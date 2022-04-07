@@ -1,17 +1,24 @@
-﻿<Window x:Class="Kreta.View.MainWindow"
+﻿<Window x:Class="Kreta.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Kreta.View"
+        xmlns:local="clr-namespace:Kreta.Views"
         mc:Ignorable="d"
         Title="Kréta - iskolai adminisztrációs program" WindowState="Maximized">
     <Grid>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Adatok">
+                <MenuItem x:Name="miWelcome" Header="_Köszöntő" Click="miWelcome_Click"></MenuItem>
                 <Separator />
                 <MenuItem x:Name="miExit" Header="_Kilépés" Click="miExit_Click"></MenuItem>
             </MenuItem>
         </Menu>
+        <Grid x:Name="PageContent" VerticalAlignment="Top" Width="1024" Height="800" Margin="5 25 5 5">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock>Üdvözlöm a Kréta - iskolai adminisztráció nevezetű alkamlazásban!</TextBlock>
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>
