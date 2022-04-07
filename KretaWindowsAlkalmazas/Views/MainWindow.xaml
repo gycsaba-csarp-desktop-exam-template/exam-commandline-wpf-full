@@ -9,13 +9,14 @@
     <Grid>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Adatok">
+                <MenuItem x:Name="miWelcome" Header="_Köszöntő" Click="miWelcome_Click"></MenuItem>
                 <Separator />
                 <MenuItem x:Name="miExit" Header="_Kilépés" Click="miExit_Click"></MenuItem>
             </MenuItem>
         </Menu>
-        <Grid x:Name="PageContent" VerticalAlignment="Top" Width="1024" Height="750">
+        <Grid x:Name="PageContent" VerticalAlignment="Top" Width="1024" Height="800" Margin="5 25 5 5">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock> Üdvözlöm a Kréta - iskolai adminisztráció nevezetű alkamlazásban!</TextBlock>
+                <TextBlock>Üdvözlöm a Kréta - iskolai adminisztráció nevezetű alkamlazásban!</TextBlock>
             </StackPanel>
 
         </Grid>
