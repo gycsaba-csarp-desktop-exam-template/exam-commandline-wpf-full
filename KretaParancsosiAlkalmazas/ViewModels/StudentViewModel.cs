@@ -17,7 +17,7 @@ namespace Kreta.ViewModels
         public StudentViewModel()
         {
             students = new StudentsRepo();
-            students2 = new ObservableCollection<Student>(students.Studentss);
+            students2 = new ObservableCollection<Student>(students.Students);
         }
         public ObservableCollection<Student> Student { get => students2; set => students2 = value; }
     }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Kreta.Models
 {
-    public class Class
+    public class SchoolClass
     {
         private int id;
         private int grade;
         private char gradeType;
         private int teacherId;
 
-        public Class(int id, int grade, char gradeType, int teacherId)
+        public SchoolClass(int id, int grade, char gradeType, int teacherId)
         {
             this.id = id;
             this.grade = grade;

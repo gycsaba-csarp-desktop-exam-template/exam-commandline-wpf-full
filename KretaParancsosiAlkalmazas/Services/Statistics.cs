@@ -11,33 +11,33 @@ namespace Kreta.Services
 {
     public class Statistics
     {
-        private ClassesRepo classesRepo;
+        private SchoolClassesRepo schoolClassRepo;
         private StudentsRepo studentsRepo;
         private SubjectRepo subjectsRepo;
 
         public Statistics()
         {
-            classesRepo = new ClassesRepo();
+            schoolClassRepo = new SchoolClassesRepo();
             studentsRepo = new StudentsRepo();
             subjectsRepo = new SubjectRepo();
         }
 
         public int GetNumberOfStudents()
         {
-            return studentsRepo.Studentss.Count;
+            return studentsRepo.Students.Count;
         }
 
         public Dictionary<string, int> GetStudentPerClasses()
         {
             // <"9.a" -> 12>
             Dictionary<string, int> studentPerClasses = new Dictionary<string, int>();
-            foreach(Class schoolClass in classesRepo.Classes)
+            foreach(SchoolClass schoolClass in schoolClassRepo.SchoolClasses)
             {
                 // Az osztály id meghatározása
                 int classId = schoolClass.Id;
                 // Az adott osztály diákjainak száma
                 int numberOfStuntInSchoolClass =
-                    studentsRepo.Studentss.FindAll(student => student.Id == classId).Count;
+                    studentsRepo.Students.FindAll(student => student.Id == classId).Count;
                 // Egy bejegyzés a dictionary
                 studentPerClasses.Add(schoolClass.GradeGradeType, numberOfStuntInSchoolClass);
             }

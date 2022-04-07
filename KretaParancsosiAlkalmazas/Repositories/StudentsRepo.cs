@@ -10,7 +10,7 @@ namespace Kreta.Repositories
     public class StudentsRepo
     {
         private List<Student> students;
-        public List<Student> Studentss { get => students; }
+        public List<Student> Students { get => students; }
 
         public StudentsRepo()
         {
