@@ -13,26 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Kreta.Views.Navigations;
+using Kreta.ViewModels;
 
-namespace Kreta.Views
+namespace Kreta.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StudentPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StudentPage : UserControl
     {
-        public MainWindow()            
+        private StudentViewModel studentViewModel;
+
+        public StudentPage(StudentViewModel studentViewModel)
         {
+            this.studentViewModel = studentViewModel;
             InitializeComponent();
-            Navigation.MainWindow = this;
+            this.DataContext = studentViewModel;
         }
-
-        private void miExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-
     }
 }

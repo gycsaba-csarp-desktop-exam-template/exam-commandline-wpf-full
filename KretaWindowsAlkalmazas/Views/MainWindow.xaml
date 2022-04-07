@@ -10,8 +10,15 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Adatok">
                 <MenuItem x:Name="miWelcome" Header="_Köszöntő" Click="miWelcome_Click"></MenuItem>
+                <MenuItem x:Name="miClass" Header="_Osztályok megjelenítése" Click="miClass_Click"></MenuItem>
+                <MenuItem x:Name="miStudents" Header="_Tanulók megjelenítése" Click="miStudents_Click"></MenuItem>
+                <MenuItem x:Name="miSubject" Header="Tantárgya_k megjelenítése" Click="miSubject_Click"></MenuItem>
                 <Separator />
                 <MenuItem x:Name="miExit" Header="_Kilépés" Click="miExit_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Statisztikák">
+                <MenuItem x:Name="miStatistics" Header="Iskolai statisztika" Click="miStatistics_Click"></MenuItem>
+                <MenuItem x:Name="miClassStatistics" Header="Osztály statisztika"></MenuItem>
             </MenuItem>
         </Menu>
         <Grid x:Name="PageContent" VerticalAlignment="Top" Width="1024" Height="800" Margin="5 25 5 5">

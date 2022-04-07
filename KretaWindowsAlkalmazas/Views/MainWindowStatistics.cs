@@ -15,6 +15,11 @@ using System.Windows.Shapes;
 
 using Kreta.Views.Navigations;
 
+
+using Kreta.ViewModels;
+using Kreta.Views.Navigations;
+using Kreta.Views.Pages;
+
 namespace Kreta.Views
 {
     /// <summary>
@@ -22,17 +27,13 @@ namespace Kreta.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()            
+        StatisticsViewModel statisticsViewModel;
+
+        private void miStatistics_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            Navigation.MainWindow = this;
+            statisticsViewModel = new StatisticsViewModel();
+            StatisticsPage statisticsPage = new StatisticsPage(statisticsViewModel);
+            Navigation.Navigate(statisticsPage);
         }
-
-        private void miExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-
     }
 }
