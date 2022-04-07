@@ -7,5 +7,11 @@
         mc:Ignorable="d"
         Title="Kréta - iskolai adminisztrációs program" WindowState="Maximized">
     <Grid>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Adatok">
+                <Separator />
+                <MenuItem x:Name="miExit" Header="_Kilépés" Click="miExit_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>
