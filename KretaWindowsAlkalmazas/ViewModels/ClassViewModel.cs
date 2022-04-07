@@ -12,13 +12,13 @@ namespace Kreta.ViewModels
 {
     public class ClassViewModel
     {
-        private ClassesRepo classesRepo;
+        private SchoolClassesRepo classesRepo;
         private ObservableCollection<SchoolClass> classes;
 
         public ClassViewModel()
         {
-            classesRepo = new ClassesRepo();
-            classes = new ObservableCollection<SchoolClass>(classesRepo.Classes);
+            classesRepo = new SchoolClassesRepo();
+            classes = new ObservableCollection<SchoolClass>(classesRepo.SchoolClasses);
         }
 
         public ObservableCollection<SchoolClass> Classes { get => classes; set => classes = value; }

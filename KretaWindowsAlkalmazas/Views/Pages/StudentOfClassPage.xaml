@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Kreta.Views.Pages.StudentOfClassPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Kreta.Views.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1024">
+    <StackPanel Orientation="Vertical" Margin="30">
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Margin="5">Válassza ki az osztályt:</TextBlock>
+                <ComboBox x:Name="cbClasses" Margin="5"
+                          ItemsSource="{Binding SchoolClasses}"
+                          SelectedItem="{Binding SelectedSchoolClass}"
+                          DisplayMemberPath="GradeGradeType"
+                />
+                <TextBlock Margin="5">Az osztály tanulói</TextBlock>
+                <ListBox x:Name="lbStudents" Margin="5"
+                         ItemsSource="{Binding StudentsOfClass}"   
+                         SelectedItem="{Binding SelectedStudentOfClass}"
+                         DisplayMemberPath="FullName"
+                />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Margin="5">Nem besorolt diákok kezelése:</TextBlock>
+                <Button Margin="5" x:Name="btStudentNoClass" 
+                        Content="Nem besorolt diákok"
+                        Command="{Binding StudentHaveNoClassCommand}"       
+                />
+                <ListBox Margin="5" x:Name="lbStudentNoClass"
+                         ItemsSource="{Binding StudentHaveNoClass}"
+                         SelectedItem="{Binding SelectedStudentHaveNoClass}"
+                         DisplayMemberPath="FullName"                         
+                 />
+                <Button Margin="5" x:Name="btStudentToClass" 
+                        Command="{Binding AddStudentToClassCommand}" 
+                        Content="Kiválasztott diák hozzáadása" />
+                <Button Margin="5" x:Name="btDeleteStudentFromClass"
+                        Command="{Binding DeleteStudentFromClassCommand}"
+                        Content="A diák eltávolítása az osztályból"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaParancssoriAlkalmazas", "KretaParancsosiAlkalmazas\KretaParancssoriAlkalmazas.csproj", "{5AC9D97F-6C8A-4848-B567-A8428DE60169}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaWindowsAlkalmazas", "KretaWindowsAlkalmazas\KretaWindowsAlkalmazas.csproj", "{D16FC18A-B18B-4B55-AB9D-32732F3387D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AC9D97F-6C8A-4848-B567-A8428DE60169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC9D97F-6C8A-4848-B567-A8428DE60169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC9D97F-6C8A-4848-B567-A8428DE60169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC9D97F-6C8A-4848-B567-A8428DE60169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D16FC18A-B18B-4B55-AB9D-32732F3387D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D16FC18A-B18B-4B55-AB9D-32732F3387D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D16FC18A-B18B-4B55-AB9D-32732F3387D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D16FC18A-B18B-4B55-AB9D-32732F3387D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07EA3BC1-3085-4A26-8269-75910640B2BD}
+	EndGlobalSection
+EndGlobal

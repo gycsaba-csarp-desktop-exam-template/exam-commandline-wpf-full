@@ -9,18 +9,18 @@ namespace Kreta.Models
     public class Student
     {
         private int id;
-        private string fullname;
-        private int osztalyId;
+        private string fullName;
+        private int schoolClassId;
 
         public Student(int id, string fullname, int osztalyId)
         {
             this.Id = id;
-            this.Fullname = fullname;
-            this.OsztalyId = osztalyId;
+            this.FullName = fullname;
+            this.SchoolClassId = osztalyId;
         }
 
         public int Id { get => id; set => id = value; }
-        public string Fullname { get => fullname; set => fullname = value; }
-        public int OsztalyId { get => osztalyId; set => osztalyId = value; }
+        public string FullName { get => fullName; set => fullName = value; }
+        public int SchoolClassId { get => schoolClassId; set => schoolClassId = value; }
     }
 }

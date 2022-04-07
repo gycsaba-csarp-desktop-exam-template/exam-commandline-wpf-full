@@ -33,7 +33,7 @@ namespace Kreta.Repositories
             students.Add(new Student(12, "Nagy Virág", 4));
             students.Add(new Student(13, "Tanuló Péter", 0));
             students.Add(new Student(14, "Nagy Lajos", 0));
-            students.Add(new Student(14, "Péter László", 0));
+            students.Add(new Student(15, "Péter László", 0));
         }
     }
 }
