@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using Kreta.Models;
 
-namespace Kreata.Repositories
+namespace Kreta.Repositories
 {
-    public partial class Teachers
+    public partial class TeachersRepo
     {
         private List<Teacher> teachers;
 
@@ -20,7 +20,7 @@ namespace Kreata.Repositories
             }
         }
 
-        public Teachers()
+        public TeachersRepo()
         {
             teachers = new List<Teacher>();
             MakeTestData();
