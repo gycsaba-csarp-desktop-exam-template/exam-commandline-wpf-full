@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kreta.View.Page;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Kreta.Views.Navigations;
+using Kreta.ViewModel;
 
 namespace Kreta.Views
 {
@@ -22,16 +24,13 @@ namespace Kreta.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()            
-        {
-            InitializeComponent();
-            Navigation.MainWindow = this;
-        }
+        private TeacherViewModel teacherViewModel = new TeacherViewModel();
 
-        private void miExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
 
+        private void miTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            TeacherPage teacherPage = new TeacherPage(teacherViewModel);
+            Navigation.Navigate(teacherPage);
+        }
     }
 }

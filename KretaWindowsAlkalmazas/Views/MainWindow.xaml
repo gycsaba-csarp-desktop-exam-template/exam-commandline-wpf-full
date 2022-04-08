@@ -12,6 +12,7 @@
                 <MenuItem x:Name="miWelcome" Header="_Köszöntő" Click="miWelcome_Click"></MenuItem>
                 <MenuItem x:Name="miClass" Header="_Osztályok megjelenítése" Click="miClass_Click"></MenuItem>
                 <MenuItem x:Name="miStudents" Header="_Tanulók megjelenítése" Click="miStudents_Click"></MenuItem>
+                <MenuItem x:Name="miTeacher" Header="_Tanárok megjelenítése" Click="miTeacher_Click"></MenuItem>
                 <MenuItem x:Name="miSubject" Header="Tantárgya_k megjelenítése" Click="miSubject_Click"></MenuItem>
                 <Separator />
                 <MenuItem x:Name="miExit" Header="_Kilépés" Click="miExit_Click"></MenuItem>

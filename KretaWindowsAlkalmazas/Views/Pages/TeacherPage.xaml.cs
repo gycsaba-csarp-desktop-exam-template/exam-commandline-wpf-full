@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kreta.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,25 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Kreta.Views.Navigations;
-
-namespace Kreta.Views
+namespace Kreta.View.Page
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TeacherPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TeacherPage : UserControl
     {
-        public MainWindow()            
+        private TeacherViewModel teacherViewModel;
+        public TeacherPage(TeacherViewModel teacherViewModel)
         {
+            this.teacherViewModel = teacherViewModel;
             InitializeComponent();
-            Navigation.MainWindow = this;
+            this.DataContext = teacherViewModel;
         }
-
-        private void miExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
     }
 }
