@@ -19,7 +19,6 @@
                 <ListBox x:Name="lbStudents" Margin="5"
                          ItemsSource="{Binding StudentsOfClass}"   
                          SelectedItem="{Binding SelectedStudentOfClass}"
-                         DisplayMemberPath="FullName"
                 />
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10">
@@ -30,8 +29,7 @@
                 />
                 <ListBox Margin="5" x:Name="lbStudentNoClass"
                          ItemsSource="{Binding StudentHaveNoClass}"
-                         SelectedItem="{Binding SelectedStudentHaveNoClass}"
-                         DisplayMemberPath="FullName"                         
+                         SelectedItem="{Binding SelectedStudentHaveNoClass}"                      
                  />
                 <Button Margin="5" x:Name="btStudentToClass" 
                         Command="{Binding AddStudentToClassCommand}" 

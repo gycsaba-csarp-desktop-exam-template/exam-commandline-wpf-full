@@ -26,13 +26,16 @@ namespace Kreta.Services
 
         public List<Student> GetStudentOfClass(int classId)
         {
-            return studentsRepo.Students.FindAll(student => student.SchoolClassId == classId);
-
+            List<Student> result=studentsRepo.Students.FindAll(student => student.SchoolClassId == classId);
+            result.Sort();
+            return result;
         }
 
         public List<Student> GetStudentNoClass()
         {
-            return studentsRepo.Students.FindAll(student => student.SchoolClassId == 0);
+            List<Student> result = studentsRepo.Students.FindAll(student => student.SchoolClassId == 0);
+            result.Sort();
+            return result;
         }
 
         public void AddStudentToClass(int studentId, int classId)
