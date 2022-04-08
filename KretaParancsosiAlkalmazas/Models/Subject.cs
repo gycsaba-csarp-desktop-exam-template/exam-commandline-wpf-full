@@ -10,16 +10,21 @@ namespace Kreta.Models
     {
 
         private int id;
-        private string subName;
+        private string subjectName;
 
         public Subject(int id, string subName)
         {
             this.Id = id;
-            this.SubName = subName;
+            this.SubjectName = subName;
         }
 
         public int Id { get => id; set => id = value; }
-        public string SubName { get => subName; set => subName = value; }
+        public string SubjectName { get => subjectName; set => subjectName = value; }
+
+        public override string ToString()
+        {
+            return id + ". " + subjectName;
+        }
 
     }
 }

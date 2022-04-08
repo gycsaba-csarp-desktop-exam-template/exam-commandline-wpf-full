@@ -66,7 +66,7 @@ namespace Kreta.Services
             foreach (SchoolClass schoolClass in schoolClassesRepo.SchoolClasses)
             {
                 int classId = schoolClass.TeacherId;
-                string teacherOfClass = teachersRepo.Teachers.Where(teacher => teacher.Id == classId).Select(teacher => teacher.TeacherName).SingleOrDefault();
+                string teacherOfClass = teachersRepo.Teachers.Where(teacher => teacher.Id == classId).Select(teacher => teacher.TeacherFullName).SingleOrDefault();
                 teacherPerClasses.Add(schoolClass.GradeGradeType, teacherOfClass);
 
             }

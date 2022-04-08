@@ -23,6 +23,7 @@
             </MenuItem>
             <MenuItem Header="Adminisztráció">
                 <MenuItem x:Name="miStudentOfClass" Header="Osztályok tanulói" Click="miStudentOfClass_Click"></MenuItem>
+                <MenuItem x:Name="miTeachTeacherSubject" Header="Tanárok által tanított tantárgyak" Click="miTeachTeacherSubject_Click"></MenuItem>
             </MenuItem>
         </Menu>
         <Grid x:Name="PageContent" VerticalAlignment="Top" Width="1024" Height="800" Margin="5 25 5 5">

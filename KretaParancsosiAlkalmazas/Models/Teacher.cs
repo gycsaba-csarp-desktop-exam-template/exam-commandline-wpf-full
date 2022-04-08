@@ -56,7 +56,7 @@ namespace Kreta.Models
         public bool Meal { get => meal; set => meal = value; }
         public EmploymentValue Emploeyment { get => emploeyment; set => emploeyment = value; }
 
-        public string TeacherName
+        public string TeacherFullName
         {
             get
             {
@@ -89,6 +89,11 @@ namespace Kreta.Models
                 else
                     emploeyment = EmploymentValue.DONEONCOMMISSION;
             }
+        }
+
+        public override string ToString()
+        {
+            return id + ". " + TeacherFullName;
         }
     }
 }
