@@ -8,6 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="30">
         <Label Content="Iskola tanulói:"/>
-        <ListBox Margin="120 5 600 400" x:Name="lbStudent" ItemsSource="{Binding Student}" DisplayMemberPath="IdFullname"></ListBox>
+        <ListBox Margin="120 5 600 400" x:Name="lbStudent" 
+                 ItemsSource="{Binding Students}">
+        </ListBox>
     </Grid>
 </UserControl>

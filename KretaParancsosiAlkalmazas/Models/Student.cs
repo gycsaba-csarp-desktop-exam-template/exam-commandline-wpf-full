@@ -65,6 +65,22 @@ namespace Kreta.Models
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj is Student)
+            {
+                Student other = (Student)obj;
+                int fullNameCompareResult = this.fullName.CompareTo(other.fullName);
+                if (fullNameCompareResult != 0)
+                    return false;
+                else if ((this.id == other.id) && (this.schoolClassId == other.schoolClassId))
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
 
         public override string ToString()
         {
