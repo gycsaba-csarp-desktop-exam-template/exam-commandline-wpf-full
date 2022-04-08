@@ -35,6 +35,11 @@ namespace Kreta.Repositories
             students.Add(new Student(14, "Nagy Lajos", 0));
             students.Add(new Student(15, "Péter László", 0));
         }
+
+        public void Sort()
+        {
+            students.Sort();
+        }
     }
 }
 

@@ -27,6 +27,7 @@ namespace Kreta.Services
         public List<Student> GetStudentOfClass(int classId)
         {
             return studentsRepo.Students.FindAll(student => student.SchoolClassId == classId);
+
         }
 
         public List<Student> GetStudentNoClass()
