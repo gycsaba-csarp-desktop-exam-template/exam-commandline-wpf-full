@@ -55,6 +55,14 @@ namespace Kreta.Models
         public string Password { get => password; set => password = value; }
         public bool Meal { get => meal; set => meal = value; }
         public EmploymentValue Emploeyment { get => emploeyment; set => emploeyment = value; }
+
+        public string TeacherName
+        {
+            get
+            {
+                return lastName + " " + firstName;
+            }
+        }
         public string EmploeymentName
         {
             get

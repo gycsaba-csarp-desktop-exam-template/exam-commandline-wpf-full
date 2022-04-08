@@ -8,17 +8,32 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1024">
     <StackPanel Orientation="Vertical" Margin="20">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="2">Diákok száma: </TextBlock>
-            <TextBlock Margin="2" x:Name="tbNumberOfStudent"
-                       Text="{Binding NumberOfStudent}"
-            />
+        <StackPanel Orientation="Horizontal" Margin="10 5 10 2">
+            <TextBlock>Diákok száma: </TextBlock>
+            <TextBlock x:Name="tbNumberOfStudent" 
+                        Text="{Binding NumberOfStudents}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="2">Diákok száma osztályonként</TextBlock>
-            <ListBox Margin="10" x:Name="lbNumberOfStudentPerClass" 
-                     ItemsSource="{Binding NumberOfStudentPerClass}"
-            />
+
+        <StackPanel Orientation="Horizontal" Margin="10 5 10 2">
+            <TextBlock>Tantárgyak száma: </TextBlock>
+            <TextBlock x:Name="tbNumberOfSubjects" 
+                        Text="{Binding NumberOfSubjects}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="10 5 10 2">
+            <TextBlock>Osztályok száma: </TextBlock>
+            <TextBlock x:Name="tbNumberOfClasses" 
+                        Text="{Binding NumberOfClasses}"/>
+        </StackPanel>
+
+        <StackPanel Margin="20 20 20 20" Orientation="Horizontal">
+            <Label>Diákok száma osztályonként</Label>
+            <ListBox x:Name="lbNumberOfStudentPerClass" ItemsSource="{Binding NumberOfStudentPerClass}"/>
+        </StackPanel>
+
+        <StackPanel Margin="20 20 20 20" Orientation="Horizontal">
+            <Label>Az osztályok osztályfőnökei</Label>
+            <ListBox x:Name="lbTeachersNamePerClass" ItemsSource="{Binding TeachersNamePerClass}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

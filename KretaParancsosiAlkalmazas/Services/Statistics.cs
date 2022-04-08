@@ -11,37 +11,66 @@ namespace Kreta.Services
 {
     public class Statistics
     {
-        private SchoolClassesRepo schoolClassRepo;
+        private SchoolClassesRepo  schoolClassesRepo;
         private StudentsRepo studentsRepo;
-        private SubjectRepo subjectsRepo;
+        private SubjectRepo subjectRepo;
+        private TeachersRepo teachersRepo;
 
         public Statistics()
         {
-            schoolClassRepo = new SchoolClassesRepo();
+            schoolClassesRepo = new SchoolClassesRepo();
             studentsRepo = new StudentsRepo();
-            subjectsRepo = new SubjectRepo();
+            subjectRepo = new SubjectRepo();
+            teachersRepo = new TeachersRepo();
         }
 
-        public int GetNumberOfStudents()
+        // Repók példányosíátsa
+
+        public int GetNumerOfStudenst()
         {
             return studentsRepo.Students.Count;
         }
 
+        public int GetNumberOfClasses()
+        {
+            return schoolClassesRepo.SchoolClasses.Count;
+        }
+
+        public int GetNumberOfSubjects()
+        {
+            return subjectRepo.Subject.Count;
+        }
+
         public Dictionary<string, int> GetStudentPerClasses()
         {
-            // <"9.a" -> 12>
             Dictionary<string, int> studentPerClasses = new Dictionary<string, int>();
-            foreach(SchoolClass schoolClass in schoolClassRepo.SchoolClasses)
+            foreach (SchoolClass schoolClass in schoolClassesRepo.SchoolClasses)
             {
                 // Az osztály id meghatározása
                 int classId = schoolClass.Id;
-                // Az adott osztály diákjainak száma
-                int numberOfStuntInSchoolClass =
-                    studentsRepo.Students.FindAll(student => student.Id == classId).Count;
-                // Egy bejegyzés a dictionary
-                studentPerClasses.Add(schoolClass.GradeGradeType, numberOfStuntInSchoolClass);
+
+                //az adott osztály diákjainak a száma
+                int numberOfStudentsInSchoolClass = studentsRepo.Students.FindAll(student => student.SchoolClassId == classId).Count;
+
+                // Egy bejegyzés a Dictionary-be
+                studentPerClasses.Add(schoolClass.GradeGradeType, numberOfStudentsInSchoolClass);
             }
+
             return studentPerClasses;
+        }
+
+        public Dictionary<string, string> GetTeacherPerClasses()
+        {
+            Dictionary<string, string> teacherPerClasses = new Dictionary<string, string>();
+
+            foreach (SchoolClass schoolClass in schoolClassesRepo.SchoolClasses)
+            {
+                int classId = schoolClass.TeacherId;
+                string teacherOfClass = teachersRepo.Teachers.Where(teacher => teacher.Id == classId).Select(teacher => teacher.TeacherName).SingleOrDefault();
+                teacherPerClasses.Add(schoolClass.GradeGradeType, teacherOfClass);
+
+            }
+            return teacherPerClasses;
         }
     }
 }
