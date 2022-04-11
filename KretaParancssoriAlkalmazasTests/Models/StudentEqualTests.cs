@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Kreta.Models.Tests
 {
     [TestClass()]
-    public class EqualsStudentTests
+    public class StudentEqualTests
     {
         [TestMethod()]
         public void EqualsStudentsTest()
