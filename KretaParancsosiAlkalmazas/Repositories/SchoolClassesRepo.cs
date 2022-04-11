@@ -14,6 +14,14 @@ namespace Kreta.Repositories
 
         public List<SchoolClass> SchoolClasses { get => schoolClasses; }
 
+        public int NumberOfClasses
+        {
+            get
+            {
+                return schoolClasses.Count;
+            }
+        }
+
         public SchoolClassesRepo()
         {
             schoolClasses = new List<SchoolClass>();

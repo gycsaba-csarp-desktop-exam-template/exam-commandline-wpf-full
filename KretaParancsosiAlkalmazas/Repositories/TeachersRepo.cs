@@ -20,6 +20,14 @@ namespace Kreta.Repositories
             }
         }
 
+        public int NumberOfTeacher
+        {
+            get
+            {
+                return teachers.Count;
+            }
+        }
+
         public TeachersRepo()
         {
             teachers = new List<Teacher>();

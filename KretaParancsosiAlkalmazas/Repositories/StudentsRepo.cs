@@ -11,6 +11,13 @@ namespace Kreta.Repositories
     {
         private List<Student> students;
         public List<Student> Students { get => students; }
+        public int NumberOfStudents
+        {
+            get
+            {
+                return students.Count;
+            }
+        }
 
         public StudentsRepo()
         {

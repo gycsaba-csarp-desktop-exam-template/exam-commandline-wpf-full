@@ -9,14 +9,14 @@ using Kreta.Models;
 
 namespace Kreta.Services
 {
-    public class Statistics
+    public class StatisticsService
     {
         private SchoolClassesRepo  schoolClassesRepo;
         private StudentsRepo studentsRepo;
         private SubjectRepo subjectRepo;
         private TeachersRepo teachersRepo;
 
-        public Statistics()
+        public StatisticsService()
         {
             schoolClassesRepo = new SchoolClassesRepo();
             studentsRepo = new StudentsRepo();
@@ -26,20 +26,30 @@ namespace Kreta.Services
 
         // Repók példányosíátsa
 
-        public int GetNumerOfStudenst()
+        public int NumerOfStudenst
         {
-            return studentsRepo.Students.Count;
+            get
+            {
+                return studentsRepo.NumberOfStudents;
+            }
         }
 
-        public int GetNumberOfClasses()
+        public int NumberOfClasses
         {
-            return schoolClassesRepo.SchoolClasses.Count;
+            get
+            {
+                return schoolClassesRepo.NumberOfClasses;
+            }
         }
 
-        public int GetNumberOfSubjects()
+        public int NumberOfSubjects
         {
-            return subjectRepo.Subject.Count;
+            get
+            {
+                return subjectRepo.NumberOfSubjects;
+            }
         }
+
 
         public Dictionary<string, int> GetStudentPerClasses()
         {

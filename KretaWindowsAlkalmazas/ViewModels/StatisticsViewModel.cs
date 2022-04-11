@@ -11,18 +11,18 @@ namespace Kreta.ViewModels
 {
     public class StatisticsViewModel
     {
-        private Statistics statistics;
+        private StatisticsService statisticsService;
 
         public StatisticsViewModel()
         {
-            this.statistics = new Statistics();
+            this.statisticsService = new StatisticsService();
         }
 
         public string NumberOfStudents
         {
             get
             {
-                string result = statistics.GetNumerOfStudenst() + " fő.";
+                string result = " "+statisticsService.NumerOfStudenst + " fő.";
                 return result;
             }
         }
@@ -31,7 +31,7 @@ namespace Kreta.ViewModels
         {
             get
             {
-                string result = statistics.GetNumberOfSubjects() + " db.";
+                string result = " " + statisticsService.NumberOfSubjects + " db.";
                 return result;
             }
         }
@@ -40,7 +40,7 @@ namespace Kreta.ViewModels
         {
             get
             {
-                string result = statistics.GetNumberOfClasses() + " db.";
+                string result = " " + statisticsService.NumberOfClasses + " db.";
                 return result;
             }
         }
@@ -65,7 +65,7 @@ namespace Kreta.ViewModels
 
         private List<string> DictionaryToList()
         {
-            Dictionary<string, int> dictionary = statistics.GetStudentPerClasses();
+            Dictionary<string, int> dictionary = statisticsService.GetStudentPerClasses();
             List<string> numberOfStudentsPerClass = new List<string>();
             foreach (KeyValuePair<string, int> item in dictionary)
             {
@@ -77,11 +77,11 @@ namespace Kreta.ViewModels
 
         private List<string> DictionaryToListTeacher()
         {
-            Dictionary<string, string> dictionary = statistics.GetTeacherPerClasses();
+            Dictionary<string, string> dictionary = statisticsService.GetTeacherPerClasses();
             List<string> teachersNamePerClass = new List<string>();
             foreach (KeyValuePair<string, string> item in dictionary)
             {
-                string result = item.Key + " Osztályfőnöke: " + item.Value;
+                string result = item.Key + ": " + item.Value;
                 teachersNamePerClass.Add(result);
             }
             return teachersNamePerClass;

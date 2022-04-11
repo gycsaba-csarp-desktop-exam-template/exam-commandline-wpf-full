@@ -9,12 +9,20 @@ namespace Kreta.Repositories
 {
     public class SubjectRepo
     {
-        private List<Subject> subject;
-        public List<Subject> Subject { get => subject; }
+        private List<Subject> subjects;
+        public List<Subject> Subject { get => subjects; }
+
+        public int NumberOfSubjects
+        {
+            get
+            {
+                return subjects.Count;
+            }
+        }
 
         public SubjectRepo()
         {
-            subject = new List<Subject>();
+            subjects = new List<Subject>();
             MakeTestData();
         }
 
