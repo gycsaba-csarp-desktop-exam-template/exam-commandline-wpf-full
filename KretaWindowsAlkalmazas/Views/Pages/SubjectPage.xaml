@@ -11,8 +11,7 @@
         <Label Content="Az iskola tantárgyai:"/>
         <ListBox Margin="120 5 600 400"
                  x:Name="lbSubject" 
-                 ItemsSource="{Binding Subject}"
-                 DisplayMemberPath="SubName">
+                 ItemsSource="{Binding Subjects}">
 
         </ListBox>
 

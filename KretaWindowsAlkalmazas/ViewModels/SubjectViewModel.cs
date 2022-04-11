@@ -12,14 +12,14 @@ namespace Kreta.ViewModels
     public class SubjectViewModel
     {
         private SubjectRepo subjectRepo;
-        private ObservableCollection<Subject> subject;
+        private ObservableCollection<Subject> subjects;
 
         public SubjectViewModel()
         {
             subjectRepo = new SubjectRepo();
-            subject = new ObservableCollection<Subject>(subjectRepo.Subject);
+            subjects = new ObservableCollection<Subject>(subjectRepo.Subject);
         }
 
-        public ObservableCollection<Subject> Subject { get => subject; set => subject = value; }
+        public ObservableCollection<Subject> Subjects { get => subjects; set => subjects = value; }
     }
 }

@@ -12,14 +12,6 @@ namespace Kreta.Models
         private int id;
         private string subjectName;
 
-        public int NumberOfSubjects
-        {
-            get
-            {
-                return 0;
-            }
-        }
-
         public Subject(int id, string subName)
         {
             this.Id = id;
