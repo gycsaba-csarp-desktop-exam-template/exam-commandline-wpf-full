@@ -22,6 +22,12 @@ namespace Kreta.Repositories
             }
         }
 
+        public int GetSchoolClassId(int grade, char gradeType)
+        {
+            SchoolClass schoolClass = schoolClasses.Find(schoolClass => schoolClass.Grade == grade && schoolClass.GradeType == gradeType);
+            return schoolClass.Id;
+        }
+
         public SchoolClassesRepo()
         {
             schoolClasses = new List<SchoolClass>();

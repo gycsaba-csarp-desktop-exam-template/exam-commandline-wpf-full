@@ -8,17 +8,25 @@ using Kreta.Models;
 
 namespace Kreta.Repositories
 {
-    class ParentsRepo
+    public class ParentsRepo
     {
         private List<Parent> parents;
+
+        public List<Parent> Parents { get => parents; set => parents = value; }
+
+        public int NumberOfParents
+        {
+            get
+            {
+                return parents.Count;
+            }
+        }
 
         public ParentsRepo()
         {
             parents = new List<Parent>();
             MakeTestData();
         }
-
-        internal List<Parent> Parents { get => parents; set => parents = value; }
 
         private void MakeTestData()
         {

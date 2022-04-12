@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kreta.Models
 {
-    class Parent
+    public class Parent
     {
         private int id;
         private string name;
