@@ -58,7 +58,8 @@ namespace Kreta.ViewModels
                 {
                     List<Student> studentOfClassList = studentOfClassService.GetStudentOfClass(SelectedSchoolClass.Id);
                     studentsOfClass.Clear();
-                    studentsOfClass = new ObservableCollection<Student>(studentOfClassList);
+                    if (studentOfClassList != null)
+                        studentsOfClass = new ObservableCollection<Student>(studentOfClassList);
                     return studentsOfClass;
                 }
                 else
