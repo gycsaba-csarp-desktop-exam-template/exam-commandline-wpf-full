@@ -25,6 +25,22 @@ namespace Kreta.Models
         public int Grade { get => grade; set => grade = value; }
         public char GradeType { get => gradeType; set => gradeType = value; }
         public int TeacherId { get => teacherId; set => teacherId = value; }
+
+        public bool SchoolLeaver
+        {
+            get
+            {
+                if (grade == 12)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         public string GradeGradeType
         {
             get
