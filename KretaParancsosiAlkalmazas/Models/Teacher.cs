@@ -29,6 +29,16 @@ namespace Kreta.Models
                 this.Emploeyment = EmploymentValue.DONEONCOMMISSION;
             }
         }
+
+        public Teacher(int id, string lastname, string firstname)
+        {
+            this.id = id;
+            this.lastName = lastname;
+            this.FirstName = firstname;
+            this.Password = string.Empty;
+            this.Meal = false;
+            this.Emploeyment = EmploymentValue.LECTURER;
+        }
         public Teacher(int id, string lastname, string firstname, string password, bool meal, EmploymentValue emploeyment)
         {
             this.id = id;
