@@ -22,6 +22,24 @@ namespace Kreta.Repositories
             }
         }
 
+        public int NumberOfWomen
+        {
+            get
+            {
+                int result = parents.Where(parents => parents.Woomen == true).Count();
+                return result;
+            }
+        }
+
+        public int NumberOfMan
+        {
+            get
+            {
+                int result = parents.Where(parents => parents.Woomen == false).Count();
+                return result;
+            }
+        }
+
         public ParentsRepo()
         {
             parents = new List<Parent>();
@@ -33,7 +51,8 @@ namespace Kreta.Repositories
             parents.Add(new Parent(1, "Kis Szonja", true));
             parents.Add(new Parent(2, "Nagy Imre", false));
             parents.Add(new Parent(3, "Szabó Ida", true));
-            parents.Add(new Parent(4, "Szabó Sándor", true));
+            parents.Add(new Parent(4, "Szabó Sándor", false));
+            parents.Add(new Parent(5, "Kis Éva", true));
         }
     }
 }
