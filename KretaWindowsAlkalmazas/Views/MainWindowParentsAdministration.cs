@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Kreta.Services;
 using Kreta.Views.Navigations;
+using Kreta.ViewModel;
+using Kreta.Views.Page;
 
 namespace Kreta.Views
 {
@@ -22,17 +26,12 @@ namespace Kreta.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()            
+        private ParentsViewModel parentsViewModel = new ParentsViewModel();
+        private void miParentsAdministration_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            Navigation.MainWindow = this;
+            ParentsAdministrationPage parentsAdministrationPage = new ParentsAdministrationPage(parentsViewModel);
+            Navigation.Navigate(parentsAdministrationPage);
         }
-
-        private void miExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-
+        
     }
 }

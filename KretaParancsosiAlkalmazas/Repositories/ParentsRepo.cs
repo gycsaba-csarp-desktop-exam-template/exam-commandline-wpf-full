@@ -14,6 +14,11 @@ namespace Kreta.Repositories
 
         public List<Parent> Parents { get => parents; set => parents = value; }
 
+        public List<Parent> GetAllParents()
+        {
+            return new List<Parent>(parents);
+        }
+
         public int NumberOfParents
         {
             get
@@ -53,6 +58,20 @@ namespace Kreta.Repositories
             parents.Add(new Parent(3, "Szabó Ida", true));
             parents.Add(new Parent(4, "Szabó Sándor", false));
             parents.Add(new Parent(5, "Kis Éva", true));
+            parents.Add(new Parent(6, "Kertész Zoltán", false));
+            parents.Add(new Parent(7, "Olajos Magdolna", true));
+            parents.Add(new Parent(8, "Izgalmas Márk", false));
+            parents.Add(new Parent(9, "Faégető Vilmos", false));
+            parents.Add(new Parent(10, "Törödő Tekla", true));
+            parents.Add(new Parent(11, "Magyar Helga", true));
+            parents.Add(new Parent(12, "Kertész László", true));
+        }
+
+        public void DeleteParent(int id)
+        {
+            Parent parentToDelete = parents.Find(parent => parent.Id == id);
+            if (parentToDelete != null)
+                parents.Remove(parentToDelete);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kreta.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,26 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Kreta.Views.Navigations;
-
-namespace Kreta.Views
+namespace Kreta.Views.Page
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ParentsAdministrationPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ParentsAdministrationPage : UserControl
     {
-        public MainWindow()            
+        private ParentsViewModel parentsViewModel;
+        public ParentsAdministrationPage(ParentsViewModel parentsViewModel)
         {
+            this.parentsViewModel = parentsViewModel;
             InitializeComponent();
-            Navigation.MainWindow = this;
+            this.DataContext = parentsViewModel;
         }
-
-        private void miExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-
     }
 }

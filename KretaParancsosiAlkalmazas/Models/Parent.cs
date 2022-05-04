@@ -29,5 +29,11 @@ namespace Kreta.Models
             this.name = string.Empty;
             this.woomen = true;
         }
+
+        public override string ToString()
+        {
+            string result = id + ". " + name;
+            return result;
+        }
     }
 }

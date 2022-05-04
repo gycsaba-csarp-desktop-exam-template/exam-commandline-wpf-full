@@ -16,14 +16,23 @@
                 />
                 <TextBlock Margin="5">Tárgyai:</TextBlock>
                 <ListBox x:Name="lbSubjects" Margin="5"
-                         ItemsSource="{Binding SubjectsOfTeachers}"
-                         />
-
+                         ItemsSource="{Binding SubjectsOfTeacher}"
+                         SelectedItem="{Binding SelectedSubjectOfTeacher}"
+                 />
+                <Button Margin ="5" x:Name="btDeleteTeachedSubject"
+                        Command="{Binding DeleteTeachedSubjectCommand}"
+                        Content="Tanított tantárgy törlése"
+                 />
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10">
                 <TextBlock Margin="5">Tanítható tantárgyak:</TextBlock>
-                <Button Margin="5" x:Name="btSubjectNoTeacher"
-                        Content="Tanítható tantárgyak" 
+                <ListBox x:Name="lbNotTeachedSubject" Margin="5"
+                         ItemsSource="{Binding TeachersNotTeachedSubjects}"
+                         SelectedItem="{Binding SelectedNotTeachedSubject}" 
+                />
+                <Button Margin="5" x:Name="btSubjectToTeacher" 
+                        Command="{Binding SubjectToTeacherCommand}"
+                        Content="Tantárgy felvétele" 
                  />
             </StackPanel>           
         </StackPanel>

@@ -10,7 +10,7 @@ namespace Kreta.Repositories
     public class SubjectRepo
     {
         private List<Subject> subjects;
-        public List<Subject> Subject { get => subjects; }
+        public List<Subject> Subjects { get => subjects; }
 
         public int NumberOfSubjects
         {
@@ -29,13 +29,18 @@ namespace Kreta.Repositories
         public void MakeTestData()
         {
 
-            Subject.Add(new Subject(1,"Informatika"));
-            Subject.Add(new Subject(2,"Angol"));
-            Subject.Add(new Subject(3,"Matematika"));
-            Subject.Add(new Subject(4,"Fizika"));
-            Subject.Add(new Subject(5,"Testnevelés"));
-            Subject.Add(new Subject(6,"Történelem"));
-            Subject.Add(new Subject(7,"Magyar nyelv és Irodalom"));
+            subjects.Add(new Subject(1,"Informatika"));
+            subjects.Add(new Subject(2,"Angol"));
+            subjects.Add(new Subject(3,"Matematika"));
+            subjects.Add(new Subject(4,"Fizika"));
+            subjects.Add(new Subject(5,"Testnevelés"));
+            subjects.Add(new Subject(6,"Történelem"));
+            subjects.Add(new Subject(7,"Magyar nyelv és Irodalom"));
+        }
+
+        public Subject GetSubject(int subjectID)
+        {
+            return subjects.Find(s => s.Id == subjectID);
         }
     }
 }
