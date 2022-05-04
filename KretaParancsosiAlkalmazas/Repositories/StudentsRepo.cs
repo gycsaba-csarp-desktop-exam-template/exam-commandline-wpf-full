@@ -19,6 +19,11 @@ namespace Kreta.Repositories
             }
         }
 
+        public List<Student> GetAllStudents()
+        {
+            return new List<Student>(students);
+        }
+
         public StudentsRepo()
         {
             students = new List<Student>();

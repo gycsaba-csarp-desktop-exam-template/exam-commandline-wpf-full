@@ -19,32 +19,6 @@ namespace Kreta.Repositories
             return new List<Parent>(parents);
         }
 
-        public int NumberOfParents
-        {
-            get
-            {
-                return parents.Count;
-            }
-        }
-
-        public int NumberOfWomen
-        {
-            get
-            {
-                int result = parents.Where(parents => parents.Woomen == true).Count();
-                return result;
-            }
-        }
-
-        public int NumberOfMan
-        {
-            get
-            {
-                int result = parents.Where(parents => parents.Woomen == false).Count();
-                return result;
-            }
-        }
-
         public ParentsRepo()
         {
             parents = new List<Parent>();

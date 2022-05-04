@@ -17,6 +17,31 @@ namespace Kreta.Services
         ParentsRepo parentsRepo;
         ParentOfStudentRepo parentOfStudentRepo;
 
+        public int NumberOfParents
+        {
+            get
+            {
+                return parentsRepo.GetAllParents().Count;
+            }
+        }
+
+        public int NumberOfWomen
+        {
+            get
+            {
+                int result = parentsRepo.GetAllParents().Where(parents => parents.Woomen == true).Count();
+                return result;
+            }
+        }
+
+        public int NumberOfMan
+        {
+            get
+            {
+                int result = parentsRepo.GetAllParents().Where(parents => parents.Woomen == false).Count();
+                return result;
+            }
+        }
 
         public ParentService()
         {
@@ -25,10 +50,20 @@ namespace Kreta.Services
             parentOfStudentRepo = new ParentOfStudentRepo();
         }
 
+
+        public List<Student> GetAllStudents()
+        {
+            return new List<Student>(studentsRepo.GetAllStudents());
+        }
+        public List<Parent> GetAllParents()
+        {
+            return new List<Parent>(parentsRepo.GetAllParents());
+        }
+
         public List<Parent> GetAllParentsWithNoStudent()
         {
             List<Parent> parentsWithNoStudent = parentsRepo.GetAllParents();
-            List<ParentOfStudent> parentsIdWithStudent = parentOfStudentRepo.ParentOfStudents;
+            List<ParentOfStudent> parentsIdWithStudent = parentOfStudentRepo.GetAllParentOfStudents();
             foreach (ParentOfStudent parentOfStudent in parentsIdWithStudent)
             {
                 Parent parentToDelete = parentsRepo.Parents.Find(parent => parent.Id == parentOfStudent.ParentId);
@@ -69,7 +104,7 @@ namespace Kreta.Services
 
             if (!findParent)
             {
-                var deleteParent = parentsRepo.Parents.Find(x => x.Id == parentId);
+                var deleteParent = parentsRepo.GetAllParents().Find(x => x.Id == parentId);
                 parentsRepo.Parents.Remove(deleteParent);
                 return true;
             }
@@ -79,22 +114,27 @@ namespace Kreta.Services
             }
         }
 
+        public void DeleteParent(int id)
+        {
+            parentsRepo.DeleteParent(id);
+        }
+
 
         public List<Parent> GetMothers()
         {
-            return parentsRepo.Parents.Where(x => x.Woomen = true).ToList();
+            return parentsRepo.GetAllParents().Where(x => x.Woomen = true).ToList();
         }
 
 
         public List<Parent> GetFathers()
         {
-            return parentsRepo.Parents.Where(x => x.Woomen = false).ToList();
+            return parentsRepo.GetAllParents().Where(x => x.Woomen = false).ToList();
         }
 
 
         public List<Parent> GetParentsOfStudents()
         {
-            return parentsRepo.Parents;
+            return parentsRepo.GetAllParents();
         }
     }
 }

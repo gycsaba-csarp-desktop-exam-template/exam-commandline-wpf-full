@@ -34,6 +34,12 @@ namespace Kreta.Repositories
             MakeTestData();
         }
 
+        public List<Teacher> GetAllTeachers()
+        {
+            return new List<Teacher>(teachers);
+        }
+
+
         public void MakeTestData()
         {
             teachers.Add(new Teacher(1, "Számoló", "Szonja", "123456", true, EmploymentValue.LECTURER));

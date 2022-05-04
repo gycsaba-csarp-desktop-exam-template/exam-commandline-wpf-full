@@ -9,17 +9,17 @@ using Kreta.Services;
 using Kreta.Models;
 using ViewModels.BaseClass;
 
-
-
 namespace Kreta.ViewModels
 {
     public class StudentOfClassViewModel : ViewModelBase
     {
+
+        private StudentOfClassService studentOfClassService;
+
         private ObservableCollection<SchoolClass> schoolClasses;
         private ObservableCollection<Student> studentsOfClass;
         private ObservableCollection<Student> studentHaveNoClass;
 
-        private StudentOfClassService studentOfClassService;
         private SchoolClass selectedSchoolClass;
         private Student selectedStudentHaveNoClass;
         private Student selectedStudentOfClass;

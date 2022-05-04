@@ -23,6 +23,11 @@ namespace Kreta.Services
             teachTeacherSubjectRepo = new TeachTeacherSubjectRepo();
         }
 
+        public List<Teacher> GetAllTeachers()
+        {
+            return teachersRepo.GetAllTeachers();
+        }
+
         public List<Subject> GetTeachersSubject(int teacherId)
         {
             List<int> subjedIds = teachTeacherSubjectRepo.GetTeacherSubjectsIds(teacherId);

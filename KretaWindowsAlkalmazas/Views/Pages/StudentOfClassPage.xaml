@@ -20,6 +20,9 @@
                          ItemsSource="{Binding StudentsOfClass}"   
                          SelectedItem="{Binding SelectedStudentOfClass}"
                 />
+                <Button Margin="5" x:Name="btDeleteStudentFromClass"
+                        Command="{Binding DeleteStudentFromClassCommand}"
+                        Content="A diák eltávolítása az osztályból"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10">
                 <TextBlock Margin="5">Nem besorolt diákok kezelése:</TextBlock>
@@ -34,9 +37,7 @@
                 <Button Margin="5" x:Name="btStudentToClass" 
                         Command="{Binding AddStudentToClassCommand}" 
                         Content="Kiválasztott diák hozzáadása" />
-                <Button Margin="5" x:Name="btDeleteStudentFromClass"
-                        Command="{Binding DeleteStudentFromClassCommand}"
-                        Content="A diák eltávolítása az osztályból"/>
+
             </StackPanel>
         </StackPanel>
     </StackPanel>

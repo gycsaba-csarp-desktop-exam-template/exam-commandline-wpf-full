@@ -14,15 +14,14 @@ namespace Kreta.ViewModels
 {
     public class TeachTeacherSubjectViewModel : ViewModelBase
     {
+        private TeachTeacherSubjectService teachTeacherSubjectService;
+
         private Teacher selectedTeacher;
         private Subject selectedSubjectOfTeacher;
         private Subject selectedNotTeachedSubject;
         private ObservableCollection<Teacher> teachers;
         private ObservableCollection<Subject> subjectsOfTeacher;
         private ObservableCollection<Subject> teachersNotTeachedSubjects;
-
-        private TeachersRepo teachersRepo;
-        private TeachTeacherSubjectService teachTeacherSubjectService;
 
         public RelayCommand SubjectToTeacherCommand { get; private set;}
         public RelayCommand DeleteTeachedSubjectCommand { get; private set; }
@@ -34,7 +33,6 @@ namespace Kreta.ViewModels
             DeleteTeachedSubjectCommand = new RelayCommand(execute => DeleteSubjectFromTecherSubjects());
 
             teachTeacherSubjectService = new TeachTeacherSubjectService();
-            teachersRepo = new TeachersRepo();
 
             teachers = new ObservableCollection<Teacher>();
             subjectsOfTeacher = new ObservableCollection<Subject>();
@@ -48,7 +46,7 @@ namespace Kreta.ViewModels
             get
             {
                 teachers.Clear();
-                teachers = new ObservableCollection<Teacher>(teachersRepo.Teachers);
+                teachers = new ObservableCollection<Teacher>(teachTeacherSubjectService.GetAllTeachers());
                 return teachers;
             }
         }

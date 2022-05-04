@@ -15,9 +15,6 @@ namespace Kreta.ViewModel
 {
     public class ParentsViewModel : ViewModelBase
     {
-        private ParentsRepo parentsRepo;
-        private StudentsRepo studentsRepo;
-
         private ParentService parentService;
 
         private ObservableCollection<Student> students;
@@ -38,11 +35,9 @@ namespace Kreta.ViewModel
 
         public ParentsViewModel()
         {
-            parentsRepo = new ParentsRepo();
             parentService = new ParentService();
-            studentsRepo = new StudentsRepo();
-            students = new ObservableCollection<Student>(studentsRepo.Students);
-            selectedStudentParents = new ObservableCollection<Parent>(parentsRepo.Parents);
+            students = new ObservableCollection<Student>(parentService.GetAllStudents());
+            selectedStudentParents = new ObservableCollection<Parent>(parentService.GetAllParents());
             selectedParent = new Parent();
             DeleteParentCommand = new RelayCommand(execute => DeleteParent());
             DeleteParantWithNoStudentCommand = new RelayCommand(execute => DeleteParentFinaly());
@@ -53,7 +48,7 @@ namespace Kreta.ViewModel
         {
             get
             {
-                return " "+parentsRepo.NumberOfParents+" fő.";
+                return " "+ parentService.NumberOfParents+" fő.";
             }
         }
 
@@ -61,7 +56,7 @@ namespace Kreta.ViewModel
         {
             get
             {
-                return " " + parentsRepo.NumberOfWomen + " fő.";
+                return " " + parentService.NumberOfWomen + " fő.";
             }
         }
 
@@ -69,7 +64,7 @@ namespace Kreta.ViewModel
         {
             get
             {
-                return " " + parentsRepo.NumberOfMan + " fő.";
+                return " " + parentService.NumberOfMan + " fő.";
             }
         }
 
@@ -79,7 +74,7 @@ namespace Kreta.ViewModel
             set
             {
                 selectedStudent = value;
-                OnPropertyChanged("SelectedStudentParents");
+                OnPropertyChanged(nameof(SelectedStudentParents));
             }
         }
 
@@ -89,7 +84,7 @@ namespace Kreta.ViewModel
             set
             {
                 selectedParantWithNoStudent = value;
-                OnPropertyChanged("SelectedParantWithNoStudent");
+                OnPropertyChanged(nameof(SelectedParantWithNoStudent));
             }
         }
 
@@ -125,16 +120,22 @@ namespace Kreta.ViewModel
                 int studentId = selectedStudent.Id;
                 int parentId = selectedParent.Id;
                 parentService.DeleteParent(studentId, parentId);
-                OnPropertyChanged("SelectedStudentParents");
-                OnPropertyChanged("ParentsWithNoStudent");
+                OnPropertyChanged(nameof(SelectedStudentParents));
+                OnPropertyChanged(nameof(ParentsWithNoStudent));
+                OnPropertyChanged(nameof(NumberOfParents));
+                OnPropertyChanged(nameof(NumberOfMan));
+                OnPropertyChanged(nameof(NumberOfWomen));
             }
         }
 
         public void DeleteParentFinaly()
         {
             if (SelectedParantWithNoStudent != null)
-                parentsRepo.DeleteParent(SelectedParantWithNoStudent.Id);
-            OnPropertyChanged("ParentsWithNoStudent");
+                parentService.DeleteParent(SelectedParantWithNoStudent.Id);
+            OnPropertyChanged(nameof(ParentsWithNoStudent));
+            OnPropertyChanged(nameof(NumberOfParents));
+            OnPropertyChanged(nameof(NumberOfMan));
+            OnPropertyChanged(nameof(NumberOfWomen));
         }
     }
 }
