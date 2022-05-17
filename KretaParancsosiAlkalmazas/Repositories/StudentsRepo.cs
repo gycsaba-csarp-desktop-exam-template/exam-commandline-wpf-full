@@ -31,21 +31,21 @@ namespace Kreta.Repositories
         }  
         public void MakeTestData()
         {
-            students.Add(new Student(1,"Kis Zoltán",2));
-            students.Add(new Student(2,"Nagy Anna",1));
-            students.Add(new Student(3,"Szabó Imre",3));
-            students.Add(new Student(4, "Péter Zoltán", 4));
-            students.Add(new Student(5, "Ávra Virág", 1));
-            students.Add(new Student(6, "Zolyom Rebeka", 2));
-            students.Add(new Student(7, "Varga Aladár", 3));
-            students.Add(new Student(8, "Nyugvó Roland", 1));
-            students.Add(new Student(9, "Nyugvó Roland", 1));
-            students.Add(new Student(10, "Marakodó Melinda", 2));
-            students.Add(new Student(11, "Jobbágy Rita", 4));
-            students.Add(new Student(12, "Nagy Virág", 4));
-            students.Add(new Student(13, "Tanuló Péter", 0));
-            students.Add(new Student(14, "Nagy Lajos", 0));
-            students.Add(new Student(15, "Péter László", 0));
+            students.Add(new Student(1,"Kis","Zoltán", false, new DateTime(2004, 10, 24),1));
+            students.Add(new Student(2,"Nagy","Anna", true, new DateTime(2003, 3, 2), 1));
+            students.Add(new Student(3,"Szabó", "Imre", false, new DateTime(2004, 7, 4), 3));
+            students.Add(new Student(4, "Péter","Zoltán", false, new DateTime(2003, 9, 9), 4));
+            students.Add(new Student(5, "Ávra", "Virág", true, new DateTime(2004, 2, 24), 1));
+            students.Add(new Student(6, "Zolyom", "Rebeka", true, new DateTime(2004, 10, 24), 2));
+            students.Add(new Student(7, "Varga", "Aladár", false, new DateTime(2003, 4, 16), 3));
+            students.Add(new Student(8, "Nyugvó", "Roland", false, new DateTime(2003, 11, 24), 1));
+            students.Add(new Student(9, "Nyugvó", "Roland", false, new DateTime(2004, 2, 3), 1));
+            students.Add(new Student(10, "Marakodó","Melinda", true, new DateTime(2004, 5, 25), 2));
+            students.Add(new Student(11, "Jobbágy", "Rita", true, new DateTime(2004, 7, 4), 4));
+            students.Add(new Student(12, "Nagy", "Virág", true, new DateTime(2003, 2, 4), 4));
+            students.Add(new Student(13, "Tanuló", "Péter", false, new DateTime(2003, 12, 31), 0));
+            students.Add(new Student(14, "Nagy","Lajos", false, new DateTime(2004, 1, 14), 0));
+            students.Add(new Student(15, "Péter", "László", false, new DateTime(2003, 1, 12), 0));
         }
     }
 }

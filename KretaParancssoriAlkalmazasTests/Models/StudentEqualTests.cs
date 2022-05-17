@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace Kreta.Models.Tests
 {
     [TestClass()]
-    public class StudentEqualTests
+    public class EqualsStudentTests
     {
         [TestMethod()]
         public void EqualsStudentsTest()
         {
-            Student student1 = new Student(1, "Kis Bence", 3);
-            Student student2 = new Student(1, "Kis Bence", 3);
+            Student student1 = new Student(1, "Kis","Bence", false, new DateTime(2004, 10, 24), 1);
+            Student student2 = new Student(1, "Kis","Bence", false, new DateTime(2004, 10, 24), 1);
 
             bool expected = true;
 
@@ -27,8 +27,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void StudentsNotEqualByIdTest()
         {
-            Student student1 = new Student(1, "Kis Bence", 3);
-            Student student2 = new Student(2, "Kis Bence", 3);
+            Student student1 = new Student(1, "Kis", "Bence", false, new DateTime(2004, 10, 24), 1);
+            Student student2 = new Student(2, "Kis", "Bence", false, new DateTime(2004, 10, 24), 1);
 
             bool expected = false;
 
@@ -40,8 +40,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void StudentsNotEqualByNameTest()
         {
-            Student student1 = new Student(1, "Kis Imre", 3);
-            Student student2 = new Student(1, "Kis Bence", 3);
+            Student student1 = new Student(1, "Kis", "Imre", false, new DateTime(2004, 10, 24), 1);
+            Student student2 = new Student(1, "Kis","Bence", false, new DateTime(2004, 10, 24), 1);
 
             bool expected = false;
 
@@ -53,8 +53,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void StudentsNotEqualByClassIDTest()
         {
-            Student student1 = new Student(1, "Kis Bence", 3);
-            Student student2 = new Student(1, "Kis Bence", 4);
+            Student student1 = new Student(1, "Kis", "Bence", false, new DateTime(2004, 10, 24), 3);
+            Student student2 = new Student(1, "Kis","Bence", false, new DateTime(2004, 10, 24), 4);
 
             bool expected = false;
 
@@ -66,8 +66,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void StudentsNotEqualByClassIDAndIDTest()
         {
-            Student student1 = new Student(1, "Kis Bence", 3);
-            Student student2 = new Student(2, "Kis Bence", 4);
+            Student student1 = new Student(1, "Kis", "Bence", false, new DateTime(2004, 10, 24), 3);
+            Student student2 = new Student(2, "Kis", "Bence", false, new DateTime(2004, 10, 24), 4);
 
             bool expected = false;
 

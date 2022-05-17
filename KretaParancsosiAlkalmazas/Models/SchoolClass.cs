@@ -4,50 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Kreta.Models.Interfaces;
+
 namespace Kreta.Models
 {
-    public class SchoolClass
+    public class SchoolClass 
     {
         private int id;
-        private int grade;
+        private int schoolClass;
         private char gradeType;
         private int teacherId;
 
         public SchoolClass(int id, int grade, char gradeType, int teacherId)
         {
             this.id = id;
-            this.grade = grade;
+            this.schoolClass = grade;
             this.gradeType = gradeType;
             this.teacherId = teacherId;
         }
 
         public int Id { get => id; set => id = value; }
-        public int Grade { get => grade; set => grade = value; }
+        public int Grade { get => schoolClass; set => schoolClass = value; }
         public char GradeType { get => gradeType; set => gradeType = value; }
         public int TeacherId { get => teacherId; set => teacherId = value; }
 
-        public bool SchoolLeaver
-        {
-            get
-            {
-                if (grade == 12)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
         public string GradeGradeType
         {
-            get
-            {
-                string result = grade + ". " + gradeType;
-                return result;
-            }
+            get { return schoolClass + " " + GradeType; }
         }
     }
 }

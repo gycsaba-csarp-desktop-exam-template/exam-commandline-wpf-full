@@ -14,8 +14,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void CompareToTestThisEqualObj()
         {
-            Student thisStudent = new Student(1, "Kis Péter", 1);
-            Student objStudent = new Student(1, "Kis Péter", 1);
+            Student thisStudent = new Student(1, "Kis", "Bence", false, new DateTime(2004, 10, 24), 1);
+            Student objStudent = new Student(1, "Kis", "Bence", false, new DateTime(2004, 10, 24), 1);
 
             int expected = 0;
             int actual = thisStudent.CompareTo(objStudent);
@@ -25,8 +25,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void CompareToTestThisBeforeObj()
         {
-            Student thisStudent = new Student(1, "Kis Péter", 1);
-            Student objStudent = new Student(1, "Nagy Péter", 1);
+            Student thisStudent = new Student(1, "Kis", "Bence", false, new DateTime(2004, 10, 24), 1);
+            Student objStudent = new Student(1, "Nagy", "Bence", false, new DateTime(2004, 10, 24), 1);
 
             int expected = -1;
             int actual = thisStudent.CompareTo(objStudent);
@@ -36,8 +36,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void CompareToTestThisAfterObj()
         {
-            Student thisStudent = new Student(1, "Nagy Péter", 1);
-            Student objStudent = new Student(1, "Kis Péter", 1);
+            Student thisStudent = new Student(1, "Nagy","Péter", false, new DateTime(2004, 10, 24), 1);
+            Student objStudent = new Student(1, "Kis","Péter", false, new DateTime(2004, 10, 24), 1);
 
             int expected = 1;
             int actual = thisStudent.CompareTo(objStudent);
@@ -47,8 +47,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void CompareToTestIdThisSmallerObj()
         {
-            Student thisStudent = new Student(1, "Kis Péter", 1);
-            Student objStudent = new Student(2, "Kis Péter", 1);
+            Student thisStudent = new Student(1, "Kis", "Péter", false, new DateTime(2004, 10, 24), 1);
+            Student objStudent = new Student(1, "Nagy", "Péter", false, new DateTime(2004, 10, 24), 1);
 
             int expected = -1;
             int actual = thisStudent.CompareTo(objStudent);
@@ -58,8 +58,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void CompareToTestIdThisBiggerObj()
         {
-            Student thisStudent = new Student(2, "Kis Péter", 1);
-            Student objStudent = new Student(1, "Kis Péter", 1);
+            Student thisStudent = new Student(2, "Kis", "Péter", false, new DateTime(2004, 10, 24), 1);
+            Student objStudent = new Student(1, "Kis", "Péter", false, new DateTime(2004, 10, 24), 1);
 
             int expected = 1;
             int actual = thisStudent.CompareTo(objStudent);
@@ -69,8 +69,8 @@ namespace Kreta.Models.Tests
         [TestMethod()]
         public void CompareToTestNotStudentObj()
         {
-            Student thisStudent = new Student(2, "Kis Péter", 1);
-            Subject objSubject = new Subject(1, "rossz");
+            Student thisStudent = new Student(2, "Kis", "Péter", false, new DateTime(2004, 10, 24), 1);
+            Subject objSubject = new Subject(1, "Történelem");
 
             int expected = 0;
             int actual = thisStudent.CompareTo(objSubject);

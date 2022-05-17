@@ -4,48 +4,106 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Kreta.Models.Interfaces;
+
 namespace Kreta.Models
 {
-    public class Student : IComparable
+    public class Student : IStudent
     {
-        private int id;
-        private string fullName;
-        private int schoolClassId;
+        public int StudentId { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public bool Wooman { get; set; }
+        public DateTime DataOfBirth { get; set; }
+        public string City { get; set; }
+        public string StreetAndNumber { get; set; }
+        public int PostCode { get; set; }
+        public string LoginName { get; set; }
+        public string Password { get; set; }
+        public int SchoolClassId { get; set; }
 
-        public Student(int id, string fullname, int osztalyId)
+
+        public Student()
         {
-            this.Id = id;
-            this.FullName = fullname;
-            this.SchoolClassId = osztalyId;
+            Id = -1;
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Wooman = false;
+            DataOfBirth = DateTime.MinValue;
+            City = string.Empty;
+            StreetAndNumber = string.Empty;
+            PostCode = -1;
+            LoginName = string.Empty;
+            Password = string.Empty;
+            SchoolClassId = -1;
         }
 
-        public int Id { get => id; set => id = value; }
-        public string FullName { get => fullName; set => fullName = value; }
-        public int SchoolClassId { get => schoolClassId; set => schoolClassId = value; }
+        public Student(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Wooman = wooman;
+            DataOfBirth = dataOfBirth;
+            City = string.Empty;
+            StreetAndNumber = string.Empty;
+            PostCode = -1;
+            LoginName = string.Empty;
+            Password = string.Empty;
+            SchoolClassId = -1;
+        }
 
-        //Egy diák megelőzi a másikat, ha a neve előbb van mint a másik diák neve.
-        //Ha a két név megegyezik, az a diák van előbb emelyiknek kisebb az id-je.
-        //1. feladat: írja meg a teszteket, hogy teljeskörűen lefedjék a feladatot!
-        //2. feladat: fejlessze ki a metódust úgy, hogy a teszteknek megfelelően működjön!
-        //A metódus -1-et ad vissza, ha a this objektum megelőzi az obj nevű objektumot.
-        //A metódus +1-et ad vissza, ha a this objektum követi az obj nevű objektumot.
-        //A metódus 0-t ad vissza, ha a két objektum megegyezik.
+        public Student(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth, int schoolClassId)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Wooman = wooman;
+            DataOfBirth = dataOfBirth;
+            City = string.Empty;
+            StreetAndNumber = string.Empty;
+            PostCode = -1;
+            LoginName = string.Empty;
+            Password = string.Empty;
+            SchoolClassId = schoolClassId;
+        }
 
-        //Érje el, hogy az osztály diákjai rendezve jelenjenek meg.
+        public Student(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth, string city, string streetAndNumber, int postCode, string loginName, string password, int schoolClassId)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Wooman = wooman;
+            DataOfBirth = dataOfBirth;
+            City = city;
+            StreetAndNumber = streetAndNumber;
+            PostCode = postCode;
+            LoginName = loginName;
+            Password = password;
+            SchoolClassId = schoolClassId;
+        }
+
+        private IStudent GetInterfaceObject
+        {
+            get { return (IStudent) this; }
+        }
+
+        public string Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public int CompareTo(object obj)
         {
             if (obj is Student)
             {
-                Student other = (Student) obj;
-                int fullNameCompareResult = this.fullName.CompareTo(other.fullName);
+                IStudent other = (Student) obj;
+                int fullNameCompareResult = this.GetInterfaceObject.FullName.CompareTo(other.FullName);
                 if (fullNameCompareResult == 0)
                 {
-                    if (this.id == other.id)
+                    if (this.Id == other.Id)
                     {
                         return 0;
                     }
-                    else if (this.id < other.id)
+                    else if (this.Id < other.Id)
                     {
                         return -1;
                     }
@@ -67,13 +125,14 @@ namespace Kreta.Models
 
         public override bool Equals(object obj)
         {
-            if (obj is Student)
+            if (obj is Student || obj is IStudent)
             {
-                Student other = (Student)obj;
-                int fullNameCompareResult = this.fullName.CompareTo(other.fullName);
+                IStudent other = (Student) obj;
+                Student otherStudent = (Student) obj;
+                int fullNameCompareResult = this.GetInterfaceObject.FullName.CompareTo(other.FullName);
                 if (fullNameCompareResult != 0)
                     return false;
-                else if ((this.id == other.id) && (this.schoolClassId == other.schoolClassId))
+                else if ((this.Id == other.Id) && (this.SchoolClassId == otherStudent.SchoolClassId))
                     return true;
                 else
                     return false;
@@ -84,9 +143,27 @@ namespace Kreta.Models
 
         public override string ToString()
         {
-            return id + ". " + fullName;
+            return Id + ". " + this.GetInterfaceObject.FullName;
         }
 
+        public bool IsLoginNameCorrect(string givenLoginName)
+        {
+            throw new NotImplementedException();
+        }
 
+        public bool IsPasswordCorrect(string givenPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool VerifyLoginName(string givenLoginName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool VerifyPassword(string givenPassword)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

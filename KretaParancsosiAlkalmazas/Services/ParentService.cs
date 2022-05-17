@@ -29,7 +29,7 @@ namespace Kreta.Services
         {
             get
             {
-                int result = parentsRepo.GetAllParents().Where(parents => parents.Woomen == true).Count();
+                int result = parentsRepo.GetAllParents().Where(parents => parents.Wooman == true).Count();
                 return result;
             }
         }
@@ -38,7 +38,7 @@ namespace Kreta.Services
         {
             get
             {
-                int result = parentsRepo.GetAllParents().Where(parents => parents.Woomen == false).Count();
+                int result = parentsRepo.GetAllParents().Where(parents => parents.Wooman == false).Count();
                 return result;
             }
         }
@@ -122,13 +122,13 @@ namespace Kreta.Services
 
         public List<Parent> GetMothers()
         {
-            return parentsRepo.GetAllParents().Where(x => x.Woomen = true).ToList();
+            return parentsRepo.GetAllParents().Where(x => x.Wooman = true).ToList();
         }
 
 
         public List<Parent> GetFathers()
         {
-            return parentsRepo.GetAllParents().Where(x => x.Woomen = false).ToList();
+            return parentsRepo.GetAllParents().Where(x => x.Wooman = false).ToList();
         }
 
 

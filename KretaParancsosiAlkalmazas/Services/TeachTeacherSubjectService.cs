@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Kreta.Repositories.Relationship;
+
 using Kreta.Models;
+using Kreta.Models.Interfaces;
+using Kreta.Repositories.Relationship;
 
 namespace Kreta.Services
 {
@@ -23,7 +25,7 @@ namespace Kreta.Services
             teachTeacherSubjectRepo = new TeachTeacherSubjectRepo();
         }
 
-        public List<Teacher> GetAllTeachers()
+        public List<ITeacher> GetAllTeachers()
         {
             return teachersRepo.GetAllTeachers();
         }

@@ -9,6 +9,7 @@ using Kreta.Models;
 using Kreta.Services;
 using Kreta.Repositories;
 using ViewModels.BaseClass;
+using Kreta.Models.Interfaces;
 
 namespace Kreta.ViewModels
 {
@@ -19,7 +20,7 @@ namespace Kreta.ViewModels
         private Teacher selectedTeacher;
         private Subject selectedSubjectOfTeacher;
         private Subject selectedNotTeachedSubject;
-        private ObservableCollection<Teacher> teachers;
+        private ObservableCollection<ITeacher> teachers;
         private ObservableCollection<Subject> subjectsOfTeacher;
         private ObservableCollection<Subject> teachersNotTeachedSubjects;
 
@@ -34,19 +35,19 @@ namespace Kreta.ViewModels
 
             teachTeacherSubjectService = new TeachTeacherSubjectService();
 
-            teachers = new ObservableCollection<Teacher>();
+            teachers = new ObservableCollection<ITeacher>();
             subjectsOfTeacher = new ObservableCollection<Subject>();
             teachersNotTeachedSubjects = new ObservableCollection<Subject>();
 
 
         }
 
-        public ObservableCollection<Teacher> Teachers
+        public ObservableCollection<ITeacher> Teachers
         {
             get
             {
                 teachers.Clear();
-                teachers = new ObservableCollection<Teacher>(teachTeacherSubjectService.GetAllTeachers());
+                teachers = new ObservableCollection<ITeacher>(teachTeacherSubjectService.GetAllTeachers());
                 return teachers;
             }
         }

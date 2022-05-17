@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kreta.Models;
+using Kreta.Models.Interfaces;
 
 namespace Kreta.Repositories
 {
     public partial class TeachersRepo
     {
-        private List<Teacher> teachers;
+        private List<ITeacher> teachers;
 
-        public List<Teacher> Teachers
+        public List<ITeacher> Teachers
         {
             get
             {
@@ -30,24 +31,24 @@ namespace Kreta.Repositories
 
         public TeachersRepo()
         {
-            teachers = new List<Teacher>();
+            teachers = new List<ITeacher>();
             MakeTestData();
         }
 
-        public List<Teacher> GetAllTeachers()
+        public List<ITeacher> GetAllTeachers()
         {
-            return new List<Teacher>(teachers);
+            return new List<ITeacher>(teachers);
         }
 
 
         public void MakeTestData()
         {
-            teachers.Add(new Teacher(1, "Számoló", "Szonja", "123456", true, EmploymentValue.LECTURER));
-            teachers.Add(new Teacher(2, "Buktató", "Béla", "123456", false, EmploymentValue.INDENTUREDLABOURER));
-            teachers.Add(new Teacher(3, "Aritmetika", "Antal", "123456", false, EmploymentValue.DONEONCOMMISSION));
-            teachers.Add(new Teacher(4, "Arany", "András", "123456", false, EmploymentValue.DONEONCOMMISSION));
-            teachers.Add(new Teacher(5, "Sportoló", "Jenő", "123456", false, EmploymentValue.DONEONCOMMISSION));
-            teachers.Add(new Teacher(6, "Visszanéző", "Viola", "123456", false, EmploymentValue.DONEONCOMMISSION));
+            teachers.Add(new Teacher(1, "Számoló", "Szonja", true, new DateTime(1974, 10, 24)));
+            teachers.Add(new Teacher(2, "Buktató", "Béla", false, new DateTime(1974, 10, 24)));
+            teachers.Add(new Teacher(3, "Aritmetika", "Antal", false, new DateTime(1974, 10, 24)));
+            teachers.Add(new Teacher(4, "Arany", "András",  false, new DateTime(1974, 10, 24)));
+            teachers.Add(new Teacher(5, "Sportoló", "Jenő", false, new DateTime(1974, 10, 24)));
+            teachers.Add(new Teacher(6, "Visszanéző", "Viola",  true, new DateTime(1974, 10, 24)));
         }
     }
 }
