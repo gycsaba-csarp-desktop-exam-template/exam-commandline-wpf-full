@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kreta.Models.Interfaces;
+using Kreta.Models.Interfaces.Base;
 
 namespace Kreta.Models
 {
-    public class Parent : IParent
+    public class Parent : IBaseModel, IParent
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -69,9 +70,29 @@ namespace Kreta.Models
             get { return (IParent) this; }
         }
 
+        long IBaseModel.Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public override string ToString()
         {
             return Id+"."+GetInterfaceObject.FullName;
+        }
+
+        public void Set(object obj)
+        {
+            if (obj is Parent)
+            {
+                Parent p = (Parent)obj;                
+                Id = p.Id;
+                FirstName = p.FirstName;
+                LastName = p.LastName;
+                Wooman = p.Wooman;
+                DataOfBirth = p.DataOfBirth;
+                City = p.City;
+                StreetAndNumber = p.StreetAndNumber;
+                PostCode = p.PostCode;
+                LoginName = p.LoginName;
+                Password = p.Password;
+            }
         }
     }
 }

@@ -8,16 +8,16 @@ namespace Kreta.Models.Relationship
 {
     class TeachTeacherSubject
     {
-        private int teacherID;
-        private int subjectID;
+        private long teacherID;
+        private long subjectID;
 
-        public TeachTeacherSubject(int teacherID, int subjectID)
+        public TeachTeacherSubject(long teacherID, long subjectID)
         {
             this.teacherID = teacherID;
             this.subjectID = subjectID;
         }
 
-        public int TeacherID { get => teacherID; set => teacherID = value; }
-        public int SubjectID { get => subjectID; set => subjectID = value; }
+        public long TeacherID { get => teacherID; set => teacherID = value; }
+        public long SubjectID { get => subjectID; set => subjectID = value; }
     }
 }

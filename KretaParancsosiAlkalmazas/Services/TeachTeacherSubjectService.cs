@@ -30,9 +30,9 @@ namespace Kreta.Services
             return teachersRepo.GetAllTeachers();
         }
 
-        public List<Subject> GetTeachersSubject(int teacherId)
+        public List<Subject> GetTeachersSubject(long teacherId)
         {
-            List<int> subjedIds = teachTeacherSubjectRepo.GetTeacherSubjectsIds(teacherId);
+            List<long> subjedIds = teachTeacherSubjectRepo.GetTeacherSubjectsIds(teacherId);
             List<Subject> teacherSubjects = new List<Subject>();
             foreach(int subjectID in subjedIds)
             {
@@ -41,9 +41,9 @@ namespace Kreta.Services
             return teacherSubjects;
         }
 
-        public List<Subject> GetTeachersNotTeachedSubjects(int teacherId)
+        public List<Subject> GetTeachersNotTeachedSubjects(long teacherId)
         {
-            List<int> teachedSubjedIds = teachTeacherSubjectRepo.GetTeacherSubjectsIds(teacherId);
+            List<long> teachedSubjedIds = teachTeacherSubjectRepo.GetTeacherSubjectsIds(teacherId);
             List<Subject> allSubjects =  new List<Subject>(subjectRepo.Subjects);
             List<Subject> notTeachedSubjet = allSubjects;
             foreach (int subjectID in teachedSubjedIds)
@@ -54,12 +54,12 @@ namespace Kreta.Services
             return notTeachedSubjet;
         }
 
-        public void AddTeacherSubject(int teacherId, int subjectId)
+        public void AddTeacherSubject(long teacherId, long subjectId)
         {
             teachTeacherSubjectRepo.Add(teacherId, subjectId);
         }
 
-        public void DeleteTeacherSubject(int teacherId, int subjectId)
+        public void DeleteTeacherSubject(long teacherId, long subjectId)
         {
             teachTeacherSubjectRepo.Delete(teacherId, subjectId);
         }

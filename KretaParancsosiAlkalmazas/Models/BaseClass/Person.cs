@@ -10,7 +10,7 @@ namespace Kreta.Models.BaseClass
 {
     public class Person : IPerson, IEquatable<Person>, IComparable
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Wooman { get; set; }
@@ -25,7 +25,7 @@ namespace Kreta.Models.BaseClass
             DataOfBirth = DateTime.MinValue;
         }
 
-        public Person(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth)
+        public Person(long id, string firstName, string lastName, bool wooman, DateTime dataOfBirth)
         {
             Id = id;
             FirstName = firstName;
@@ -43,5 +43,7 @@ namespace Kreta.Models.BaseClass
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

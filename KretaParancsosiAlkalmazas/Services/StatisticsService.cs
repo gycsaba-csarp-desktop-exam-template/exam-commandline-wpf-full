@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Kreta.Repositories;
 using Kreta.Models;
-
+using Kreta.Models.Interfaces;
 
 namespace Kreta.Services
 {
@@ -77,7 +77,7 @@ namespace Kreta.Services
             foreach (SchoolClass schoolClass in schoolClassesRepo.SchoolClasses)
             {
                 int classId = schoolClass.TeacherId;
-                string teacherOfClass = teachersRepo.Teachers.Where(teacher => teacher.Id == classId).Select(teacher =>teacher.FullName).SingleOrDefault();
+                string teacherOfClass = teachersRepo.GetAllTeachers().Where(teacher => teacher.Id == classId).Select(teacher =>teacher.FullName).SingleOrDefault();
                 teacherPerClasses.Add(schoolClass.GradeGradeType, teacherOfClass);
 
             }

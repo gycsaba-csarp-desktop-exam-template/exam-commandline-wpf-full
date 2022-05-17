@@ -41,7 +41,7 @@ namespace Kreta.Models.Tests
         public void StudentsNotEqualByNameTest()
         {
             Student student1 = new Student(1, "Kis", "Imre", false, new DateTime(2004, 10, 24), 1);
-            Student student2 = new Student(1, "Kis","Bence", false, new DateTime(2004, 10, 24), 1);
+            Student student2 = new Student(1, "Kis", "Bence", false, new DateTime(2004, 10, 24), 1);
 
             bool expected = false;
 

@@ -131,8 +131,8 @@ namespace Kreta.ViewModels
                 return;
             else
             {
-                int teacherId = SelectedTeacher.Id;
-                int subjectId = selectedNotTeachedSubject.Id;
+                long teacherId = SelectedTeacher.Id;
+                long subjectId = selectedNotTeachedSubject.Id;
                 teachTeacherSubjectService.AddTeacherSubject(teacherId, subjectId);
                 OnPropertyChanged(nameof(SubjectsOfTeacher));
             }
@@ -144,8 +144,8 @@ namespace Kreta.ViewModels
                 return;
             else
             {
-                int teacherId = SelectedTeacher.Id;
-                int subjectId = SelectedSubjectOfTeacher.Id;
+                long teacherId = SelectedTeacher.Id;
+                long subjectId = SelectedSubjectOfTeacher.Id;
                 teachTeacherSubjectService.DeleteTeacherSubject(teacherId, subjectId);
                 OnPropertyChanged(nameof(SubjectsOfTeacher));
             }

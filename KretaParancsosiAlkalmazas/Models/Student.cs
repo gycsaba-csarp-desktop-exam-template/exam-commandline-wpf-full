@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kreta.Models.Interfaces;
+using Kreta.Models.Interfaces.Base;
 
 namespace Kreta.Models
 {
-    public class Student : IStudent
+    public class Student : IBaseModel, IStudent
     {
         public int StudentId { get; set; }
         public int Id { get; set; }
@@ -90,20 +91,22 @@ namespace Kreta.Models
         }
 
         public string Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        long IBaseModel.Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public int CompareTo(object obj)
         {
             if (obj is Student)
             {
-                IStudent other = (Student) obj;
-                int fullNameCompareResult = this.GetInterfaceObject.FullName.CompareTo(other.FullName);
+                IStudent otherIStudent = (Student) obj;
+                Student otherStudent = (Student)obj;
+                int fullNameCompareResult = this.GetInterfaceObject.FullName.CompareTo(otherIStudent.FullName);
                 if (fullNameCompareResult == 0)
                 {
-                    if (this.Id == other.Id)
+                    if (this.Id == otherStudent.Id)
                     {
                         return 0;
                     }
-                    else if (this.Id < other.Id)
+                    else if (this.Id < otherStudent.Id)
                     {
                         return -1;
                     }
@@ -132,7 +135,7 @@ namespace Kreta.Models
                 int fullNameCompareResult = this.GetInterfaceObject.FullName.CompareTo(other.FullName);
                 if (fullNameCompareResult != 0)
                     return false;
-                else if ((this.Id == other.Id) && (this.SchoolClassId == otherStudent.SchoolClassId))
+                else if ((this.Id == otherStudent.Id) && (this.SchoolClassId == otherStudent.SchoolClassId))
                     return true;
                 else
                     return false;
@@ -164,6 +167,26 @@ namespace Kreta.Models
         public bool VerifyPassword(string givenPassword)
         {
             throw new NotImplementedException();
+        }
+
+        public void Set(object obj)
+        {
+            if (obj is Student)
+            {
+                Student s = (Student) obj;
+
+                Id =s.Id;
+                FirstName = s.FirstName;
+                LastName = s.LastName;
+                Wooman = s.Wooman;
+                DataOfBirth = s.DataOfBirth;
+                City = s.City;
+                StreetAndNumber = s.StreetAndNumber;
+                PostCode = s.PostCode;
+                LoginName = s.LoginName;
+                Password = s.Password;
+                SchoolClassId = s.SchoolClassId;
+            }
         }
     }
 }

@@ -10,9 +10,9 @@ using Kreta.Models.BaseClass;
 
 namespace Kreta.Models
 {
-    public class Teacher : ITeacher, IComparable, IEquatable<Teacher>
+    public class Teacher :  ITeacher, IComparable, IEquatable<Teacher>
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Wooman { get; set; }
@@ -103,19 +103,22 @@ namespace Kreta.Models
                 return 0;
             else
             {
-                ITeacher objTeacher = (ITeacher) obj;
-                ITeacher thisTeacher = (ITeacher) this;
+                ITeacher objITeacher = (ITeacher) obj;
+                ITeacher thisITeacher = (ITeacher) this;
 
-                int teacherFullNameCompareResult = thisTeacher.FullName.CompareTo(objTeacher.FullName);
+                int teacherFullNameCompareResult = thisITeacher.FullName.CompareTo(objITeacher.FullName);
                 if (teacherFullNameCompareResult == 0)
                     return 0;
                 else
                 {
-                    int teacherDataOfBirthComapreResult = this.DataOfBirth.CompareTo(objTeacher.DataOfBirth);
+                    int teacherDataOfBirthComapreResult = this.DataOfBirth.CompareTo(objITeacher.DataOfBirth);
                     if (teacherDataOfBirthComapreResult == 0)
                         return 0;
                     else
-                        return thisTeacher.Id.CompareTo(objTeacher.Id);
+                    {
+                        Teacher objTeacher = (Teacher) obj;
+                        return this.Id.CompareTo(objTeacher.Id);
+                    }
                 }
             }
         }
@@ -124,6 +127,26 @@ namespace Kreta.Models
         {
 
             return "("+Id+") "+ GetInterfaceObject.FullName;
+        }
+
+        public void Set(object obj)
+        {
+            if (obj is Teacher)
+            {
+                Teacher t = (Teacher) obj;
+                Id = t.Id;
+                FirstName = t.FirstName;
+                LastName = t.LastName;
+                Wooman = t.Wooman;
+                DataOfBirth = t.DataOfBirth;
+                City = t.City;
+                StreetAndNumber = t.StreetAndNumber;
+                PostCode = t.PostCode;
+                LoginName = t.LoginName;
+                Password = t.Password;
+                GrossSalary = t.GrossSalary;
+                NumberOfChildren = t.NumberOfChildren;
+            }
         }
 
         private ITeacher GetInterfaceObject

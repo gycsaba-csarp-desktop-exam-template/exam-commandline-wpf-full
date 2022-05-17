@@ -20,7 +20,7 @@ namespace Kreta.Repositories.Relationship
             MakeTestData();
         }
 
-        public List<int> GetTeacherSubjectsIds(int teacherId)
+        public List<long> GetTeacherSubjectsIds(long teacherId)
         {
             var teacherSubjectsIds = teachTeacherSubjects.Where(tts => tts.TeacherID == teacherId).Select(tts => tts.SubjectID);
             return teacherSubjectsIds.ToList();
@@ -35,12 +35,12 @@ namespace Kreta.Repositories.Relationship
             teachTeacherSubjects.Add(new TeachTeacherSubject(2, 3));
         }
 
-        public void Add(int teacherId, int subjectId)
+        public void Add(long teacherId, long subjectId)
         {
             teachTeacherSubjects.Add(new TeachTeacherSubject(teacherId, subjectId));
         }
 
-        public void Delete(int teacherId, int subjectId)
+        public void Delete(long teacherId, long subjectId)
         {
             TeachTeacherSubject subjectToDelete = teachTeacherSubjects.Find(tts => tts.TeacherID == teacherId && tts.SubjectID == subjectId);
             if (subjectToDelete != null)

@@ -122,13 +122,13 @@ namespace Kreta.Services
 
         public List<Parent> GetMothers()
         {
-            return parentsRepo.GetAllParents().Where(x => x.Wooman = true).ToList();
+            return parentsRepo.GetAllParents().Where(x => x.Wooman == true).ToList();
         }
 
 
         public List<Parent> GetFathers()
         {
-            return parentsRepo.GetAllParents().Where(x => x.Wooman = false).ToList();
+            return parentsRepo.GetAllParents().Where(x => x.Wooman == false).ToList();
         }
 
 
