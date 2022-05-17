@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 using Kreta.Models;
 using Kreta.Models.Interfaces.Base;
+using Kreta.Repositories.Interfaces;
 
 namespace Kreta.Repositories.BaseClass
 {
-    public class GenericTestRepository<TEntity, TRepository>  
+    public class GenericTestRepository<TEntity, TRepository>  : IGenericRepository <TEntity>
         where TEntity : class
         where TRepository : List<TEntity>
     {
         protected TRepository repo;
+
+        public GenericTestRepository()
+        {            
+        }
 
         public virtual List<TEntity> GetAll()
         {

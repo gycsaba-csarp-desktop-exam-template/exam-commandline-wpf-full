@@ -14,13 +14,13 @@ namespace Kreta.Services
 {
     public class TeachTeacherSubjectService
     {
-        private TeachersRepo teachersRepo;
+        private TeachersTestRepo teachersRepo;
         private SubjectRepo subjectRepo;
         private TeachTeacherSubjectRepo teachTeacherSubjectRepo;
 
         public TeachTeacherSubjectService()
         {
-            teachersRepo = new TeachersRepo();
+            teachersRepo = new TeachersTestRepo();
             subjectRepo = new SubjectRepo();
             teachTeacherSubjectRepo = new TeachTeacherSubjectRepo();
         }

@@ -7,7 +7,7 @@ using Kreta.Models.Interfaces.Base;
 
 namespace Kreta.Models.Interfaces
 {
-    interface IEmployee : IPerson, IAddress, IAccount
+    interface IEmployee : IBaseModel, IPerson, IAddress, IAccount
     {
     }
 }

@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kreta.Models;
+using Kreta.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kreta.Repositories
+namespace Kreta.Repositories.BaseClass
 {
-    public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity> 
+    public class GenericDatabaseRepository<TEntity, TContext> : IGenericRepository<TEntity> 
         where TEntity : class
         where TContext : DbContext
     {
         protected TContext _context;
-        public GenericRepository(TContext context)
+        public GenericDatabaseRepository(TContext context)
         {
             _context = context;
         }

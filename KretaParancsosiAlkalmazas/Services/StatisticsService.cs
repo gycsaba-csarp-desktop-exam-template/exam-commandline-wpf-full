@@ -15,14 +15,14 @@ namespace Kreta.Services
         private SchoolClassesRepo  schoolClassesRepo;
         private StudentsRepo studentsRepo;
         private SubjectRepo subjectRepo;
-        private TeachersRepo teachersRepo;
+        private TeachersTestRepo teachersRepo;
 
         public StatisticsService()
         {
             schoolClassesRepo = new SchoolClassesRepo();
             studentsRepo = new StudentsRepo();
             subjectRepo = new SubjectRepo();
-            teachersRepo = new TeachersRepo();
+            teachersRepo = new TeachersTestRepo();
         }
 
         // Repók példányosíátsa
