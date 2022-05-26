@@ -10,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Repositories.BaseClass
 {
-    public class GenericDatabaseRepository<TEntity, TContext> : IGenericRepository<TEntity> 
+    public class GenericInMemoryDatabaseRepository<TEntity, TContext> : IGenericRepository<TEntity> 
         where TEntity : class
         where TContext : DbContext
     {
         protected TContext context;
-        public GenericDatabaseRepository(TContext context)
+        public GenericInMemoryDatabaseRepository(TContext context)
         {
             this.context = context;
         }

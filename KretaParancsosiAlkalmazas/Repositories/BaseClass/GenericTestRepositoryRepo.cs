@@ -10,13 +10,15 @@ using Kreta.Repositories.Interfaces;
 
 namespace Kreta.Repositories.BaseClass
 {
-    public class GenericTestRepository<TEntity, TRepository>  : IGenericRepository <TEntity>
+    // https://github.com/rowanmiller/UnicornStore/blob/master/UnicornStore/src/UnicornStore.Tests/Controllers/ShippingControllerTests.cs
+
+    public class GenericTestRepositoryRepo<TEntity, TRepository>  : IGenericRepository <TEntity>
         where TEntity : class
         where TRepository : List<TEntity>
     {
         protected TRepository repo;
 
-        public GenericTestRepository()
+        public GenericTestRepositoryRepo()
         {            
         }
 
@@ -46,10 +48,10 @@ namespace Kreta.Repositories.BaseClass
             //TEntity search = repo.Find(e => (IBaseModel) e.Id==(IBaseModel) entity.Id);
         }
 
-        public virtual void Delete(TEntity entity)
+     /*   public virtual void Delete(TEntity entity)
         {
             repo.Remove(entity);
-        }
+        }*/
 
 
         public virtual void Delete(int id)

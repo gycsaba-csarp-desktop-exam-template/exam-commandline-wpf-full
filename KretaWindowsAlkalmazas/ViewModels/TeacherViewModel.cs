@@ -17,8 +17,9 @@ namespace Kreta.ViewModel
     {
         //private TeachersRepo teachersRepo;
         private IGenericRepository<Teacher> teacherRepo;
-        TeachersTestRepo<Teacher> teacherTestRepo; 
-        TeachersDatabaseRepo<Teacher, JKContext> teacherDatabaseRepo;
+       // private GenericTestRepository<Teacher> teachersRepo;
+        private TeachersTestRepo<Teacher> teacherTestRepo; 
+        private TeachersDatabaseRepo<Teacher, JKContext> teacherDatabaseRepo;
 
 
         private ObservableCollection<ITeacher> teachers;
@@ -33,7 +34,14 @@ namespace Kreta.ViewModel
             teacherDatabaseRepo = new TeachersDatabaseRepo<Teacher, JKContext>(context);
 
             if (test)
-                teacherRepo = (IGenericRepository<Teacher>) teacherTestRepo;
+            {
+                // c# multiple repositories test database
+                //https://stackoverflow.com/questions/5502019/how-to-set-up-an-in-memory-repository
+
+                teacherTestRepo = new TeachersTestRepo<Teacher>();
+                teacherRepo = (IGenericRepository<Teacher>)teacherTestRepo;
+            }
+                
             else
             {
                 teacherRepo = (IGenericRepository<Teacher>) teacherDatabaseRepo;

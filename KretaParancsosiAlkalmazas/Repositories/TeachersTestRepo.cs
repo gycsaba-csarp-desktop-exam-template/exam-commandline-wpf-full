@@ -10,7 +10,7 @@ using Kreta.Repositories.BaseClass;
 
 namespace Kreta.Repositories
 {
-    public partial class TeachersTestRepo<TEntity> : GenericTestRepository<ITeacher, List<ITeacher>>
+    public partial class TeachersTestRepo<TEntity> : GenericTestRepositoryRepo<ITeacher, List<ITeacher>>
     {
 
         // https://stackoverflow.com/questions/17902579/repository-pattern-and-unit-testing-from-memory
