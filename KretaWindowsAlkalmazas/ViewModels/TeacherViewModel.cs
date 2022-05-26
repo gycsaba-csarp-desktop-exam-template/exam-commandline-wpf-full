@@ -9,17 +9,16 @@ using Kreta.Models;
 using Kreta.Models.Interfaces;
 using Kreta.Repositories;
 using Kreta.Repositories.Interfaces;
-using Kreta.Repositories.BaseClass;
 
 namespace Kreta.ViewModel
 {
     public class TeacherViewModel
     {
         //private TeachersRepo teachersRepo;
-        private IGenericRepository<Teacher> teacherRepo;
+        private ICRUDRepository<Teacher, KreataContext> teacherRepo;
        // private GenericTestRepository<Teacher> teachersRepo;
-        private TeachersTestRepo<Teacher> teacherTestRepo; 
-        private TeachersDatabaseRepo<Teacher, JKContext> teacherDatabaseRepo;
+        private TeacherInMemoryDatabaseRepo<Teacher,KreataContext> teacherInMemoryTestRepo; 
+        private TeacherDatabaseRepo<Teacher, KreataContext> teacherDatabaseRepo;
 
 
         private ObservableCollection<ITeacher> teachers;
@@ -27,24 +26,27 @@ namespace Kreta.ViewModel
         public TeacherViewModel()
         {
             bool test = true;
-            var context = new JKContext();
+            var context = new KreataContext();
 
 
-            teacherTestRepo = new TeachersTestRepo<Teacher>();
-            teacherDatabaseRepo = new TeachersDatabaseRepo<Teacher, JKContext>(context);
+
+
 
             if (test)
             {
-                // c# multiple repositories test database
-                //https://stackoverflow.com/questions/5502019/how-to-set-up-an-in-memory-repository
+            // c# multiple repositories test database
+            //https://stackoverflow.com/questions/5502019/how-to-set-up-an-in-memory-repository
 
-                teacherTestRepo = new TeachersTestRepo<Teacher>();
-                teacherRepo = (IGenericRepository<Teacher>)teacherTestRepo;
+            https://ogeek.cn/qa/?qa=585404/
+
+                teacherInMemoryTestRepo = new TeacherInMemoryDatabaseRepo<Teacher, KreataContext>(context);
+                teacherRepo = (ICRUDRepository<Teacher,KreataContext>) teacherInMemoryTestRepo;
             }
                 
             else
             {
-                teacherRepo = (IGenericRepository<Teacher>) teacherDatabaseRepo;
+               // teacherDatabaseRepo = new TeacherDatabaseRepo<Teacher, KreataContext>(context);
+                //teacherRepo = (IGenericRepository<Teacher>) teacherDatabaseRepo;
                 //(TeachersDatabaseRepo<TEntity, TContext>)teacherRepo = new TeachersDatabaseRepo<Teacher, JKContext>(context);
             }
                 //teacherRepo = new GenericDatabaseRepository<Teacher, JKContext>(context);

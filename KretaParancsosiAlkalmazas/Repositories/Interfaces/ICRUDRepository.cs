@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Kreta.Models;
-using Kreta.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kreta.Repositories.BaseClass
+
+namespace Kreta.Repositories.Interfaces
 {
-    public class GenericDatabaseRepository<TEntity, TContext> : IGenericRepository<TEntity> 
+    public class ICRUDRepository<TEntity, TContext> : IGenericRepository<TEntity>
         where TEntity : class
         where TContext : DbContext
     {
         protected TContext context;
-        public GenericDatabaseRepository(TContext context)
+        public ICRUDRepository(TContext context)
         {
             this.context = context;
         }
@@ -26,9 +24,9 @@ namespace Kreta.Repositories.BaseClass
 
         public virtual TEntity Get(int id)
         {
-            return context.Set<TEntity>().Find(id);   
+            return context.Set<TEntity>().Find(id);
         }
-      
+
         public virtual void Insert(TEntity entity)
         {
             context.Add(entity);
@@ -54,6 +52,11 @@ namespace Kreta.Repositories.BaseClass
         public virtual void Save()
         {
             context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

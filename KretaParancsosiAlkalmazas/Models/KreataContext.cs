@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Kreta.Models
 {
-    public partial class JKContext : DbContext
+    public partial class KreataContext : DbContext
     {
-        public JKContext()
+        public KreataContext()
         {
         }
 
-        public JKContext(DbContextOptions<JKContext> options)
+        public KreataContext(DbContextOptions<KreataContext> options)
             : base(options)
         {
         }

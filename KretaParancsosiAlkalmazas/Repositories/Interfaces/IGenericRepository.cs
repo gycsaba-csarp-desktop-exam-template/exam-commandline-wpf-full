@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Kreta.Repositories.Interfaces
 {
-    public interface IGenericRepository<T> where T: class
+    public interface IGenericRepository<T> : IDisposable
+        where T : class
     {
         List<T> GetAll();
         T Get(int id);

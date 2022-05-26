@@ -66,5 +66,10 @@ namespace Kreta.Repositories.BaseClass
                 }
             }
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

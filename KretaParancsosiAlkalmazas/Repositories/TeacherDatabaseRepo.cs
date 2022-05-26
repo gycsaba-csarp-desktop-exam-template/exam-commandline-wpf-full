@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 using Kreta.Models;
 using Kreta.Models.Interfaces;
-using Kreta.Repositories.BaseClass;
+using Kreta.Repositories.Interfaces;
 
 namespace Kreta.Repositories
 {
-    public class TeachersDatabaseRepo<TEntity, TContext> : GenericDatabaseRepository<ITeacher, JKContext>
+    public class TeacherDatabaseRepo<TEntity, TContext> : ICRUDRepository<ITeacher, KreataContext>
     {
-        public TeachersDatabaseRepo(JKContext context) : base(context)
+        public TeacherDatabaseRepo(KreataContext context) : base(context)
         {
 
         }
