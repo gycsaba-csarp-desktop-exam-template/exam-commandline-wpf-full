@@ -38,6 +38,7 @@ namespace Kreta.ViewModel
             //https://stackoverflow.com/questions/5502019/how-to-set-up-an-in-memory-repository
 
             https://ogeek.cn/qa/?qa=585404/
+            https://stackoverflow.com/questions/32249992/explicit-interface-and-generic-dynamic-type-conversion
 
                 teacherInMemoryTestRepo = new TeacherInMemoryDatabaseRepo<Teacher, KreataContext>(context);
                 teacherRepo = (ICRUDRepository<Teacher,KreataContext>) teacherInMemoryTestRepo;
