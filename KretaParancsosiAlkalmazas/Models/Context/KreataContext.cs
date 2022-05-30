@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace Kreta.Models
+namespace Kreta.Models.Context
 {
     public partial class KreataContext : DbContext
     {
+        public DbSet<Teacher> teachers { get; set; }
+
         public KreataContext()
         {
         }

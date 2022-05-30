@@ -6,18 +6,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kreta.Models;
+using Kreta.Models.Context;
 using Kreta.Models.Interfaces;
 using Kreta.Repositories;
 using Kreta.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.ViewModel
 {
     public class TeacherViewModel
     {
-        //private TeachersRepo teachersRepo;
-        private ICRUDRepository<Teacher, KreataContext> teacherRepo;
-       // private GenericTestRepository<Teacher> teachersRepo;
-        private TeacherInMemoryDatabaseRepo<Teacher,KreataContext> teacherInMemoryTestRepo; 
+
+        private KreataContext kreataContext;
+        private ICRUDRepository<Teacher, DbContext> teacherRepo;
+        private TeacherInMemoryDatabaseRepo<Teacher, DbContext> teacherInMemoryTestRepo; 
         private TeacherDatabaseRepo<Teacher, KreataContext> teacherDatabaseRepo;
 
 
@@ -32,15 +34,13 @@ namespace Kreta.ViewModel
 
 
 
+
             if (test)
             {
             // c# multiple repositories test database
             //https://stackoverflow.com/questions/5502019/how-to-set-up-an-in-memory-repository
 
-            https://ogeek.cn/qa/?qa=585404/
-            https://stackoverflow.com/questions/32249992/explicit-interface-and-generic-dynamic-type-conversion
-
-                teacherInMemoryTestRepo = new TeacherInMemoryDatabaseRepo<Teacher, KreataContext>(context);
+                teacherInMemoryTestRepo = new TeacherInMemoryDatabaseRepo<Teacher, DbContext>(context);
                 teacherRepo = (ICRUDRepository<Teacher,KreataContext>) teacherInMemoryTestRepo;
             }
                 

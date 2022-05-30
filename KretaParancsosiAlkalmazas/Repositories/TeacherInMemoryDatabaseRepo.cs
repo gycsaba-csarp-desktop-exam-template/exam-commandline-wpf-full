@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kreta.Models;
+using Kreta.Models.Context;
 using Kreta.Models.Interfaces;
 using Kreta.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,19 @@ namespace Kreta.Repositories
         public TeacherInMemoryDatabaseRepo(KreataContext context) : 
             base(context)
         {
-            this.context = context;
-            var builder = new DbContextOptionsBuilder<KreataContext>();
+
+            // https://www.infoworld.com/article/3234531/testing-with-the-inmemory-provider-in-entity-framework-core.html
+
+            // TODO TeacherInMemoryDatabaseRepo minek kapjon KreataContextet, nem lehet kihagyni?
+            this.context = context; // ??
+
+
+            KretaInMemoryContext kretaInMemoryContext;
+            DbContextOptions<KretaInMemoryContext> dbContextOptions;
+            var builder = new DbContextOptionsBuilder<KretaInMemoryContext>();
             builder.UseInMemoryDatabase(databaseName: "KreataTest");
-            var options = builder.Options;
+            dbContextOptions = builder.Options;
+            kretaInMemoryContext = new KretaInMemoryContext(dbContextOptions);
 
             var teachers = new List<Teacher>();
 
@@ -30,8 +40,8 @@ namespace Kreta.Repositories
             teachers.Add(new Teacher(5, "Sportoló", "Jenő", false, new DateTime(1974, 10, 24)));
             teachers.Add(new Teacher(6, "Visszanéző", "Viola", true, new DateTime(1974, 10, 24)));
 
-            context.AddRange(teachers);           
-            context.SaveChanges();
+            kretaInMemoryContext.AddRange(teachers);
+            kretaInMemoryContext.SaveChanges();
         }
     }
 }

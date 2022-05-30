@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kreta.Models;
+using Kreta.Models.Context;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace Kreta.Repositories.Interfaces
 {
-    public class ICRUDRepository<TEntity, TContext> : IGenericRepository<TEntity>
+    public abstract class ICRUDRepository<TEntity, TContext> : IGenericRepository<TEntity>
         where TEntity : class
         where TContext : DbContext
     {
@@ -48,6 +50,11 @@ namespace Kreta.Repositories.Interfaces
                 context.SaveChanges();
             }
         }
+
+       /* public static explicit operator ICRUDRepository<TEntity, TContext>(TeacherInMemoryDatabaseRepo<Teacher, KreataContext> v)
+        {
+            return v as ICRUDRepository<TEntity, TContext>;
+        }*/
 
         public virtual void Save()
         {
