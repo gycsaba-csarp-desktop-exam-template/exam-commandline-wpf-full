@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace GerericInterfaceConvert
 {
@@ -16,15 +17,12 @@ namespace GerericInterfaceConvert
     {
     }
 
-    public class DbContext
+
+    public abstract class DatabaseContext : DbContext
     {
     }
 
-    public class DatabaseContext : DbContext
-    {
-    }
-
-    public class MemoryContext : DbContext
+    public abstract class InMemoryContext : DbContext
     {
     }
 
@@ -32,11 +30,12 @@ namespace GerericInterfaceConvert
     {
     }
 
-    public interface ICRUDRepository<TEntity, TContext> where TEntity : class
-        where TContext : DbContext , IGenericRepository<TEntity>
+    public interface ICRUDRepository<TEntity, TContext> : IGenericRepository<TEntity>
+        where TEntity : class
+        where TContext : DbContext
     { }
 
-    public abstract class CRUDRepository< TEntity, TContext> : IGenericRepository<TEntity>
+  /*  public abstract class CRUDRepository< TEntity, TContext> : IGenericRepository<TEntity>
        where TEntity : class
        where TContext : DbContext
     {
@@ -45,13 +44,29 @@ namespace GerericInterfaceConvert
         {
             throw new NotImplementedException();
         }
+    }*/
+
+
+    public abstract class DatabaseRepo<TEntity, TContext> : ICRUDRepository<Teacher, DbContext>
+    {
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 
+    public abstract class InMemoryRepo<TEntity, TContext> : ICRUDRepository<Teacher, DbContext>
+    {
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
 
-    public class TeacherDatabaseRepo<TEntity, TContext> : CRUDRepository<Teacher, DbContext>
+    public class TeacherDatabaseRepo : DatabaseRepo<Teacher, DatabaseContext>
     { }
 
-    public class TeacherInMemoryDatabaseRepo<TEntity, TContext> : CRUDRepository<Teacher, DbContext>
+    public class TeacherInMemoryDatabaseRepo : InMemoryRepo<Teacher,InMemoryContext>
     {
     }
 
@@ -63,12 +78,11 @@ namespace GerericInterfaceConvert
         {
             IAbstractClass<BaseInterface> c = new ConcreteClass();
 
+            ICRUDRepository<Teacher, DbContext> teacherDatabaseRepo = new TeacherDatabaseRepo();
+            ICRUDRepository <Teacher, DbContext> teacherInMemoryDatabaseRepo = new TeacherInMemoryDatabaseRepo();
 
-            CRUDRepository<Teacher, DbContext> iCRUDDatabase = new TeacherDatabaseRepo<Teacher, DatabaseContext>();
-            CRUDRepository<Teacher, DbContext> iCRUDMemory = new TeacherDatabaseRepo<Teacher, MemoryContext>();
-
-
-            ICRUDRepository<Teacher, DbContext> repo = iCRUDDatabase;
+            ICRUDRepository<Teacher, DbContext> repo = teacherDatabaseRepo;
+            repo = teacherInMemoryDatabaseRepo;
         }
     }
 }
