@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
+// https://code-maze.com/aspnetcore-multiple-databases-efcore/
+
 namespace Kreta.Models.Context
 {
     public partial class KreataContext : DbContext

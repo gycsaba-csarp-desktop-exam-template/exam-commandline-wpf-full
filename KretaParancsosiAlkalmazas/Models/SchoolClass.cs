@@ -10,12 +10,12 @@ namespace Kreta.Models
 {
     public class SchoolClass 
     {
-        private int id;
+        private long id;
         private int schoolClass;
         private char gradeType;
         private int teacherId;
 
-        public SchoolClass(int id, int grade, char gradeType, int teacherId)
+        public SchoolClass(long id, int grade, char gradeType, int teacherId)
         {
             this.id = id;
             this.schoolClass = grade;
@@ -23,7 +23,7 @@ namespace Kreta.Models
             this.teacherId = teacherId;
         }
 
-        public int Id { get => id; set => id = value; }
+        public long Id { get => id; set => id = value; }
         public int Grade { get => schoolClass; set => schoolClass = value; }
         public char GradeType { get => gradeType; set => gradeType = value; }
         public int TeacherId { get => teacherId; set => teacherId = value; }

@@ -51,6 +51,11 @@ namespace Kreta.Repositories.Interfaces
             }
         }
 
+       /* public static explicit operator ICRUDRepository<TEntity, TContext>(TeacherInMemoryDatabaseRepo<Teacher, KreataContext> v)
+        {
+            return v as ICRUDRepository<TEntity, TContext>;
+        }*/
+
         public virtual void Save()
         {
             context.SaveChanges();
