@@ -24,7 +24,7 @@ namespace Kreta.Services
             }
         }
 
-        public List<Student> GetStudentOfClass(int classId)
+        public List<Student> GetStudentOfClass(long classId)
         {
             List<Student> result=studentsRepo.Students.FindAll(student => student.SchoolClassId == classId);
             result.Sort();
@@ -33,7 +33,7 @@ namespace Kreta.Services
 
         public List<Student> GetStudentOfClass(SchoolClass schoolClass)
         {
-            int schoolClassId = schoolClassesRepo.GetSchoolClassId(schoolClass.Grade, schoolClass.GradeType);
+            long schoolClassId = schoolClassesRepo.GetSchoolClassId(schoolClass.Grade, schoolClass.GradeType);
             List<Student> result = studentsRepo.Students.FindAll(student => student.SchoolClassId == schoolClassId);
             result.Sort();
             return result;
@@ -46,7 +46,7 @@ namespace Kreta.Services
             return result;
         }
 
-        public void AddStudentToClass(int studentId, int classId)
+        public void AddStudentToClass(int studentId, long classId)
         {
             Student student = studentsRepo.Students.Find(student => student.Id == studentId);
             if (student != null)

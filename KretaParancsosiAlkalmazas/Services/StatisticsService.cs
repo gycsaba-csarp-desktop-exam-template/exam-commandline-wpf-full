@@ -52,13 +52,13 @@ namespace Kreta.Services
         }
 
 
-        public Dictionary<string, int> GetStudentPerClasses()
+        public Dictionary<string, long> GetStudentPerClasses()
         {
-            Dictionary<string, int> studentPerClasses = new Dictionary<string, int>();
+            Dictionary<string, long> studentPerClasses = new Dictionary<string, long>();
             foreach (SchoolClass schoolClass in schoolClassesRepo.SchoolClasses)
             {
                 // Az osztály id meghatározása
-                int classId = schoolClass.Id;
+                long classId = schoolClass.Id;
 
                 //az adott osztály diákjainak a száma
                 int numberOfStudentsInSchoolClass = studentsRepo.Students.FindAll(student => student.SchoolClassId == classId).Count;

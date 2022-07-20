@@ -41,7 +41,7 @@ namespace Kreta.ViewModel
             //https://stackoverflow.com/questions/5502019/how-to-set-up-an-in-memory-repository
 
                 teacherInMemoryTestRepo = new TeacherInMemoryDatabaseRepo<Teacher, DbContext>(context);
-                teacherRepo = (ICRUDRepository<Teacher,KreataContext>) teacherInMemoryTestRepo;
+               // teacherRepo = (ICRUDRepository<Teacher,KreataContext>) teacherInMemoryTestRepo;
             }
                 
             else
@@ -52,7 +52,7 @@ namespace Kreta.ViewModel
             }
                 //teacherRepo = new GenericDatabaseRepository<Teacher, JKContext>(context);
 
-            teachers = new ObservableCollection<ITeacher>(teacherRepo.GetAll());
+            //teachers = new ObservableCollection<ITeacher>(teacherRepo.GetAll());
         }
 
         public ObservableCollection<ITeacher> Teachers { get => teachers; set => teachers = value; }

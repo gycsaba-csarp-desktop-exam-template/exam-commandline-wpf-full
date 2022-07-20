@@ -65,9 +65,9 @@ namespace Kreta.ViewModels
 
         private List<string> DictionaryToList()
         {
-            Dictionary<string, int> dictionary = statisticsService.GetStudentPerClasses();
+            Dictionary<string, long> dictionary = statisticsService.GetStudentPerClasses();
             List<string> numberOfStudentsPerClass = new List<string>();
-            foreach (KeyValuePair<string, int> item in dictionary)
+            foreach (KeyValuePair<string, long> item in dictionary)
             {
                 string result = item.Key + " osztály létszáma: " + item.Value + " fő";
                 numberOfStudentsPerClass.Add(result);

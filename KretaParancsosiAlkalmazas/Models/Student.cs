@@ -22,7 +22,7 @@ namespace Kreta.Models
         public int PostCode { get; set; }
         public string LoginName { get; set; }
         public string Password { get; set; }
-        public int SchoolClassId { get; set; }
+        public long SchoolClassId { get; set; }
 
 
         public Student()

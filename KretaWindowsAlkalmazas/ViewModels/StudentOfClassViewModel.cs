@@ -106,7 +106,7 @@ namespace Kreta.ViewModels
             if (SelectedStudentHaveNoClass != null && selectedSchoolClass != null)
             {
                 int studentId = SelectedStudentHaveNoClass.Id;
-                int classId = SelectedSchoolClass.Id;
+                long classId = SelectedSchoolClass.Id;
                 studentOfClassService.AddStudentToClass(studentId, classId);
                 UpdateListBoxData();
             }
