@@ -1,0 +1,322 @@
+2022-07-20 17:38:29.4620 Info Message Template Auto Format enabled
+2022-07-20 17:38:29.5117 Debug ScanAssembly('NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2022-07-20 17:38:29.6490 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2022-07-20 17:38:29.6490 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt'
+2022-07-20 17:38:29.6682 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:38:29.6682 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:38:29.6763 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:38:29.6763 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:38:29.6763 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:38:29.6763 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:38:29.6763 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:38:29.6763 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:38:29.6763 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:38:29.6763 Info Adding target FileTarget(Name=logfile)
+2022-07-20 17:38:29.6763 Debug Registered target logfile: NLog.Targets.FileTarget
+2022-07-20 17:38:29.6763 Trace ParseRulesElement
+2022-07-20 17:38:29.7124 Debug Watching file-filter 'nlog.config' in directory: F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi
+2022-07-20 17:38:29.7124 Debug --- NLog configuration dump ---
+2022-07-20 17:38:29.7124 Debug Targets:
+2022-07-20 17:38:29.7124 Debug FileTarget(Name=logfile)
+2022-07-20 17:38:29.7124 Debug Rules:
+2022-07-20 17:38:29.7124 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]
+2022-07-20 17:38:29.7124 Debug --- End of NLog configuration dump ---
+2022-07-20 17:38:29.7267 Trace FindReachableObject<System.Object>:
+2022-07-20 17:38:29.7267 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]'
+2022-07-20 17:38:29.7267 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2022-07-20 17:38:29.7267 Trace  Scanning FileTarget 'FileTarget(Name=logfile)'
+2022-07-20 17:38:29.7267 Trace   Scanning Property FileName 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt' NLog.Layouts
+2022-07-20 17:38:29.7267 Trace   Scanning SimpleLayout 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt'
+2022-07-20 17:38:29.7267 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:38:29.7267 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:38:29.7267 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:38:29.7267 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:38:29.7267 Trace   Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2022-07-20 17:38:29.7365 Trace   Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:38:29.7365 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:38:29.7365 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:38:29.7365 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:38:29.7365 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:38:29.7365 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:38:29.7365 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:38:29.7365 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2022-07-20 17:38:29.7365 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2022-07-20 17:38:29.7365 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2022-07-20 17:38:29.7365 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi\nlog.config
+2022-07-20 17:38:29.7365 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2022-07-20 17:38:29.7555 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2022-07-20 17:38:29.7555 Trace Initializing Layout Renderer: ${message}
+2022-07-20 17:38:29.7555 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:38:29.7555 Trace Initializing Layout Renderer: ${level}
+2022-07-20 17:38:29.7555 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:38:29.7555 Trace Initializing Layout Renderer: ${longdate}
+2022-07-20 17:38:29.7555 Trace Initializing ${longdate} ${level:uppercase=true} ${message}
+2022-07-20 17:38:29.7555 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:38:29.7555 Trace Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:38:29.7555 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:38:29.7555 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:38:29.7555 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:38:29.7555 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:38:29.7555 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:38:29.7555 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:38:29.7555 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:38:29.7685 Trace Initializing Layout Renderer: ${shortdate}
+2022-07-20 17:38:29.7685 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:38:29.7685 Trace Initializing d:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt
+2022-07-20 17:38:29.7685 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:38:29.7685 Trace Scanning SimpleLayout 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt'
+2022-07-20 17:38:29.7685 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:38:29.7685 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:38:29.7685 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:38:29.7685 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:38:29.7685 Trace Initializing FileTarget(Name=logfile)
+2022-07-20 17:38:29.7685 Trace FindReachableObject<NLog.Layouts.Layout>:
+2022-07-20 17:38:29.7685 Trace Scanning FileTarget 'FileTarget(Name=logfile)'
+2022-07-20 17:38:29.7685 Trace  Scanning Property FileName 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt' NLog.Layouts
+2022-07-20 17:38:29.7685 Trace  Scanning SimpleLayout 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt'
+2022-07-20 17:38:29.7685 Trace  Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2022-07-20 17:38:29.7685 Trace  Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:38:29.7685 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2022-07-20 17:38:29.7685 Trace FileTarget(Name=logfile) has 2 layouts
+2022-07-20 17:38:29.7685 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory
+2022-07-20 17:39:01.3913 Info Configuration file change detected! Reloading in 1000ms...
+2022-07-20 17:39:02.4758 Info Reloading configuration...
+2022-07-20 17:39:02.5890 Info Loading NLog config from XML file: F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi\nlog.config
+2022-07-20 17:39:02.5890 Trace ParseNLogElement
+2022-07-20 17:39:02.5890 Trace ParseNLogConfig
+2022-07-20 17:39:02.5890 Info Message Template Auto Format enabled
+2022-07-20 17:39:02.5975 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2022-07-20 17:39:02.5975 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt'
+2022-07-20 17:39:02.5975 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:39:02.5975 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:39:02.5975 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:39:02.5975 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:39:02.5975 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:39:02.5975 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:39:02.5975 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:39:02.5975 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:39:02.5975 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:39:02.5975 Info Adding target FileTarget(Name=logfile)
+2022-07-20 17:39:02.5975 Debug Registered target logfile: NLog.Targets.FileTarget
+2022-07-20 17:39:02.6297 Trace ParseRulesElement
+2022-07-20 17:39:02.6460 Debug Stopping file watching for path 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi' filter 'nlog.config'
+2022-07-20 17:39:02.6638 Info Closing old configuration.
+2022-07-20 17:39:02.6757 Debug LogFactory Flush with timeout=15 secs
+2022-07-20 17:39:02.6757 Trace Flushing all 1 targets...
+2022-07-20 17:39:02.7113 Trace ForEachItemInParallel() 1 items
+2022-07-20 17:39:02.7234 Trace FileTarget(Name=logfile): FlushAsync
+2022-07-20 17:39:02.7455 Trace Continuation invoked: 
+2022-07-20 17:39:02.7541 Trace Parallel task completed. 0 items remaining
+2022-07-20 17:39:02.7716 Debug Flush completed
+2022-07-20 17:39:02.7716 Trace FileTarget(Name=logfile): FlushAsync Done
+2022-07-20 17:39:02.7716 Debug Closing logging configuration...
+2022-07-20 17:39:02.7716 Trace Closing FileTarget(Name=logfile)
+2022-07-20 17:39:02.7716 Debug FileTarget(Name=logfile): Closing...
+2022-07-20 17:39:02.7835 Debug FileTarget(Name=logfile): Closed.
+2022-07-20 17:39:02.7835 Trace Closing d:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt
+2022-07-20 17:39:02.7835 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:39:02.7835 Trace Closing Layout Renderer: ${shortdate}
+2022-07-20 17:39:02.7835 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:39:02.7835 Trace Closing ${longdate} ${level:uppercase=true} ${message}
+2022-07-20 17:39:02.7835 Trace Closing Layout Renderer: ${longdate}
+2022-07-20 17:39:02.7835 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:39:02.7835 Trace Closing Layout Renderer: ${level}
+2022-07-20 17:39:02.7835 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:39:02.7835 Trace Closing Layout Renderer: ${message}
+2022-07-20 17:39:02.7835 Debug Finished closing logging configuration.
+2022-07-20 17:39:02.7835 Debug Watching file-filter 'nlog.config' in directory: F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi
+2022-07-20 17:39:02.7835 Debug --- NLog configuration dump ---
+2022-07-20 17:39:02.7835 Debug Targets:
+2022-07-20 17:39:02.7835 Debug FileTarget(Name=logfile)
+2022-07-20 17:39:02.7835 Debug Rules:
+2022-07-20 17:39:02.7835 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]
+2022-07-20 17:39:02.7835 Debug --- End of NLog configuration dump ---
+2022-07-20 17:39:02.7835 Trace FindReachableObject<System.Object>:
+2022-07-20 17:39:02.7835 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]'
+2022-07-20 17:39:02.8027 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2022-07-20 17:39:02.8027 Trace  Scanning FileTarget 'FileTarget(Name=logfile)'
+2022-07-20 17:39:02.8027 Trace   Scanning Property FileName 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt' NLog.Layouts
+2022-07-20 17:39:02.8027 Trace   Scanning SimpleLayout 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt'
+2022-07-20 17:39:02.8027 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:39:02.8027 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:39:02.8213 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:39:02.8611 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:39:02.8733 Trace   Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2022-07-20 17:39:02.8834 Trace   Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:39:02.8834 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:39:02.9291 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:39:02.9291 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:39:02.9404 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:39:02.9404 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:39:02.9404 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:39:02.9554 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2022-07-20 17:39:02.9554 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2022-07-20 17:39:02.9554 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2022-07-20 17:39:02.9554 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi\nlog.config
+2022-07-20 17:39:02.9554 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2022-07-20 17:39:02.9554 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2022-07-20 17:39:02.9554 Trace Initializing Layout Renderer: ${message}
+2022-07-20 17:39:02.9554 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:39:02.9554 Trace Initializing Layout Renderer: ${level}
+2022-07-20 17:39:02.9554 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:39:02.9554 Trace Initializing Layout Renderer: ${longdate}
+2022-07-20 17:39:02.9554 Trace Initializing ${longdate} ${level:uppercase=true} ${message}
+2022-07-20 17:39:02.9554 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:39:02.9554 Trace Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:39:02.9554 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:39:02.9716 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:39:02.9716 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:39:02.9716 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:39:02.9716 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:39:02.9716 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:39:02.9716 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:39:02.9716 Trace Initializing Layout Renderer: ${shortdate}
+2022-07-20 17:39:02.9716 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:39:02.9716 Trace Initializing d:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt
+2022-07-20 17:39:02.9716 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:39:02.9716 Trace Scanning SimpleLayout 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt'
+2022-07-20 17:39:02.9716 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:39:02.9716 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:39:02.9716 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:39:02.9716 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:39:02.9716 Trace Initializing FileTarget(Name=logfile)
+2022-07-20 17:39:02.9716 Trace FindReachableObject<NLog.Layouts.Layout>:
+2022-07-20 17:39:02.9716 Trace Scanning FileTarget 'FileTarget(Name=logfile)'
+2022-07-20 17:39:02.9716 Trace  Scanning Property FileName 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt' NLog.Layouts
+2022-07-20 17:39:02.9716 Trace  Scanning SimpleLayout 'd:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt'
+2022-07-20 17:39:02.9716 Trace  Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2022-07-20 17:39:02.9716 Trace  Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:39:02.9870 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2022-07-20 17:39:02.9870 Trace FileTarget(Name=logfile) has 2 layouts
+2022-07-20 17:39:02.9870 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory
+2022-07-20 17:39:04.3163 Info AppDomain Shutting down. LogFactory closing...
+2022-07-20 17:39:04.3163 Debug Stopping file watching for path 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi' filter 'nlog.config'
+2022-07-20 17:39:04.3163 Trace Flushing all 1 targets...
+2022-07-20 17:39:04.3163 Trace ForEachItemInParallel() 1 items
+2022-07-20 17:39:04.3163 Trace FileTarget(Name=logfile): FlushAsync
+2022-07-20 17:39:04.3163 Trace Continuation invoked: 
+2022-07-20 17:39:04.3163 Trace Parallel task completed. 0 items remaining
+2022-07-20 17:39:04.3163 Debug Flush completed
+2022-07-20 17:39:04.3163 Trace FileTarget(Name=logfile): FlushAsync Done
+2022-07-20 17:39:04.3163 Debug Closing logging configuration...
+2022-07-20 17:39:04.3163 Trace Closing FileTarget(Name=logfile)
+2022-07-20 17:39:04.3163 Debug FileTarget(Name=logfile): Closing...
+2022-07-20 17:39:04.3163 Debug FileTarget(Name=logfile): Closed.
+2022-07-20 17:39:04.3163 Trace Closing d:/Projects/Blog-AccountOwner/Project/logs/${shortdate}_logfile.txt
+2022-07-20 17:39:04.3163 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:39:04.3163 Trace Closing Layout Renderer: ${shortdate}
+2022-07-20 17:39:04.3163 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:39:04.3163 Trace Closing ${longdate} ${level:uppercase=true} ${message}
+2022-07-20 17:39:04.3163 Trace Closing Layout Renderer: ${longdate}
+2022-07-20 17:39:04.3163 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:39:04.3163 Trace Closing Layout Renderer: ${level}
+2022-07-20 17:39:04.3163 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:39:04.3163 Trace Closing Layout Renderer: ${message}
+2022-07-20 17:39:04.3304 Debug Finished closing logging configuration.
+2022-07-20 17:39:04.3304 Info LogFactory has been closed.
+2022-07-20 17:41:52.8652 Info Message Template Auto Format enabled
+2022-07-20 17:41:52.9599 Debug ScanAssembly('NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2022-07-20 17:41:53.1184 Debug Setting 'NLog.Targets.FileTarget.name' to 'logfile'
+2022-07-20 17:41:53.1287 Debug Setting 'NLog.Targets.FileTarget.fileName' to 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\logs/${shortdate}_logfile.txt'
+2022-07-20 17:41:53.1431 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:41:53.1431 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:41:53.1431 Debug Setting 'NLog.Targets.FileTarget.layout' to '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:41:53.1431 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:41:53.1431 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:41:53.1648 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:41:53.1648 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:41:53.1648 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:41:53.1648 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:41:53.1648 Info Adding target FileTarget(Name=logfile)
+2022-07-20 17:41:53.1648 Debug Registered target logfile: NLog.Targets.FileTarget
+2022-07-20 17:41:53.1648 Trace ParseRulesElement
+2022-07-20 17:41:53.2248 Debug Watching file-filter 'nlog.config' in directory: F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi
+2022-07-20 17:41:53.2248 Debug --- NLog configuration dump ---
+2022-07-20 17:41:53.2248 Debug Targets:
+2022-07-20 17:41:53.2248 Debug FileTarget(Name=logfile)
+2022-07-20 17:41:53.2248 Debug Rules:
+2022-07-20 17:41:53.2248 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]
+2022-07-20 17:41:53.2375 Debug --- End of NLog configuration dump ---
+2022-07-20 17:41:53.2375 Trace FindReachableObject<System.Object>:
+2022-07-20 17:41:53.2531 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]'
+2022-07-20 17:41:53.2531 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2022-07-20 17:41:53.2696 Trace  Scanning FileTarget 'FileTarget(Name=logfile)'
+2022-07-20 17:41:53.2696 Trace   Scanning Property FileName 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\logs/${shortdate}_logfile.txt' NLog.Layouts
+2022-07-20 17:41:53.2696 Trace   Scanning SimpleLayout 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\logs/${shortdate}_logfile.txt'
+2022-07-20 17:41:53.2696 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:41:53.2696 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:41:53.2696 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:41:53.2696 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:41:53.2696 Trace   Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2022-07-20 17:41:53.2696 Trace   Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:41:53.2870 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:41:53.2870 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:41:53.2870 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:41:53.2870 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:41:53.2870 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:41:53.2870 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:41:53.3022 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2022-07-20 17:41:53.3022 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2022-07-20 17:41:53.3022 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2022-07-20 17:41:53.3233 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi\nlog.config
+2022-07-20 17:41:53.3307 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2022-07-20 17:41:53.3307 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2022-07-20 17:41:53.3307 Trace Initializing Layout Renderer: ${message}
+2022-07-20 17:41:53.3307 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:41:53.3470 Trace Initializing Layout Renderer: ${level}
+2022-07-20 17:41:53.3470 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:41:53.3470 Trace Initializing Layout Renderer: ${longdate}
+2022-07-20 17:41:53.3470 Trace Initializing ${longdate} ${level:uppercase=true} ${message}
+2022-07-20 17:41:53.3710 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:41:53.3710 Trace Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:41:53.3710 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:41:53.3710 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2022-07-20 17:41:53.3710 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:41:53.3776 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2022-07-20 17:41:53.3776 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:41:53.3776 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2022-07-20 17:41:53.3776 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:41:53.3776 Trace Initializing Layout Renderer: ${shortdate}
+2022-07-20 17:41:53.3932 Trace Initializing Layout Renderer: ${literal}
+2022-07-20 17:41:53.3932 Trace Initializing F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\logs/${shortdate}_logfile.txt
+2022-07-20 17:41:53.3932 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2022-07-20 17:41:53.3932 Trace Scanning SimpleLayout 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\logs/${shortdate}_logfile.txt'
+2022-07-20 17:41:53.3932 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2022-07-20 17:41:53.3932 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:41:53.3932 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2022-07-20 17:41:53.4094 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2022-07-20 17:41:53.4094 Trace Initializing FileTarget(Name=logfile)
+2022-07-20 17:41:53.4094 Trace FindReachableObject<NLog.Layouts.Layout>:
+2022-07-20 17:41:53.4094 Trace Scanning FileTarget 'FileTarget(Name=logfile)'
+2022-07-20 17:41:53.4243 Trace  Scanning Property FileName 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\logs/${shortdate}_logfile.txt' NLog.Layouts
+2022-07-20 17:41:53.4243 Trace  Scanning SimpleLayout 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\logs/${shortdate}_logfile.txt'
+2022-07-20 17:41:53.4243 Trace  Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2022-07-20 17:41:53.4243 Trace  Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2022-07-20 17:41:53.4243 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2022-07-20 17:41:53.4490 Trace FileTarget(Name=logfile) has 2 layouts
+2022-07-20 17:41:53.4802 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory
+2022-07-20 17:42:02.9894 Info AppDomain Shutting down. LogFactory closing...
+2022-07-20 17:42:02.9894 Debug Stopping file watching for path 'F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\KretaWebApi' filter 'nlog.config'
+2022-07-20 17:42:02.9894 Trace Flushing all 1 targets...
+2022-07-20 17:42:02.9894 Trace ForEachItemInParallel() 1 items
+2022-07-20 17:42:03.0028 Trace FileTarget(Name=logfile): FlushAsync
+2022-07-20 17:42:03.0028 Trace Continuation invoked: 
+2022-07-20 17:42:03.0028 Trace Parallel task completed. 0 items remaining
+2022-07-20 17:42:03.0028 Debug Flush completed
+2022-07-20 17:42:03.0028 Trace FileTarget(Name=logfile): FlushAsync Done
+2022-07-20 17:42:03.0028 Debug Closing logging configuration...
+2022-07-20 17:42:03.0028 Trace Closing FileTarget(Name=logfile)
+2022-07-20 17:42:03.0028 Debug FileTarget(Name=logfile): Closing...
+2022-07-20 17:42:03.0028 Debug FileTarget(Name=logfile): Closed.
+2022-07-20 17:42:03.0028 Trace Closing F:\OneDrive\Develop\csarp-java-develop\csarp-kreta\logs/${shortdate}_logfile.txt
+2022-07-20 17:42:03.0028 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:42:03.0028 Trace Closing Layout Renderer: ${shortdate}
+2022-07-20 17:42:03.0028 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:42:03.0028 Trace Closing ${longdate} ${level:uppercase=true} ${message}
+2022-07-20 17:42:03.0181 Trace Closing Layout Renderer: ${longdate}
+2022-07-20 17:42:03.0181 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:42:03.0181 Trace Closing Layout Renderer: ${level}
+2022-07-20 17:42:03.0181 Trace Closing Layout Renderer: ${literal}
+2022-07-20 17:42:03.0181 Trace Closing Layout Renderer: ${message}
+2022-07-20 17:42:03.0181 Debug Finished closing logging configuration.
+2022-07-20 17:42:03.0181 Info LogFactory has been closed.
