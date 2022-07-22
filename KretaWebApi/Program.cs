@@ -11,8 +11,12 @@ builder.Services.ConfigureCors();
 // WEbszerver konfiguráció
 builder.Services.ConfigureIISIntegration();
 
+// Mysql server elérés konfigurálás
+builder.Services.ConfigureMySqlContext(builder.Configuration);
+
 // Add services to the container.
 builder.Services.AddRazorPages();
+
 
 builder.Services.ConfigureLoggerService();
 

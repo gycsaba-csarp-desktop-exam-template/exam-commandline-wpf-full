@@ -1,6 +1,9 @@
 ﻿using KretaWebApiContracts;
 using KretaWEbApiLoggerService;
 
+using Kreta.Models.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace KretaWebApi.Extensions
 {
     public static class ServiceExtenxions
@@ -28,9 +31,18 @@ namespace KretaWebApi.Extensions
             });
         }
 
+        // Loggolás
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        // MySql
+        public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration config)
+        {
+            var connectionString = config["mysqlconnection:connectionString"];
+
+            services.AddDbContext<KretaContext>(o => o.UseMySql(connectionString,MySqlServerVersion.LatestSupportedServerVersion));
         }
     }
 }

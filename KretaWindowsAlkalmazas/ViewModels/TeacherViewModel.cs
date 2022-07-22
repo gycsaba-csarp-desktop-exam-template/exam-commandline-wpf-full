@@ -17,10 +17,10 @@ namespace Kreta.ViewModel
     public class TeacherViewModel
     {
 
-        private KreataContext kreataContext;
+        private KretaContext kreataContext;
         private ICRUDRepository<Teacher, DbContext> teacherRepo;
         private TeacherInMemoryDatabaseRepo<Teacher, DbContext> teacherInMemoryTestRepo; 
-        private TeacherDatabaseRepo<Teacher, KreataContext> teacherDatabaseRepo;
+        private TeacherDatabaseRepo<Teacher, KretaContext> teacherDatabaseRepo;
 
 
         private ObservableCollection<ITeacher> teachers;
@@ -28,7 +28,7 @@ namespace Kreta.ViewModel
         public TeacherViewModel()
         {
             bool test = true;
-            var context = new KreataContext();
+            var context = new KretaContext();
 
 
 

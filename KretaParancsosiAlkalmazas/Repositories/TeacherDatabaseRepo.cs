@@ -11,9 +11,9 @@ using Kreta.Repositories.Interfaces;
 
 namespace Kreta.Repositories
 {
-    public class TeacherDatabaseRepo<TEntity, TContext> : ICRUDRepository<ITeacher, KreataContext>
+    public class TeacherDatabaseRepo<TEntity, TContext> : ICRUDRepository<ITeacher, KretaContext>
     {
-        public TeacherDatabaseRepo(KreataContext context) : base(context)
+        public TeacherDatabaseRepo(KretaContext context) : base(context)
         {
 
         }

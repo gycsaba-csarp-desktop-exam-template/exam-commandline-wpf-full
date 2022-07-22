@@ -12,9 +12,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Repositories
 {
-    public class TeacherInMemoryDatabaseRepo<TEntity, TContext> : ICRUDRepository<ITeacher, KreataContext>
+    public class TeacherInMemoryDatabaseRepo<TEntity, TContext> : ICRUDRepository<ITeacher, KretaContext>
     {
-        public TeacherInMemoryDatabaseRepo(KreataContext context) : 
+        public TeacherInMemoryDatabaseRepo(KretaContext context) : 
             base(context)
         {
 

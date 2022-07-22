@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Kreta.Models.Context
 {
-    public partial class KreataContext : DbContext
+    public partial class KretaContext : DbContext
     {
         public DbSet<SchoolClass> SchoolClasses { get; set; }
         public DbSet<Subject> Subjects { get; set; }
 
-        public KreataContext()
+        public KretaContext()
         {
         }
 
-        public KreataContext(DbContextOptions<KreataContext> options)
+        public KretaContext(DbContextOptions<KretaContext> options)
             : base(options)
         {
         }
