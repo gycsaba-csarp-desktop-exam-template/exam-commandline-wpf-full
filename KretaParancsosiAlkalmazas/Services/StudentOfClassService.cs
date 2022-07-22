@@ -33,7 +33,7 @@ namespace Kreta.Services
 
         public List<Student> GetStudentOfClass(SchoolClass schoolClass)
         {
-            long schoolClassId = schoolClassesRepo.GetSchoolClassId(schoolClass.Grade, schoolClass.GradeType);
+            long schoolClassId = schoolClassesRepo.GetSchoolClassId(schoolClass.SchoolYear, schoolClass.ClassType);
             List<Student> result = studentsRepo.Students.FindAll(student => student.SchoolClassId == schoolClassId);
             result.Sort();
             return result;
