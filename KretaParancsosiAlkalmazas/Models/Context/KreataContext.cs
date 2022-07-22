@@ -11,7 +11,8 @@ namespace Kreta.Models.Context
 {
     public partial class KreataContext : DbContext
     {
-        public DbSet<Teacher> teachers { get; set; }
+        public DbSet<SchoolClass> SchoolClasses { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
 
         public KreataContext()
         {
