@@ -10,6 +10,7 @@ using Kreta.Repositories.BaseClass;
 
 namespace Kreta.Repositories
 {
+    /*
     public partial class TeacherTestRepoRepo<TEntity> : GenericTestRepositoryRepo<ITeacher, List<ITeacher>>
     {
 
@@ -51,5 +52,5 @@ namespace Kreta.Repositories
             repo.Add(new Teacher(5, "Sportoló", "Jenő", false, new DateTime(1974, 10, 24)));
             repo.Add(new Teacher(6, "Visszanéző", "Viola",  true, new DateTime(1974, 10, 24)));
         }
-    }
+    }*/
 }

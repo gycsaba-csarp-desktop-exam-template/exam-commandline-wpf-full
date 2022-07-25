@@ -11,7 +11,7 @@ using Kreta.Models.Interfaces;
 using Kreta.Repositories.Relationship;
 
 namespace Kreta.Services
-{
+{/*
     public class TeachTeacherSubjectService
     {
         private TeacherTestRepoRepo<Teacher> teachersRepo;
@@ -63,6 +63,6 @@ namespace Kreta.Services
         {
             teachTeacherSubjectRepo.Delete(teacherId, subjectId);
         }
-    }
+    }*/
 
 }

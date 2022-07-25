@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Repositories
 {
-    public class TeacherInMemoryDatabaseRepo<TEntity, TContext> : ICRUDRepository<ITeacher, KretaContext>
+  /*  public class TeacherInMemoryDatabaseRepo<TEntity, TContext> : ICRUDRepository<ITeacher, KretaContext>
     {
         public TeacherInMemoryDatabaseRepo(KretaContext context) : 
             base(context)
@@ -43,5 +43,5 @@ namespace Kreta.Repositories
             kretaInMemoryContext.AddRange(teachers);
             kretaInMemoryContext.SaveChanges();
         }
-    }
+    }*/
 }

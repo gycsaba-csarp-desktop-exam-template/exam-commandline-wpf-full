@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KretaParancsosiAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
+    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
     <ProjectReference Include="..\KretaWEbApiLoggerService\KretaWEbApiLoggerService.csproj" />
   </ItemGroup>
 

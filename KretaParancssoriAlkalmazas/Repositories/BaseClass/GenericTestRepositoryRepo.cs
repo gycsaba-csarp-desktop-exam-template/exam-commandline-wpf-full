@@ -12,7 +12,7 @@ namespace Kreta.Repositories.BaseClass
 {
     // https://github.com/rowanmiller/UnicornStore/blob/master/UnicornStore/src/UnicornStore.Tests/Controllers/ShippingControllerTests.cs
 
-    public class GenericTestRepositoryRepo<TEntity, TRepository>  : IRepositoryBase <TEntity>
+  /*  public class GenericTestRepositoryRepo<TEntity, TRepository>  : IRepositoryBase <TEntity>
         where TEntity : class
         where TRepository : List<TEntity>
     {
@@ -48,10 +48,10 @@ namespace Kreta.Repositories.BaseClass
             //TEntity search = repo.Find(e => (IBaseModel) e.Id==(IBaseModel) entity.Id);
         }
 
-     /*   public virtual void Delete(TEntity entity)
+       public virtual void Delete(TEntity entity)
         {
             repo.Remove(entity);
-        }*/
+        }
 
 
         public virtual void Delete(int id)
@@ -71,5 +71,5 @@ namespace Kreta.Repositories.BaseClass
         {
             throw new NotImplementedException();
         }
-    }
+    }*/
 }

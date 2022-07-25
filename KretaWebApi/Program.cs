@@ -14,6 +14,9 @@ builder.Services.ConfigureIISIntegration();
 // Mysql server elérés konfigurálás
 builder.Services.ConfigureMySqlContext(builder.Configuration);
 
+// RepositoryWrapper
+builder.Services.ConfigureWrapperRepository();
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 

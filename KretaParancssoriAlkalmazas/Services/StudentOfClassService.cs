@@ -7,7 +7,7 @@ namespace Kreta.Services
 {
     public class StudentOfClassService
     {
-        SchoolClassesRepo schoolClassesRepo;
+      /*  SchoolClassesRepo schoolClassesRepo;
         StudentsRepo studentsRepo;
 
         public StudentOfClassService()
@@ -58,6 +58,6 @@ namespace Kreta.Services
             Student student = studentsRepo.Students.Find(student => student.Id == studentId);
             if (student != null)
                 student.SchoolClassId = 0;
-        }
+        }*/
     }
 }

@@ -3,6 +3,21 @@ using KretaWEbApiLoggerService;
 
 using Kreta.Models.Context;
 using Microsoft.EntityFrameworkCore;
+using Kreta.Repositories;
+using Kreta.Repositories.Interfaces;
+
+
+/*
+AddTransient
+Transient lifetime services are created each time they are requested. This lifetime works best for lightweight, stateless services.
+
+AddScoped
+Scoped lifetime services are created once per request.
+
+AddSingleton
+Singleton lifetime services are created the first time they are requested (or when ConfigureServices is run if you specify an instance there) and then every subsequent request will use the same instance. 
+
+ */
 
 namespace KretaWebApi.Extensions
 {
@@ -43,6 +58,12 @@ namespace KretaWebApi.Extensions
             var connectionString = config["mysqlconnection:connectionString"];
 
             services.AddDbContext<KretaContext>(o => o.UseMySql(connectionString,MySqlServerVersion.LatestSupportedServerVersion));
+        }
+
+        // Repository Wrapper
+        public static void ConfigureWrapperRepository(this IServiceCollection service)
+        {
+            service.AddScoped<IRepositoryWrapper,RepositoryWrapper>();
         }
     }
 }

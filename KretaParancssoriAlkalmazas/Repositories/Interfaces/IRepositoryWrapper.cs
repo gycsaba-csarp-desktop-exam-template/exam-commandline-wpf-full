@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kreta.Repositories.Interfaces
 {
-    interface IRepositoryWrapper
+    public interface IRepositoryWrapper
     {
         ISchoolClassRepo SchoolClass { get; }
         ISubjectRepo SubjectRepo { get;  }

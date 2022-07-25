@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaParancssoriAlkalmazas", "KretaParancsosiAlkalmazas\KretaParancssoriAlkalmazas.csproj", "{5AC9D97F-6C8A-4848-B567-A8428DE60169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaWebApi", "KretaWebApi\KretaWebApi.csproj", "{01599A36-4F40-4513-B7C3-068C216FE79E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaWindowsAlkalmazas", "KretaWindowsAlkalmazas\KretaWindowsAlkalmazas.csproj", "{D16FC18A-B18B-4B55-AB9D-32732F3387D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaWebApiContracts", "KretaWebApiContracts\KretaWebApiContracts.csproj", "{EC5EADDF-FE78-44AB-93F9-46EB7E9DE302}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaParancssoriAlkalmazasTests", "KretaParancssoriAlkalmazasTests\KretaParancssoriAlkalmazasTests.csproj", "{5F96B4C2-2A0A-47CE-9B4B-44A6B6F3E713}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaWEbApiLoggerService", "KretaWEbApiLoggerService\KretaWEbApiLoggerService.csproj", "{441082F6-56B6-4F12-AAD3-74AEDDAD0172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KretaWebApi", "KretaWebApi\KretaWebApi.csproj", "{01599A36-4F40-4513-B7C3-068C216FE79E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KretaParancssoriAlkalmazas", "KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj", "{8A6D356D-0CB4-41D9-AAF1-2BA4C607DDA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KretaWebApiContracts", "KretaWebApiContracts\KretaWebApiContracts.csproj", "{EC5EADDF-FE78-44AB-93F9-46EB7E9DE302}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KretaWEbApiLoggerService", "KretaWEbApiLoggerService\KretaWEbApiLoggerService.csproj", "{441082F6-56B6-4F12-AAD3-74AEDDAD0172}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KretaWindowsAlkalmazas", "KretaWindowsAlkalmazas\KretaWindowsAlkalmazas.csproj", "{8A63B29D-F04E-429E-92D1-D8A1CC46D9BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5AC9D97F-6C8A-4848-B567-A8428DE60169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5AC9D97F-6C8A-4848-B567-A8428DE60169}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5AC9D97F-6C8A-4848-B567-A8428DE60169}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5AC9D97F-6C8A-4848-B567-A8428DE60169}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D16FC18A-B18B-4B55-AB9D-32732F3387D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D16FC18A-B18B-4B55-AB9D-32732F3387D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D16FC18A-B18B-4B55-AB9D-32732F3387D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D16FC18A-B18B-4B55-AB9D-32732F3387D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5F96B4C2-2A0A-47CE-9B4B-44A6B6F3E713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F96B4C2-2A0A-47CE-9B4B-44A6B6F3E713}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F96B4C2-2A0A-47CE-9B4B-44A6B6F3E713}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F96B4C2-2A0A-47CE-9B4B-44A6B6F3E713}.Release|Any CPU.Build.0 = Release|Any CPU
 		{01599A36-4F40-4513-B7C3-068C216FE79E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01599A36-4F40-4513-B7C3-068C216FE79E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01599A36-4F40-4513-B7C3-068C216FE79E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +31,14 @@ Global
 		{441082F6-56B6-4F12-AAD3-74AEDDAD0172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{441082F6-56B6-4F12-AAD3-74AEDDAD0172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{441082F6-56B6-4F12-AAD3-74AEDDAD0172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A6D356D-0CB4-41D9-AAF1-2BA4C607DDA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A6D356D-0CB4-41D9-AAF1-2BA4C607DDA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6D356D-0CB4-41D9-AAF1-2BA4C607DDA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A6D356D-0CB4-41D9-AAF1-2BA4C607DDA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A63B29D-F04E-429E-92D1-D8A1CC46D9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A63B29D-F04E-429E-92D1-D8A1CC46D9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A63B29D-F04E-429E-92D1-D8A1CC46D9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A63B29D-F04E-429E-92D1-D8A1CC46D9BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

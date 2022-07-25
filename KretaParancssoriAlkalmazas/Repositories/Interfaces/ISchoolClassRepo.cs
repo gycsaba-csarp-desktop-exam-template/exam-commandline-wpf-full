@@ -8,7 +8,7 @@ using Kreta.Models;
 
 namespace Kreta.Repositories.Interfaces
 {
-    interface ISubjectRepo : IRepositoryBase<Subject>
+    public interface ISchoolClassRepo : IRepositoryBase<SchoolClass>
     {
     }
 }

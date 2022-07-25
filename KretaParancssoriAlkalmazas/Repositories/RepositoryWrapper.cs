@@ -9,7 +9,7 @@ using Kreta.Models.Context;
 
 namespace Kreta.Repositories
 {
-    class RepositoryWrapper : IRepositoryWrapper
+    public class RepositoryWrapper : IRepositoryWrapper
     {
         private KretaContext kretaContext;
         private ISchoolClassRepo schoolClass;
