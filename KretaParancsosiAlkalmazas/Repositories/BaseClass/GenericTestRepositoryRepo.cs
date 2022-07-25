@@ -12,7 +12,7 @@ namespace Kreta.Repositories.BaseClass
 {
     // https://github.com/rowanmiller/UnicornStore/blob/master/UnicornStore/src/UnicornStore.Tests/Controllers/ShippingControllerTests.cs
 
-    public class GenericTestRepositoryRepo<TEntity, TRepository>  : IGenericRepository <TEntity>
+    public class GenericTestRepositoryRepo<TEntity, TRepository>  : IRepositoryBase <TEntity>
         where TEntity : class
         where TRepository : List<TEntity>
     {
