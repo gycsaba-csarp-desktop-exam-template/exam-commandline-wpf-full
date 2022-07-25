@@ -5,42 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kreta.Models;
+using Kreta.Repositories.Interfaces;
+using Kreta.Repositories.BaseClass;
+using Kreta.Models.Context;
 
 namespace Kreta.Repositories
 {
-    public class SchoolClassesRepo
+    public class SchoolClassesRepo : RepositoryBase<SchoolClass>, ISchoolClassRepo
     {
-        private List<SchoolClass> schoolClasses;
-
-        public List<SchoolClass> SchoolClasses { get => schoolClasses; }
-
-        public int NumberOfClasses
+        public SchoolClassesRepo(KretaContext kretaContext) 
+            : base(kretaContext)
         {
-            get
-            {
-                return schoolClasses.Count;
-            }
-        }
-
-        public long GetSchoolClassId(int grade, char gradeType)
-        {
-            SchoolClass schoolClass = schoolClasses.Find(schoolClass => schoolClass.SchoolYear == grade && schoolClass.ClassType == gradeType);
-            return schoolClass.Id;
-        }
-
-        public SchoolClassesRepo()
-        {
-            schoolClasses = new List<SchoolClass>();
-            MakeTestData();
-        }
-
-        public void MakeTestData()
-        {
-            schoolClasses.Add(new SchoolClass(1, 9, 'a', 4));
-            schoolClasses.Add(new SchoolClass(2, 9, 'b', 1));
-            schoolClasses.Add(new SchoolClass(3, 10, 'a', 6));
-            schoolClasses.Add(new SchoolClass(4, 10, 'b', 3));
-            schoolClasses.Add(new SchoolClass(5, 10, 'c', 0));
         }
     }
 }
