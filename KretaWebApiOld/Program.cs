@@ -2,10 +2,8 @@ using KretaWebApi.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 // Külsõ erõforrások elérése
@@ -23,37 +21,41 @@ builder.Services.ConfigureMySqlContext(builder.Configuration);
 // RepositoryWrapper
 builder.Services.ConfigureWrapperRepository();
 
-
+// Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddRazorPages();
+
+
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseDeveloperExceptionPage();
-}
-else
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
 
-app.UseHttpsRedirection();
 
-app.UseStaticFiles();
-
+// proxy fejlés továbbítása az aktuális kérésnél, a Linux használata esetén nyújt segítséget
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
-    ForwardedHeaders=ForwardedHeaders.All
+    ForwardedHeaders = ForwardedHeaders.All
 });
 
 app.UseCors("CorsPolicy");
 
+
+app.UseHttpsRedirection();
+// a kéréshez statikus fájlok használatát teszi lehetõvé, ha nem adjuk meg az útvonalat, akkor a wwwroot-lesz
+app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapRazorPages();
 
 app.Run();

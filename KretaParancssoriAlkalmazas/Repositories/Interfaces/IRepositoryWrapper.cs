@@ -8,7 +8,7 @@ namespace Kreta.Repositories.Interfaces
 {
     public interface IRepositoryWrapper
     {
-        ISchoolClassRepo SchoolClass { get; }
+        //ISchoolClassRepo SchoolClass { get; }
         ISubjectRepo SubjectRepo { get;  }
         void Save();
     }

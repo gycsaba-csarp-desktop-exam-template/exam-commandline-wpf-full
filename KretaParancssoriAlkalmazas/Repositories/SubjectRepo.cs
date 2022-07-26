@@ -18,5 +18,12 @@ namespace Kreta.Repositories
             : base(kretaContext)
         {
         }
+
+        public IEnumerable<Subject> GetAllSubjects()
+        {
+            return GetAll()
+                .OrderBy(subject => subject.SubjectName)
+                .ToList();
+        }
     }
 }

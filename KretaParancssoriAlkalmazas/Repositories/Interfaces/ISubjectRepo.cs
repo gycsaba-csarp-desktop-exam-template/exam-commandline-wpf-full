@@ -10,5 +10,6 @@ namespace Kreta.Repositories.Interfaces
 {
     public interface ISubjectRepo : IRepositoryBase<Subject>
     {
+        IEnumerable<Subject> GetAllSubjects();
     }
 }

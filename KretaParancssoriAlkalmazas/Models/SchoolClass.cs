@@ -19,11 +19,11 @@ namespace Kreta.Models
         private char classType;
         private int teacherId;
 
-        public SchoolClass(long id, int grade, char gradeType, int teacherId)
+        public SchoolClass(long id, int schoolYear, char classType, int teacherId)
         {
             this.id = id;
-            this.scoolYear = grade;
-            this.classType = gradeType;
+            this.scoolYear = schoolYear;
+            this.classType = classType;
             this.teacherId = teacherId;
         }
 
