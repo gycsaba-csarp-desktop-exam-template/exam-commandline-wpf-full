@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 using KretaWebApiContracts;
 using Kreta.Repositories.Interfaces;
+using AutoMapper;
+using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
+using System.Collections;
 
 
 /*
@@ -24,11 +27,13 @@ namespace KretaWebApi.Controllers
     {
         private ILoggerManager logger;
         private IRepositoryWrapper repositoryWrapper;
+        private IMapper mapper;
 
-        public SubjectController(ILoggerManager logger, IRepositoryWrapper repositoryWrapper)
+        public SubjectController(ILoggerManager logger, IRepositoryWrapper repositoryWrapper, IMapper mapper)
         {
             this.logger = logger;
             this.repositoryWrapper = repositoryWrapper;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -38,7 +43,9 @@ namespace KretaWebApi.Controllers
             {
                 var subjects = repositoryWrapper.SubjectRepo.GetAllSubjects();
                 logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
-                return Ok(subjects);
+
+                var subjectResult = mapper.Map<IEnumerable>(subjects);
+                return Ok(subjectResult);
             }
             catch (Exception ex)
             {
