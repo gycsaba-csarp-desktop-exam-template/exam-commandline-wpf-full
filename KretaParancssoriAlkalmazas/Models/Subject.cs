@@ -24,6 +24,7 @@ namespace Kreta.Models
 
         public long Id { get => id; set => id = value; }
 
+        [Column("name")]
         [Required(ErrorMessage ="The name is required")]
         [StringLength(30,ErrorMessage ="The name cannot be longer than 30 characters")]
         public string SubjectName { get => subjectName; set => subjectName = value; }
