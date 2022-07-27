@@ -25,5 +25,16 @@ namespace Kreta.Repositories
                 .OrderBy(subject => subject.SubjectName)
                 .ToList();
         }
+
+        public Subject? GetSubjectById(int subjectId)
+        {
+            return FindByCondition(subject => subject.Id.Equals(subjectId))
+                .FirstOrDefault();
+        }
+
+        public void CreateSubject(Subject subject)
+        {
+            Insert(subject);
+        }
     }
 }

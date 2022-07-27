@@ -9,18 +9,16 @@ using System.ComponentModel.DataAnnotations;
 using Kreta.Models.Interfaces;
 using Kreta.Models;
 
-namespace KretaParancssoriAlkalmazas.Models
+namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
 {
-    [Table("schoolclass")]
-    public class SchoolClass
+    public class SchoolClassDto
     {
-
         private long id;
         private int scoolYear;
         private char classType;
         private int teacherId;
 
-        public SchoolClass(long id, int schoolYear, char classType, int teacherId)
+        public SchoolClassDto(long id, int schoolYear, char classType, int teacherId)
         {
             this.id = id;
             scoolYear = schoolYear;
@@ -29,11 +27,8 @@ namespace KretaParancssoriAlkalmazas.Models
         }
 
         public long Id { get => id; set => id = value; }
-        [Required(ErrorMessage = "School class is required")]
         public int SchoolYear { get => scoolYear; set => scoolYear = value; }
-        [Required(ErrorMessage = "Class type is required")]
         public char ClassType { get => classType; set => classType = value; }
-        [ForeignKey(nameof(Teacher))]
         public int TeacherId { get => teacherId; set => teacherId = value; }
 
         public string GradeGradeType

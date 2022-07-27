@@ -12,7 +12,7 @@ namespace Kreta.Repositories
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private KretaContext kretaContext;
-        //private ISchoolClassRepo schoolClass;
+        private ISchoolClassRepo schoolClass;
         private ISubjectRepo subjectRepo;
 
         public RepositoryWrapper(KretaContext kretaContext)
@@ -20,7 +20,7 @@ namespace Kreta.Repositories
             this.kretaContext = kretaContext;
         }
 
-       /* public ISchoolClassRepo SchoolClass
+        public ISchoolClassRepo SchoolClass
         {
             get
             {
@@ -30,7 +30,7 @@ namespace Kreta.Repositories
                 }
                 return schoolClass;
             }
-        }*/
+        }
 
         public ISubjectRepo SubjectRepo
         {

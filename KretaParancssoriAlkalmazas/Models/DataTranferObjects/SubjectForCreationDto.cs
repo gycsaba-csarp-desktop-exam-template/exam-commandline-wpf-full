@@ -4,32 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
 namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
 {
-    public  class SubjectDto
+    public class SubjectForCreationDto
     {
         private long id;
         private string subjectName;
 
-        public SubjectDto(long id, string subName)
-        {
-            this.Id = id;
-            this.SubjectName = subName;
-        }
-
-        public SubjectDto()
-        {
-            this.Id = -1;
-            this.SubjectName = String.Empty;
-        }
-
         public long Id { get => id; set => id = value; }
 
+        [Column("name")]
+        [Required(ErrorMessage = "The name is required")]
+        [StringLength(30, ErrorMessage = "The name cannot be longer than 30 characters")]
         public string SubjectName { get => subjectName; set => subjectName = value; }
-
-        public override string ToString()
-        {
-            return id + ". " + subjectName;
-        }
     }
 }

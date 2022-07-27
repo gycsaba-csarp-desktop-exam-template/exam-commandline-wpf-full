@@ -6,6 +6,7 @@ using Kreta.Repositories.Interfaces;
 using AutoMapper;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
+using Kreta.Models;
 
 
 /*
@@ -36,7 +37,7 @@ namespace KretaWebApi.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet(Name ="All subjects")]
         public IActionResult GetAllSubjects()
         {
             try
@@ -49,10 +50,59 @@ namespace KretaWebApi.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError(ex.Message);
-                logger.LogError($"Valami nem működik a GetAllSubjects metódusban");
+                logger.LogError($"Valami nem működik a GetAllSubjects metódusban: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
-    }
+
+        [HttpGet("{id}",Name ="Subject by id")]
+        public IActionResult GetSubjectById(int id)
+        {
+            try
+            {
+                var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id);
+
+                if (subject == null)
+                {
+                    logger.LogError($"GetSubjet(id)->Tantárgy id alapján: {id} -jű tantárgy nem létezik");
+                    return NotFound();
+                }
+                else
+                {
+                    logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
+                    var subjectResult = mapper.Map<SubjectDto>(subject);
+                    return Ok(subjectResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Valami nem működik a GetSubject(int id) metódusban:" + ex.Message);
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
+        {
+            if (subjectForCreation == null)
+            {
+                logger.LogError("CreateSubject->Subject sent to creation from client is null");
+                return BadRequest("Subject is null");
+            }
+            if (!ModelState.IsValid)
+            {
+                logger.LogInfo("CreateSubject->Subject sent to creation from clien is not valid.");
+                return BadRequest("Invalid model object!");
+            }
+
+            var subjectEntity = mapper.Map<Subject>(subjectForCreation);
+
+            repositoryWrapper.SubjectRepo.CreateSubject(subjectEntity);
+            repositoryWrapper.Save();
+
+            var createdSubject = mapper.Map<SubjectDto>(subjectEntity);
+
+            return CreatedAtRoute("SubjectById", new { id = createdSubject.Id }, createdSubject);
+        }
+    }         
 }

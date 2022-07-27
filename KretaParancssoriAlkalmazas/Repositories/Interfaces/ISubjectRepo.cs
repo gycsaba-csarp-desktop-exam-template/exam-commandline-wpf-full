@@ -11,5 +11,7 @@ namespace Kreta.Repositories.Interfaces
     public interface ISubjectRepo : IRepositoryBase<Subject>
     {
         IEnumerable<Subject> GetAllSubjects();
+        Subject? GetSubjectById(int id);
+        void CreateSubject(Subject subject);
     }
 }
