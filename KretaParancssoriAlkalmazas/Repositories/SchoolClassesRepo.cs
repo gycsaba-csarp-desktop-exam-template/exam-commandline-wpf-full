@@ -11,14 +11,20 @@ using System.Linq.Expressions;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using KretaParancssoriAlkalmazas.Repositories.BaseClass;
+using System.Reflection;
+
+using KretaParancssoriAlkalmazas.Models.Helpers;
 
 namespace Kreta.Repositories
 {
     public class SchoolClassesRepo : RepositoryBase<SchoolClass>, ISchoolClassRepo
     {
-        public SchoolClassesRepo(KretaContext kretaContext) 
+        private ISortHelper<SchoolClass> sortHelper;
+
+        public SchoolClassesRepo(KretaContext kretaContext,ISortHelper<SchoolClass> sortHelper) 
             : base(kretaContext)
         {
+            this.sortHelper = sortHelper;
         }
 
         public IEnumerable<SchoolClass> GetAllSchoolClasses()
@@ -40,11 +46,23 @@ namespace Kreta.Repositories
 
         public IEnumerable<SchoolClass> GetAllFilteringSchoolClass(SchoolClassQueryYearParameter schoolClassQueryYearParameter)
         {
-            return FindByCondition(schoolClass => schoolClass.SchoolYear >= schoolClassQueryYearParameter.minYear 
-                                               && schoolClass.SchoolYear <= schoolClassQueryYearParameter.maxYear)
+            return FindByCondition(schoolClass => schoolClass.SchoolYear >= schoolClassQueryYearParameter.MinYear 
+                                               && schoolClass.SchoolYear <= schoolClassQueryYearParameter.MaxYear)
                 .OrderBy(schoolClass => schoolClass.SchoolYear)
                 .ThenBy(schoolClass => schoolClass.ClassType)
                 .ToList();
+        }
+
+        public IEnumerable<SchoolClass> GetAllSorted(SchoolClassSortingParameters schoolClassSortingParameters)
+        {
+            var schoolClasses= GetAll()
+                .OrderBy(schoolClass => schoolClass.SchoolYear)
+                .ThenBy(schoolClass => schoolClass.ClassType);
+
+            var sortedSchoolClasses = sortHelper.ApplySort(schoolClasses, schoolClassSortingParameters.OrderBy);
+
+            return sortedSchoolClasses.ToList();
+
         }
 
         public SchoolClass GetSchoolClassById(int id)

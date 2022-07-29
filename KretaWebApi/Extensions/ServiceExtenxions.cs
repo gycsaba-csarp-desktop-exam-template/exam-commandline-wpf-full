@@ -5,6 +5,8 @@ using Kreta.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Kreta.Repositories;
 using Kreta.Repositories.Interfaces;
+using KretaParancssoriAlkalmazas.Models.Helpers;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 
 
 /*
@@ -61,9 +63,10 @@ namespace KretaWebApi.Extensions
         }
 
         // Repository Wrapper
-        public static void ConfigureWrapperRepository(this IServiceCollection service)
+        public static void ConfigureWrapperRepository(this IServiceCollection services)
         {
-            service.AddScoped<IRepositoryWrapper,RepositoryWrapper>();
+            services.AddScoped<ISortHelper<SchoolClass>, SortHelper<SchoolClass>>();
+            services.AddScoped<IRepositoryWrapper,RepositoryWrapper>();
         }
     }
 }

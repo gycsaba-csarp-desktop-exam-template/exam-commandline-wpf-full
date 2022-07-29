@@ -8,9 +8,9 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
 {
     public class SchoolClassQueryYearParameter
     {
-        public int minYear { get; set; } = 9;
-        public int maxYear { get; set; } = 12;
+        public int MinYear { get; set; } = 9;
+        public int MaxYear { get; set; } = 12;
 
-        public bool ValidYearRange => minYear <= maxYear && minYear >= 9 && maxYear <= 12;
+        public bool ValidYearRange => MinYear <= MaxYear && MinYear >= 9 && MaxYear <= 12;
     }
 }

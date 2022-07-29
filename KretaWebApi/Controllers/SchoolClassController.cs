@@ -27,7 +27,7 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpGet("api/schoolclass",Name = "All school classes")]
-        public IActionResult GetAllSchoolClass()
+        public IActionResult GetAllSchoolClasses()
         {
             try
             {
@@ -44,7 +44,7 @@ namespace KretaWebApi.Controllers
         }
         
         [HttpGet("api/schoolclass-paged",Name="All paged school classes")]
-        public IActionResult GetAllPagedSchoolClass([FromQuery] SchollClassPageParameters schoolClassPageParameters)
+        public IActionResult GetAllPagedSchoolClasses([FromQuery] SchollClassPageParameters schoolClassPageParameters)
         {
             try
             {
@@ -76,8 +76,8 @@ namespace KretaWebApi.Controllers
             }
         }
 
-        [HttpGet("api/schoolclass-filtering",Name ="Filtering school class")]
-        public IActionResult GetAllFilteringSchoolClass([FromQuery] SchoolClassQueryYearParameter schoolClassQueryYearParameter)
+        [HttpGet("api/schoolclass-filtering",Name ="Filtering school classes")]
+        public IActionResult GetAllFilteringSchoolClasses([FromQuery] SchoolClassQueryYearParameter schoolClassQueryYearParameter)
         {
             try
             {
@@ -88,12 +88,36 @@ namespace KretaWebApi.Controllers
 
                 var schoolClasses = wrapper.SchoolClass.GetAllFilteringSchoolClass(schoolClassQueryYearParameter);
 
+                logger.LogInfo("GetAllFilteringSchoolClasses->Az összes osztály szürt lekérdezése az adatbázisból.");
+                logger.LogInfo($"GetAllFilteringSchoolClasses->Szürési feltétel: {schoolClassQueryYearParameter.MinYear}<=ev<={schoolClassQueryYearParameter.MaxYear} ");
+
                 var schoolClassResult = mapper.Map<IEnumerable>(schoolClasses);
                 return Ok(schoolClassResult);
             }
             catch (Exception ex)
             {
                 logger.LogError("GetAllFilteringSchoolClass->Valami hiba történt az összes osztály szürt lekédezése során.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet("api/schoolclass-sorted", Name = "Sorted chool classes")]
+        public IActionResult GetSchoolClassSorted([FromQuery] SchoolClassSortingParameters schoolClassSortingParameters)
+        {
+            try
+            {
+                var schoolClasses = wrapper.SchoolClass.GetAllSorted(schoolClassSortingParameters);
+
+                logger.LogInfo("GetSchoolClassSorted->Az összes osztály rendezett lekérdezése az adatbázisból.");
+                logger.LogInfo($"GetSchoolClassSorted->rendezési feltétel: {schoolClassSortingParameters.OrderBy} ");
+
+                var schoolClassResult = mapper.Map<IEnumerable>(schoolClasses);
+                return Ok(schoolClassResult);
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("GetSchoolClassSorted->Valami hiba történt az összes osztály szürt lekédezése során.");
                 return StatusCode(500, "Internal server error");
             }
         }
