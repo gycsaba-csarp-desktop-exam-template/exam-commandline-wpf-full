@@ -8,9 +8,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using KretaParancssoriAlkalmazas.Models.AbstractClass;
 
-namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
+namespace KretaParancssoriAlkalmazas.Models.EFClass
 {
-    public class SubjectForCreationDto : SubjectBaseWithAttributes
+    [Table("subject")]
+    public class EFSubject : SubjectBaseWithAttributes
     {
     }
 }

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Kreta.Models;
+using KretaParancssoriAlkalmazas.Models.EFClass;
 
 namespace Kreta.Repositories.Interfaces
 {
-    public interface ISubjectRepo : IRepositoryBase<Subject>
+    public interface ISubjectRepo : IRepositoryBase<EFSubject>
     {
-        IEnumerable<Subject> GetAllSubjects();
-        Subject? GetSubjectById(int id);
-        void CreateSubject(Subject subject);
+        IEnumerable<EFSubject> GetAllSubjects();
+        EFSubject? GetSubjectById(long id);
+        void CreateSubject(EFSubject subject);
+        void UpdateSubject(EFSubject subject);
+        void DeleteSubject(EFSubject subject);
     }
 }

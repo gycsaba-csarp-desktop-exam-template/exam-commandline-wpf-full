@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using KretaParancssoriAlkalmazas.Models;
+using KretaParancssoriAlkalmazas.Models.EFClass;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -13,7 +14,7 @@ namespace Kreta.Models.Context
     public partial class KretaContext : DbContext
     {
         public DbSet<SchoolClass> SchoolClasses { get; set; }
-        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<EFSubject> Subjects { get; set; }
 
         public KretaContext()
         {

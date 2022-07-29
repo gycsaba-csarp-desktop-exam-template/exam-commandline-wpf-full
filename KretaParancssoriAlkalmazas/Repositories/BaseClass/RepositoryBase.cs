@@ -51,6 +51,8 @@ namespace Kreta.Repositories.BaseClass
             }
         }
 
+        public void Delete(T entyty) => KretaContext.Set<T>().Remove(entyty);
+
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)

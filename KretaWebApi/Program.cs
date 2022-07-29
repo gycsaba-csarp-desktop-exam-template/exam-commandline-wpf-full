@@ -11,7 +11,7 @@ LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nl
 // Külsõ erõforrások elérése
 builder.Services.ConfigureCors();
 
-// WEbszerver konfiguráció
+// Webszerver konfiguráció
 builder.Services.ConfigureIISIntegration();
 
 // Loggolás

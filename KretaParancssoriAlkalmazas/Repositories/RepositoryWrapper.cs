@@ -46,7 +46,14 @@ namespace Kreta.Repositories
 
         public void Save()
         {
-            kretaContext.SaveChanges();
+            try
+            {
+                kretaContext.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
     }
 }

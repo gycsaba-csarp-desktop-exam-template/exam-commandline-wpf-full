@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Kreta.Models;
 using KretaParancssoriAlkalmazas.Models;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
+using KretaParancssoriAlkalmazas.Models.EFClass;
 
 namespace KretaWebApi
 {
@@ -9,9 +9,10 @@ namespace KretaWebApi
     {
         public MappingProfile()
         {
-            CreateMap<Subject, SubjectDto>();
+            CreateMap<EFSubject, Subject>();
             CreateMap<SchoolClass, SchoolClassDto>();
-            CreateMap<SubjectForCreationDto, Subject>();
+            CreateMap<SubjectForCreationDto, EFSubject>();
+            CreateMap<SubjectForUpdateDto, EFSubject>();
         }
     }
 }

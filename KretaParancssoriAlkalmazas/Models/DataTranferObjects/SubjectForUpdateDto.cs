@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using KretaParancssoriAlkalmazas.Models.AbstractClass;
 
-namespace KretaParancssoriAlkalmazas.Models
+namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
 {
-    public class Subject : SubjectBase
+    public class SubjectForUpdateDto : SubjectBaseWithAttributes
     {
     }
 }

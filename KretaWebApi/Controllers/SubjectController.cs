@@ -6,7 +6,8 @@ using Kreta.Repositories.Interfaces;
 using AutoMapper;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
-using Kreta.Models;
+using KretaParancssoriAlkalmazas.Models.EFClass;
+using KretaParancssoriAlkalmazas.Models;
 
 
 /*
@@ -22,6 +23,8 @@ Az attribútumos útválasztás az attribútumokat használja, hogy az útvonala
 
 namespace KretaWebApi.Controllers
 {
+    //TODO: NoDatabase
+
     [Route("api/subject")]
     [ApiController]
     public class SubjectController : ControllerBase
@@ -37,7 +40,7 @@ namespace KretaWebApi.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet(Name ="All subjects")]
+        [HttpGet(Name = "All subjects")]
         public IActionResult GetAllSubjects()
         {
             try
@@ -55,7 +58,7 @@ namespace KretaWebApi.Controllers
             }
         }
 
-        [HttpGet("{id}",Name ="Subject by id")]
+        [HttpGet("{id}", Name = "Subject by id")]
         public IActionResult GetSubjectById(int id)
         {
             try
@@ -70,7 +73,7 @@ namespace KretaWebApi.Controllers
                 else
                 {
                     logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
-                    var subjectResult = mapper.Map<SubjectDto>(subject);
+                    var subjectResult = mapper.Map<Subject>(subject);
                     return Ok(subjectResult);
                 }
             }
@@ -84,25 +87,97 @@ namespace KretaWebApi.Controllers
         [HttpPost]
         public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
-            if (subjectForCreation == null)
+            try
             {
-                logger.LogError("CreateSubject->Subject sent to creation from client is null");
-                return BadRequest("Subject is null");
+                if (subjectForCreation == null)
+                {
+                    logger.LogError("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy null.");
+                    return BadRequest("Subject is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    logger.LogInfo("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy nem elfogadható.");
+                    return BadRequest("Invalid model object!");
+                }
+
+                var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
+
+                repositoryWrapper.SubjectRepo.CreateSubject(insertedEFSubject);
+                repositoryWrapper.Save();
+
+                var createdSubject = mapper.Map<Subject>(insertedEFSubject);
+
+                logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy módosítva {createdSubject}-re");
+
+                return NoContent();
             }
-            if (!ModelState.IsValid)
+            catch (Exception ex)
             {
-                logger.LogInfo("CreateSubject->Subject sent to creation from clien is not valid.");
-                return BadRequest("Invalid model object!");
+                logger.LogError($"Valami nem működik a CreateSubject metódusban:" + ex.Message);
+                return StatusCode(500, "Internal server error");
             }
-
-            var subjectEntity = mapper.Map<Subject>(subjectForCreation);
-
-            repositoryWrapper.SubjectRepo.CreateSubject(subjectEntity);
-            repositoryWrapper.Save();
-
-            var createdSubject = mapper.Map<SubjectDto>(subjectEntity);
-
-            return CreatedAtRoute("SubjectById", new { id = createdSubject.Id }, createdSubject);
         }
-    }         
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateSubject(long id, [FromBody] SubjectForUpdateDto subjectForUpdate)
+        {
+            try
+            {
+
+
+                if (subjectForUpdate == null)
+                {
+                    logger.LogError("UpdateSubject->Tantárgy módosítás során a klienstől küldött tantárgy null.");
+                    return BadRequest("Subject is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    logger.LogInfo("UpdateSubject->Tantárgy módosítás során a klienstől küldött tantárgy nem elfogadható.");
+                }
+
+                var updatedEFSubject = mapper.Map<EFSubject>(subjectForUpdate);
+
+                repositoryWrapper.SubjectRepo.Update(updatedEFSubject);
+                repositoryWrapper.Save();
+
+                var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
+
+                logger.LogInfo($"UpdateSubject->{updatedSubject.Id} id-jű tantárgy módosítva {updatedSubject}-re)");
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"UpdateSubject->Valami nem sikerült a metóduson belül: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteSubject(long id)
+        {
+            try
+            {
+                var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id);
+                if (subject == null)
+                {
+                    logger.LogError($"DeleteSubject->A törlendő tantárgy {id} id-vel nem található az adatbázisban.");
+                    return NotFound();
+                }
+
+                repositoryWrapper.SubjectRepo.DeleteSubject(subject);
+                repositoryWrapper.Save();
+
+                logger.LogInfo($"DeleteSubject->{id}-id-jű tantárgy törölve lett!");
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"DeleteSubject->Valami nem sikerült a metóduson belül: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+    
+    }
 }
+
