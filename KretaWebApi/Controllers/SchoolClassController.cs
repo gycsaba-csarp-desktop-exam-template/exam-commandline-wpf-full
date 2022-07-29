@@ -43,7 +43,7 @@ namespace KretaWebApi.Controllers
             }
         }
         
-        [HttpGet("api/schoolclasspaged",Name="All paged school classes")]
+        [HttpGet("api/schoolclass-paged",Name="All paged school classes")]
         public IActionResult GetAllPagedSchoolClass([FromQuery] SchollClassPageParameters schoolClassPageParameters)
         {
             try
@@ -75,6 +75,29 @@ namespace KretaWebApi.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpGet("api/schoolclass-filtering",Name ="Filtering school class")]
+        public IActionResult GetAllFilteringSchoolClass([FromQuery] SchoolClassQueryYearParameter schoolClassQueryYearParameter)
+        {
+            try
+            {
+                if (!schoolClassQueryYearParameter.ValidYearRange)
+                {
+                    return BadRequest("A befejező év nem lehet kisebb a kezdő évnél, a kezdő év nagyobb egyenlő kell legyen 9-el, a befejező év kisebb egyenlő kell legyen 12-nél");
+                }
+
+                var schoolClasses = wrapper.SchoolClass.GetAllFilteringSchoolClass(schoolClassQueryYearParameter);
+
+                var schoolClassResult = mapper.Map<IEnumerable>(schoolClasses);
+                return Ok(schoolClassResult);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("GetAllFilteringSchoolClass->Valami hiba történt az összes osztály szürt lekédezése során.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         
         [HttpGet("api/schoolclass/{id}", Name = "Scholl classes by id")]
         public IActionResult GetSchoolClassById(int id)

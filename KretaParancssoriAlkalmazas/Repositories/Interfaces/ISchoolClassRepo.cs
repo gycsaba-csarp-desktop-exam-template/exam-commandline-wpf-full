@@ -14,6 +14,7 @@ namespace Kreta.Repositories.Interfaces
     {
         IEnumerable<SchoolClass> GetAllSchoolClasses();
         PagedList<SchoolClass> GetAllPagedSchoolClasses(SchollClassPageParameters schollClassPageParameters);
+        IEnumerable<SchoolClass> GetAllFilteringSchoolClass(SchoolClassQueryYearParameter schoolClassQueryYearParameter);
         SchoolClass GetSchoolClassById(int id);
     }
 }

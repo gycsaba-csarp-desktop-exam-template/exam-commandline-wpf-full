@@ -26,6 +26,13 @@ namespace Kreta.Repositories
                 .ToList();
         }
 
+        public IEnumerable<EFSubject> SearchBySubjectName(SubjectNameSearchingParameters subjectNameSearchingParameters)
+        {
+            return GetAll()
+                .Where(subject => subject.SubjectName.ToLower().Contains(subjectNameSearchingParameters.Name.Trim().ToLower()))
+                .ToList();
+        }
+
 
         public EFSubject? GetSubjectById(long subjectId)
         {
@@ -47,7 +54,5 @@ namespace Kreta.Repositories
         {
             Delete(subject);
         }
-
-
     }
 }

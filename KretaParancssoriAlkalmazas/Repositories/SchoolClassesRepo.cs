@@ -38,9 +38,18 @@ namespace Kreta.Repositories
                 schollClassPageParameters.PageSize);
         }
 
+        public IEnumerable<SchoolClass> GetAllFilteringSchoolClass(SchoolClassQueryYearParameter schoolClassQueryYearParameter)
+        {
+            return FindByCondition(schoolClass => schoolClass.SchoolYear >= schoolClassQueryYearParameter.minYear 
+                                               && schoolClass.SchoolYear <= schoolClassQueryYearParameter.maxYear)
+                .OrderBy(schoolClass => schoolClass.SchoolYear)
+                .ThenBy(schoolClass => schoolClass.ClassType)
+                .ToList();
+        }
+
         public SchoolClass GetSchoolClassById(int id)
         {
-            return Get(id);      
+            return Get(id);
         }
     }
 }

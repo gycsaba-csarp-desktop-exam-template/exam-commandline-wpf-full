@@ -8,6 +8,7 @@ using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
+using KretaParancssoriAlkalmazas.Models.Parameters;
 
 
 /*
@@ -25,7 +26,7 @@ namespace KretaWebApi.Controllers
 {
     //TODO: NoDatabase
 
-    [Route("api/subject")]
+    [Route("[controller]")]
     [ApiController]
     public class SubjectController : ControllerBase
     {
@@ -40,7 +41,7 @@ namespace KretaWebApi.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet(Name = "All subjects")]
+        [HttpGet("api/subject",Name = "All subjects")]
         public IActionResult GetAllSubjects()
         {
             try
@@ -58,7 +59,25 @@ namespace KretaWebApi.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "Subject by id")]
+        [HttpGet("api/subject-search-by-name", Name = "All subject search by name")]
+        public IActionResult SearchBySubjectName([FromQuery] SubjectNameSearchingParameters subjectNameSearchingParameters)
+        {
+            try
+            {
+                var subjects = repositoryWrapper.SubjectRepo.SearchBySubjectName(subjectNameSearchingParameters);
+                logger.LogInfo($"Az összes tantárgy lekérdezése amelynek nevében szerepel '{subjectNameSearchingParameters.Name}' szó.");
+
+                var subjectResult = mapper.Map<IEnumerable>(subjects);
+                return Ok(subjectResult);
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Valami nem működik a GetAllSubjectSearchByName metódusban: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpGet("api/subject/{id}", Name = "Subject by id")]
         public IActionResult GetSubjectById(int id)
         {
             try
@@ -84,7 +103,7 @@ namespace KretaWebApi.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("api/subject",Name ="Insert subject")]
         public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
             try
@@ -118,7 +137,7 @@ namespace KretaWebApi.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("api/subject/{id}", Name ="Update subject")]
         public IActionResult UpdateSubject(long id, [FromBody] SubjectForUpdateDto subjectForUpdate)
         {
             try
@@ -152,7 +171,7 @@ namespace KretaWebApi.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("api/subject/{id}", Name ="Delete subject")]
         public IActionResult DeleteSubject(long id)
         {
             try
