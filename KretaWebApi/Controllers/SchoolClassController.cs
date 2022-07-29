@@ -26,7 +26,7 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpGet(Name ="All school classes")]
-        public IActionResult GetData()
+        public IActionResult GetAllSchoolClass()
         {
             try
             {
