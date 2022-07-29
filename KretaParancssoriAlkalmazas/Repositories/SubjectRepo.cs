@@ -8,6 +8,7 @@ using Kreta.Repositories.Interfaces;
 using Kreta.Repositories.BaseClass;
 using Kreta.Models.Context;
 using KretaParancssoriAlkalmazas.Models.EFClass;
+using KretaParancssoriAlkalmazas.Models.Parameters;
 
 namespace Kreta.Repositories
 {
@@ -24,6 +25,7 @@ namespace Kreta.Repositories
                 .OrderBy(subject => subject.SubjectName)
                 .ToList();
         }
+
 
         public EFSubject? GetSubjectById(long subjectId)
         {
@@ -45,5 +47,7 @@ namespace Kreta.Repositories
         {
             Delete(subject);
         }
+
+
     }
 }

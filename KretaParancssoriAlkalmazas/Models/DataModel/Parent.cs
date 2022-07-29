@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Kreta.Models.Interfaces;
 using Kreta.Models.Interfaces.Base;
 
-namespace Kreta.Models
+namespace KretaParancssoriAlkalmazas.Models.DataModel
 {
     public class Parent : IBaseModel, IParent
     {
@@ -67,21 +67,21 @@ namespace Kreta.Models
 
         private IParent GetInterfaceObject
         {
-            get { return (IParent) this; }
+            get { return this; }
         }
 
         long IBaseModel.Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override string ToString()
         {
-            return Id+"."+GetInterfaceObject.FullName;
+            return Id + "." + GetInterfaceObject.FullName;
         }
 
         public void Set(object obj)
         {
             if (obj is Parent)
             {
-                Parent p = (Parent)obj;                
+                Parent p = (Parent)obj;
                 Id = p.Id;
                 FirstName = p.FirstName;
                 LastName = p.LastName;

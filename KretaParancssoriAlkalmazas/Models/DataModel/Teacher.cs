@@ -8,9 +8,9 @@ using Kreta.Models.Interfaces;
 using Kreta.Models.Interfaces.Base;
 using Kreta.Models.BaseClass;
 
-namespace Kreta.Models
+namespace KretaParancssoriAlkalmazas.Models.DataModel
 {
-    public class Teacher :  ITeacher, IComparable, IEquatable<Teacher>
+    public class Teacher : ITeacher, IComparable, IEquatable<Teacher>
     {
         public long Id { get; set; }
         public string FirstName { get; set; }
@@ -91,10 +91,10 @@ namespace Kreta.Models
                     Account otherAccount = new Account(other.LoginName, other.Password);
                     EmployeeData otherEmloyeeData = new EmployeeData(other.GrossSalary, NumberOfChildren);
 
-                    return person.Equals(otherPerson) && account.Equals(otherAccount) && (employeeData.Equals(otherEmloyeeData));
+                    return person.Equals(otherPerson) && account.Equals(otherAccount) && employeeData.Equals(otherEmloyeeData);
                 }
             }
-                   
+
         }
 
         public int CompareTo(object obj)
@@ -103,21 +103,21 @@ namespace Kreta.Models
                 return 0;
             else
             {
-                ITeacher objITeacher = (ITeacher) obj;
-                ITeacher thisITeacher = (ITeacher) this;
+                ITeacher objITeacher = (ITeacher)obj;
+                ITeacher thisITeacher = this;
 
                 int teacherFullNameCompareResult = thisITeacher.FullName.CompareTo(objITeacher.FullName);
                 if (teacherFullNameCompareResult == 0)
                     return 0;
                 else
                 {
-                    int teacherDataOfBirthComapreResult = this.DataOfBirth.CompareTo(objITeacher.DataOfBirth);
+                    int teacherDataOfBirthComapreResult = DataOfBirth.CompareTo(objITeacher.DataOfBirth);
                     if (teacherDataOfBirthComapreResult == 0)
                         return 0;
                     else
                     {
-                        Teacher objTeacher = (Teacher) obj;
-                        return this.Id.CompareTo(objTeacher.Id);
+                        Teacher objTeacher = (Teacher)obj;
+                        return Id.CompareTo(objTeacher.Id);
                     }
                 }
             }
@@ -126,14 +126,14 @@ namespace Kreta.Models
         public override string ToString()
         {
 
-            return "("+Id+") "+ GetInterfaceObject.FullName;
+            return "(" + Id + ") " + GetInterfaceObject.FullName;
         }
 
         public void Set(object obj)
         {
             if (obj is Teacher)
             {
-                Teacher t = (Teacher) obj;
+                Teacher t = (Teacher)obj;
                 Id = t.Id;
                 FirstName = t.FirstName;
                 LastName = t.LastName;
@@ -151,7 +151,7 @@ namespace Kreta.Models
 
         private ITeacher GetInterfaceObject
         {
-            get { return (ITeacher)this; }
+            get { return this; }
         }
     }
 }

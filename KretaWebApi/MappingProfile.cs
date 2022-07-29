@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using KretaParancssoriAlkalmazas.Models;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 

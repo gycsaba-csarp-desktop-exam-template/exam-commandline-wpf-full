@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Kreta.Models;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 
 namespace Kreta.Repositories
 {

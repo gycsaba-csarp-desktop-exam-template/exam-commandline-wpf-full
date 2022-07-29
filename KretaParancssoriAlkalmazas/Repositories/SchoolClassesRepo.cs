@@ -7,8 +7,10 @@ using Kreta.Repositories.Interfaces;
 using Kreta.Repositories.BaseClass;
 using Kreta.Models.Context;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
-using KretaParancssoriAlkalmazas.Models;
 using System.Linq.Expressions;
+using KretaParancssoriAlkalmazas.Models.DataModel;
+using KretaParancssoriAlkalmazas.Models.Parameters;
+using KretaParancssoriAlkalmazas.Repositories.BaseClass;
 
 namespace Kreta.Repositories
 {
@@ -25,6 +27,15 @@ namespace Kreta.Repositories
                 .OrderBy(schoolClass => schoolClass.SchoolYear)
                 .ThenBy(schoolClass => schoolClass.ClassType)
                 .ToList();
+        }
+
+        public PagedList<SchoolClass> GetAllPagedSchoolClasses(SchollClassPageParameters schollClassPageParameters)
+        {
+            return PagedList<SchoolClass>.ToPagedList(GetAll()
+                .OrderBy(schoolClass => schoolClass.SchoolYear)
+                .ThenBy(schoolClass => schoolClass.ClassType),
+                schollClassPageParameters.PageNumber,
+                schollClassPageParameters.PageSize);
         }
 
         public SchoolClass GetSchoolClassById(int id)

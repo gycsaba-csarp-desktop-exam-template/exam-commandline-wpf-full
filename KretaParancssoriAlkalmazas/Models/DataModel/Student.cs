@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Kreta.Models.Interfaces;
 using Kreta.Models.Interfaces.Base;
 
-namespace Kreta.Models
+namespace KretaParancssoriAlkalmazas.Models.DataModel
 {
     public class Student : IBaseModel, IStudent
     {
@@ -87,7 +87,7 @@ namespace Kreta.Models
 
         private IStudent GetInterfaceObject
         {
-            get { return (IStudent) this; }
+            get { return this; }
         }
 
         public string Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -97,16 +97,16 @@ namespace Kreta.Models
         {
             if (obj is Student)
             {
-                IStudent otherIStudent = (Student) obj;
+                IStudent otherIStudent = (Student)obj;
                 Student otherStudent = (Student)obj;
-                int fullNameCompareResult = this.GetInterfaceObject.FullName.CompareTo(otherIStudent.FullName);
+                int fullNameCompareResult = GetInterfaceObject.FullName.CompareTo(otherIStudent.FullName);
                 if (fullNameCompareResult == 0)
                 {
-                    if (this.Id == otherStudent.Id)
+                    if (Id == otherStudent.Id)
                     {
                         return 0;
                     }
-                    else if (this.Id < otherStudent.Id)
+                    else if (Id < otherStudent.Id)
                     {
                         return -1;
                     }
@@ -130,12 +130,12 @@ namespace Kreta.Models
         {
             if (obj is Student || obj is IStudent)
             {
-                IStudent other = (Student) obj;
-                Student otherStudent = (Student) obj;
-                int fullNameCompareResult = this.GetInterfaceObject.FullName.CompareTo(other.FullName);
+                IStudent other = (Student)obj;
+                Student otherStudent = (Student)obj;
+                int fullNameCompareResult = GetInterfaceObject.FullName.CompareTo(other.FullName);
                 if (fullNameCompareResult != 0)
                     return false;
-                else if ((this.Id == otherStudent.Id) && (this.SchoolClassId == otherStudent.SchoolClassId))
+                else if (Id == otherStudent.Id && SchoolClassId == otherStudent.SchoolClassId)
                     return true;
                 else
                     return false;
@@ -146,7 +146,7 @@ namespace Kreta.Models
 
         public override string ToString()
         {
-            return Id + ". " + this.GetInterfaceObject.FullName;
+            return Id + ". " + GetInterfaceObject.FullName;
         }
 
         public bool IsLoginNameCorrect(string givenLoginName)
@@ -173,9 +173,9 @@ namespace Kreta.Models
         {
             if (obj is Student)
             {
-                Student s = (Student) obj;
+                Student s = (Student)obj;
 
-                Id =s.Id;
+                Id = s.Id;
                 FirstName = s.FirstName;
                 LastName = s.LastName;
                 Wooman = s.Wooman;

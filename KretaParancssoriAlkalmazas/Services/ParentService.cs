@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Kreta.Models;
 using Kreta.Models.Relationship;
 using Kreta.Repositories;
 using Kreta.Repositories.Relationship;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 
 namespace Kreta.Services
 {

@@ -7,7 +7,7 @@ using AutoMapper;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
 using KretaParancssoriAlkalmazas.Models.EFClass;
-using KretaParancssoriAlkalmazas.Models;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 
 
 /*

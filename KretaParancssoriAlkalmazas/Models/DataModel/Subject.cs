@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using KretaParancssoriAlkalmazas.Models.AbstractClass;
 
-namespace KretaParancssoriAlkalmazas.Models
+namespace KretaParancssoriAlkalmazas.Models.DataModel
 {
     public class Subject : SubjectBase
     {

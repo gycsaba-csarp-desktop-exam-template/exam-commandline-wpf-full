@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Kreta.Models.Interfaces;
-using Kreta.Models;
 
-namespace KretaParancssoriAlkalmazas.Models
+namespace KretaParancssoriAlkalmazas.Models.DataModel
 {
     [Table("schoolclass")]
     public class SchoolClass

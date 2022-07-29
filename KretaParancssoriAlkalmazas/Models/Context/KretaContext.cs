@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using KretaParancssoriAlkalmazas.Models;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;

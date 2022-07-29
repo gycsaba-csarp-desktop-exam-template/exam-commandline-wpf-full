@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Models.Context
