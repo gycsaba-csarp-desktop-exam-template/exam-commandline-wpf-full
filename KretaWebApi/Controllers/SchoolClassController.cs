@@ -7,6 +7,8 @@ using AutoMapper;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
 using KretaParancssoriAlkalmazas.Models.Parameters;
+using System.Dynamic;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 
 namespace KretaWebApi.Controllers
 {
@@ -122,13 +124,30 @@ namespace KretaWebApi.Controllers
             }
         }
 
-        
+        [HttpGet("api/schoolclass-select", Name = "All school classes and select filds")]
+        public IActionResult GetAllSchoolClasses([FromQuery] SchoolClassFieldsParameters fields)
+        {
+            try
+            {
+                var schooClasses = wrapper.SchoolClass.GetAllSelectField(fields);
+                logger.LogInfo("GetAllSchoolClass->Az összes osztály lekérdezése az adatbázisból mező selekcióval.");
+                var schoolClassResult = mapper.Map<IEnumerable>(schooClasses);
+                return Ok(schoolClassResult);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("GetAllSchoolClass->Valami hiba történt az összes osztály lekédezése során.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         [HttpGet("api/schoolclass/{id}", Name = "Scholl classes by id")]
         public IActionResult GetSchoolClassById(int id)
         {
             try
             {
                 var schoolClass = wrapper.SchoolClass.GetSchoolClassById(id);
+           
                 if (schoolClass == null)
                 {
                     logger.LogInfo($"GetSchoolClassById->Osztály id alapján: {id} idjű osztály nem létezik!");
@@ -137,7 +156,42 @@ namespace KretaWebApi.Controllers
                 else
                 {
                     logger.LogInfo($"GetSchoolClassById->Osztály id alapján: {id} idjű osztály lekérése sikeres!");
-                    var schoolClassResult = mapper.Map<SchoolClassDto>(schoolClass);
+                    var schoolClassResult = mapper.Map<SchoolClass>(schoolClass);
+                    return Ok(schoolClassResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Valami nem működik a GetSchoolClass(int id) metódusban:" + ex.Message);
+                return StatusCode(500, "Internal server error");
+            }
+
+        }
+
+
+        [HttpGet("api/schoolclass-select/{id}", Name = "Scholl classes by id and select")]
+        public IActionResult GetSchoolClassByIdAndSelect(int id, [FromQuery] SchoolClassFieldsParameters fields)
+        {
+            try
+            {
+                //var schoolClasses = wrapper.SchoolClass.GetSchoolClassById(id);
+                var schoolClass = wrapper.SchoolClass.GetSchoolClassById(id, fields);
+
+                if (schoolClass == default(ExpandoObject))
+                {
+                    logger.LogInfo($"GetSchoolClassById->Osztály id alapján: {id} idjű osztály nem létezik!");
+                    return NotFound();
+                }
+                /*
+                if (schoolClass == null)
+                {
+                    logger.LogInfo($"GetSchoolClassById->Osztály id alapján: {id} idjű osztály nem létezik!");
+                    return NotFound();
+                }*/
+                else
+                {
+                    logger.LogInfo($"GetSchoolClassById->Osztály id alapján: {id} idjű osztály lekérése sikeres!");
+                    var schoolClassResult = mapper.Map<SchoolClass>(schoolClass);
                     return Ok(schoolClassResult);
                 }
             }

@@ -13,7 +13,7 @@ namespace Kreta.Models.Context
 {
     public partial class KretaContext : DbContext
     {
-        public DbSet<SchoolClass> SchoolClasses { get; set; }
+        public DbSet<EFSchoolClass> SchoolClasses { get; set; }
         public DbSet<EFSubject> Subjects { get; set; }
 
         public KretaContext()

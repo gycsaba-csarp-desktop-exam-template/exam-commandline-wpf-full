@@ -10,24 +10,28 @@ using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Linq.Expressions;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Parameters;
-using KretaParancssoriAlkalmazas.Repositories.BaseClass;
 using System.Reflection;
 
 using KretaParancssoriAlkalmazas.Models.Helpers;
+using System.Dynamic;
+using KretaParancssoriAlkalmazas.Models.EFClass;
+using System.Linq.Dynamic.Core;
 
 namespace Kreta.Repositories
 {
-    public class SchoolClassesRepo : RepositoryBase<SchoolClass>, ISchoolClassRepo
+    public class SchoolClassesRepo : RepositoryBase<EFSchoolClass>, ISchoolClassRepo
     {
-        private ISortHelper<SchoolClass> sortHelper;
+        private ISortHelper<EFSchoolClass> sortHelper;
+        private IDataShaper<EFSchoolClass> dataShaper;
 
-        public SchoolClassesRepo(KretaContext kretaContext,ISortHelper<SchoolClass> sortHelper) 
+        public SchoolClassesRepo(KretaContext kretaContext,ISortHelper<EFSchoolClass> sortHelper, IDataShaper<EFSchoolClass> dataShaper)
             : base(kretaContext)
         {
             this.sortHelper = sortHelper;
+            this.dataShaper = dataShaper;
         }
 
-        public IEnumerable<SchoolClass> GetAllSchoolClasses()
+        public IEnumerable<EFSchoolClass> GetAllSchoolClasses()
         {
             return GetAll()
                 .OrderBy(schoolClass => schoolClass.SchoolYear)
@@ -35,16 +39,16 @@ namespace Kreta.Repositories
                 .ToList();
         }
 
-        public PagedList<SchoolClass> GetAllPagedSchoolClasses(SchollClassPageParameters schollClassPageParameters)
+        public PagedList<EFSchoolClass> GetAllPagedSchoolClasses(SchollClassPageParameters schollClassPageParameters)
         {
-            return PagedList<SchoolClass>.ToPagedList(GetAll()
+            return PagedList<EFSchoolClass>.ToPagedList(GetAll()
                 .OrderBy(schoolClass => schoolClass.SchoolYear)
                 .ThenBy(schoolClass => schoolClass.ClassType),
                 schollClassPageParameters.PageNumber,
                 schollClassPageParameters.PageSize);
         }
 
-        public IEnumerable<SchoolClass> GetAllFilteringSchoolClass(SchoolClassQueryYearParameter schoolClassQueryYearParameter)
+        public IEnumerable<EFSchoolClass> GetAllFilteringSchoolClass(SchoolClassQueryYearParameter schoolClassQueryYearParameter)
         {
             return FindByCondition(schoolClass => schoolClass.SchoolYear >= schoolClassQueryYearParameter.MinYear 
                                                && schoolClass.SchoolYear <= schoolClassQueryYearParameter.MaxYear)
@@ -53,7 +57,7 @@ namespace Kreta.Repositories
                 .ToList();
         }
 
-        public IEnumerable<SchoolClass> GetAllSorted(SchoolClassSortingParameters schoolClassSortingParameters)
+        public IEnumerable<EFSchoolClass> GetAllSorted(SchoolClassSortingParameters schoolClassSortingParameters)
         {
             var schoolClasses= GetAll()
                 .OrderBy(schoolClass => schoolClass.SchoolYear)
@@ -65,9 +69,32 @@ namespace Kreta.Repositories
 
         }
 
-        public SchoolClass GetSchoolClassById(int id)
+        public IEnumerable<ExpandoObject> GetAllSelectField(SchoolClassFieldsParameters schoolClassFiledsParameters)
+        {
+            var schoolClasses = GetAll()
+                .OrderBy(schoolClass => schoolClass.SchoolYear)
+                .ThenBy(schoolClass => schoolClass.ClassType);
+
+            var shapedSchoolClasses = dataShaper.ShapeData(schoolClasses, schoolClassFiledsParameters.Fields);
+
+            return shapedSchoolClasses;
+        }
+
+        public EFSchoolClass GetSchoolClassById(int id)
         {
             return Get(id);
         }
+
+        public ExpandoObject GetSchoolClassById(int id, SchoolClassFieldsParameters fields)
+        {
+            var schoolClass = FindByCondition(schoolClass => schoolClass.Id.Equals(id))
+                .FirstOrDefault();
+
+            if (schoolClass == null)
+                schoolClass = new EFSchoolClass();
+
+            return dataShaper.ShapeData(schoolClass, fields.Fields);
+        }
+
     }
 }

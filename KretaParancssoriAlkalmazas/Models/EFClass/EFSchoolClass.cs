@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Kreta.Models.Interfaces;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 
-namespace KretaParancssoriAlkalmazas.Models.DataModel
+namespace KretaParancssoriAlkalmazas.Models.EFClass
 {
-
-    public class SchoolClass
+    [Table("schoolclass")]
+    public class EFSchoolClass
     {
 
         private long id;
@@ -19,7 +19,7 @@ namespace KretaParancssoriAlkalmazas.Models.DataModel
         private char classType;
         private int teacherId;
 
-        public SchoolClass(long id, int schoolYear, char classType, int teacherId)
+        public EFSchoolClass(long id, int schoolYear, char classType, int teacherId)
         {
             this.id = id;
             scoolYear = schoolYear;
@@ -27,7 +27,7 @@ namespace KretaParancssoriAlkalmazas.Models.DataModel
             this.teacherId = teacherId;
         }
 
-        public SchoolClass()
+        public EFSchoolClass()
         {
             this.id = -1;
             scoolYear = 9;
@@ -36,11 +36,11 @@ namespace KretaParancssoriAlkalmazas.Models.DataModel
         }
 
         public long Id { get => id; set => id = value; }
-
+        [Required(ErrorMessage = "School class is required")]
         public int SchoolYear { get => scoolYear; set => scoolYear = value; }
-
+        [Required(ErrorMessage = "Class type is required")]
         public char ClassType { get => classType; set => classType = value; }
-
+        [ForeignKey(nameof(Teacher))]
         public int TeacherId { get => teacherId; set => teacherId = value; }
 
         public string GradeGradeType

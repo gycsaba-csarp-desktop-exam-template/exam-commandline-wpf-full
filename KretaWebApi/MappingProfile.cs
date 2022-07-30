@@ -10,7 +10,7 @@ namespace KretaWebApi
         public MappingProfile()
         {
             CreateMap<EFSubject, Subject>();
-            CreateMap<SchoolClass, SchoolClassDto>();
+            CreateMap<EFSchoolClass, SchoolClass>();
             CreateMap<SubjectForCreationDto, EFSubject>();
             CreateMap<SubjectForUpdateDto, EFSubject>();
         }

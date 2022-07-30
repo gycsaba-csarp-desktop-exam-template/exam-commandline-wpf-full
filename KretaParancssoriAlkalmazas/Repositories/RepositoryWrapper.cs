@@ -8,6 +8,7 @@ using Kreta.Repositories.Interfaces;
 using Kreta.Models.Context;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.DataModel;
+using KretaParancssoriAlkalmazas.Models.EFClass;
 
 namespace Kreta.Repositories
 {
@@ -16,13 +17,15 @@ namespace Kreta.Repositories
         private KretaContext kretaContext;
         private ISchoolClassRepo schoolClass;
         private ISubjectRepo subjectRepo;
+        private IDataShaper<EFSchoolClass> dataShaper;
 
-        private ISortHelper<SchoolClass> schoolClassSortHelper;
+        private ISortHelper<EFSchoolClass> schoolClassSortHelper;
 
-        public RepositoryWrapper(KretaContext kretaContext, ISortHelper<SchoolClass> schoolClassSortHelper)
+        public RepositoryWrapper(KretaContext kretaContext, ISortHelper<EFSchoolClass> schoolClassSortHelper, IDataShaper<EFSchoolClass> dataShaper)
         {
             this.kretaContext = kretaContext;
             this.schoolClassSortHelper = schoolClassSortHelper;
+            this.dataShaper = dataShaper;
         }
 
         public ISchoolClassRepo SchoolClass
@@ -31,7 +34,7 @@ namespace Kreta.Repositories
             {
                 if (schoolClass == null)
                 {
-                    schoolClass = new SchoolClassesRepo(kretaContext, schoolClassSortHelper);
+                    schoolClass = new SchoolClassesRepo(kretaContext, schoolClassSortHelper,dataShaper);
                 }
                 return schoolClass;
             }
