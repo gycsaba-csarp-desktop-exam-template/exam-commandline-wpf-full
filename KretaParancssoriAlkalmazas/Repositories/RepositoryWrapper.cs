@@ -17,15 +17,21 @@ namespace Kreta.Repositories
         private KretaContext kretaContext;
         private ISchoolClassRepo schoolClass;
         private ISubjectRepo subjectRepo;
-        private IDataShaper<EFSchoolClass> dataShaper;
 
-        private ISortHelper<EFSchoolClass> schoolClassSortHelper;
+        private ISortHelper<EFSchoolClass> schoolSortHelper;
+        private IDataShaper<EFSchoolClass> schoolDataShaper;
 
-        public RepositoryWrapper(KretaContext kretaContext, ISortHelper<EFSchoolClass> schoolClassSortHelper, IDataShaper<EFSchoolClass> dataShaper)
+        private ISortHelper<EFSubject> subjectSortHelper;
+        private IDataShaper<EFSubject> subjectDataShaper;
+        
+
+        public RepositoryWrapper(KretaContext kretaContext, ISortHelper<EFSchoolClass> schoolSortHelper, IDataShaper<EFSchoolClass> schoolDataShaper, ISortHelper<EFSubject> subjectSortHelper,IDataShaper<EFSubject> subjectDataShaper)
         {
             this.kretaContext = kretaContext;
-            this.schoolClassSortHelper = schoolClassSortHelper;
-            this.dataShaper = dataShaper;
+            this.schoolSortHelper = schoolSortHelper;
+            this.schoolDataShaper = schoolDataShaper;
+            this.subjectSortHelper = subjectSortHelper;
+            this.subjectDataShaper = subjectDataShaper;
         }
 
         public ISchoolClassRepo SchoolClass
@@ -34,7 +40,7 @@ namespace Kreta.Repositories
             {
                 if (schoolClass == null)
                 {
-                    schoolClass = new SchoolClassesRepo(kretaContext, schoolClassSortHelper,dataShaper);
+                    schoolClass = new SchoolClassesRepo(kretaContext, schoolSortHelper,schoolDataShaper);
                 }
                 return schoolClass;
             }
@@ -46,7 +52,7 @@ namespace Kreta.Repositories
             {
                 if (subjectRepo==null)
                 {
-                    subjectRepo = new SubjectRepo(kretaContext);
+                    subjectRepo = new SubjectRepo(kretaContext,subjectSortHelper,subjectDataShaper);
                 }
                 return subjectRepo;
             }

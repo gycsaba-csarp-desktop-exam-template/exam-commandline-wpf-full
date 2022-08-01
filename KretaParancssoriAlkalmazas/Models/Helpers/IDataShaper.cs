@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KretaParancssoriAlkalmazas.Models.HTEOS;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace KretaParancssoriAlkalmazas.Models.Helpers
 {
     public interface IDataShaper<T>
     {
+        // IEnumerable<ExpandoObject> ??
         IEnumerable<ExpandoObject> ShapeData(IEnumerable<T> entities, string fieldsString);
         ExpandoObject ShapeData(T entity, string fieldsString);
     }

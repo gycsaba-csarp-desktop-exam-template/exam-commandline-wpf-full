@@ -9,6 +9,7 @@ using System.Collections;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Parameters;
+using Newtonsoft.Json;
 
 
 /*
@@ -42,12 +43,26 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpGet("api/subject",Name = "All subjects")]
-        public IActionResult GetAllSubjects()
+        public IActionResult GetAllSubjects([FromQuery] SubjectParameters subjectParameters)
         {
             try
             {
-                var subjects = repositoryWrapper.SubjectRepo.GetAllSubjects();
+                var subjects = repositoryWrapper.SubjectRepo.GetAllSubjects(subjectParameters);
                 logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
+
+                var metadata = new
+                {
+                    subjects.TotalCount,
+                    subjects.PageSize,
+                    subjects.CurrentPage,
+                    subjects.TotalPages,
+                    subjects.HasNext,
+                    subjects.HasPrevious
+                };
+
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+
+                logger.LogInfo($"Visszatérés {subjects.Count} tantárgy adattal az adatbázisból");
 
                 var subjectResult = mapper.Map<IEnumerable>(subjects);
                 return Ok(subjectResult);

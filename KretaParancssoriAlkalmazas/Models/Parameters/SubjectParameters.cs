@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.Parameters
 {
-    public class SubjectNameSearchingParameters 
+    public  class SubjectParameters : QueryStringParameters
     {
-        public string Name { get; set; } = string.Empty;
     }
 }

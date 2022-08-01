@@ -69,6 +69,9 @@ namespace KretaWebApi.Extensions
             services.AddScoped<ISortHelper<EFSchoolClass>, SortHelper<EFSchoolClass>>();
             services.AddScoped<IDataShaper<EFSchoolClass>, DataShaper<EFSchoolClass>>();
 
+            services.AddScoped<ISortHelper<EFSubject>, SortHelper<EFSubject>>();
+            services.AddScoped<IDataShaper<EFSubject>, DataShaper<EFSubject>>();
+
             services.AddScoped<IRepositoryWrapper,RepositoryWrapper>();
         }
     }

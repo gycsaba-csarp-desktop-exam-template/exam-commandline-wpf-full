@@ -9,27 +9,41 @@ using Kreta.Repositories.BaseClass;
 using Kreta.Models.Context;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.Parameters;
+using KretaParancssoriAlkalmazas.Models.Helpers;
+using KretaParancssoriAlkalmazas.Models.HTEOS;
+using System.Dynamic;
 
 namespace Kreta.Repositories
 {
     public class SubjectRepo : RepositoryBase<EFSubject>, ISubjectRepo
     {
-        public SubjectRepo(KretaContext kretaContext)
+        private ISortHelper<EFSubject> sortHelper;
+        private IDataShaper<EFSubject> dataShaper;
+
+        public SubjectRepo(KretaContext kretaContext, ISortHelper<EFSubject> sortHelper, IDataShaper<EFSubject> dataShaper)
             : base(kretaContext)
         {
+            this.sortHelper = sortHelper;
+            this.dataShaper = dataShaper;
         }
 
-        public IEnumerable<EFSubject> GetAllSubjects()
+        public PagedList<ExpandoObject> GetAllSubjects(SubjectParameters subjectParameters)
         {
-            return GetAll()
-                .OrderBy(subject => subject.SubjectName)
-                .ToList();
+
+            var subjects = GetAll();
+
+            var sortedSubject = sortHelper.ApplySort(subjects, subjectParameters.OrderBy);
+            var sortedAndShapedSubject = dataShaper.ShapeData(sortedSubject, subjectParameters.Fields);
+
+            return PagedList<ExpandoObject>.ToPagedList(sortedAndShapedSubject, subjectParameters.PageNumber, subjectParameters.PageSize);
+
+         
         }
 
-        public IEnumerable<EFSubject> SearchBySubjectName(SubjectNameSearchingParameters subjectNameSearchingParameters)
+        public IEnumerable<EFSubject> SearchBySubjectName(SubjectNameSearchingParameters searchingParameters)
         {
             return GetAll()
-                .Where(subject => subject.SubjectName.ToLower().Contains(subjectNameSearchingParameters.Name.Trim().ToLower()))
+                .Where(subject => subject.SubjectName.ToLower().Contains(searchingParameters.Name.Trim().ToLower()))
                 .ToList();
         }
 
