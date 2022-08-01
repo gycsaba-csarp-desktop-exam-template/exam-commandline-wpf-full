@@ -9,6 +9,9 @@ using System.Collections;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using System.Dynamic;
 using KretaParancssoriAlkalmazas.Models.DataModel;
+using KretaParancssoriAlkalmazas.Models.HTEOS;
+using KretaParancssoriAlkalmazas.Models.EFClass;
+using System.Net.Http.Headers;
 
 namespace KretaWebApi.Controllers
 {
@@ -19,13 +22,15 @@ namespace KretaWebApi.Controllers
         private ILoggerManager logger;
         private IRepositoryWrapper wrapper;
         private IMapper mapper;
+        private LinkGenerator linkGenerator;
 
 
-        public SchoolClassController(ILoggerManager logger, IRepositoryWrapper wrapper, IMapper mapper)
+        public SchoolClassController(ILoggerManager logger, IRepositoryWrapper wrapper, IMapper mapper, LinkGenerator linkGenerator)
         {
             this.logger = logger;
             this.wrapper = wrapper;
             this.mapper = mapper;
+            this.linkGenerator = linkGenerator;
         }
 
         [HttpGet("api/schoolclass",Name = "All school classes")]
@@ -33,8 +38,22 @@ namespace KretaWebApi.Controllers
         {
             try
             {
-                var schooClasses = wrapper.SchoolClass.GetAllSchoolClasses();
+                var schooClasses = wrapper.SchoolClass.GetAllSchoolClasses().ToList();
                 logger.LogInfo("GetAllSchoolClass->Az összes osztály lekérdezése az adatbázisból.");
+
+
+                var mediaType = (MediaTypeHeaderValue)HttpContext.Items["AcceptHeaderMediaType"];
+
+
+                for (var index = 0; index < schooClasses.Count(); index++)
+                {
+                    var schoolClassLinks = CreateLinksForSchoolClasses(schooClasses.ElementAt(index).Id);
+                    //TODO: HTEOS  Itt indexedik elemet ADD-al nem lehet hozzáadni
+                    //schooClasses[index]=
+
+                    
+                }
+
                 var schoolClassResult = mapper.Map<IEnumerable>(schooClasses);
                 return Ok(schoolClassResult);
             }
@@ -200,7 +219,29 @@ namespace KretaWebApi.Controllers
                 logger.LogError($"Valami nem működik a GetSchoolClass(int id) metódusban:" + ex.Message);
                 return StatusCode(500, "Internal server error");
             }
-
         }
+
+        // HTEOS Link generator
+        private List<Link> CreateLinksForSchoolClasses(long schoolClassId)
+        {
+            var links = new List<Link>
+            {
+                new Link(linkGenerator.GetUriByAction(HttpContext, nameof(GetAllSchoolClasses), values: new { schoolClassId }),
+                "self",
+                "GET"),
+            };
+
+            return links;
+        }
+
+        // HTEOS Link generator
+       /* private LinkCollectionWrapper<Entity> CreateLinksForAccounts(LinkCollectionWrapper<Entity> accountsWrapper)
+        {
+            accountsWrapper.Links.Add(new Link(_linkGenerator.GetUriByAction(HttpContext, nameof(GetAccountsForOwner), values: new { }),
+                    "self",
+                    "GET"));
+
+            return accountsWrapper;
+        }*/
     }
 }
