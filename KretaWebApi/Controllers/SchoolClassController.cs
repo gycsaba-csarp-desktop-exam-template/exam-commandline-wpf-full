@@ -146,6 +146,7 @@ namespace KretaWebApi.Controllers
         [HttpGet("api/schoolclass-select", Name = "All school classes and select filds")]
         public IActionResult GetAllSchoolClasses([FromQuery] SchoolClassFieldsParameters fields)
         {
+            // TODO: Nem működik
             try
             {
                 var schooClasses = wrapper.SchoolClass.GetAllSelectField(fields);

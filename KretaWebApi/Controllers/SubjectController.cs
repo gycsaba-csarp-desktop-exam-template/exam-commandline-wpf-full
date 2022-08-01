@@ -10,6 +10,8 @@ using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using Newtonsoft.Json;
+using System.Dynamic;
+using System.ComponentModel.DataAnnotations;
 
 
 /*
@@ -93,17 +95,25 @@ namespace KretaWebApi.Controllers
             }
         }
         [HttpGet("api/subject/{id}", Name = "Subject by id")]
-        public IActionResult GetSubjectById(int id)
+        public IActionResult GetSubjectById(int id, [FromQuery] FieldsParameter fields)
         {
+            //TODO: Nem működik, FieldsParameter nulla lesz. URI hiba?
+
             try
             {
-                var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id);
+                var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id,fields.Fields);
 
-                if (subject == null)
+                if (subject==default(ExpandoObject))
+                {
+                    logger.LogError($"{id}-jú tantárgy nem létezik");
+                    return NotFound();
+                }
+
+                /*if (subject == null)
                 {
                     logger.LogError($"GetSubjet(id)->Tantárgy id alapján: {id} -jű tantárgy nem létezik");
                     return NotFound();
-                }
+                }*/
                 else
                 {
                     logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
@@ -191,7 +201,7 @@ namespace KretaWebApi.Controllers
         {
             try
             {
-                var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id);
+                var subject =  repositoryWrapper.SubjectRepo.GetSubjectById(id);
                 if (subject == null)
                 {
                     logger.LogError($"DeleteSubject->A törlendő tantárgy {id} id-vel nem található az adatbázisban.");

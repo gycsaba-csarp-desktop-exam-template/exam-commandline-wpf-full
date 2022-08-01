@@ -17,7 +17,8 @@ namespace Kreta.Repositories.Interfaces
         PagedList<ExpandoObject> GetAllSubjects(SubjectParameters subjectParameters);
         IEnumerable<EFSubject> SearchBySubjectName(SubjectNameSearchingParameters subjectNameSearchingParameters);
 
-        EFSubject? GetSubjectById(long id);
+        ExpandoObject? GetSubjectById(long id, string fields);
+        EFSubject GetSubjectById(long id);
         void CreateSubject(EFSubject subject);
         void UpdateSubject(EFSubject subject);
         void DeleteSubject(EFSubject subject);

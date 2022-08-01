@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.Parameters
 {
-    public class SchoolClassFieldsParameters
+    public  class FieldsParameter
     {
-        public string Fields { get; set; }
+        public string Fields { get; set; } = "";
     }
 }

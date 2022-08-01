@@ -13,5 +13,10 @@ namespace KretaParancssoriAlkalmazas.Models.EFClass
     [Table("subject")]
     public class EFSubject : SubjectBaseWithAttributes
     {
+        public EFSubject()
+        {
+            this.Id = -1;
+            this.SubjectName = string.Empty;
+        }
     }
 }

@@ -47,11 +47,18 @@ namespace Kreta.Repositories
                 .ToList();
         }
 
-
         public EFSubject? GetSubjectById(long subjectId)
         {
             return FindByCondition(subject => subject.Id.Equals(subjectId))
+                   .FirstOrDefault();
+   
+        }
+
+        public ExpandoObject? GetSubjectById(long subjectId,string fields)
+        {
+            var subjects=FindByCondition(subject => subject.Id.Equals(subjectId))
                 .FirstOrDefault();
+            return dataShaper.ShapeData(subjects, fields);
         }
 
         public void CreateSubject(EFSubject subject)
