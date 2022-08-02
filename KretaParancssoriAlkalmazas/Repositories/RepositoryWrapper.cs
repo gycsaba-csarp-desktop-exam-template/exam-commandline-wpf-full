@@ -23,7 +23,16 @@ namespace Kreta.Repositories
 
         private ISortHelper<EFSubject> subjectSortHelper;
         private IDataShaper<EFSubject> subjectDataShaper;
-        
+
+        public RepositoryWrapper(KretaContext kretaContext)
+        {
+            this.kretaContext = kretaContext;
+            this.schoolSortHelper = null;
+            this.schoolDataShaper = null;
+            this.subjectSortHelper = null;
+            this.subjectDataShaper = null;
+        }
+
 
         public RepositoryWrapper(KretaContext kretaContext, ISortHelper<EFSchoolClass> schoolSortHelper, IDataShaper<EFSchoolClass> schoolDataShaper, ISortHelper<EFSubject> subjectSortHelper,IDataShaper<EFSubject> subjectDataShaper)
         {

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KretaParancssoriAlkalmazas.Models.AbstractClass
 {
-    public class SubjectBaseWithAttributes : SubjectBase
+    public abstract class SubjectBaseWithAttributes : SubjectBase
     {
         [Column("name")]
         [Required(ErrorMessage = "The name is required")]

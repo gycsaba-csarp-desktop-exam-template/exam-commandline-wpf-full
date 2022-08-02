@@ -1,0 +1,25 @@
+﻿@model KretaParancssoriAlkalmazas.Models.EFClass.EFSchoolClass
+
+@{
+    ViewData["Title"] = "Iskolai osztály adatok";
+}
+
+<h1>Iskolai osztály</h1>
+<div>
+    <h4>Iskolai osztály adatai</h4>
+    <hr />
+    <d1 class="row">
+        <dt class="col-sm-2">Id</dt>   
+        <dd class="col-sm-10">@Html.DisplayFor(sc => sc.Id)<dd>
+        <dt class="col-sm-2">Évfolyam</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(sc => sc.SchoolYear)</dd>
+        <dt class="col-sm-2">Osztály</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(sc => sc.ClassType)</dd>
+        <dt class="col-sm-2">Osztály teljes neve</dt>
+        <dd class="col-sm-10"">@Html.DisplayFor(sc => sc.SchoolYearClassType)</dd>
+    </d1>                 
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Szerkesztés</a>
+    <a asp-action="Index">Vissza</a>
+</div>
