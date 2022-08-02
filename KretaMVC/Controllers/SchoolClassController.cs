@@ -4,6 +4,7 @@ using Kreta.Repositories;
 using Kreta.Repositories.Interfaces;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 
+
 namespace KretaMVC.Controllers
 {
     public class SchoolClassController : Controller
