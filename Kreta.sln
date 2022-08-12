@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaParancssoriAlkalmazas"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaWebApi", "KretaWebApi\KretaWebApi.csproj", "{FA14553A-F453-49A8-9EFB-C9BFB34945BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaMVC", "KretaMVC\KretaMVC.csproj", "{9281FECD-8ED3-4F80-B548-312CB55A075F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KretaRazorPages", "KretaRazorPages\KretaRazorPages.csproj", "{8A8A45E3-108E-4B85-B123-F89EEC4BFAE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaRazorPages", "KretaRazorPages\KretaRazorPages.csproj", "{8A8A45E3-108E-4B85-B123-F89EEC4BFAE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{FA14553A-F453-49A8-9EFB-C9BFB34945BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA14553A-F453-49A8-9EFB-C9BFB34945BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA14553A-F453-49A8-9EFB-C9BFB34945BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9281FECD-8ED3-4F80-B548-312CB55A075F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9281FECD-8ED3-4F80-B548-312CB55A075F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9281FECD-8ED3-4F80-B548-312CB55A075F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9281FECD-8ED3-4F80-B548-312CB55A075F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A8A45E3-108E-4B85-B123-F89EEC4BFAE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A8A45E3-108E-4B85-B123-F89EEC4BFAE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A8A45E3-108E-4B85-B123-F89EEC4BFAE0}.Release|Any CPU.ActiveCfg = Release|Any CPU

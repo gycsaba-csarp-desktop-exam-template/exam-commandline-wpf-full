@@ -193,7 +193,8 @@ namespace KretaWebApi.Controllers
             catch (Exception ex)
             {
                 logger.LogError($"UpdateSubject->Valami nem sikerült a metóduson belül: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                //return StatusCode(500, "Internal server error");
+                return Ok(ex.Message);
             }
         }
         [HttpDelete("api/subject/{id}", Name ="Delete subject")]

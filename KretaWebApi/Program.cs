@@ -42,7 +42,11 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 else
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
     app.UseHsts();
+} 
 
 app.UseHttpsRedirection();
 

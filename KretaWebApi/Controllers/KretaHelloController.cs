@@ -3,21 +3,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KretaWebApi.Controllers
 {
-    [Route("api/values")]
+    [Route("[controller]")]
     [ApiController]
-    public class Values2Controller : ControllerBase
+    public class KretaHelloController : ControllerBase
     {
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public Values2Controller(ILogger<WeatherForecastController> logger)
+        public KretaHelloController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("api/hello", Name = "Kréta helló")]
         public IActionResult GetData()
         {
-            string result = "A";
+            string result = "Hello Kréta!";
             return Ok(result);
         }
     }
