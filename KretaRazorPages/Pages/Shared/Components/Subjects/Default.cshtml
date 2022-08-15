@@ -1,10 +1,41 @@
 ﻿@using KretaParancssoriAlkalmazas.Models.DataModel
 @model List<Subject>
 
-<h3>Tantárgyak</h3>
-<ul>
-    @foreach(var subject in Model)
-    {
-        <li>@subject.Id. @subject.SubjectName</li>
-    }
-</ul>
+<div class="container p-3">
+
+    <div class="row pt-4">
+        <div class="col-10">
+            <h2 class="text-primary">Tantárgyak</h2>
+        </div>
+        <div class="col-15">
+            <a asp-page="subject/create" class="btn btn-primary">                
+                Új tantárgy
+            </a>
+        </div>
+    </div>
+
+
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Id.
+                </th>
+                <th>
+                    Név
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>    
+            @foreach(var subject in Model)
+            {
+                <tr>
+                    <td width="30%">@subject.Id. </td>
+                    <td width="50%">@subject.SubjectName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
