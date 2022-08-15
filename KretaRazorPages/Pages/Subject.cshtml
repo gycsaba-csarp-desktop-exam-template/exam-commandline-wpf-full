@@ -1,0 +1,10 @@
+﻿@page
+@model KretaRazorPages.Pages.SubjectModel
+@{
+    ViewData["Title"] = "Tantárgyak";
+}
+<div>
+    <div class="col-md-3">
+         @await Component.InvokeAsync("Subjects")
+    </div>
+</div>
