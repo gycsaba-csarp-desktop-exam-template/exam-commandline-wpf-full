@@ -5,12 +5,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace KretaRazorPages.Pages
 {
     public class IndexModel : PageModel
-    {
-        public RepositoryWrapper repository;
-        
-        public IndexModel(RepositoryWrapper repository)
+    {     
+        public IndexModel()
         {
-            this.repository = repository;
+
         }
 
         public void OnGet()

@@ -1,0 +1,10 @@
+﻿@using KretaParancssoriAlkalmazas.Models.DataModel
+@model List<Subject>
+
+<h3>Tantárgyak</h3>
+<ul>
+    @foreach(var subject in Model)
+    {
+        <li>@subject.Id. @subject.SubjectName</li>
+    }
+</ul>

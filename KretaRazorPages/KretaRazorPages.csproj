@@ -10,7 +10,6 @@
     <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
     <ProjectReference Include="..\KretaWebApiContracts\KretaWebApiContracts.csproj" />
     <ProjectReference Include="..\KretaWEbApiLoggerService\KretaWEbApiLoggerService.csproj" />
-    <ProjectReference Include="..\KretaWebApi\KretaWebApi.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,15 +1,11 @@
-using KretaWebApi.Extensions;
+using KretaRazorPages.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-// Mysql server elérés konfigurálás
-builder.Services.ConfigureMySqlContext(builder.Configuration);
-
-// RepositoryWrapper
-builder.Services.ConfigureWrapperRepository();
+builder.Services.ConfigureRazorPageServices();
 
 var app = builder.Build();
 
