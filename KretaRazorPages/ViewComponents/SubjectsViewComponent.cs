@@ -14,7 +14,7 @@ namespace KretaRazorPages.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var subject = await subjectService.GetSubjectAsync();
+            var subject = await subjectService.GetSubjectsAsync();
             return View(subject);
         }
     }

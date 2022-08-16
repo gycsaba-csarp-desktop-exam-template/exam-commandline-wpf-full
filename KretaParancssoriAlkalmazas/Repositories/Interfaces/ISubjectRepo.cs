@@ -14,6 +14,7 @@ namespace Kreta.Repositories.Interfaces
 {
     public interface ISubjectRepo : IRepositoryBase<EFSubject>
     {
+        long GetNextId();
         PagedList<ExpandoObject> GetAllSubjects(SubjectParameters subjectParameters);
         IEnumerable<EFSubject> SearchBySubjectName(SubjectNameSearchingParameters subjectNameSearchingParameters);
 

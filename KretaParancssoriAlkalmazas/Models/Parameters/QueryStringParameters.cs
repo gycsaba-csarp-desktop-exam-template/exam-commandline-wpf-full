@@ -11,7 +11,7 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
 		const int maxPageSize = 50;
 		public int PageNumber { get; set; } = 1;
 
-		private int pageSize = 3;
+		private int pageSize = 10;
 
 		public int PageSize
 		{

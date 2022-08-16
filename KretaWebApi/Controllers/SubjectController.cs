@@ -39,9 +39,11 @@ namespace KretaWebApi.Controllers
 
         public SubjectController(ILoggerManager logger, IRepositoryWrapper repositoryWrapper, IMapper mapper)
         {
+            logger.LogInfo($"Tantárgy vezérlő kérést kapott!");
             this.logger = logger;
             this.repositoryWrapper = repositoryWrapper;
             this.mapper = mapper;
+            logger.LogInfo($"Szükséges adatok elérhetőek!");
         }
 
         [HttpGet("api/subject",Name = "All subjects")]
@@ -52,7 +54,7 @@ namespace KretaWebApi.Controllers
                 var subjects = repositoryWrapper.SubjectRepo.GetAllSubjects(subjectParameters);
                 logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
 
-                var metadata = new
+                var paginationMetadata = new
                 {
                     subjects.TotalCount,
                     subjects.PageSize,
@@ -62,7 +64,13 @@ namespace KretaWebApi.Controllers
                     subjects.HasPrevious
                 };
 
-                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
+
+                long nextId = repositoryWrapper.SubjectRepo.GetNextId();
+                Dictionary<string,string> nextIDToSerialize=new Dictionary<string,string>();
+                nextIDToSerialize.Add("NextId", nextId.ToString());
+
+                Response.Headers.Add("X-NextId", JsonConvert.SerializeObject(nextIDToSerialize));
 
                 logger.LogInfo($"Visszatérés {subjects.Count} tantárgy adattal az adatbázisból");
 
@@ -133,6 +141,10 @@ namespace KretaWebApi.Controllers
         {
             try
             {
+                logger.LogInfo("Új tantárgy felvétele az adatbázisba");
+                logger.LogInfo("Új tantárgy azonosító:" + subjectForCreation.Id);
+                logger.LogInfo("Új tantárgy neve:" + subjectForCreation.SubjectName);
+
                 if (subjectForCreation == null)
                 {
                     logger.LogError("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy null.");
@@ -144,6 +156,8 @@ namespace KretaWebApi.Controllers
                     return BadRequest("Invalid model object!");
                 }
 
+                logger.LogInfo("Új tantárgy adatok rendben.");
+
                 var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
 
                 repositoryWrapper.SubjectRepo.CreateSubject(insertedEFSubject);
@@ -151,7 +165,7 @@ namespace KretaWebApi.Controllers
 
                 var createdSubject = mapper.Map<Subject>(insertedEFSubject);
 
-                logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy módosítva {createdSubject}-re");
+                logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
 
                 return NoContent();
             }
@@ -167,6 +181,9 @@ namespace KretaWebApi.Controllers
         {
             try
             {
+                logger.LogInfo("Tantárgy módosítása az adatbázisba");
+                logger.LogInfo("Módosítandó tantárgy id-je:" + subjectForUpdate.Id);
+                logger.LogInfo("Módosítandó tantárgy neve-je:" + subjectForUpdate.SubjectName);
 
 
                 if (subjectForUpdate == null)

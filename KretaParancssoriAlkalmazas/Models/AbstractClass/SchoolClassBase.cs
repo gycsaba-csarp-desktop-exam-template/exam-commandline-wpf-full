@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.AbstractClass
 {
-    public abstract class SchoolClassBase
+    public abstract class SchoolClassBase :ClassWithId
     {
 
         public SchoolClassBase(long id, int schoolYear, char classType, int teacherId)
@@ -24,8 +24,6 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
             this.ClassType = 'a';
             this.TeacherId = -1;
         }
-
-        public virtual long Id { get; set; }
 
         public virtual int SchoolYear { get; set; }
 

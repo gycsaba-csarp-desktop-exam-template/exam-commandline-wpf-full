@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using Kreta.Repositories.Interfaces;
 using Kreta.Models.Context;
 using Microsoft.EntityFrameworkCore;
+using KretaParancssoriAlkalmazas.Models.AbstractClass;
 
 namespace Kreta.Repositories.BaseClass
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : ClassWithId
     {
         private bool disposed = false;
         protected KretaContext KretaContext { get; set; }
@@ -24,6 +25,16 @@ namespace Kreta.Repositories.BaseClass
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
             return KretaContext.Set<T>().Where(expression).AsNoTracking();
+        }
+
+        public long GetNextId()
+        {
+            var list = KretaContext.Set<T>().ToList();
+            var nextId = list.Select(x => x.Id).Max();
+            if (nextId > 0)
+                return nextId+1;
+            else
+                return 1;
         }
 
         public T Get(long id)

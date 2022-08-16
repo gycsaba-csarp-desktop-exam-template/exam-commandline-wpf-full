@@ -1,0 +1,28 @@
+﻿@page
+@model KretaRazorPages.Pages.Menu.SubjectMenu.CreateModel
+
+@using KretaRazorPages.Services;
+
+@{
+    var subjectService = new SubjectService();
+    long nextId = await subjectService.GetNextSubjectId();
+
+}
+
+<form method="post">
+     <div class="border p-3 mt-4">
+         <div class="row pb-2"
+            <h2 class="text-primary pl-3">Új tantárgy adatai:</h2>
+            <hr />
+          </div>
+          <div class="mb-3">
+            Id
+            <input asp-for="Subject.Id" type="text" value="@nextId" readonly/>
+         </div>
+         <div class="mb-3">
+            Név
+            <input asp-for="Subject.SubjectName" class="form-control"/>
+         </div>
+         <button type="submit" class="btn btn-primary">Mentés</button>
+     </div>
+</form>

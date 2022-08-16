@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.AbstractClass
 {
-    public abstract class SubjectBase
+    public abstract class SubjectBase : ClassWithId
     {
 
         public SubjectBase(long id, string subName)
@@ -20,8 +20,6 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
             this.Id = -1;
             this.SubjectName = String.Empty;
         }
-
-        public virtual long Id { get; set; }
 
         public virtual string SubjectName { get; set; }
 
