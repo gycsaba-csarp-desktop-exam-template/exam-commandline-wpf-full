@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using KretaRazorPages.Extensions.View
+
+@{
+    FlagExtension fe = new FlagExtension();
+    string countryFlag= fe.GetFlagSpanClass();
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,7 +16,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     https://bootswatch.com
     -->
-    <link rel="stylesheet" href="~/css/bootswatch-cyborg.css" />
+    <link rel="stylesheet" href="~/css/bootswatch-cyborg.css" />    
+    <!--
+    Zászlók   
+    -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.4/css/flag-icons.min.css" /> 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KretaRazorPages.styles.css" asp-append-version="true" />
     <!-- Bootstrap icons -->
@@ -40,9 +52,15 @@
                             </ul>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Menu/CultureSwitcherMenu/CultureSwitcher">Nyelv választás</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <div class="text-end" id="CurrentCultureFlag">
+                        Nyelv: @Html.Raw(@countryFlag)
+                    </div>
                 </div>
             </div>
         </nav>
@@ -52,6 +70,7 @@
             @RenderBody()
         </main>
     </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">

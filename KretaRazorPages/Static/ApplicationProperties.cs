@@ -11,5 +11,9 @@ namespace KretaRazorPages.Static
             return uri;
         }
 
+        public static string GetDefaultCulture()
+        {
+            return Resources.ResourceManager.GetString("CultureInfo");
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/subject/create"
 @model KretaRazorPages.Pages.Menu.SubjectMenu.CreateModel
 
 @using KretaRazorPages.Services;
@@ -6,7 +6,6 @@
 @{
     var subjectService = new SubjectService();
     long nextId = await subjectService.GetNextSubjectId();
-
 }
 
 <form method="post">

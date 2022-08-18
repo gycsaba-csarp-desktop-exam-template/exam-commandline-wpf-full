@@ -77,5 +77,14 @@ namespace KretaRazorPages.Properties {
                 return ResourceManager.GetString("APIScheme", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hu-HU.
+        /// </summary>
+        internal static string CultureInfo {
+            get {
+                return ResourceManager.GetString("CultureInfo", resourceCulture);
+            }
+        }
     }
 }

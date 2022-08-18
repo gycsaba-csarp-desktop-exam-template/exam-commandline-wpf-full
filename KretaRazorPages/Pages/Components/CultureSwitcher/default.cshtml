@@ -1,0 +1,24 @@
+﻿@model KretaRazorPages.Model.CultureSwitcherModel
+<!-- https://www.kafle.io/tutorials/asp-dot-net/Globalization-And-Localization-In-ASP.NET-->
+
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+ 
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .ToList();
+    //var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}"; 
+}
+
+<form method="post">
+    <label>Language:</label>
+    <select name="culture" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
+    </select>
+    <button type="submit">Nyelv választás</button>
+</form>
