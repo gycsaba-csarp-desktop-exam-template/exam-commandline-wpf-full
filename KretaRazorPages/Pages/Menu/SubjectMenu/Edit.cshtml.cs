@@ -43,7 +43,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             {
                 ISubjectService subjectService = new SubjectService();
                 var statusCode = await subjectService.UpdateSubjectAsync(_subjectIdToModify, Subject);
-                return RedirectToPage("Subject");
+                return RedirectToPage("Index");
             }
             return Page();
         }
