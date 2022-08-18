@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using KretaWebApiContracts;
 using NLog;
 
-namespace KretaWEbApiLoggerService
+namespace ServiceKretaLogger
 {
     public class LoggerManager : ILoggerManager
     {

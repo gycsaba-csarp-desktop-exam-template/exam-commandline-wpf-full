@@ -1,8 +1,7 @@
-﻿using KretaRazorPages.Services;
-using KretaRazorPages.Services.Interface;
-using KretaRazorPages.Static;
+﻿using ApplicationPropertiesSettings;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using ServiceKretaLogger;
 
 namespace KretaRazorPages.Extensions
 {
@@ -34,9 +33,14 @@ namespace KretaRazorPages.Extensions
             });         
         }
 
-        public static void ConfigureComponentsService(this IServiceCollection services)
+        // Loggolás
+        public static void ConfigureLoggerService(this IServiceCollection services)
         {
-            services.AddTransient<ISubjectService, SubjectService>();
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        public static void ConfigureComponentsService(this IServiceCollection services)
+        {            
         }
     }
 }

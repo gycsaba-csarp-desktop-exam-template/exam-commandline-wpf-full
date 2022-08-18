@@ -1,12 +1,10 @@
-﻿using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaRazorPages.Services.Interface;
-
+﻿using Newtonsoft.Json;
 using System.Text;
 using System.Net;
-using Newtonsoft.Json;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 using ApplicationPropertiesSettings;
 
-namespace KretaRazorPages.Services
+namespace ServiceKretaAPI.Services
 {
     public class SubjectService : ISubjectService
     {

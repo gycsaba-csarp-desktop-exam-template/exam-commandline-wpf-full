@@ -1,19 +1,19 @@
-﻿using KretaRazorPages.Services.Interface;
+﻿using KretaRazorPages.Services;
+using KretaRazorPages.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KretaRazorPages.ViewComponents
 {
     public class SubjectsViewComponent : ViewComponent
     {
-        private ISubjectService subjectService;
-
-        public SubjectsViewComponent(ISubjectService subjectService)
+ 
+        public SubjectsViewComponent()
         {
-            this.subjectService = subjectService;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            ISubjectService subjectService = new SubjectService();
             var subject = await subjectService.GetSubjectsAsync();
             return View(subject);
         }

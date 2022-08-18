@@ -25,6 +25,9 @@
                 <th>
                     Név
                 </th>
+                <th>
+                </th>
+
             </tr>
 
         </thead>
@@ -34,6 +37,12 @@
                 <tr>
                     <td width="30%">@subject.Id. </td>
                     <td width="50%">@subject.SubjectName</td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                        <a asp-page="/Menu/SubjectMenu/Edit" asp-route-id="@subject.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i></a>
+                        <!--<a asp-page="/Menu/SubjectMenu/Delete" asp-route-id="@subject.Id" class="btn btn-danger mx-2"><i class="bi bi-trash3"></i></a>-->
+                     </div>
+                    </td>
                 </tr>
             }
         </tbody>

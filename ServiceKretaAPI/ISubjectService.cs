@@ -1,6 +1,6 @@
 ﻿using KretaParancssoriAlkalmazas.Models.DataModel;
 
-namespace KretaRazorPages.Services.Interface
+namespace ServiceKretaAPI
 {
     public interface ISubjectService
     {
@@ -10,6 +10,6 @@ namespace KretaRazorPages.Services.Interface
         Task<System.Net.HttpStatusCode> InsertNewSubjectAsync(Subject subject);
         Task<System.Net.HttpStatusCode> UpdateSubjectAsync(long id, Subject subject);
         Task<System.Net.HttpStatusCode> DeleteSubjectAsync(long id);
-        
+
     }
 }

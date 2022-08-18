@@ -1,5 +1,5 @@
+using ApplicationPropertiesSettings;
 using KretaRazorPages.Extensions;
-using KretaRazorPages.Static;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +10,10 @@ builder.Services.ConfigureRazorPageServices();
 
 builder.Services.ConfigureLocalization();
 
-builder.Services.ConfigureComponentsService();
+// Loggolás
+builder.Services.ConfigureLoggerService();
+
+//builder.Services.ConfigureComponentsService();
 
 var app = builder.Build();
 

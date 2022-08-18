@@ -1,6 +1,6 @@
-﻿using KretaRazorPages.Properties;
+﻿using ApplicationPropertiesSettings.Properties;
 
-namespace KretaRazorPages.Static
+namespace ApplicationPropertiesSettings
 {
     public static class ApplicationProperties
     {

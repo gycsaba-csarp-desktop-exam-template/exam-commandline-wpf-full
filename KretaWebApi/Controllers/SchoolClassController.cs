@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using KretaWebApiContracts;
 using Kreta.Repositories.Interfaces;
 using AutoMapper;
-using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using System.Dynamic;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.HTEOS;
-using KretaParancssoriAlkalmazas.Models.EFClass;
 using System.Net.Http.Headers;
+using ServiceKretaLogger;
 
 namespace KretaWebApi.Controllers
 {

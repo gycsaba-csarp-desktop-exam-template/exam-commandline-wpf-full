@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using KretaWebApiContracts;
 using Kreta.Repositories.Interfaces;
 using AutoMapper;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
@@ -12,6 +11,7 @@ using KretaParancssoriAlkalmazas.Models.Parameters;
 using Newtonsoft.Json;
 using System.Dynamic;
 using System.ComponentModel.DataAnnotations;
+using ServiceKretaLogger;
 
 
 /*

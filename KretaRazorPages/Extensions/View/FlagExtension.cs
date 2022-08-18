@@ -1,4 +1,4 @@
-﻿using KretaRazorPages.Static;
+﻿using ApplicationPropertiesSettings;
 
 namespace KretaRazorPages.Extensions.View
 {

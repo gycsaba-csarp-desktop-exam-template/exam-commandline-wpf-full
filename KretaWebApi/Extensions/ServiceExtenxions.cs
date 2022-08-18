@@ -1,13 +1,11 @@
-﻿using KretaWebApiContracts;
-using KretaWEbApiLoggerService;
-
-using Kreta.Models.Context;
+﻿using Kreta.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Kreta.Repositories;
 using Kreta.Repositories.Interfaces;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.EFClass;
+using ServiceKretaLogger;
 
 
 /*

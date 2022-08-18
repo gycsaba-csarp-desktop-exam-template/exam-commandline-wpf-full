@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-
-using KretaWebApiContracts;
+using ServiceKretaLogger;
 
 namespace KretaWebApi.Controllers
 {

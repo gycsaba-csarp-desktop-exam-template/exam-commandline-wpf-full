@@ -1,8 +1,7 @@
-﻿
-using System.Configuration;
+﻿using System.Configuration;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
-namespace KretaRazorPages.Static
+namespace ApplicationPropertiesSettings
 {
     public class AppSettingsControl
     {
