@@ -3,27 +3,23 @@
 
 @using KretaRazorPages.Services;
 
-@{
-    var subjectService = new SubjectService();
-    long nextId = await subjectService.GetNextSubjectIdAsync();
-}
-
 <form method="post">
      <div class="border p-3 mt-4">
          <div class="row pb-2"
             <h2 class="text-primary pl-3">Új tantárgy adatai:</h2>
             <hr />
           </div>
-          <div asp-validation-summary="All"></div>
+          <div asp-validation-summary="All"></div>         
           <div class="mb-3">
             <label asp-for="Subject.Id"></label>
-            <input asp-for="SubjectIdToModify" type="text" value="@nextId" readonly/>
+            <input asp-for="Subject.Id" type="text" readonly/>
          </div>
          <div class="mb-3">
             <label asp-for="Subject.SubjectName"></label>
             <input asp-for="Subject.SubjectName" class="form-control"/>
             <span asp-validation-for="Subject.SubjectName" class="text-danger"></span>
          </div>
+         <input hidden asp-for="SubjectIdToModify" />
          <button type="submit" class="btn btn-primary">Mentés</button>
      </div>
 </form>

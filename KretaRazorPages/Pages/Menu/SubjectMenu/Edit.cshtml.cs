@@ -9,17 +9,21 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
 {
     public class EditModel : PageModel
     {
+        private long _subjectIdToModify;
+
         [BindProperty]
         public Subject Subject { get; set; }
         
         [BindProperty]
-        public long ? SubjectIdToModify { get; set; }
-
-        private long _id;
+        public long SubjectIdToModify 
+        {
+            get { return _subjectIdToModify; } 
+            set { _subjectIdToModify = value; }
+        }
 
         public void OnGet(long id)
         {
-            SubjectIdToModify = id;
+            _subjectIdToModify = id;
             ISubjectService subjectService = new SubjectService();
             Task<Subject> obj = subjectService.GetSubjectByIdAsync(id);
             if (obj!=null)
@@ -38,7 +42,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             if (ModelState.IsValid)
             {
                 ISubjectService subjectService = new SubjectService();
-                var statusCode = await subjectService.UpdateSubjectAsync(_id, Subject);
+                var statusCode = await subjectService.UpdateSubjectAsync(_subjectIdToModify, Subject);
                 return RedirectToPage("Subject");
             }
             return Page();
