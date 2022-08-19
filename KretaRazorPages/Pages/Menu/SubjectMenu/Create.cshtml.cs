@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaRazorPages.Services.Interface;
-using KretaRazorPages.Services;
+using ServiceKretaAPI;
+using ServiceKretaAPI.Services;
 
 namespace KretaRazorPages.Pages.Menu.SubjectMenu
 {

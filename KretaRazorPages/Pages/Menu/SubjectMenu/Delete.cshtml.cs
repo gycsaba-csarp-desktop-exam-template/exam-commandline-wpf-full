@@ -1,23 +1,22 @@
+using KretaParancssoriAlkalmazas.Models.DataModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-using KretaParancssoriAlkalmazas.Models.DataModel;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
 
 namespace KretaRazorPages.Pages.Menu.SubjectMenu
 {
-    public class EditModel : PageModel
+    public class DeleteModel : PageModel
     {
         private long _subjectIdToModify;
 
         [BindProperty]
         public Subject Subject { get; set; }
-        
+
         [BindProperty]
-        public long SubjectIdToModify 
+        public long SubjectIdToModify
         {
-            get { return _subjectIdToModify; } 
+            get { return _subjectIdToModify; }
             set { _subjectIdToModify = value; }
         }
 
@@ -26,7 +25,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             _subjectIdToModify = id;
             ISubjectService subjectService = new SubjectService();
             Task<Subject> obj = subjectService.GetSubjectByIdAsync(id);
-            if (obj!=null)
+            if (obj != null)
             {
                 Subject = obj.Result;
             }
@@ -34,7 +33,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
 
         public async Task<IActionResult> OnPost()
         {
-            if (SubjectIdToModify!=Subject.Id)
+            if (SubjectIdToModify != Subject.Id)
             {
                 ModelState.TryAddModelError("IdError", "Programming error");
 
@@ -42,7 +41,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             if (ModelState.IsValid)
             {
                 ISubjectService subjectService = new SubjectService();
-                var statusCode = await subjectService.UpdateSubjectAsync(_subjectIdToModify, Subject);
+                var statusCode = await subjectService.DeleteSubjectAsync(SubjectIdToModify);
                 return RedirectToPage("Index");
             }
             return Page();

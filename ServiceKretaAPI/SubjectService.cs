@@ -94,9 +94,16 @@ namespace ServiceKretaAPI.Services
             }
         }
 
-        public Task<HttpStatusCode> DeleteSubjectAsync(long id)
+        public async Task<HttpStatusCode> DeleteSubjectAsync(long id)
         {
-            throw new NotImplementedException();
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.BaseAddress = GetHttpClientUri();
+
+                var response = await httpClient.DeleteAsync("Subject/api/subject/" + id.ToString());
+
+                return response.StatusCode;
+            }
         }
 
         private Uri GetHttpClientUri()

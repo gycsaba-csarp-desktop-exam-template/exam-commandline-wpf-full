@@ -1,6 +1,6 @@
-﻿using KretaRazorPages.Services;
-using KretaRazorPages.Services.Interface;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ServiceKretaAPI;
+using ServiceKretaAPI.Services;
 
 namespace KretaRazorPages.ViewComponents
 {
