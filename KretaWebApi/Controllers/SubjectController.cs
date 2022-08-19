@@ -66,7 +66,9 @@ namespace KretaWebApi.Controllers
 
                 Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
 
-                long nextId = repositoryWrapper.SubjectRepo.GetNextId();
+                long nextId = 0;
+                if (subjects.Count>0)
+                    nextId = repositoryWrapper.SubjectRepo.GetNextId();
                 Dictionary<string,string> nextIDToSerialize=new Dictionary<string,string>();
                 nextIDToSerialize.Add("NextId", nextId.ToString());
 

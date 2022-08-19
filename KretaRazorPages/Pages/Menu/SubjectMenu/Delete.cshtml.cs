@@ -42,6 +42,10 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             {
                 ISubjectService subjectService = new SubjectService();
                 var statusCode = await subjectService.DeleteSubjectAsync(SubjectIdToModify);
+                if (statusCode == System.Net.HttpStatusCode.NoContent)
+                    TempData["success"] = "Subject created successfully";
+                else
+                    TempData["error"] = "Error: subject deletion";
                 return RedirectToPage("Index");
             }
             return Page();

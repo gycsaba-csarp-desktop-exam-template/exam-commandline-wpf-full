@@ -15,7 +15,7 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
         [Display(Name = "Subject name:")]
         [Required(ErrorMessage = "The name is required")]
         [StringLength(30, ErrorMessage = "The name cannot be longer than 30 characters")]
-        [MinLength(3,ErrorMessage ="The name must be at least 6 characters long")]
+        [MinLength(3,ErrorMessage ="The name must be at least 3 characters long")]
         [RegularExpression(@"^[A-Z]+[a-z]*$",
          ErrorMessage = "First letter must be uppercase, other lowercase")]
         public override string 

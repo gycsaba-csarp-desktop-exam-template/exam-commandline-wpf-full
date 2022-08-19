@@ -16,7 +16,7 @@
          </div>
          <div class="mb-3">
             <label asp-for="Subject.SubjectName"></label>
-            <input asp-for="Subject.SubjectName" class="form-control"/>
+            <input asp-for="Subject.SubjectName" class="form-control" readonly/>
             <span asp-validation-for="Subject.SubjectName" class="text-danger"></span>
          </div>
          <input hidden asp-for="SubjectIdToModify" />

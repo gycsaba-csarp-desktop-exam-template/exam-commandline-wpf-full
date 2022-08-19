@@ -13,6 +13,9 @@ builder.Services.ConfigureLocalization();
 // Loggolás
 builder.Services.ConfigureLoggerService();
 
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
+
 //builder.Services.ConfigureComponentsService();
 
 var app = builder.Build();

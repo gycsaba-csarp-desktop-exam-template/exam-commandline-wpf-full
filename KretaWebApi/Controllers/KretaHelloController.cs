@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServiceKretaLogger;
 
 namespace KretaWebApi.Controllers
 {
@@ -7,11 +8,11 @@ namespace KretaWebApi.Controllers
     [ApiController]
     public class KretaHelloController : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILoggerManager logger;
 
-        public KretaHelloController(ILogger<WeatherForecastController> logger)
+        public KretaHelloController(ILoggerManager logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
         [HttpGet("api/hello", Name = "Kréta helló")]

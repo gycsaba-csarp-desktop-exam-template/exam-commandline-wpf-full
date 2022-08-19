@@ -4,15 +4,23 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
+using KretaParancssoriAlkalmazas.Models.EFClass;
+using AutoMapper;
 
 namespace KretaRazorPages.Pages.Menu.SubjectMenu
 {
     public class EditModel : PageModel
     {
         private long _subjectIdToModify;
+        private IMapper _mapper;
 
         [BindProperty]
-        public Subject Subject { get; set; }
+        public EFSubject Subject { get; set; }
+
+        public EditModel(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
         
         [BindProperty]
         public long SubjectIdToModify 
@@ -28,7 +36,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             Task<Subject> obj = subjectService.GetSubjectByIdAsync(id);
             if (obj!=null)
             {
-                Subject = obj.Result;
+                Subject = _mapper.Map<EFSubject>(obj.Result);
             }
         }
 
@@ -42,7 +50,12 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             if (ModelState.IsValid)
             {
                 ISubjectService subjectService = new SubjectService();
-                var statusCode = await subjectService.UpdateSubjectAsync(_subjectIdToModify, Subject);
+                Subject subjectToEdit = _mapper.Map<Subject>(Subject);
+                var statusCode = await subjectService.UpdateSubjectAsync(_subjectIdToModify, subjectToEdit);
+                if (statusCode == System.Net.HttpStatusCode.NoContent)
+                    TempData["success"] = "Subject created successfully";
+                else
+                    TempData["error"] = "Error: subject modification";
                 return RedirectToPage("Index");
             }
             return Page();

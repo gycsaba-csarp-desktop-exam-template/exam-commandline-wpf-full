@@ -1,16 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using KretaParancssoriAlkalmazas.Models.DataModel;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
+using KretaParancssoriAlkalmazas.Models.EFClass;
+using KretaParancssoriAlkalmazas.Models.DataModel;
+using AutoMapper;
 
 namespace KretaRazorPages.Pages.Menu.SubjectMenu
 {
     public class CreateModel : PageModel
     {
+        IMapper mapper;
+
         [BindProperty]
-        public Subject Subject { get; set; }
+        public EFSubject Subject { get; set; }
+
+        public CreateModel(IMapper mapper)
+        {
+            this.mapper = mapper;
+        }
 
         public void OnGet()
         {
@@ -21,7 +30,12 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             if (ModelState.IsValid)
             {
                 ISubjectService subjectService = new SubjectService();
-                var statusCode = await subjectService.InsertNewSubjectAsync(Subject);
+                Subject subjectToCreate = mapper.Map<Subject>(Subject);
+                var statusCode = await subjectService.InsertNewSubjectAsync(subjectToCreate);
+                if (statusCode == System.Net.HttpStatusCode.NoContent)
+                    TempData["success"] = "Subject created successfully";
+                else
+                    TempData["error"] = "Error: subject creation";
                 return RedirectToPage("Index");
             }
             return Page();
