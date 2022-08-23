@@ -3,6 +3,7 @@ using System.Text;
 using System.Net;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using ApplicationPropertiesSettings;
+using KretaParancssoriAlkalmazas.Models.Pagination;
 
 namespace ServiceKretaAPI.Services
 {
@@ -22,6 +23,23 @@ namespace ServiceKretaAPI.Services
                 #pragma warning restore CS8603 // Possible null reference return.
             }
         }
+
+        public async Task<ListWithPaginationData<Subject>>? GetSubjectsAsyncWithPageData()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = GetHttpClientUri();
+
+                var respons = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
+
+                var content = respons.Content.ReadAsStringAsync();
+                #pragma warning disable CS8603 // Possible null reference return.
+                return JsonConvert.DeserializeObject<List<Subject>>(content.Result);
+                #pragma warning restore CS8603 // Possible null reference return.
+            }
+        }
+
+
 
 
         public async Task<Subject>? GetSubjectByIdAsync(long id)

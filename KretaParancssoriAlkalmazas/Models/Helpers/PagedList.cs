@@ -22,7 +22,7 @@ namespace KretaParancssoriAlkalmazas.Models.Helpers
             PageSize = pageSize;
             CurrentPage = pageNumber;
 
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            TotalPages = (int) Math.Ceiling(count / (double)pageSize);
 
             AddRange(items);
         }
