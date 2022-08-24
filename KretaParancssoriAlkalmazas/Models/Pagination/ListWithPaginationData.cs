@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.Pagination
 {
-    public abstract class ListWithPaginationData<T> : PaginationModel
+    public class ListWithPaginationData<T> : PaginationModel
     {
          public List<T> Items { get; set; }
     }

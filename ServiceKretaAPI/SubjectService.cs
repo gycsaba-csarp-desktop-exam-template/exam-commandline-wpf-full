@@ -4,6 +4,9 @@ using System.Net;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using ApplicationPropertiesSettings;
 using KretaParancssoriAlkalmazas.Models.Pagination;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Reflection.Metadata;
 
 namespace ServiceKretaAPI.Services
 {
@@ -18,14 +21,15 @@ namespace ServiceKretaAPI.Services
                 var respons = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
 
                 var content = respons.Content.ReadAsStringAsync();
-                #pragma warning disable CS8603 // Possible null reference return.
+#pragma warning disable CS8603 // Possible null reference return.
                 return JsonConvert.DeserializeObject<List<Subject>>(content.Result);
-                #pragma warning restore CS8603 // Possible null reference return.
+#pragma warning restore CS8603 // Possible null reference return.
             }
         }
 
         public async Task<ListWithPaginationData<Subject>>? GetSubjectsAsyncWithPageData()
         {
+            ListWithPaginationData<Subject> listWithPaginationData = new ListWithPaginationData<Subject>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = GetHttpClientUri();
@@ -33,10 +37,17 @@ namespace ServiceKretaAPI.Services
                 var respons = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
 
                 var content = respons.Content.ReadAsStringAsync();
-                #pragma warning disable CS8603 // Possible null reference return.
-                return JsonConvert.DeserializeObject<List<Subject>>(content.Result);
-                #pragma warning restore CS8603 // Possible null reference return.
+#pragma warning disable CS8603 // Possible null reference return.
+                List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(content.Result);
+#pragma warning restore CS8603 // Possible null reference return.
+                
+                listWithPaginationData.Items = subjects;
+                listWithPaginationData.TotalPages= GetHeaderParameter(respons, "TotalPages");
+                listWithPaginationData.TotalCount = GetHeaderParameter(respons, "TotalCount");
+                listWithPaginationData.CurrentPage = GetHeaderParameter(respons, "CurrentPage");
+                listWithPaginationData.PageSize = GetHeaderParameter(respons, "PageSize");
             }
+            return listWithPaginationData;
         }
 
 
@@ -52,9 +63,9 @@ namespace ServiceKretaAPI.Services
 
                 var content = respons.Content.ReadAsStringAsync();
 
-                #pragma warning disable CS8603 // Possible null reference return.
+#pragma warning disable CS8603 // Possible null reference return.
                 return JsonConvert.DeserializeObject<Subject>(content.Result);
-                #pragma warning restore CS8603 // Possible null reference return.
+#pragma warning restore CS8603 // Possible null reference return.
 
             }
         }
@@ -67,19 +78,9 @@ namespace ServiceKretaAPI.Services
 
                 var result = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
 
-                if (result.Headers.Contains("X-NextId"))
-                {
-                    var json = result.Headers.GetValues("X-NextId").First();
-                    var nextId = JsonConvert.DeserializeObject<dynamic>(json);
-                    long id;
-                    if (nextId != null)
-                    {
-                        if (long.TryParse(nextId["NextId"].ToString(), out id))
-                            return id;
-                    }
-                }
+                int id = GetHeaderParameter(result, "X-NextId");
+                return id;
             }
-            return 0;
         }
 
         public async Task<System.Net.HttpStatusCode> InsertNewSubjectAsync(Subject subject)
@@ -130,5 +131,24 @@ namespace ServiceKretaAPI.Services
             uri = ApplicationProperties.GetAPIUri(uri);
             return uri.Uri;
         }
+
+        private int GetHeaderParameter(HttpResponseMessage httpResponseMessage, string parameter)
+        {
+
+            if (httpResponseMessage.Headers.Contains(parameter))
+            {
+                var json = httpResponseMessage.Headers.GetValues(parameter).First();
+                var nextId = JsonConvert.DeserializeObject<dynamic>(json);
+                int id;
+                if (nextId != null)
+                {
+                    if (int.TryParse(nextId["NextId"].ToString(), out id))
+                        return id;
+                }
+            }
+            return 0;
+        }
     }
 }
+
+
