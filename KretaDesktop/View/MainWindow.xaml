@@ -4,12 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KretaDesktop"
+        xmlns:vm="clr-namespace:KretaDesktop.ViewModel"
         mc:Ignorable="d"
         Title="Kréta - iskolai adminisztráció" Height="450" Width="800"
         WindowStyle="None"
         WindowState="Maximized">
-
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120" MinWidth="5" MaxWidth="120"/>
@@ -22,10 +21,11 @@
                     <VirtualizingStackPanel Orientation="Vertical"></VirtualizingStackPanel>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Listák"></MenuItem>
+            <MenuItem Header="Listák" Command="{Binding UpdateViewCommand}" CommandParameter="Listak"></MenuItem>
             <MenuItem Header="Áthelyezések"></MenuItem>
             <MenuItem Header="Műveletek"></MenuItem>
         </Menu>
-        <GridSplitter Grid.Column="1" Width="2" Background="Black"></GridSplitter>
+        <GridSplitter  Grid.Column="1" Width="2" Background="Black"></GridSplitter>
+        <ContentControl Grid.Column="2" Content="{Binding SelectedView}" />
     </Grid>
 </Window>

@@ -14,20 +14,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KretaDesktop
+namespace KretaDesktop.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HeaderWithContentList.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HeaderWithContentList : UserControl
     {
-        private MainWindowViewModel viewModel;
+        private HeaderWithContentListViewModel viewModel;
 
-        public MainWindow()
-        {
-            viewModel = new MainWindowViewModel();
+        public HeaderWithContentList()
+        {           
+            viewModel = new HeaderWithContentListViewModel();
             InitializeComponent();
-            this.DataContext=viewModel;
+            this.DataContext = viewModel;
         }
     }
 }
