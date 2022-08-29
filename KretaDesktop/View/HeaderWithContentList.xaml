@@ -12,7 +12,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Tantárgyak</Button>
+            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}" Command="{Binding UpdateContentView}" CommandParameter="Tantargyak">Tantárgyak</Button>
             <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Tanárok</Button>
             <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Osztályok</Button>
         </StackPanel>
