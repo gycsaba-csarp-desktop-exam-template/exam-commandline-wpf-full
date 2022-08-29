@@ -6,7 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/MenuWindows.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/ViewModelViewDataTamplate.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/HeaderButtonTemplate.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

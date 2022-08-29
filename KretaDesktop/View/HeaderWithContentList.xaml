@@ -12,9 +12,9 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button>Tantárgyak</Button>
-            <Button>Tanárok</Button>
-            <Button>Osztályok</Button>
+            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Tantárgyak</Button>
+            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Tanárok</Button>
+            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Osztályok</Button>
         </StackPanel>
         <ContentControl></ContentControl>
     </Grid>
