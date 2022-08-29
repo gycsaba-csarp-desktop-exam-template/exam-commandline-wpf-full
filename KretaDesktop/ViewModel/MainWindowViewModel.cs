@@ -38,7 +38,11 @@ namespace KretaDesktop.ViewModel
             {
                 if (parameter.ToString() == "Listak")
                 {
-                    selectedView = new HeaderWithContentListViewModel();
+                    SelectedView = new HeaderWithContentListViewModel();
+                }
+                if (parameter.ToString() == "Athelyezesek")
+                {
+                    SelectedView = new HeaderWithContentMoveViewModel();
                 }
             }
         }

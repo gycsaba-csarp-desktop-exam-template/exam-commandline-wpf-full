@@ -24,12 +24,11 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
                 <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Listák" Command="{Binding UpdateViewCommand}" CommandParameter="Listak"></MenuItem>
-                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Áthelyezések"></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Áthelyezések" Command="{Binding UpdateViewCommand}" CommandParameter="Athelyezesek"></MenuItem>
                 <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Műveletek"></MenuItem>
             </Menu>
         </StackPanel>
         <GridSplitter  Grid.Column="1" Width="2" Background="Black"></GridSplitter>
         <ContentControl Grid.Column="2" Content="{Binding SelectedView}" />
-
     </Grid>
 </Window>

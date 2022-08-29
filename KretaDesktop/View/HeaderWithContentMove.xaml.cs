@@ -17,12 +17,12 @@ using System.Windows.Shapes;
 namespace KretaDesktop.View
 {
     /// <summary>
-    /// Interaction logic for HeaderWithContentList.xaml
+    /// Interaction logic for HeaderWithContentMove.xaml
     /// </summary>
-    public partial class HeaderWithContentList : UserControl
+    public partial class HeaderWithContentMove : UserControl        
     {
-        public HeaderWithContentList()
-        {           
+        public HeaderWithContentMove()
+        {
             InitializeComponent();
         }
     }
