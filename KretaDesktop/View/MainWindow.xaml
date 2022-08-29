@@ -15,17 +15,21 @@
             <ColumnDefinition Width="2"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Menu>
-            <Menu.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Vertical"></VirtualizingStackPanel>
-                </ItemsPanelTemplate>
-            </Menu.ItemsPanel>
-            <MenuItem Header="Listák" Command="{Binding UpdateViewCommand}" CommandParameter="Listak"></MenuItem>
-            <MenuItem Header="Áthelyezések"></MenuItem>
-            <MenuItem Header="Műveletek"></MenuItem>
-        </Menu>
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <TextBlock>Kréta</TextBlock>
+            <Menu>
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"></VirtualizingStackPanel>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Listák" Command="{Binding UpdateViewCommand}" CommandParameter="Listak"></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Áthelyezések"></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Műveletek"></MenuItem>
+            </Menu>
+        </StackPanel>
         <GridSplitter  Grid.Column="1" Width="2" Background="Black"></GridSplitter>
         <ContentControl Grid.Column="2" Content="{Binding SelectedView}" />
+
     </Grid>
 </Window>
