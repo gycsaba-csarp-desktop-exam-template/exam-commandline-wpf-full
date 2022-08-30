@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="content-sort-down" UriSource="/Resources/icons/sort-alpha-down.png"></BitmapImage>
+    <BitmapImage x:Key="content-sort-up" UriSource="/Resources/icons/sort-alpha-up-alt.png"></BitmapImage>
+    
+</ResourceDictionary>

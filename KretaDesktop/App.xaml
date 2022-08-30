@@ -9,6 +9,8 @@
                 <ResourceDictionary Source="/Resources/ViewModelViewDataTamplate.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Resources/HeaderButtonTemplate.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Resources/MenuItemBaseStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/AppStyling.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/Icons.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

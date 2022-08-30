@@ -6,7 +6,43 @@
              xmlns:local="clr-namespace:KretaDesktop.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Button>Helló</Button>
+    <Grid Background="{DynamicResource ContentBackgraoundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label FontSize="16" HorizontalAlignment="Center" Foreground="{DynamicResource ContentForegroundColor}">Tantárgyak</Label>
+        <Grid Grid.Row="1" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Margin="18 2 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="Szűrés:"></TextBlock>
+            <TextBox Grid.Column="1" x:Name="tbFiltringSubjectName" Margin="2 2 20 2" 
+                     Width="150"
+                     Background="{DynamicResource ContentTextBoxBackground}" 
+                     Foreground="{DynamicResource ContentTextBoxForgraound}">
+                Valami
+            </TextBox>
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <TextBlock  Margin="2" Foreground="{DynamicResource ContentForegroundColor}" Text="Rendezés:"></TextBlock>
+                <Grid Margin="2 0 0 2" Background="{DynamicResource ContentTextBoxBackground}" Height="16" Width="16">
+                    <Image Source="{StaticResource content-sort-down}" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="2 2 18 2">
+                <TextBlock HorizontalAlignment="Right" Margin="2" Foreground="{DynamicResource ContentForegroundColor}" Text="Elem/oldal:"></TextBlock>
+                <ComboBox HorizontalAlignment="Right" Grid.Column="5">
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem>20</ComboBoxItem>
+                    <ComboBoxItem>30</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+        </Grid>
+
     </Grid>
 </UserControl>
