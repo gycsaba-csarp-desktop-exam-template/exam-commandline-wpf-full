@@ -11,9 +11,14 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label FontSize="16" HorizontalAlignment="Center" Foreground="{DynamicResource ContentForegroundColor}">Tantárgyak</Label>
-        <Grid Grid.Row="1" VerticalAlignment="Top">
+        <Label FontSize="24" HorizontalAlignment="Left"
+               Foreground="{DynamicResource ContentForegroundColor}"
+               Margin=" 16 16 2 2"
+               >Tantárgyak</Label>
+        <Grid Grid.Row="1" VerticalAlignment="Top" Background="{DynamicResource FiltringBackgroundColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -21,11 +26,8 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Margin="18 2 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="Szűrés:"></TextBlock>
-            <TextBox Grid.Column="1" x:Name="tbFiltringSubjectName" Margin="2 2 20 2" 
-                     Width="150"
-                     Background="{DynamicResource ContentTextBoxBackground}" 
-                     Foreground="{DynamicResource ContentTextBoxForgraound}">
+            <Label Grid.Column="0" Style="{DynamicResource FormLabel}" Content="Szűrés:"></Label>
+            <TextBox Grid.Column="1" x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}">
                 Valami
             </TextBox>
             <Button Grid.Column="2" Margin="12 2 32 2" Grid.Row="2" Width="100" Height="24" Content="Keresés" HorizontalAlignment="Left"></Button>
@@ -44,7 +46,7 @@
                 </ComboBox>
             </StackPanel>
         </Grid>
-        <Expander Grid.Row="2" Header="Tantárgy adatai" Foreground="{DynamicResource ContentForegroundColor}">
+        <Expander Grid.Row="2" Header="Tantárgy adatai" Margin="2 24 2 2" Foreground="{DynamicResource ContentForegroundColor}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"></ColumnDefinition>
@@ -56,18 +58,12 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label  Grid.Row="0" Grid.Column="0" Margin="18 2 2 2" Foreground="{DynamicResource ContentForegroundColor}" Content="Tantárgy id:"></Label>
-                <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbSubjectId" Margin="2" 
-                     Width="200" HorizontalAlignment="Left"                         
-                     Background="{DynamicResource ContentTextBoxBackground}" 
-                     Foreground="{DynamicResource ContentTextBoxForgraound}">
+                <Label Style="{DynamicResource FormLabel}" Grid.Row="0" Grid.Column="0"  Content="Tantárgy id:"></Label>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbSubjectId" Style="{DynamicResource FormTextBox}">
                     Id
                 </TextBox>
-                <Label  Grid.Row="1" Grid.Column="0" Margin="18 2 2 2" Foreground="{DynamicResource ContentForegroundColor}" Content="Tantárgy név:"></Label>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbSubjectName" Margin="2" 
-                     Width="200" HorizontalAlignment="Left"                         
-                     Background="{DynamicResource ContentTextBoxBackground}" 
-                     Foreground="{DynamicResource ContentTextBoxForgraound}">
+                <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0" Content="Tantárgy név:"></Label>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbSubjectName" Style="{DynamicResource FormTextBox}">
                     SubjectName
                 </TextBox>
                 <Button Margin="100 2 2 2" Width="100" Height="24" Grid.Row="0" Grid.Column="2" Content="Mentés"></Button>
@@ -75,6 +71,32 @@
                 <Button Margin="2 8 2 2" Grid.Row="2" Width="100" Height="24" Grid.Column="1" Content="Új" HorizontalAlignment="Left"></Button>
             </Grid>
         </Expander>
+        <DataGrid Grid.Row="3" 
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"                  
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="40" Header="Id."></DataGridTextColumn>
+                <DataGridTextColumn Width="200" Header="Tantárgy név"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="5" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="&lt;&lt;" Grid.Column="0"  Command="{Binding FirstPageCmd}" />
+            <Button Content="&lt;" Grid.Column="1" Command="{Binding PreviousPageCmd}" />
+            <TextBlock Text="{Binding CurrentPage}" Grid.Column="2" HorizontalAlignment="Center"/>
+            <Button Content=">" Grid.Column="3" Command="{Binding NextPageCmd}" />
+            <Button Content=">>" Grid.Column="4" Command="{Binding LastPageCmd}" />
+        </Grid>
 
     </Grid>
 </UserControl>

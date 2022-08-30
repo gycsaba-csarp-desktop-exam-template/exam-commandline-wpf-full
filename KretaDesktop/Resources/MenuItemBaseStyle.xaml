@@ -2,10 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="StandardMenuItemBackground" Color="#1C536F"></SolidColorBrush>
-    <SolidColorBrush x:Key="StandardMenuItemForeground" Color="#FEFEFE"></SolidColorBrush>
+    <SolidColorBrush x:Key="StandardMenuItemForeground" Color="#ffff8531"></SolidColorBrush>
     <Style TargetType="MenuItem" x:Key="MenuItemBaseStyle">
         <Setter Property="Foreground" Value="{StaticResource StandardMenuItemForeground}"></Setter>
         <Setter Property="Background" Value="{StaticResource StandardMenuItemBackground}"></Setter>
+        <Setter Property="Margin" Value="2 2 2 2"></Setter>
+        <Setter Property="FontSize" Value="14"></Setter>
     </Style>
     
 </ResourceDictionary>

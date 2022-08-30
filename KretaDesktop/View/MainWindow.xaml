@@ -11,13 +11,13 @@
         WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120" MinWidth="5" MaxWidth="120"/>
+            <ColumnDefinition Width="160" MinWidth="5" MaxWidth="120"/>
             <ColumnDefinition Width="2"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Orientation="Vertical">
-            <TextBlock>Kréta</TextBlock>
-            <Menu>
+        <StackPanel Grid.Column="0" Orientation="Vertical" Background="{DynamicResource HeaderBackgroundColor}">
+            <TextBlock FontSize="24" Foreground="{DynamicResource ContentForegroundColor}" Margin="2 22 2 36">Kréta</TextBlock>
+            <Menu Margin="2 2 2 2" Background="{DynamicResource HeaderBackgroundColor}">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel Orientation="Vertical"></VirtualizingStackPanel>

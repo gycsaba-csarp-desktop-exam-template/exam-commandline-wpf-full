@@ -5,5 +5,9 @@
     <SolidColorBrush x:Key="ContentForegroundColor" Color="#ffff8531"></SolidColorBrush>
     <SolidColorBrush x:Key="ContentTextBoxBackground" Color="DarkGoldenrod"></SolidColorBrush>
     <SolidColorBrush x:Key="ContentTextBoxForgraound" Color="#003f5c"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="HeaderBackgroundColor" Color="#ff003f5c"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="FiltringBackgroundColor" Color="#ff003f5c"></SolidColorBrush>
     
 </ResourceDictionary>
