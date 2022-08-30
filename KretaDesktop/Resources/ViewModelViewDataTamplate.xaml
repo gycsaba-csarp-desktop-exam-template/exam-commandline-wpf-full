@@ -8,4 +8,7 @@
     <DataTemplate DataType="{x:Type viewmodels:HeaderWithContentMoveViewModel}">
         <views:HeaderWithContentMove></views:HeaderWithContentMove>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ContentListSubjectViewModel}">
+        <views:ContentListSubject></views:ContentListSubject>
+    </DataTemplate>
 </ResourceDictionary>

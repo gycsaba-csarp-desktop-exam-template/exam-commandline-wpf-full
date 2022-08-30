@@ -28,6 +28,7 @@ namespace KretaDesktop.ViewModel
         public HeaderWithContentListViewModel()
         {
             UpdateContentViewCommand = new RelayCommand(parameter => UpdateContentView(parameter));
+            SelectedView = new ContentListSubjectViewModel();
         }
 
         public void UpdateContentView(object parameter)

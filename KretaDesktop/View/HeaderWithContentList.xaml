@@ -11,11 +11,11 @@
             <RowDefinition Height="35" MinHeight="5" MaxHeight="35"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}" Command="{Binding UpdateContentView}" CommandParameter="Tantargyak">Tantárgyak</Button>
             <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Tanárok</Button>
             <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Osztályok</Button>
         </StackPanel>
-        <ContentControl></ContentControl>
+        <ContentControl Grid.Row="1" Content="{Binding SelectedView}"></ContentControl>
     </Grid>
 </UserControl>
