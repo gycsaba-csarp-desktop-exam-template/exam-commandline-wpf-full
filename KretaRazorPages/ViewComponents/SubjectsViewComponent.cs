@@ -18,7 +18,7 @@ namespace KretaRazorPages.ViewComponents
         {
             ISubjectService subjectService = new SubjectService();
             var subjectListWithPaginationData = await subjectService.GetSubjectsAsyncWithPageData();
-            // TODO: ide rakjak-e a vizsgálatot 
+            // TODO: ide rakjak-e vizsgálatot 
             if (subjectListWithPaginationData.Items == null)
                 return View(new List<Subject>());
             else

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ViewModels.BaseClass
+namespace KretaDesktop.ViewModel.BaseClass
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

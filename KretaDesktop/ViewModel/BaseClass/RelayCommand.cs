@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ViewModels.BaseClass
+namespace KretaDesktop.ViewModel.BaseClass
 {
     public class RelayCommand : ICommand
     {
@@ -23,7 +23,7 @@ namespace ViewModels.BaseClass
             this.execute = execute;
         }
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute) 
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
             : this(execute)
         {
             this.execute = execute;
@@ -32,13 +32,13 @@ namespace ViewModels.BaseClass
 
         public bool CanExecute(object parameter)
         {
-            if (this.canExecute == null)
+            if (canExecute == null)
             {
                 return true;
             }
             else
             {
-                bool result = this.canExecute.Invoke(parameter);
+                bool result = canExecute.Invoke(parameter);
                 return result;
             }
         }

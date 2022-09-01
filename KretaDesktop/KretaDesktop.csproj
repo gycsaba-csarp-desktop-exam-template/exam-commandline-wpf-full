@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ServiceKretaAPI\ServiceKretaAPI.csproj" />
+    <ProjectReference Include="..\StaticClasses\StaticClasses.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Resources\icons\sort-alpha-down.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
