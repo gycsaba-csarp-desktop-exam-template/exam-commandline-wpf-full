@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.Pagination
 {
-    public abstract class PaginationModel
+    public class PaginationModel
     {
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
@@ -15,5 +15,11 @@ namespace KretaParancssoriAlkalmazas.Models.Pagination
 
         public bool HasPrevious => CurrentPage > 1;
         public bool HasNext => CurrentPage < TotalPages;
+
+        public PaginationModel()
+        {
+            CurrentPage = 1;
+            TotalPages = 1;
+        }
     }
 }

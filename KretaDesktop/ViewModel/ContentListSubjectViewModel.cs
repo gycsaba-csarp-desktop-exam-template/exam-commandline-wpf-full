@@ -15,10 +15,11 @@ namespace KretaDesktop.ViewModel
 {
     public class ContentListSubjectViewModel : PagerViewModel
     {
-        ISubjectService subjectService;
-
         private ObservableCollection<Subject> subjects;
         private Subject selectedSubject;
+
+        ISubjectService subjectService;
+         
 
         public Subject SelectedSubject
         {
@@ -45,6 +46,8 @@ namespace KretaDesktop.ViewModel
         {
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
+            selectedSubject = new Subject();
+
             LoadData();
         }
 
@@ -52,13 +55,12 @@ namespace KretaDesktop.ViewModel
         {
             if (subjectService != null)
             {
-                ListWithPaginationData<Subject> listWithPaginationData = await subjectService.GetSubjectsAsyncWithPageData();
-                if (listWithPaginationData.Items!=null)
+                ListWithPaginationData<Subject> listWithPaginationData = await subjectService.GetSubjectsAsyncWithPageData();                
+                if ((listWithPaginationData != null) && (listWithPaginationData.Items != null))
                     Subjects = new ObservableCollection<Subject>(listWithPaginationData.Items);
                 else
                     Subjects = new ObservableCollection<Subject>();
-            }
-            
+            }            
         }
     }
 }

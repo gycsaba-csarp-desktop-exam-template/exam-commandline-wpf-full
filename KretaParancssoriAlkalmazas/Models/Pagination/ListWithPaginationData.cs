@@ -8,6 +8,21 @@ namespace KretaParancssoriAlkalmazas.Models.Pagination
 {
     public class ListWithPaginationData<T> : PaginationModel
     {
-         public List<T> Items { get; set; }
+        public List<T> Items { get; set; }
+
+        private PaginationModel paginationData;
+
+        public PaginationModel PaginationData
+        {
+            get
+            {
+                paginationData.CurrentPage = CurrentPage;
+                paginationData.PageSize = PageSize;
+                paginationData.TotalCount = TotalCount;
+                paginationData.TotalPages = TotalPages;
+
+                return paginationData;
+            }
+        }        
     }
 }
