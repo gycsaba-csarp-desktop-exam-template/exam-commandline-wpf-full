@@ -18,6 +18,18 @@ namespace KretaDesktop.ViewModel
         ISubjectService subjectService;
 
         private ObservableCollection<Subject> subjects;
+        private Subject selectedSubject;
+
+        public Subject SelectedSubject
+        {
+            get { return selectedSubject; }
+            set 
+            {                
+                selectedSubject = value;
+                OnPropertyChanged(nameof(SelectedSubject));
+            }
+        }
+
 
         public ObservableCollection<Subject> Subjects
         {
