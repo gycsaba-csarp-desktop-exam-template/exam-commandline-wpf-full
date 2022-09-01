@@ -86,7 +86,6 @@
                   Width="300"
                   ColumnHeaderStyle="{DynamicResource DataGridCRUDHeaderStyle}"
                   >
-
             <DataGrid.Columns>
                 <DataGridTextColumn Width="40" Header="Id." Binding="{Binding Id}"></DataGridTextColumn>
                 <DataGridTextColumn Width="220" Header="Tantárgy név" Binding="{Binding SubjectName}"></DataGridTextColumn>

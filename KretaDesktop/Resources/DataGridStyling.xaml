@@ -13,13 +13,11 @@
         <Setter Property="Foreground" Value="White"></Setter>
     </Style>
     
-    
     <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="DataGridCRUDHeaderStyle">
         <Setter Property="Background" Value="#0D2644"></Setter>
         <Setter Property="Foreground" Value="#ff8531"></Setter>
         <Setter Property="FontSize" Value="14"></Setter>
         <Setter Property="FontWeight" Value="Bold"></Setter>
     </Style>
-    
     
 </ResourceDictionary>
