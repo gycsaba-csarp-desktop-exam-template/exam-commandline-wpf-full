@@ -20,5 +20,21 @@
         </Setter>
     </Style>
 
-    
+    <Style TargetType="Button" x:Key="ContentButton">
+        <Setter Property="Background" Value="{StaticResource StandardButtonBackground}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}"></Setter>
+        <Setter Property="Width" Value="100"></Setter>
+        <Setter Property="Height" Value="32"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Margin="5" Padding="1,1,1,1" BorderThickness="1" CornerRadius="5" Background="{StaticResource StandardButtonBackground}">
+                        <ContentPresenter Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 </ResourceDictionary>
