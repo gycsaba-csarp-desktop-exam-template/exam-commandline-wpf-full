@@ -86,5 +86,14 @@ namespace ApplicationPropertiesSettings.Properties {
                 return ResourceManager.GetString("CultureInfo", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10,20,30.
+        /// </summary>
+        internal static string GetPossibleNumberOfRowOnTheDataGridTable {
+            get {
+                return ResourceManager.GetString("GetPossibleNumberOfRowOnTheDataGridTable", resourceCulture);
+            }
+        }
     }
 }

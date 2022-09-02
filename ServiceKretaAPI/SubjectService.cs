@@ -7,18 +7,29 @@ using KretaParancssoriAlkalmazas.Models.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Reflection.Metadata;
+using ServiceKretaAPI.Lib;
+using KretaParancssoriAlkalmazas.Models.Parameters;
+using Microsoft.Extensions.Primitives;
 
 namespace ServiceKretaAPI.Services
 {
     public class SubjectService : ISubjectService
     {
-        public async Task<List<Subject>>? GetSubjectsAsync()
+        public async Task<List<Subject>>? GetSubjectsAsync(QueryStringParameters queryStringParameter)
         {
+            if (queryStringParameter == null)
+            {
+                queryStringParameter = new QueryStringParameters();
+            }
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = GetHttpClientUri();
 
-                var respons = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
+                StringBuilder query = new StringBuilder("/Subject/api/subject");
+                query.Append(queryStringParameter.ToQueryString);
+
+                var respons = await client.GetAsync(query.ToString());
 
                 var content = respons.Content.ReadAsStringAsync();
 #pragma warning disable CS8603 // Possible null reference return.
@@ -27,14 +38,22 @@ namespace ServiceKretaAPI.Services
             }
         }
 
-        public async Task<ListWithPaginationData<Subject>>? GetSubjectsAsyncWithPageData()
+        public async Task<ListWithPaginationData<Subject>>? GetSubjectsAsyncWithPageData(QueryStringParameters queryStringParameter)
         {
+            if (queryStringParameter == null)
+            {
+                queryStringParameter = new QueryStringParameters();
+            }
+
             ListWithPaginationData<Subject> listWithPaginationData = new ListWithPaginationData<Subject>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = GetHttpClientUri();
 
-                var respons = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
+                StringBuilder query = new StringBuilder("/Subject/api/subject");
+                query.Append(queryStringParameter.ToQueryString);
+                
+                var respons = await client.GetAsync(query.ToString());
 
                 var content = respons.Content.ReadAsStringAsync();
 #pragma warning disable CS8603 // Possible null reference return.
@@ -42,10 +61,12 @@ namespace ServiceKretaAPI.Services
 #pragma warning restore CS8603 // Possible null reference return.
                 
                 listWithPaginationData.Items = subjects;
-                listWithPaginationData.TotalPages= GetHeaderParameter(respons, "TotalPages");
-                listWithPaginationData.TotalCount = GetHeaderParameter(respons, "TotalCount");
-                listWithPaginationData.CurrentPage = GetHeaderParameter(respons, "CurrentPage");
-                listWithPaginationData.PageSize = GetHeaderParameter(respons, "PageSize");
+
+                ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
+                listWithPaginationData.NumberOfPage= apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
+                listWithPaginationData.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
+                listWithPaginationData.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
+                listWithPaginationData.NumberOfRows=apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfRows");                
             }
             return listWithPaginationData;
         }
@@ -78,7 +99,8 @@ namespace ServiceKretaAPI.Services
 
                 var result = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
 
-                int id = GetHeaderParameter(result, "X-NextId");
+                ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
+                int id = apiHeaderHandler.GetHeaderParameter(result, "X-NextId","NextId");
                 return id;
             }
         }
@@ -130,23 +152,6 @@ namespace ServiceKretaAPI.Services
             UriBuilder uri = new UriBuilder();
             uri = ApplicationProperties.GetAPIUri(uri);
             return uri.Uri;
-        }
-
-        private int GetHeaderParameter(HttpResponseMessage httpResponseMessage, string parameter)
-        {
-
-            if (httpResponseMessage.Headers.Contains(parameter))
-            {
-                var json = httpResponseMessage.Headers.GetValues(parameter).First();
-                var nextId = JsonConvert.DeserializeObject<dynamic>(json);
-                int id;
-                if (nextId != null)
-                {
-                    if (int.TryParse(nextId["NextId"].ToString(), out id))
-                        return id;
-                }
-            }
-            return 0;
         }
     }
 }

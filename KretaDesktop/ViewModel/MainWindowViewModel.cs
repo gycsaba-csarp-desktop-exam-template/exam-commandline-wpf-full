@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationPropertiesSettings;
 using CommunityToolkit.Mvvm.ComponentModel;
 using KretaDesktop.ViewModel.BaseClass;
 
@@ -27,7 +28,7 @@ namespace KretaDesktop.ViewModel
         public MainWindowViewModel()
         {
             UpdateViewCommand = new RelayCommand((parameter) => UpdateView(parameter));
-            selectedView = new HeaderWithContentListViewModel();
+            selectedView = new HeaderWithContentListViewModel();            
         }
 
         public void UpdateView(object parameter)

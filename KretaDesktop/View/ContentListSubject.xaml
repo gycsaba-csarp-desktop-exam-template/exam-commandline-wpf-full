@@ -69,11 +69,11 @@
             </StackPanel>
             <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="2,2,18,2">
                 <TextBlock HorizontalAlignment="Right" Margin="2" Foreground="{DynamicResource ContentForegroundColor}" Text="Elem/oldal:"></TextBlock>
-                <ComboBox HorizontalAlignment="Right" Grid.Column="5">
-                    <ComboBoxItem>10</ComboBoxItem>
-                    <ComboBoxItem>20</ComboBoxItem>
-                    <ComboBoxItem>30</ComboBoxItem>
-                </ComboBox>
+                <ComboBox HorizontalAlignment="Right" Grid.Column="5"
+                          ItemsSource="{Binding RowPerPagePossibilities}"
+                          SelectedValue="{Binding PageSize}"
+                          SelectedIndex="0"
+                />
             </StackPanel>
         </Grid>
         <DataGrid x:Name="dgSubjects"
@@ -101,7 +101,7 @@
             <Button Style="{DynamicResource ContentButton}" Content="&lt;" Grid.Column="1" />
             <TextBlock Text="{Binding CurrentPage}" Grid.Column="2" HorizontalAlignment="Center"/>
             <Button Style="{DynamicResource ContentButton}" Content=">" Grid.Column="3" />
-            <Button Style="{DynamicResource ContentButton}" Content=">>" Grid.Column="4" />
+            <Button Style="{DynamicResource ContentButton}" Command="{Binding LastPageCommand}" Content=">>" Grid.Column="4" />
         </Grid>
 
     </Grid>

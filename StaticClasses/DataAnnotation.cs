@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StaticClasses
+namespace StaticClassess
 {
     public static class DataAnnotation
     {

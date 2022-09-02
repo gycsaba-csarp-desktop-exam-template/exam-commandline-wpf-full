@@ -35,7 +35,7 @@ namespace Kreta.Repositories
             var sortedSubject = sortHelper.ApplySort(subjects, subjectParameters.OrderBy);
             var sortedAndShapedSubject = dataShaper.ShapeData(sortedSubject, subjectParameters.Fields);
 
-            return PagedList<ExpandoObject>.ToPagedList(sortedAndShapedSubject, subjectParameters.PageNumber, subjectParameters.PageSize);
+            return PagedList<ExpandoObject>.ToPagedList(sortedAndShapedSubject, subjectParameters.CurrentPage, subjectParameters.PageSize);
 
          
         }

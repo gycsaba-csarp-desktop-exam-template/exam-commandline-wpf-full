@@ -17,7 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationPropertiesSettin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaDesktop", "KretaDesktop\KretaDesktop.csproj", "{D8E705E4-FB77-4C49-BEB0-CA5A008574AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticClasses", "StaticClasses\StaticClasses.csproj", "{468CB607-41A5-48C9-A30E-73992B8A17A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticClasses", "StaticClasses\StaticClasses.csproj", "{468CB607-41A5-48C9-A30E-73992B8A17A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F793279-6139-451C-841F-F7BDD1D45615}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

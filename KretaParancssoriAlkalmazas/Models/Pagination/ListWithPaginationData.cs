@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KretaParancssoriAlkalmazas.Models.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,20 +7,19 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.Pagination
 {
-    public class ListWithPaginationData<T> : PaginationModel
+    public class ListWithPaginationData<T> : PaginationParameter
     {
         public List<T> Items { get; set; }
 
-        private PaginationModel paginationData;
+        private PaginationParameter paginationData;
 
-        public PaginationModel PaginationData
+        public PaginationParameter PaginationData
         {
             get
             {
                 paginationData.CurrentPage = CurrentPage;
                 paginationData.PageSize = PageSize;
-                paginationData.TotalCount = TotalCount;
-                paginationData.TotalPages = TotalPages;
+                paginationData.NumberOfPage = NumberOfPage;
 
                 return paginationData;
             }

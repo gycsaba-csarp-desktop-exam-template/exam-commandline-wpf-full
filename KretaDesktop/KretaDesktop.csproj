@@ -8,10 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="App.config" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApplicationProperties\ApplicationPropertiesSettings.csproj" />
+    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
     <ProjectReference Include="..\ServiceKretaAPI\ServiceKretaAPI.csproj" />
     <ProjectReference Include="..\StaticClasses\StaticClasses.csproj" />
   </ItemGroup>

@@ -30,7 +30,7 @@ namespace KretaRazorPages.Pages.Menu.CultureSwitcher
             {
                 Thread.CurrentThread.CurrentCulture= CultureInfo.CreateSpecificCulture(selectedLanguage);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(selectedLanguage);
-                AppSettingsControl.AddOrUpdateAppSettings("CurrentCulture", selectedLanguage);
+                AppConfigControl.AddOrUpdateAppSettings("CurrentCulture", selectedLanguage);
             }
         }
     }

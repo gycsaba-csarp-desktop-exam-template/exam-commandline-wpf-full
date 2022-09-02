@@ -58,41 +58,41 @@ namespace KretaWebApi.Controllers
             {
                 logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
                 logger.LogInfo($"Paraméterek {subjectParameters}");
+
                 var subjects = repositoryWrapper.SubjectRepo.GetAllSubjects(subjectParameters);
                 logger.LogInfo($"Kiolvasva {subjects.Count} tantárgy adat az adatbázisból");
 
-
-
-
+                // pagination data in header
                 var paginationMetadata = new
                 {
-                    subjects.TotalCount,
+                    subjects.NumberOfRows,
                     subjects.PageSize,
                     subjects.CurrentPage,
-                    subjects.TotalPages,
+                    subjects.NumberOfPage,
                     subjects.HasNext,
                     subjects.HasPrevious
                 };
-
                 Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
 
+                // nextId header data to insert new subject
                 long nextId = 0;
                 if (subjects!=null && subjects.Count>0)
                     nextId = repositoryWrapper.SubjectRepo.GetNextId();
                 logger.LogInfo($"Meghatározva {nextId} a következő lehetséges id");
                 Dictionary<string,string> nextIDToSerialize=new Dictionary<string,string>();
                 nextIDToSerialize.Add("NextId", nextId.ToString());
-
                 Response.Headers.Add("X-NextId", JsonConvert.SerializeObject(nextIDToSerialize));
 
                 logger.LogInfo($"Visszatérés {subjects.Count} tantárgy adattal az adatbázisból");
 
+                // ha nincs adat
                 if ((subjects == null) || (subjects.Count == 0))
                 {
                     logger.LogInfo($"Paraméterek {subjectParameters}");
                     return NoContent();
                 }
 
+                // ha van adat
                 var subjectResult = mapper.Map<IEnumerable>(subjects);
                 return Ok(subjectResult);
             }

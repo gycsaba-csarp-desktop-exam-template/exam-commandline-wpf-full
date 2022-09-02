@@ -72,10 +72,10 @@ namespace KretaWebApi.Controllers
 
                 var metadata = new
                 {
-                    schoolClasses.TotalCount,
+                    schoolClasses.NumberOfRows,
                     schoolClasses.PageSize,
                     schoolClasses.CurrentPage,
-                    schoolClasses.TotalPages,
+                    schoolClasses.NumberOfPage,
                     schoolClasses.HasNext,
                     schoolClasses.HasPrevious
                 };
@@ -83,7 +83,7 @@ namespace KretaWebApi.Controllers
                 Response.Headers.Add("X-Pagination", Newtonsoft.Json.JsonConvert.SerializeObject(metadata));
 
                 logger.LogInfo("GetAllPagedSchoolClass->Az összes osztály lapozott lekérdezése az adatbázisból.");
-                logger.LogInfo($"GetAllPagedSchoolClass->{schoolClasses.TotalCount} adat lekérdezése az adatbázisból.");
+                logger.LogInfo($"GetAllPagedSchoolClass->{schoolClasses.NumberOfRows} adat lekérdezése az adatbázisból.");
 
                 var schoolClassResult = mapper.Map<IEnumerable>(schoolClasses);
                 return Ok(schoolClassResult);

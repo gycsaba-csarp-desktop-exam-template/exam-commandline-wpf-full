@@ -1,9 +1,11 @@
-﻿using System.Configuration;
+﻿using CommunityToolkit.HighPerformance;
+using System.Collections.ObjectModel;
+using System.Configuration;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace ApplicationPropertiesSettings
 {
-    public class AppSettingsControl
+    public class AppConfigControl
     {
         public static void AddOrUpdateAppSettings(string key, string value)
         {
@@ -39,6 +41,29 @@ namespace ApplicationPropertiesSettings
             }
             catch (ConfigurationErrorsException)
             {               
+            }
+            return null;
+        }
+
+        public static List<string>? getAppSettingsToList(string key)
+        {
+            try
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var setting = configFile.AppSettings.Settings;
+                if (setting.AllKeys.Contains(key))
+                {
+                    List<string> result = new List<string>();
+                    string text=setting[key].Value;
+                    foreach (var token in text.Tokenize(','))
+                    {
+                        result.Add(token.ToString());                        
+                    }
+                    return result;
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
             }
             return null;
         }
