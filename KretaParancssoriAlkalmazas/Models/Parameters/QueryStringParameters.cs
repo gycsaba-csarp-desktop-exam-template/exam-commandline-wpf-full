@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.Parameters
 {
-    public class QueryStringParameters : PaginationParameter
-	{
-		public string OrderBy { get; set; } = "";
-
+    public class QueryStringParameters : IQueryStringParameters
+    {   
+        public int CurrentPage { get; set; }
+        public int NumberOfPage { get; set; }
+        public int PageSize { get; set; }
+        public int NumberOfRows { get; set; }
+		
+        public string OrderBy { get; set; } = "";
 		public string Fields { get; set; } = "";
 
         public string ToQueryString
@@ -18,8 +22,8 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
             {
                 StringBuilder result = new StringBuilder("?");
                 // TODO általánossan megcsinálni!
-                // ?orderby=subjectName&pagesize=10&pagenumber=2&fields=id,subjectName
-                result.Append("pagenumber=" + CurrentPage);
+                // ?orderby=subjectName&CurrentPage=2&pagesize=10&fields=id,subjectName
+                result.Append("currentpage=" + CurrentPage);
                 if (PageSize > 0)
                     result.Append("&pagesize=" + PageSize);
                 if (OrderBy != string.Empty)
@@ -29,6 +33,7 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
                 return result.ToString();
             }
         }
+
 
         public QueryStringParameters()
         {

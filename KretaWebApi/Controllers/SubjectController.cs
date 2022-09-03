@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Dynamic;
 using System.ComponentModel.DataAnnotations;
 using ServiceKretaLogger;
+using KretaParancssoriAlkalmazas.Models.Helpers;
 
 
 /*
@@ -65,12 +66,10 @@ namespace KretaWebApi.Controllers
                 // pagination data in header
                 var paginationMetadata = new
                 {
-                    subjects.NumberOfRows,
-                    subjects.PageSize,
-                    subjects.CurrentPage,
-                    subjects.NumberOfPage,
-                    subjects.HasNext,
-                    subjects.HasPrevious
+                    subjects.QueryString.NumberOfRows,
+                    subjects.QueryString.PageSize,
+                    subjects.QueryString.CurrentPage,
+                    subjects.QueryString.NumberOfPage,
                 };
                 Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
 

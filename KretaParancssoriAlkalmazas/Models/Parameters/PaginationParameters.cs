@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using KretaParancssoriAlkalmazas.Models.Helpers;
+
 namespace KretaParancssoriAlkalmazas.Models.Parameters
 {
-    public class PaginationParameter
+    public class PaginationParameter : IPaginationData
     {
         const int maxPageSize = 50;
         private int pageSize = 10;
@@ -30,7 +32,7 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
         public bool HasPrevious => CurrentPage > 1;
         public bool HasNext => CurrentPage < NumberOfPage;
 
-        public PaginationParameter(int totalCount)
+        public PaginationParameter()
         {
             CurrentPage = 1;
         }

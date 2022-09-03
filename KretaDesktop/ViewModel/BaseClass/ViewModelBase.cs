@@ -1,9 +1,14 @@
-﻿using System.ComponentModel;
+﻿using KretaParancssoriAlkalmazas.Models.Helpers;
+using KretaParancssoriAlkalmazas.Models.Parameters;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace KretaDesktop.ViewModel.BaseClass
 {
-    public class ViewModelBase : INotifyPropertyChanged
+
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -14,5 +19,21 @@ namespace KretaDesktop.ViewModel.BaseClass
         }
 
         public virtual void Dispose() { }
+    }
+
+    public class PageParameterViewModelBase : ViewModelBase
+    {
+        private QueryStringParameters queryString;
+
+        public QueryStringParameters QueryString
+        {
+            get { return queryString; }
+            set { queryString = value; }
+        }
+
+        public QueryStringParameters GetParameters()
+        {            
+            return queryString;
+        }
     }
 }

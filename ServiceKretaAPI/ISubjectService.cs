@@ -1,5 +1,5 @@
 ﻿using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Pagination;
+using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 
 namespace ServiceKretaAPI
@@ -7,7 +7,7 @@ namespace ServiceKretaAPI
     public interface ISubjectService
     {
         Task<List<Subject>>? GetSubjectsAsync(QueryStringParameters queryStringParameter);
-        Task<ListWithPaginationData<Subject>>? GetSubjectsAsyncWithPageData(QueryStringParameters queryStringParameter);
+        Task<PagedList<Subject>>? GetSubjectsAsyncWithPageData(QueryStringParameters queryStringParameter);
         Task<Subject>? GetSubjectByIdAsync(long id);
         Task<long> GetNextSubjectIdAsync();
         Task<System.Net.HttpStatusCode> InsertNewSubjectAsync(Subject subject);

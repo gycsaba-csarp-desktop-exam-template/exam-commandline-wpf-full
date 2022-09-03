@@ -3,36 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KretaParancssoriAlkalmazas.Models.Parameters;
 
 namespace KretaParancssoriAlkalmazas.Models.Helpers
 {
-    public class PagedList<T> : List<T> where T : class
+    public class PagedList<T> : List<T>
     {
-        public int CurrentPage { get; private set; }
-        public int NumberOfPage { get; private set; }
-        public int PageSize { get; private set; }
-        public int NumberOfRows { get; private set; }
+        private QueryStringParameters queryString;
 
-        public bool HasPrevious => CurrentPage > 1;
-        public bool HasNext => CurrentPage < NumberOfPage;
+        public QueryStringParameters QueryString
+        {
+            get { return queryString; }
+            set { queryString = value; }
+        }
+
 
         public PagedList(List<T> items, int count, int pageNumber, int pageSize)
         {
-            NumberOfRows = count;
-            PageSize = pageSize;
-            CurrentPage = pageNumber;
+            queryString = new QueryStringParameters();
+            queryString.NumberOfRows = count;
+            queryString.PageSize = pageSize;
+            queryString.CurrentPage = pageNumber;
+            queryString.OrderBy = String.Empty;
+            queryString.Fields = String.Empty;
 
-            NumberOfPage = (int) Math.Ceiling(count / (double)pageSize);
+            queryString.NumberOfPage = (int)Math.Ceiling(count / (double)pageSize);
 
             AddRange(items);
+        }
+
+        public PagedList()
+        {
+            queryString = new QueryStringParameters();
+            queryString.CurrentPage = 0;
+            queryString.NumberOfPage = 0;
+            queryString.PageSize = 0;
+            queryString.NumberOfRows = 0;
+            queryString.OrderBy = String.Empty;
+            queryString.Fields = String.Empty;
         }
 
         public static PagedList<T> ToPagedList(IEnumerable<T> source, int pageNumber, int pageSize)
         {
             var count = source.Count();
-            var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var items = source.Skip((pageNumber-1) * pageSize).Take(pageSize).ToList();
 
             return new PagedList<T>(items, count, pageNumber, pageSize);
+        }
+
+        public QueryStringParameters GetParameters()
+        {
+            return queryString;
         }
     }
 }

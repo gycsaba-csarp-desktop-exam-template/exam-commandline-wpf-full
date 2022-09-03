@@ -17,11 +17,19 @@ namespace ServiceKretaAPI.Lib
                 {
                     var json = httpResponseMessage.Headers.GetValues(key).First();
                     var headerData = JsonConvert.DeserializeObject<dynamic>(json);
-                    int dataInHeader;
-                    string headerValue = headerData[parameter].ToString();
+                    int dataInHeader= 0;
+                    string headerValue = String.Empty;
+                    try
+                    {
+                        headerValue = headerData[parameter].ToString();
+                    }
+                    catch (Exception e)
+                    {
+                        return -1;
+                    }
                     if (headerData != null)
                     {
-                        if (int.TryParse(headerData[parameter].ToString(), out dataInHeader))
+                        if (int.TryParse(headerValue, out dataInHeader))
                             return dataInHeader;
                     }
                 }

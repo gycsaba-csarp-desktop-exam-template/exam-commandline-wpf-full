@@ -1,15 +1,16 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
 using System.Net;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using ApplicationPropertiesSettings;
-using KretaParancssoriAlkalmazas.Models.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Reflection.Metadata;
+
 using ServiceKretaAPI.Lib;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using Microsoft.Extensions.Primitives;
+using KretaParancssoriAlkalmazas.Models.DataModel;
+using ApplicationPropertiesSettings;
+using KretaParancssoriAlkalmazas.Models.Helpers;
 
 namespace ServiceKretaAPI.Services
 {
@@ -38,14 +39,14 @@ namespace ServiceKretaAPI.Services
             }
         }
 
-        public async Task<ListWithPaginationData<Subject>>? GetSubjectsAsyncWithPageData(QueryStringParameters queryStringParameter)
+        public async Task<PagedList<Subject>>? GetSubjectsAsyncWithPageData(QueryStringParameters queryStringParameter)
         {
             if (queryStringParameter == null)
             {
                 queryStringParameter = new QueryStringParameters();
             }
 
-            ListWithPaginationData<Subject> listWithPaginationData = new ListWithPaginationData<Subject>();
+            PagedList<Subject> pagedSubjectList = new PagedList<Subject>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = GetHttpClientUri();
@@ -56,19 +57,19 @@ namespace ServiceKretaAPI.Services
                 var respons = await client.GetAsync(query.ToString());
 
                 var content = respons.Content.ReadAsStringAsync();
-#pragma warning disable CS8603 // Possible null reference return.
+
                 List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(content.Result);
-#pragma warning restore CS8603 // Possible null reference return.
-                
-                listWithPaginationData.Items = subjects;
+
+                pagedSubjectList.Clear();
+                pagedSubjectList.AddRange(subjects);
 
                 ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
-                listWithPaginationData.NumberOfPage= apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
-                listWithPaginationData.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
-                listWithPaginationData.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
-                listWithPaginationData.NumberOfRows=apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfRows");                
+                pagedSubjectList.QueryString.NumberOfPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
+                pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
+                pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
+                pagedSubjectList.QueryString.NumberOfRows =apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfRows");                
             }
-            return listWithPaginationData;
+            return pagedSubjectList;
         }
 
 

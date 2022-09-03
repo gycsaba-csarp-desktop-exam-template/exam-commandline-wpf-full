@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using KretaDesktop.ViewModel.BaseClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Pagination;
+using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
@@ -16,14 +16,11 @@ using ServiceKretaAPI.Services;
 namespace KretaDesktop.ViewModel
 {
     // TODO: A datagrid oszlopa olyan széles legyen mint az adatbázisban lévő max hosszúságú adat
-    public class ContentListSubjectViewModel : PagerViewModel
+    public class ContentListSubjectViewModel : PagedViewModel
     {
-        ISubjectService subjectService;
+        SubjectService subjectService;
 
         private ObservableCollection<Subject> subjects;
-        private Subject selectedSubject;
-        private int pageSize;
-
 
         public ObservableCollection<Subject> Subjects
         {
@@ -35,6 +32,8 @@ namespace KretaDesktop.ViewModel
             }
         }
 
+        private Subject selectedSubject;
+
         public Subject SelectedSubject
         {
             get { return selectedSubject; }
@@ -42,16 +41,6 @@ namespace KretaDesktop.ViewModel
             {
                 selectedSubject = value;
                 OnPropertyChanged(nameof(SelectedSubject));
-            }
-        }
-
-        public int PageSize
-        {
-            get { return pageSize; }
-            set
-            {
-                pageSize = int.Parse(value.ToString());
-                OnPropertyChanged(nameof(PageSize));
             }
         }
 
@@ -69,17 +58,15 @@ namespace KretaDesktop.ViewModel
         {
             if (subjectService != null)
             {
-
-                // TODO: PagedList, ListWithPaginationData, PaginationParameters egyeztetés
-
-                ListWithPaginationData<Subject> listWithPaginationData = await subjectService.GetSubjectsAsyncWithPageData(QueryParameter);
-                if ((listWithPaginationData != null) && (listWithPaginationData.Items != null))
+                PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters());
+                SaveParameter(pagedSubjectList);
+                if (pagedSubjectList != null)
                 {
-                    Subjects = new ObservableCollection<Subject>(listWithPaginationData.Items);
+                    Subjects = new ObservableCollection<Subject>((List<Subject>)pagedSubjectList);
                 }
                 else
                     Subjects = new ObservableCollection<Subject>();
-            }            
+            }
         }
     }
 }
