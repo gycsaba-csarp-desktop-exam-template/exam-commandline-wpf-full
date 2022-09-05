@@ -93,15 +93,18 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
-            <Button Style="{DynamicResource ContentButton}" Content="&lt;&lt;" Grid.Column="0" />
-            <Button Style="{DynamicResource ContentButton}" Content="&lt;" Grid.Column="1" />
-            <TextBlock Text="{Binding CurrentPage}" Grid.Column="2" HorizontalAlignment="Center"/>
-            <Button Style="{DynamicResource ContentButton}" Content=">" Grid.Column="3" />
-            <Button Style="{DynamicResource ContentButton}" Command="{Binding LastPageCommand}" Content=">>" Grid.Column="4" />
+            <Button x:Name="btFirstPage"  Style="{DynamicResource ContentButton}" Command="{Binding FirstPageCommand}" Content="&lt;&lt;" Grid.Column="0" />
+            <Button x:Name="btPreviusPage" Style="{DynamicResource ContentButton}" Command="{Binding PreviusPageCommand}" Content="&lt;" Grid.Column="1" />
+            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                <Label x:Name="Page" Foreground="{DynamicResource ContentForegroundColor}" Content="Oldal:"></Label>
+                <Label x:Name="tbCurrentPage" Foreground="{DynamicResource ContentForegroundColor}" Content="{Binding CurrentPage}"/>
+            </StackPanel>
+            <Button x:Name="btNextPage" Style="{DynamicResource ContentButton}" Command="{Binding NextPageCommand}" Content=">" Grid.Column="3" />
+            <Button x:Name="btLastPage" Style="{DynamicResource ContentButton}" Command="{Binding LastPageCommand}" Content=">>" Grid.Column="4" />
         </Grid>
 
     </Grid>
