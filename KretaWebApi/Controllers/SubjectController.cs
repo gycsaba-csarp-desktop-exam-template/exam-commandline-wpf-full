@@ -66,7 +66,7 @@ namespace KretaWebApi.Controllers
                 // pagination data in header
                 var paginationMetadata = new
                 {
-                    subjects.QueryString.NumberOfRows,
+                    subjects.QueryString.NumberOfItem,
                     subjects.QueryString.PageSize,
                     subjects.QueryString.CurrentPage,
                     subjects.QueryString.NumberOfPage,

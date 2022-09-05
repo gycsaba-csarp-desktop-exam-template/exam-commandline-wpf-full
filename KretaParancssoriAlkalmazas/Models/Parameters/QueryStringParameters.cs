@@ -11,7 +11,7 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
         public int CurrentPage { get; set; }
         public int NumberOfPage { get; set; }
         public int PageSize { get; set; }
-        public int NumberOfRows { get; set; }
+        public int NumberOfItem { get; set; }
 
         public bool HasPrevious => CurrentPage > 1;
         public bool HasNext => CurrentPage < NumberOfPage;

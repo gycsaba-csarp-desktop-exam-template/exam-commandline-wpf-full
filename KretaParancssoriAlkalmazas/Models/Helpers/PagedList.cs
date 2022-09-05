@@ -21,7 +21,7 @@ namespace KretaParancssoriAlkalmazas.Models.Helpers
         public PagedList(List<T> items, int count, int pageNumber, int pageSize)
         {
             queryString = new QueryStringParameters();
-            queryString.NumberOfRows = count;
+            queryString.NumberOfItem = count;
             queryString.PageSize = pageSize;
             queryString.CurrentPage = pageNumber;
             queryString.OrderBy = String.Empty;
@@ -38,7 +38,7 @@ namespace KretaParancssoriAlkalmazas.Models.Helpers
             queryString.CurrentPage = 0;
             queryString.NumberOfPage = 0;
             queryString.PageSize = 0;
-            queryString.NumberOfRows = 0;
+            queryString.NumberOfItem = 0;
             queryString.OrderBy = String.Empty;
             queryString.Fields = String.Empty;
         }

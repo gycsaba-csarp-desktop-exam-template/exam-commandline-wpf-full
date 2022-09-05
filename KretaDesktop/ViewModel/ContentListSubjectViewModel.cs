@@ -52,6 +52,7 @@ namespace KretaDesktop.ViewModel
             selectedSubject = new Subject();
 
             LoadData();
+            SelectedItemIndex = 0;
         }
 
         async public override void LoadData()

@@ -40,6 +40,29 @@ namespace KretaDesktop.ViewModel.BaseClass
             }
         }
 
+        public int NumberOfPage
+        {
+            get { return QueryString.NumberOfPage > 0 ? QueryString.NumberOfPage : 0; }
+        }
+
+        public int NumberOfItem
+        {
+            get { return QueryString.NumberOfItem > 0 ? QueryString.NumberOfItem : 0;  }
+        }
+
+        public int selectedItemIndex;
+
+        public int SelectedItemIndex
+        {
+            get { return selectedItemIndex; }
+            set
+            {
+                selectedItemIndex = value;
+                OnPropertyChanged(nameof(SelectedItemIndex));
+            }
+        }
+
+
         public int CurrentPage
         {
             get { return QueryString.CurrentPage; }
@@ -78,6 +101,10 @@ namespace KretaDesktop.ViewModel.BaseClass
         public void SaveParameter(PagedList<Subject> pagedSubjectList)
         {
             QueryString = pagedSubjectList.GetParameters();
+            OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(PageSize));
+            OnPropertyChanged(nameof(NumberOfPage));
+            OnPropertyChanged(nameof(NumberOfItem));
         }
 
         public void LastPage()
