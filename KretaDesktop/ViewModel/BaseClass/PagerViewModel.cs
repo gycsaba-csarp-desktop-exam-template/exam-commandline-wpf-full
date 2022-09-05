@@ -4,6 +4,7 @@ using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,8 @@ namespace KretaDesktop.ViewModel.BaseClass
 {
     public abstract class PagedViewModel : PageParameterViewModelBase
     {
+        // View adatok
+
         private ObservableCollection<string> rowPerPagePossibilities;
 
         public ObservableCollection<string> RowPerPagePossibilities
@@ -78,16 +81,45 @@ namespace KretaDesktop.ViewModel.BaseClass
 
         public bool SortingAscending
         {
-            get { return sortingAscending; }
-            set { sortingAscending = value; }
+            get
+            {
+                return sortingAscending; 
+            }
+            set 
+            {
+                sortingAscending = value;           
+            }
         }
-
 
         public RelayCommand LastPageCommand {get; set;}
         public RelayCommand FirstPageCommand { get; set;}
         public RelayCommand PreviusPageCommand { get; set;}
         public RelayCommand NextPageCommand { get; set;}
         public RelayCommand SortingCommand { get; set; }
+
+        public bool IsSortingVisible
+        {
+            get
+            {
+                if (sortByField != string.Empty)
+                    return true;
+                else
+                    return false;
+            }
+        }           
+
+        // Belső adatok
+        private string sortByField;
+
+        public string SortByField
+        {
+            get { return sortByField; }
+            set 
+            { 
+                sortByField = value;
+                MakeSortingPartOfQuary();
+            }
+        }
 
         public PagedViewModel()
         {
@@ -109,6 +141,7 @@ namespace KretaDesktop.ViewModel.BaseClass
                 SetPageSize(int.Parse(rowPerPagePossibilities.ElementAt(0)));
 
             SortingAscending = true;
+            sortByField = String.Empty;
         }
 
         public abstract void LoadData();
@@ -169,8 +202,21 @@ namespace KretaDesktop.ViewModel.BaseClass
         public void Sorting()
         {
             sortingAscending = !sortingAscending;
+            MakeSortingPartOfQuary();
             OnPropertyChanged(nameof(SortingAscending));
+        }
 
+        private void MakeSortingPartOfQuary()
+        {
+            if (SortByField != string.Empty)
+            {
+                QueryString.OrderBy = SortByField;
+                if (!SortingAscending)
+                    QueryString.OrderBy += " desc";
+            }
+            else
+                QueryString.OrderBy = string.Empty;
+            LoadData();
         }
     }
 }
