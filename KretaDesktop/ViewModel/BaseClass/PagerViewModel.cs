@@ -40,7 +40,6 @@ namespace KretaDesktop.ViewModel.BaseClass
             }
         }
 
-
         public int CurrentPage
         {
             get { return QueryString.CurrentPage; }
