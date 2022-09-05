@@ -2,6 +2,7 @@
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.Parameters;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,20 @@ namespace KretaDesktop.ViewModel.BaseClass
             }
         }
 
+        private int pageSize;
+
+        public int PageSize
+        {
+            get { return pageSize; }
+            set 
+            {
+                QueryString.PageSize = value;
+                pageSize = value;
+                LoadData();
+            }
+        }
+
+
         public int CurrentPage
         {
             get { return QueryString.CurrentPage; }
@@ -40,8 +55,8 @@ namespace KretaDesktop.ViewModel.BaseClass
         {
             LastPageCommand = new RelayCommand(execute => LastPage());
             FirstPageCommand = new RelayCommand(execute => FirstPage());
-            PreviusPageCommand = new RelayCommand(execute => PreviusPage());
-            NextPageCommand = new RelayCommand(execute => NextPage());
+            PreviusPageCommand = new RelayCommand(execute => PreviusPage(), canExecute => CanExecutePreviusPageCommand());
+            NextPageCommand = new RelayCommand(execute => NextPage() , canExecute => CanExecuteNextPageCommand());
             
             AppConfiguration appConfiguration = new AppConfiguration();
             rowPerPagePossibilities=new ObservableCollection<string>(appConfiguration.GetPossibleNumberOfRowOnTheDataGridTable());
@@ -93,5 +108,15 @@ namespace KretaDesktop.ViewModel.BaseClass
             OnPropertyChanged(nameof(CurrentPage));
             LoadData();
         }  
+
+        public bool CanExecutePreviusPageCommand()
+        {
+            return QueryString.HasPrevious;
+        }
+
+        public bool CanExecuteNextPageCommand()
+        {
+            return QueryString.HasNext;
+        }
     }
 }

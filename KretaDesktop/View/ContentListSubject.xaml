@@ -80,6 +80,7 @@
                   Grid.Row="3" 
                   ItemsSource="{Binding Subjects}"
                   SelectedItem="{Binding SelectedSubject}"
+                  SelectedIndex="0"
                   Style="{DynamicResource DataGridCrudStyle}"
                   Width="300"
                   ColumnHeaderStyle="{DynamicResource DataGridCRUDHeaderStyle}"
