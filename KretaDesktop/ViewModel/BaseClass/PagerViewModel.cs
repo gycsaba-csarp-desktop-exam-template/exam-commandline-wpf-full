@@ -59,9 +59,15 @@ namespace KretaDesktop.ViewModel.BaseClass
             {
                 selectedItemIndex = value;
                 OnPropertyChanged(nameof(SelectedItemIndex));
+                OnPropertyChanged(nameof(ItemData));
             }
         }
 
+        public string ItemData
+        {
+            get { return $"Tantárgy adatai: {(SelectedItemIndex + 1)}  /  {NumberOfItem}"; }
+        }
+            
 
         public int CurrentPage
         {
@@ -105,6 +111,7 @@ namespace KretaDesktop.ViewModel.BaseClass
             OnPropertyChanged(nameof(PageSize));
             OnPropertyChanged(nameof(NumberOfPage));
             OnPropertyChanged(nameof(NumberOfItem));
+            OnPropertyChanged(nameof(ItemData));
         }
 
         public void LastPage()

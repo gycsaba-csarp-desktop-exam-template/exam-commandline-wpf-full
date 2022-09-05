@@ -67,7 +67,7 @@ namespace ServiceKretaAPI.Services
                 pagedSubjectList.QueryString.NumberOfPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
                 pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
                 pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
-                pagedSubjectList.QueryString.NumberOfItem =apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfRows");                
+                pagedSubjectList.QueryString.NumberOfItem =apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfItem");                
             }
             return pagedSubjectList;
         }

@@ -25,7 +25,7 @@
                Margin=" 16 16 2 2"
                >Tantárgyak
         </Label>
-        <Expander Grid.Row="1" Header="Tantárgy adatai" Margin="0 24 2 2" Foreground="{DynamicResource ContentForegroundColor}" >
+        <Expander Grid.Row="1" Header="{Binding ItemData}" Margin="0 24 2 2" Foreground="{DynamicResource ContentForegroundColor}" >
             <Grid Background="{DynamicResource ExpanderBackgroundColor}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"></ColumnDefinition>
