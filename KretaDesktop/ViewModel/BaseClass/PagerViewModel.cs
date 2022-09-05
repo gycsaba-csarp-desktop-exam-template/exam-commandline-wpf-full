@@ -74,10 +74,20 @@ namespace KretaDesktop.ViewModel.BaseClass
             get { return QueryString.CurrentPage; }
         }
 
+        private bool sortingAscending;
+
+        public bool SortingAscending
+        {
+            get { return sortingAscending; }
+            set { sortingAscending = value; }
+        }
+
+
         public RelayCommand LastPageCommand {get; set;}
         public RelayCommand FirstPageCommand { get; set;}
         public RelayCommand PreviusPageCommand { get; set;}
         public RelayCommand NextPageCommand { get; set;}
+        public RelayCommand SortingCommand { get; set; }
 
         public PagedViewModel()
         {
@@ -85,6 +95,8 @@ namespace KretaDesktop.ViewModel.BaseClass
             FirstPageCommand = new RelayCommand(execute => FirstPage());
             PreviusPageCommand = new RelayCommand(execute => PreviusPage(), canExecute => CanExecutePreviusPageCommand());
             NextPageCommand = new RelayCommand(execute => NextPage() , canExecute => CanExecuteNextPageCommand());
+
+            SortingCommand = new RelayCommand(execute => Sorting());
             
             AppConfiguration appConfiguration = new AppConfiguration();
             rowPerPagePossibilities=new ObservableCollection<string>(appConfiguration.GetPossibleNumberOfRowOnTheDataGridTable());
@@ -95,6 +107,8 @@ namespace KretaDesktop.ViewModel.BaseClass
             QueryString.Fields = String.Empty;
             if (rowPerPagePossibilities.Count > 0)
                 SetPageSize(int.Parse(rowPerPagePossibilities.ElementAt(0)));
+
+            SortingAscending = true;
         }
 
         public abstract void LoadData();
@@ -150,6 +164,13 @@ namespace KretaDesktop.ViewModel.BaseClass
         public bool CanExecuteNextPageCommand()
         {
             return QueryString.HasNext;
+        }
+
+        public void Sorting()
+        {
+            sortingAscending = !sortingAscending;
+            OnPropertyChanged(nameof(SortingAscending));
+
         }
     }
 }

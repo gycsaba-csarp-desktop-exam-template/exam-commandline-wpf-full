@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KretaDesktop.View"
              xmlns:viewmodels="clr-namespace:KretaDesktop.ViewModel"
+             xmlns:converter="clr-namespace:KretaDesktop.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:BoolToSortIconConverter x:Key="boolToIconConverter"></converter:BoolToSortIconConverter>
+    </UserControl.Resources>
     <!--
     <UserControl.DataContext>
         <viewmodels:ContentListSubjectViewModel/>
@@ -64,10 +68,12 @@
             </TextBox>
             <Button Style="{DynamicResource ContentButton}" Grid.Column="2" Content="Keresés" />
             <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="32,0,0,0">
-                <TextBlock  Margin="64 2 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="Rendezés:"></TextBlock>
-                <Grid Margin="2 0 0 2" Background="{DynamicResource ContentTextBoxBackground}" Height="16" Width="16">
-                    <Image Source="{StaticResource content-sort-down}" />
-                </Grid>
+                <TextBlock  Margin="64 6 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="Rendezés:"></TextBlock>
+                <StackPanel Margin="2 0 0 2" Background="{DynamicResource ContentForegroundColor}" Height="18" Width="18">
+                    <Button Command="{Binding SortingCommand}">
+                        <Image Source="{Binding SortingAscending, Converter={StaticResource boolToIconConverter}}" />
+                    </Button>
+                </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="2,2,18,2">
                 <TextBlock HorizontalAlignment="Right" Margin="2" Foreground="{DynamicResource ContentForegroundColor}" Text="Elem/oldal:"></TextBlock>
