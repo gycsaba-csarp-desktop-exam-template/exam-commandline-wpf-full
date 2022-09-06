@@ -68,7 +68,11 @@ namespace KretaDesktop.ViewModel.BaseClass
 
         public string ItemData
         {
-            get { return $"Tantárgy adatai: {(SelectedItemIndex + 1)}  /  {NumberOfItem}"; }
+            get 
+            {
+                int index = ((QueryString.CurrentPage-1) * QueryString.PageSize) + (SelectedItemIndex + 1);
+                return $"Tantárgy adatai: {index}  /  {NumberOfItem}"; 
+            }
         }
             
 
