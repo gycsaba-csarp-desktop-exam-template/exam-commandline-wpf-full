@@ -26,6 +26,8 @@ A konvenció alapú útválasztást azért nevezik így, mert egy konvenciót ho
 Az attribútumos útválasztás az attribútumokat használja, hogy az útvonalakat közvetlenül a vezérlőn belüli műveleti metódusokra képezze le. Általában az alap útvonalat a vezérlő osztály fölé helyezzük, ahogyan azt a Web API vezérlő osztályunkban is láthatjuk. Hasonlóképpen, az egyes műveleti metódusokhoz közvetlenül fölöttük hozzuk létre az útvonalaikat.
  */
 
+//https://code-maze.com
+
 namespace KretaWebApi.Controllers
 {
     //TODO: Herouke

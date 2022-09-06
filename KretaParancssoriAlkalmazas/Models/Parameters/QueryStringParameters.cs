@@ -17,7 +17,8 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
         public bool HasNext => CurrentPage < NumberOfPage;
 
         public string OrderBy { get; set; } = "";
-		public string Fields { get; set; } = "";
+        public string Fields { get; set; } = "";
+        public string Filter { get; set; } = "";
 
         public string ToQueryString
         {

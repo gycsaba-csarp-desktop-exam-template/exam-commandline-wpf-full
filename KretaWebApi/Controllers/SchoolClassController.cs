@@ -13,6 +13,7 @@ using ServiceKretaLogger;
 
 namespace KretaWebApi.Controllers
 {
+    // https://code-maze.com
     [Route("[controller]")]
     [ApiController]
     public class SchoolClassController : ControllerBase
