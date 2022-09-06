@@ -54,7 +54,6 @@ namespace KretaDesktop.ViewModel
             SortByField = "SubjectName";
 
             LoadData();
-            SelectedItemIndex = 0;
         }
 
         async public override void LoadData()
@@ -70,6 +69,7 @@ namespace KretaDesktop.ViewModel
                 else
                     Subjects = new ObservableCollection<Subject>();
             }
+            SelectedItemIndex = 0;
         }
     }
 }
