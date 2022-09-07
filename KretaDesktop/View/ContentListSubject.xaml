@@ -51,7 +51,10 @@
                          Text="{Binding SelectedSubject.SubjectName}"        
                  />
                 <Button Style="{DynamicResource ContentButton}" Margin="100 2 2 2" Grid.Row="0" Grid.Column="2" Content="Mentés"></Button>
-                <Button Style="{DynamicResource ContentButton}" Margin="100 2 2 2" Grid.Row="1" Grid.Column="2" Content="Törlés"></Button>
+                <Button Style="{DynamicResource ContentButton}" 
+                        Command="{Binding DeleteCommand}" 
+                        CommandParameter="{Binding SelectedSubject}" 
+                        Margin="100 2 2 2" Grid.Row="1" Grid.Column="2" Content="Törlés"></Button>
                 <Button Style="{DynamicResource ContentButton}" Margin="2 8 2 8" Grid.Row="2"  Grid.Column="1" Content="Új"></Button>
             </Grid>
         </Expander>

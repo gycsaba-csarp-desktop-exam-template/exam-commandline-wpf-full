@@ -1,7 +1,4 @@
-﻿using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.Parameters;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using KretaParancssoriAlkalmazas.Models.Parameters;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 

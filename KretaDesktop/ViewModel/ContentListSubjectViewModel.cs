@@ -5,18 +5,17 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-
+using CommunityToolkit.Mvvm.Input;
 using KretaDesktop.ViewModel.BaseClass;
+using KretaDesktop.ViewModel.Interface;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.Parameters;
-using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
 
 namespace KretaDesktop.ViewModel
 {
     // TODO: A datagrid oszlopa olyan széles legyen mint az adatbázisban lévő max hosszúságú adat
-    public class ContentListSubjectViewModel : PagedViewModel
+    public class ContentListSubjectViewModel : PagedViewModel, ICrudCommand<Subject>
     {
         SubjectService subjectService;
 
@@ -44,9 +43,14 @@ namespace KretaDesktop.ViewModel
             }
         }
 
+        public RelayCommand<Subject> DeleteCommand { get; }
+        public RelayCommand<Subject> SaveCommand { get; }
+        public RelayCommand<Subject> NewCommand { get; }
 
         public ContentListSubjectViewModel()
         {
+            //CreateCommand=new RelayCommand<Subject>((subjects)=>)
+
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
             selectedSubject = new Subject();
@@ -70,6 +74,22 @@ namespace KretaDesktop.ViewModel
                     Subjects = new ObservableCollection<Subject>();
             }
             SelectedItemIndex = 0;
+        }
+
+        async public void Delete(Subject entity)
+        {
+            if (subjectService!=null)
+                await subjectService.DeleteSubjectAsync(entity.Id);
+            LoadData();
+
+        }
+
+        public void Save(Subject entity)
+        {
+        }
+
+        public void New(Subject entity)
+        {
         }
     }
 }

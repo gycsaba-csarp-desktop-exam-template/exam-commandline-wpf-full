@@ -23,11 +23,11 @@ namespace KretaDesktop.ViewModel
             }
         }
             
-        public RelayCommand UpdateViewCommand { get; set; }
+        public RelayCommandClass UpdateViewCommand { get; set; }
 
         public MainWindowViewModel()
         {
-            UpdateViewCommand = new RelayCommand((parameter) => UpdateView(parameter));
+            UpdateViewCommand = new RelayCommandClass((parameter) => UpdateView(parameter));
             selectedView = new HeaderWithContentListViewModel();            
         }
 
