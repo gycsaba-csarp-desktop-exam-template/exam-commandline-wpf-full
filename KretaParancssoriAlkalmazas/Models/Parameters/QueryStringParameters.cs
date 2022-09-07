@@ -33,7 +33,9 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
                 if (OrderBy != string.Empty)
                     result.Append("&orderby=" + OrderBy);
                 if (Fields != string.Empty)
-                    result.Append("&fields+=" + Fields);
+                    result.Append("&fields=" + Fields);
+                if (Filter != string.Empty)
+                    result.Append("&filter=" + Filter);
                 return result.ToString();
             }
         }

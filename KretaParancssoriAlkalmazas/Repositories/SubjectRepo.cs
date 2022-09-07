@@ -30,22 +30,19 @@ namespace Kreta.Repositories
 
         public PagedList<ExpandoObject> GetAllSubjects(SubjectParameters subjectParameters)
         {
-            var subjects = SearchBySubjectName(subjectParameters.Filter);
+            var subjects = SearchSubjectNameStartWith(subjectParameters.Filter);
 
             var sortedSubject = sortHelper.ApplySort((IQueryable<EFSubject>) subjects, subjectParameters.OrderBy);
             var sortedAndShapedSubject = dataShaper.ShapeData(sortedSubject, subjectParameters.Fields);
 
-            return PagedList<ExpandoObject>.ToPagedList(sortedAndShapedSubject, subjectParameters.CurrentPage, subjectParameters.PageSize);
-
-         
+            return PagedList<ExpandoObject>.ToPagedList(sortedAndShapedSubject, subjectParameters.CurrentPage, subjectParameters.PageSize);      
         }
 
-        public IEnumerable<EFSubject> SearchBySubjectName(string subjectParameters)
+        public IQueryable<EFSubject> SearchSubjectNameStartWith(string patterNameStartWith)
         {
-            if(subjectParameters!=string.Empty)
+            if (patterNameStartWith != string.Empty)
                 return GetAll()
-                    .Where(subject => subject.SubjectName.ToLower().Contains(subjectParameters.Trim().ToLower()))
-                    .ToList();
+                    .Where(subject => subject.SubjectName.ToLower().StartsWith(patterNameStartWith.Trim().ToLower()));
             else
                 return GetAll();
         }

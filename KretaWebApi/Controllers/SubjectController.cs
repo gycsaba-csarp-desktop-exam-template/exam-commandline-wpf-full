@@ -109,7 +109,7 @@ namespace KretaWebApi.Controllers
         {
             try
             {
-                var subjects = repositoryWrapper.SubjectRepo.SearchBySubjectName(subjectNameSearchingParameters);
+                var subjects = repositoryWrapper.SubjectRepo.SearchSubjectNameStartWith(subjectNameSearchingParameters.Name);
                 logger.LogInfo($"Az összes tantárgy lekérdezése amelynek nevében szerepel '{subjectNameSearchingParameters.Name}' szó.");
 
                 var subjectResult = mapper.Map<IEnumerable>(subjects);

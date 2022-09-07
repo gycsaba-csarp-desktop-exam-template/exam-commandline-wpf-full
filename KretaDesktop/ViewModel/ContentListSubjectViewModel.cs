@@ -51,7 +51,7 @@ namespace KretaDesktop.ViewModel
             subjectService = new SubjectService();
             selectedSubject = new Subject();
 
-            SortByField = "SubjectName";
+            SortBy = "SubjectName";
 
             LoadData();
         }

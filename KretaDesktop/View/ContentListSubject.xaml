@@ -60,23 +60,27 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Style="{DynamicResource FormLabel}" Content="Szűrés:" Grid.ColumnSpan="3" Margin="3,4,2,2"></Label>
-            <TextBox Grid.Column="1" x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}" Margin="2,5,2,5">
-                Valami
-            </TextBox>
-            <Button Style="{DynamicResource ContentButton}" Grid.Column="2" Content="Keresés" />
-            <StackPanel Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Grid.Column="3" Orientation="Horizontal" Margin="32,0,0,0">
-                <TextBlock  Margin="64 6 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="Rendezés:"></TextBlock>
-                <StackPanel Margin="2 0 0 2" Background="{DynamicResource ContentForegroundColor}" Height="18" Width="18">
+            <StackPanel Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Grid.Column="0" Orientation="Horizontal" Margin="0">
+                <TextBlock  Margin="6 8 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="Rendezés:"></TextBlock>
+                <StackPanel Margin="2 2 2 2" Background="{DynamicResource ContentForegroundColor}" Height="18" Width="18">
                     <Button Command="{Binding SortingCommand}">
                         <Image Source="{Binding SortingAscending, Converter={StaticResource boolToIconConverter}}" />
                     </Button>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="2,2,18,2">
+            <Label Grid.Column="1" Style="{DynamicResource FormLabel}" Content="Szűrés:" Margin="64 2 2 2"></Label>
+            <TextBox Grid.Column="2" x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}" Margin="2 2 2 2"                     
+                     Text="{Binding UserFiltringParameter,Mode=TwoWay}"
+                     >
+            </TextBox>
+            <Button Style="{DynamicResource ContentButton}" Grid.Column="3" Content="Keresés" Command="{Binding SearchCommand}" Margin="2 2 2 2"/>
+            <Button Style="{DynamicResource ContentButton}" Grid.Column="4" Content="Összes" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
+            <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 2 2 2">
                 <TextBlock HorizontalAlignment="Right" Margin="2" Foreground="{DynamicResource ContentForegroundColor}" Text="Elem/oldal:"></TextBlock>
                 <ComboBox HorizontalAlignment="Right" Grid.Column="5"
                           ItemsSource="{Binding RowPerPagePossibilities}"

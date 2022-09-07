@@ -30,6 +30,16 @@ namespace KretaDesktop.ViewModel.BaseClass
             }
         }
 
+        // TODO Can not execute nem látszik a gombokon
+
+        public RelayCommand LastPageCommand { get; private set; }
+        public RelayCommand FirstPageCommand { get; private set; }
+        public RelayCommand PreviusPageCommand { get; private set; }
+        public RelayCommand NextPageCommand { get; private set; }
+        public RelayCommand SortingCommand { get; private set; }
+        public RelayCommand SearchCommand { get; private set; }
+        public RelayCommand SearchAllCommand { get; private set; }
+
         private int pageSize;
 
         public int PageSize
@@ -94,18 +104,12 @@ namespace KretaDesktop.ViewModel.BaseClass
                 sortingAscending = value;           
             }
         }
-
-        public RelayCommand LastPageCommand {get; set;}
-        public RelayCommand FirstPageCommand { get; set;}
-        public RelayCommand PreviusPageCommand { get; set;}
-        public RelayCommand NextPageCommand { get; set;}
-        public RelayCommand SortingCommand { get; set; }
-
+        
         public bool IsSortingVisible
         {
             get
             {
-                if (sortByField != string.Empty)
+                if (sortBy != string.Empty)
                     return true;
                 else
                     return false;
@@ -113,39 +117,58 @@ namespace KretaDesktop.ViewModel.BaseClass
         }           
 
         // Belső adatok
-        private string sortByField;
+        private string sortBy;
 
-        public string SortByField
+        public string SortBy
         {
-            get { return sortByField; }
+            get { return sortBy; }
             set 
             { 
-                sortByField = value;
+                sortBy = value;
                 MakeSortingPartOfQuary();
             }
         }
+
+        private string userFiltringParameter;
+
+        public string UserFiltringParameter
+        {
+            get { return userFiltringParameter; }
+            set 
+            { 
+                userFiltringParameter = value;
+                OnPropertyChanged(nameof(UserFiltringParameter));
+            }
+        }
+
 
         public PagedViewModel()
         {
             LastPageCommand = new RelayCommand(execute => LastPage());
             FirstPageCommand = new RelayCommand(execute => FirstPage());
             PreviusPageCommand = new RelayCommand(execute => PreviusPage(), canExecute => CanExecutePreviusPageCommand());
-            NextPageCommand = new RelayCommand(execute => NextPage() , canExecute => CanExecuteNextPageCommand());
+            NextPageCommand = new RelayCommand(execute => NextPage() , canExecute => CanExecuteNextPageCommand());            
 
             SortingCommand = new RelayCommand(execute => Sorting());
-            
+            SearchCommand = new RelayCommand(execute => Filtring(), canExecute => CanExecuteFiltringCommand());
+            SearchAllCommand = new RelayCommand(execute => SearrchAll(), canExecute => CanExecuteSeachAllCommand());
+
+
             AppConfiguration appConfiguration = new AppConfiguration();
             rowPerPagePossibilities=new ObservableCollection<string>(appConfiguration.GetPossibleNumberOfRowOnTheDataGridTable());
 
+            SortingAscending = true;
+            sortBy = String.Empty;
+            UserFiltringParameter = String.Empty;
+
             QueryString = new QueryStringParameters();
             QueryString.CurrentPage = 1;
-            QueryString.OrderBy = String.Empty;
             QueryString.Fields = String.Empty;
+            QueryString.OrderBy = SortBy;
+            QueryString.Filter = UserFiltringParameter;
+
             if (rowPerPagePossibilities.Count > 0)
                 SetPageSize(int.Parse(rowPerPagePossibilities.ElementAt(0)));
-
-            SortingAscending = true;
-            sortByField = String.Empty;
         }
 
         public abstract void LoadData();
@@ -210,16 +233,51 @@ namespace KretaDesktop.ViewModel.BaseClass
             OnPropertyChanged(nameof(SortingAscending));
         }
 
+        public void Filtring()
+        {
+            QueryString.Filter = UserFiltringParameter;
+            LoadData();
+        }
+
+        // TODO CanExecuteFiltringCommand nem működik
+        public bool CanExecuteFiltringCommand()
+        {
+            /*if (UserFiltringParameter != String.Empty)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }*/
+            return true;
+        }
+
+        public void SearrchAll()
+        {
+            UserFiltringParameter= String.Empty;
+            LoadData();
+        }
+
+        // TODO CanExecuteSeachAllCommand nem működik
+        public bool CanExecuteSeachAllCommand()
+        {
+            //return !CanExecuteFiltringCommand();
+            return true;
+        }
+
         private void MakeSortingPartOfQuary()
         {
-            if (SortByField != string.Empty)
+            if (SortBy != string.Empty)
             {
-                QueryString.OrderBy = SortByField;
+                QueryString.OrderBy = SortBy;
                 if (!SortingAscending)
                     QueryString.OrderBy += " desc";
             }
             else
                 QueryString.OrderBy = string.Empty;
+            if (UserFiltringParameter != string.Empty)
+                QueryString.Filter = UserFiltringParameter;
             LoadData();
         }
     }

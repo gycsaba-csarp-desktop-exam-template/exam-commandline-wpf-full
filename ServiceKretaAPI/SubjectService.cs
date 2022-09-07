@@ -61,18 +61,26 @@ namespace ServiceKretaAPI.Services
                 List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(content.Result);
 
                 pagedSubjectList.Clear();
-                pagedSubjectList.AddRange(subjects);
-
                 ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
-                pagedSubjectList.QueryString.NumberOfPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
-                pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
-                pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
-                pagedSubjectList.QueryString.NumberOfItem =apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfItem");                
+                if (subjects != null)
+                {
+                    pagedSubjectList.AddRange(subjects);
+                    //TODO - a peged listbe benne vannak a paraméterek, a controller ezeket is adhatja...
+                    pagedSubjectList.QueryString.NumberOfPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
+                    pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
+                    pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
+                    pagedSubjectList.QueryString.NumberOfItem = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfItem");
+                }
+                else
+                {
+                    pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
+                    pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
+                    pagedSubjectList.QueryString.NumberOfItem = 0;
+                    pagedSubjectList.QueryString.NumberOfPage = 0;
+                }
             }
             return pagedSubjectList;
         }
-
-
 
 
         public async Task<Subject>? GetSubjectByIdAsync(long id)
