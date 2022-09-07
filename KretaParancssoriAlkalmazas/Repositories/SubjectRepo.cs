@@ -12,6 +12,7 @@ using KretaParancssoriAlkalmazas.Models.Parameters;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.HTEOS;
 using System.Dynamic;
+using KretaParancssoriAlkalmazas.Models.DataModel;
 
 namespace Kreta.Repositories
 {
@@ -29,22 +30,21 @@ namespace Kreta.Repositories
 
         public PagedList<ExpandoObject> GetAllSubjects(SubjectParameters subjectParameters)
         {
+            var subjects = SearchSubjectNameStartWith(subjectParameters.Filter);
 
-            var subjects = GetAll();
-
-            var sortedSubject = sortHelper.ApplySort(subjects, subjectParameters.OrderBy);
+            var sortedSubject = sortHelper.ApplySort((IQueryable<EFSubject>) subjects, subjectParameters.OrderBy);
             var sortedAndShapedSubject = dataShaper.ShapeData(sortedSubject, subjectParameters.Fields);
 
-            return PagedList<ExpandoObject>.ToPagedList(sortedAndShapedSubject, subjectParameters.PageNumber, subjectParameters.PageSize);
-
-         
+            return PagedList<ExpandoObject>.ToPagedList(sortedAndShapedSubject, subjectParameters.CurrentPage, subjectParameters.PageSize);      
         }
 
-        public IEnumerable<EFSubject> SearchBySubjectName(SubjectNameSearchingParameters searchingParameters)
+        public IQueryable<EFSubject> SearchSubjectNameStartWith(string patterNameStartWith)
         {
-            return GetAll()
-                .Where(subject => subject.SubjectName.ToLower().Contains(searchingParameters.Name.Trim().ToLower()))
-                .ToList();
+            if (patterNameStartWith != string.Empty)
+                return GetAll()
+                    .Where(subject => subject.SubjectName.ToLower().StartsWith(patterNameStartWith.Trim().ToLower()));
+            else
+                return GetAll();
         }
 
         public EFSubject? GetSubjectById(long subjectId)

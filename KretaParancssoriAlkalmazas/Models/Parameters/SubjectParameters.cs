@@ -1,12 +1,16 @@
-﻿using System;
+﻿using KretaParancssoriAlkalmazas.Models.AbstractClass;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using StaticClasses;
+
 namespace KretaParancssoriAlkalmazas.Models.Parameters
 {
     public  class SubjectParameters : QueryStringParameters
     {
+       
     }
 }

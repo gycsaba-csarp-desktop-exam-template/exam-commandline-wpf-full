@@ -1,5 +1,5 @@
 ﻿using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Pagination;
+using KretaParancssoriAlkalmazas.Models.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
@@ -8,7 +8,7 @@ namespace KretaRazorPages.ViewComponents
 {
     public class SubjectsViewComponent : ViewComponent
     {
-        private ListWithPaginationData<Subject> subjectListWithPaginationData;
+        private PagedList<Subject> subjectListWithPaginationData;
 
         public SubjectsViewComponent()
         {
@@ -17,12 +17,12 @@ namespace KretaRazorPages.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             ISubjectService subjectService = new SubjectService();
-            var subjectListWithPaginationData = await subjectService.GetSubjectsAsyncWithPageData();
-            // TODO: ide rakjak-e a vizsgálatot 
-            if (subjectListWithPaginationData.Items == null)
+            var pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(null);
+            // TODO: ide rakjak-e vizsgálatot 
+            if (pagedSubjectList == null)
                 return View(new List<Subject>());
             else
-                return View(subjectListWithPaginationData.Items);
+                return View((List<Subject>) pagedSubjectList);
         }
     }
 }

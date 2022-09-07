@@ -1,24 +1,36 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
 using System.Net;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using ApplicationPropertiesSettings;
-using KretaParancssoriAlkalmazas.Models.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Reflection.Metadata;
+
+using ServiceKretaAPI.Lib;
+using KretaParancssoriAlkalmazas.Models.Parameters;
+using Microsoft.Extensions.Primitives;
+using KretaParancssoriAlkalmazas.Models.DataModel;
+using ApplicationPropertiesSettings;
+using KretaParancssoriAlkalmazas.Models.Helpers;
 
 namespace ServiceKretaAPI.Services
 {
     public class SubjectService : ISubjectService
     {
-        public async Task<List<Subject>>? GetSubjectsAsync()
+        public async Task<List<Subject>>? GetSubjectsAsync(QueryStringParameters queryStringParameter)
         {
+            if (queryStringParameter == null)
+            {
+                queryStringParameter = new QueryStringParameters();
+            }
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = GetHttpClientUri();
 
-                var respons = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
+                StringBuilder query = new StringBuilder("/Subject/api/subject");
+                query.Append(queryStringParameter.ToQueryString);
+
+                var respons = await client.GetAsync(query.ToString());
 
                 var content = respons.Content.ReadAsStringAsync();
 #pragma warning disable CS8603 // Possible null reference return.
@@ -27,30 +39,48 @@ namespace ServiceKretaAPI.Services
             }
         }
 
-        public async Task<ListWithPaginationData<Subject>>? GetSubjectsAsyncWithPageData()
+        public async Task<PagedList<Subject>>? GetSubjectsAsyncWithPageData(QueryStringParameters queryStringParameter)
         {
-            ListWithPaginationData<Subject> listWithPaginationData = new ListWithPaginationData<Subject>();
+            if (queryStringParameter == null)
+            {
+                queryStringParameter = new QueryStringParameters();
+            }
+
+            PagedList<Subject> pagedSubjectList = new PagedList<Subject>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = GetHttpClientUri();
 
-                var respons = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
+                StringBuilder query = new StringBuilder("/Subject/api/subject");
+                query.Append(queryStringParameter.ToQueryString);
+                
+                var respons = await client.GetAsync(query.ToString());
 
                 var content = respons.Content.ReadAsStringAsync();
-#pragma warning disable CS8603 // Possible null reference return.
+
                 List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(content.Result);
-#pragma warning restore CS8603 // Possible null reference return.
-                
-                listWithPaginationData.Items = subjects;
-                listWithPaginationData.TotalPages= GetHeaderParameter(respons, "TotalPages");
-                listWithPaginationData.TotalCount = GetHeaderParameter(respons, "TotalCount");
-                listWithPaginationData.CurrentPage = GetHeaderParameter(respons, "CurrentPage");
-                listWithPaginationData.PageSize = GetHeaderParameter(respons, "PageSize");
+
+                pagedSubjectList.Clear();
+                ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
+                if (subjects != null)
+                {
+                    pagedSubjectList.AddRange(subjects);
+                    //TODO - a peged listbe benne vannak a paraméterek, a controller ezeket is adhatja...
+                    pagedSubjectList.QueryString.NumberOfPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
+                    pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
+                    pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
+                    pagedSubjectList.QueryString.NumberOfItem = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfItem");
+                }
+                else
+                {
+                    pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
+                    pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
+                    pagedSubjectList.QueryString.NumberOfItem = 0;
+                    pagedSubjectList.QueryString.NumberOfPage = 0;
+                }
             }
-            return listWithPaginationData;
+            return pagedSubjectList;
         }
-
-
 
 
         public async Task<Subject>? GetSubjectByIdAsync(long id)
@@ -78,7 +108,8 @@ namespace ServiceKretaAPI.Services
 
                 var result = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
 
-                int id = GetHeaderParameter(result, "X-NextId");
+                ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
+                int id = apiHeaderHandler.GetHeaderParameter(result, "X-NextId","NextId");
                 return id;
             }
         }
@@ -130,23 +161,6 @@ namespace ServiceKretaAPI.Services
             UriBuilder uri = new UriBuilder();
             uri = ApplicationProperties.GetAPIUri(uri);
             return uri.Uri;
-        }
-
-        private int GetHeaderParameter(HttpResponseMessage httpResponseMessage, string parameter)
-        {
-
-            if (httpResponseMessage.Headers.Contains(parameter))
-            {
-                var json = httpResponseMessage.Headers.GetValues(parameter).First();
-                var nextId = JsonConvert.DeserializeObject<dynamic>(json);
-                int id;
-                if (nextId != null)
-                {
-                    if (int.TryParse(nextId["NextId"].ToString(), out id))
-                        return id;
-                }
-            }
-            return 0;
         }
     }
 }

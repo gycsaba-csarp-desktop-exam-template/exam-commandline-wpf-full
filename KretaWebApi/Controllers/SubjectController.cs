@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Dynamic;
 using System.ComponentModel.DataAnnotations;
 using ServiceKretaLogger;
+using KretaParancssoriAlkalmazas.Models.Helpers;
 
 
 /*
@@ -24,6 +25,8 @@ A konvenció alapú útválasztást azért nevezik így, mert egy konvenciót ho
 
 Az attribútumos útválasztás az attribútumokat használja, hogy az útvonalakat közvetlenül a vezérlőn belüli műveleti metódusokra képezze le. Általában az alap útvonalat a vezérlő osztály fölé helyezzük, ahogyan azt a Web API vezérlő osztályunkban is láthatjuk. Hasonlóképpen, az egyes műveleti metódusokhoz közvetlenül fölöttük hozzuk létre az útvonalaikat.
  */
+
+//https://code-maze.com
 
 namespace KretaWebApi.Controllers
 {
@@ -58,41 +61,39 @@ namespace KretaWebApi.Controllers
             {
                 logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
                 logger.LogInfo($"Paraméterek {subjectParameters}");
+
                 var subjects = repositoryWrapper.SubjectRepo.GetAllSubjects(subjectParameters);
                 logger.LogInfo($"Kiolvasva {subjects.Count} tantárgy adat az adatbázisból");
 
-
-
-
+                // pagination data in header
                 var paginationMetadata = new
                 {
-                    subjects.TotalCount,
-                    subjects.PageSize,
-                    subjects.CurrentPage,
-                    subjects.TotalPages,
-                    subjects.HasNext,
-                    subjects.HasPrevious
+                    subjects.QueryString.NumberOfItem,
+                    subjects.QueryString.PageSize,
+                    subjects.QueryString.CurrentPage,
+                    subjects.QueryString.NumberOfPage,
                 };
-
                 Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
 
+                // nextId header data to insert new subject
                 long nextId = 0;
                 if (subjects!=null && subjects.Count>0)
                     nextId = repositoryWrapper.SubjectRepo.GetNextId();
                 logger.LogInfo($"Meghatározva {nextId} a következő lehetséges id");
                 Dictionary<string,string> nextIDToSerialize=new Dictionary<string,string>();
                 nextIDToSerialize.Add("NextId", nextId.ToString());
-
                 Response.Headers.Add("X-NextId", JsonConvert.SerializeObject(nextIDToSerialize));
 
                 logger.LogInfo($"Visszatérés {subjects.Count} tantárgy adattal az adatbázisból");
 
+                // ha nincs adat
                 if ((subjects == null) || (subjects.Count == 0))
                 {
                     logger.LogInfo($"Paraméterek {subjectParameters}");
                     return NoContent();
                 }
 
+                // ha van adat
                 var subjectResult = mapper.Map<IEnumerable>(subjects);
                 return Ok(subjectResult);
             }
@@ -108,7 +109,7 @@ namespace KretaWebApi.Controllers
         {
             try
             {
-                var subjects = repositoryWrapper.SubjectRepo.SearchBySubjectName(subjectNameSearchingParameters);
+                var subjects = repositoryWrapper.SubjectRepo.SearchSubjectNameStartWith(subjectNameSearchingParameters.Name);
                 logger.LogInfo($"Az összes tantárgy lekérdezése amelynek nevében szerepel '{subjectNameSearchingParameters.Name}' szó.");
 
                 var subjectResult = mapper.Map<IEnumerable>(subjects);

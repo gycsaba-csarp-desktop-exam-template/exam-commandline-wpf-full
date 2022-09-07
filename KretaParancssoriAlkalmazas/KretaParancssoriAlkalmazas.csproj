@@ -14,4 +14,9 @@
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.19" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationProperties\ApplicationPropertiesSettings.csproj" />
+    <ProjectReference Include="..\StaticClasses\StaticClasses.csproj" />
+  </ItemGroup>
+
 </Project>

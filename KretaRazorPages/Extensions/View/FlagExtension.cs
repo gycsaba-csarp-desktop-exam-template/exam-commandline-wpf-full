@@ -7,7 +7,7 @@ namespace KretaRazorPages.Extensions.View
         public string GetFlagSpanClass()
         {
             string flagSpanClass = "<span class=\"fi fi-";
-            string currentCulture=AppSettingsControl.GettAppSettings("CurrentCulture");
+            string currentCulture=AppConfigControl.GettAppSettings("CurrentCulture");
             if (currentCulture == null)
                 currentCulture = ApplicationProperties.GetDefaultCulture();
 

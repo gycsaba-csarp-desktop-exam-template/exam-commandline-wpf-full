@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/Resources/AppStyling.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Resources/Icons.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Resources/InputForm.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resources/DataGridStyling.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -42,10 +42,10 @@ namespace Kreta.Repositories
         public PagedList<EFSchoolClass> GetAllPagedSchoolClasses(SchollClassPageParameters schollClassPageParameters)
         {
             return PagedList<EFSchoolClass>.ToPagedList(GetAll()
-                .OrderBy(schoolClass => schoolClass.SchoolYear)
-                .ThenBy(schoolClass => schoolClass.ClassType),
-                schollClassPageParameters.PageNumber,
-                schollClassPageParameters.PageSize);
+                                                        .OrderBy(schoolClass => schoolClass.SchoolYear)
+                                                        .ThenBy(schoolClass => schoolClass.ClassType),
+                                                       schollClassPageParameters.PageNumber,
+                                                       schollClassPageParameters.PageSize);
         }
 
         public IEnumerable<EFSchoolClass> GetAllFilteringSchoolClass(SchoolClassQueryYearParameter schoolClassQueryYearParameter)

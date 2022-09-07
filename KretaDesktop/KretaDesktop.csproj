@@ -8,16 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="App.config" />
+    <None Remove="Resources\icons\sort-alpha-down.png" />
+    <None Remove="Resources\icons\sort-alpha-up-alt.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\icons\sort-alpha-down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\icons\sort-alpha-up-alt.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Resources\icons\sort-alpha-down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\icons\sort-alpha-up-alt.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\ApplicationProperties\ApplicationPropertiesSettings.csproj" />
+    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
+    <ProjectReference Include="..\ServiceKretaAPI\ServiceKretaAPI.csproj" />
+    <ProjectReference Include="..\StaticClasses\StaticClasses.csproj" />
   </ItemGroup>
 
 </Project>
