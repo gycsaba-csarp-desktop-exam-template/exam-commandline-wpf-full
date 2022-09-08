@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!--
+    https://tipsfordev.com/wpf-localization-multiple-languages-resourcedictionary-vs-resource-file-resx
+    https://docs.microsoft.com/et-ee/dotnet/desktop/wpf/advanced/how-to-use-a-resourcedictionary-to-manage-localizable-string-resources?view=netframeworkdesktop-4.8
+    -->
+    <system:String x:Key="validationNameIsShort">A név nem elég hosszú!</system:String>
+    <system:String x:Key="validationNameFirstLetterNotUppercase">A név nem nagybetűvel kezdődik!</system:String>
+    <system:String x:Key="validationOtherLetterNotLowercase">A kezdőbetűk után kisbetűket írjon!</system:String>
+    <system:String x:Key="validationNameOnlyLetters">A névben csak batűk lehetnek!</system:String>
+</ResourceDictionary>

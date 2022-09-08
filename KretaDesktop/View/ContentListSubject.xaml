@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KretaDesktop.View"
              xmlns:viewmodels="clr-namespace:KretaDesktop.ViewModel"
+             xmlns:validations="clr-namespace:ValidationProject.Validations"
              xmlns:converter="clr-namespace:KretaDesktop.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -48,14 +49,21 @@
                          Text="{Binding SelectedSubject.Id}"       
                 />
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0" Content="Tantárgy név:"></Label>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbSubjectName" Style="{DynamicResource FormTextBox}"
-                         Text="{Binding SelectedSubject.SubjectName}"        
-                 />
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbSubjectName" 
+                         Style="{DynamicResource FormTextBox}"
+                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedSubject.SubjectName" ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validations:NameValidation/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <Button Style="{DynamicResource ContentButton}" 
                         Command="{Binding SaveCommand}"
                         CommandParameter="{Binding SelectedSubject}"
                         Margin="100 2 2 2" Grid.Row="0" Grid.Column="2" Content="Mentés">
-                    
                 </Button>
                 <Button Style="{DynamicResource ContentButton}" 
                         Command="{Binding DeleteCommand}" 
