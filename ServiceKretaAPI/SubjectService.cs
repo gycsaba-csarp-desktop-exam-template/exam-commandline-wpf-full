@@ -11,6 +11,7 @@ using Microsoft.Extensions.Primitives;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using ApplicationPropertiesSettings;
 using KretaParancssoriAlkalmazas.Models.Helpers;
+using System.ComponentModel;
 
 namespace ServiceKretaAPI.Services
 {
@@ -100,6 +101,22 @@ namespace ServiceKretaAPI.Services
             }
         }
 
+        public async Task<bool> IsSubjectExsist(Subject subject)
+        {
+            using (var client=new HttpClient())
+            {
+                client.BaseAddress = GetHttpClientUri();
+
+                var respons = await client.GetAsync("Subject/api/subject/" + subject.Id.ToString());
+
+                if (respons.StatusCode == HttpStatusCode.OK)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+
         public async Task<long> GetNextSubjectIdAsync()
         {
             using (var client = new HttpClient())
@@ -114,10 +131,21 @@ namespace ServiceKretaAPI.Services
             }
         }
 
-        public async Task<System.Net.HttpStatusCode> InsertNewSubjectAsync(Subject subject)
+        public async Task<HttpStatusCode> Save(Subject subject)
+        {
+            bool isExsist = await IsSubjectExsist(subject);
+            if (isExsist)
+                await UpdateSubjectAsync(subject.Id, subject);
+            else
+                await InsertNewSubjectAsync(subject);
+            return HttpStatusCode.OK;
+        }
+
+        public async Task<HttpStatusCode> InsertNewSubjectAsync(Subject subject)
         {
             using (var httpClient = new HttpClient())
             {
+
                 httpClient.BaseAddress = GetHttpClientUri();
 
                 String jsonString = JsonConvert.SerializeObject(subject);

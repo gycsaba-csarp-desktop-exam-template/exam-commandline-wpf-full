@@ -44,6 +44,8 @@ namespace KretaDesktop.ViewModel
         {
             DeleteCommand = new RelayCommand(parameter => Delete(parameter));
             NewCommand = new RelayCommand(execute => New());
+            SaveCommand = new RelayCommand(parameter => Save(parameter));
+
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
             selectedSubject = new Subject();
@@ -91,8 +93,13 @@ namespace KretaDesktop.ViewModel
             }
         }
 
-        public void Save(Subject entity)
+        public async void Save(object entity)
         {
+            if (entity is Subject)
+            {
+                Subject subjectToSave= (Subject) entity;
+                await subjectService.Save(subjectToSave);
+            }
         }
 
 
