@@ -10,11 +10,6 @@ namespace KretaDesktop.ViewModel.Interface
 {
     public interface ICrudCommand<T>
     {
-        RelayCommand<T> DeleteCommand { get; }
-        RelayCommand<T> SaveCommand { get; }
-        RelayCommand<T> NewCommand { get; }
-
-
         void Delete(T entity);
         void Save(T entity);
         void New(T entity);

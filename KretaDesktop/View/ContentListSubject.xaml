@@ -68,7 +68,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Grid.Column="0" Orientation="Horizontal" Margin="0">
+            <StackPanel  Grid.Column="0" Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" Margin="0">
                 <TextBlock  Margin="6 8 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="Rendezés:"></TextBlock>
                 <StackPanel Margin="2 2 2 2" Background="{DynamicResource ContentForegroundColor}" Height="18" Width="18">
                     <Button Command="{Binding SortingCommand}">
@@ -78,34 +78,41 @@
             </StackPanel>
             <Label Grid.Column="1" Style="{DynamicResource FormLabel}" Content="Szűrés:" Margin="64 2 2 2"></Label>
             <TextBox Grid.Column="2" x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}" Margin="2 2 2 2"                     
-                     Text="{Binding UserFiltringParameter,Mode=TwoWay}"
-                     >
+                        Text="{Binding UserFiltringParameter,Mode=TwoWay}"
+                        >
             </TextBox>
-            <Button Style="{DynamicResource ContentButton}" Grid.Column="3" Content="Keresés" Command="{Binding SearchCommand}" Margin="2 2 2 2"/>
-            <Button Style="{DynamicResource ContentButton}" Grid.Column="4" Content="Összes" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
+            <Button Grid.Column="3" Style="{DynamicResource ContentButton}"  Content="Keresés" Command="{Binding SearchCommand}" Margin="2 2 2 2"/>
+            <Button Grid.Column="4" Style="{DynamicResource ContentButton}"  Content="Összes" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
             <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 2 2 2">
                 <TextBlock HorizontalAlignment="Right" Margin="2" Foreground="{DynamicResource ContentForegroundColor}" Text="Elem/oldal:"></TextBlock>
                 <ComboBox HorizontalAlignment="Right" Grid.Column="5"
-                          ItemsSource="{Binding RowPerPagePossibilities}"
-                          SelectedValue="{Binding PageSize}"
-                          SelectedIndex="0"
+                            ItemsSource="{Binding RowPerPagePossibilities}"
+                            SelectedValue="{Binding PageSize}"
+                            SelectedIndex="0"
                 />
             </StackPanel>
         </Grid>
-        <DataGrid x:Name="dgSubjects"
-                  Grid.Row="3" 
-                  ItemsSource="{Binding Subjects}"
-                  SelectedItem="{Binding SelectedSubject}"
-                  SelectedIndex="{Binding SelectedItemIndex}"
-                  Style="{DynamicResource DataGridCrudStyle}"
-                  Width="300"
-                  ColumnHeaderStyle="{DynamicResource DataGridCRUDHeaderStyle}"
-                  >
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="40" Header="Azon." Binding="{Binding Id}"></DataGridTextColumn>
-                <DataGridTextColumn Width="220" Header="Tantárgy név" Binding="{Binding SubjectName}"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <StackPanel Grid.Row="3"  Orientation="Horizontal">
+            <DataGrid x:Name="dgSubjects"                 
+                      ItemsSource="{Binding Subjects}"
+                      SelectedItem="{Binding SelectedSubject}"
+                      SelectedIndex="{Binding SelectedItemIndex}"
+                      Style="{DynamicResource DataGridCrudStyle}"
+                      Width="300"
+                      ColumnHeaderStyle="{DynamicResource DataGridCRUDHeaderStyle}"
+             >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="40" Header="Azon." Binding="{Binding Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="220" Header="Tantárgy név" Binding="{Binding SubjectName}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Style="{DynamicResource ContentButton}" 
+                    VerticalAlignment="Bottom"
+                        Command="{Binding DeleteCommand}" 
+                        CommandParameter="{Binding SelectedSubject}" 
+                        Margin="100 2 2 2" Grid.Row="1" Grid.Column="2" Content="Törlés">
+            </Button>
+        </StackPanel>
         <Grid Background="{DynamicResource NavigationBackgroundColor}" Grid.Row="5" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
@@ -125,6 +132,5 @@
             <Button x:Name="btNextPage" Style="{DynamicResource ContentButton}" Command="{Binding NextPageCommand}" Content=">" Grid.Column="3" />
             <Button x:Name="btLastPage" Style="{DynamicResource ContentButton}" Command="{Binding LastPageCommand}" Content=">>" Grid.Column="4" />
         </Grid>
-
     </Grid>
 </UserControl>

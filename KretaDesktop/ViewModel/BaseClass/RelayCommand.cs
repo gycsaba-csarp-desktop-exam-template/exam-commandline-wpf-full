@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace KretaDesktop.ViewModel.BaseClass
 {
-    public class RelayCommandClass : ICommand
+    public class RelayCommand : ICommand
     {
         private Action<object> execute;
         private Func<object, bool> canExecute;
@@ -18,12 +18,12 @@ namespace KretaDesktop.ViewModel.BaseClass
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public RelayCommandClass(Action<object> execute)
+        public RelayCommand(Action<object> execute)
         {
             this.execute = execute;
         }
 
-        public RelayCommandClass(Action<object> execute, Func<object, bool> canExecute)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
             : this(execute)
         {
             this.execute = execute;

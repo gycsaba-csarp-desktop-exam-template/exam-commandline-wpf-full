@@ -32,13 +32,13 @@ namespace KretaDesktop.ViewModel.BaseClass
 
         // TODO Can not execute nem látszik a gombokon
 
-        public RelayCommandClass LastPageCommand { get; private set; }
-        public RelayCommandClass FirstPageCommand { get; private set; }
-        public RelayCommandClass PreviusPageCommand { get; private set; }
-        public RelayCommandClass NextPageCommand { get; private set; }
-        public RelayCommandClass SortingCommand { get; private set; }
-        public RelayCommandClass SearchCommand { get; private set; }
-        public RelayCommandClass SearchAllCommand { get; private set; }
+        public RelayCommand LastPageCommand { get; private set; }
+        public RelayCommand FirstPageCommand { get; private set; }
+        public RelayCommand PreviusPageCommand { get; private set; }
+        public RelayCommand NextPageCommand { get; private set; }
+        public RelayCommand SortingCommand { get; private set; }
+        public RelayCommand SearchCommand { get; private set; }
+        public RelayCommand SearchAllCommand { get; private set; }
 
         private int pageSize;
 
@@ -144,14 +144,14 @@ namespace KretaDesktop.ViewModel.BaseClass
 
         public PagedViewModel()
         {
-            LastPageCommand = new RelayCommandClass(execute => LastPage());
-            FirstPageCommand = new RelayCommandClass(execute => FirstPage());
-            PreviusPageCommand = new RelayCommandClass(execute => PreviusPage(), canExecute => CanExecutePreviusPageCommand());
-            NextPageCommand = new RelayCommandClass(execute => NextPage() , canExecute => CanExecuteNextPageCommand());            
+            LastPageCommand = new RelayCommand(execute => LastPage());
+            FirstPageCommand = new RelayCommand(execute => FirstPage());
+            PreviusPageCommand = new RelayCommand(execute => PreviusPage(), canExecute => CanExecutePreviusPageCommand());
+            NextPageCommand = new RelayCommand(execute => NextPage() , canExecute => CanExecuteNextPageCommand());            
 
-            SortingCommand = new RelayCommandClass(execute => Sorting());
-            SearchCommand = new RelayCommandClass(execute => Filtring(), canExecute => CanExecuteFiltringCommand());
-            SearchAllCommand = new RelayCommandClass(execute => SearrchAll(), canExecute => CanExecuteSeachAllCommand());
+            SortingCommand = new RelayCommand(execute => Sorting());
+            SearchCommand = new RelayCommand(execute => Filtring(), canExecute => CanExecuteFiltringCommand());
+            SearchAllCommand = new RelayCommand(execute => SearrchAll(), canExecute => CanExecuteSeachAllCommand());
 
 
             AppConfiguration appConfiguration = new AppConfiguration();

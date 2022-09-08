@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Input;
 using KretaDesktop.ViewModel.BaseClass;
-using KretaDesktop.ViewModel.Interface;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using ServiceKretaAPI.Services;
@@ -15,7 +8,7 @@ using ServiceKretaAPI.Services;
 namespace KretaDesktop.ViewModel
 {
     // TODO: A datagrid oszlopa olyan széles legyen mint az adatbázisban lévő max hosszúságú adat
-    public class ContentListSubjectViewModel : PagedViewModel, ICrudCommand<Subject>
+    public class ContentListSubjectViewModel : PagedViewModel
     {
         SubjectService subjectService;
 
@@ -43,14 +36,13 @@ namespace KretaDesktop.ViewModel
             }
         }
 
-        public RelayCommand<Subject> DeleteCommand { get; }
-        public RelayCommand<Subject> SaveCommand { get; }
-        public RelayCommand<Subject> NewCommand { get; }
+        public RelayCommand DeleteCommand { get; }
+        public RelayCommand SaveCommand { get; }
+        public RelayCommand NewCommand { get; }
 
         public ContentListSubjectViewModel()
         {
-            //CreateCommand=new RelayCommand<Subject>((subjects)=>)
-
+            DeleteCommand = new RelayCommand(parameter => Delete(parameter));
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
             selectedSubject = new Subject();
@@ -76,12 +68,15 @@ namespace KretaDesktop.ViewModel
             SelectedItemIndex = 0;
         }
 
-        async public void Delete(Subject entity)
+        async public void Delete(object entity)
         {
-            if (subjectService!=null)
-                await subjectService.DeleteSubjectAsync(entity.Id);
-            LoadData();
-
+            if (entity is Subject)
+            {
+                Subject subjectToDelete = (Subject)entity;
+                if (subjectService != null)
+                    await subjectService.DeleteSubjectAsync(subjectToDelete.Id);
+                LoadData();
+            }
         }
 
         public void Save(Subject entity)

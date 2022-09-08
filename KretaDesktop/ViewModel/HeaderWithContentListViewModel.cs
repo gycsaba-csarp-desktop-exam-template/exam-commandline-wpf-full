@@ -5,7 +5,7 @@ namespace KretaDesktop.ViewModel
 {
     public class HeaderWithContentListViewModel : ViewModelBase 
     {
-        private RelayCommandClass UpdateContentViewCommand;
+        private RelayCommand UpdateContentViewCommand { get; }
         private ViewModelBase selectedView;
         private ViewModelBase headerAppName;
 
@@ -29,11 +29,9 @@ namespace KretaDesktop.ViewModel
             }
         }
 
-
-
         public HeaderWithContentListViewModel()
         {
-            UpdateContentViewCommand = new RelayCommandClass(parameter => UpdateContentView(parameter));
+            UpdateContentViewCommand = new RelayCommand(parameter => UpdateContentView(parameter));
             SelectedView = new ContentListSubjectViewModel();
             HeaderAppName = new HeaderAppNameViewModel();
         }
