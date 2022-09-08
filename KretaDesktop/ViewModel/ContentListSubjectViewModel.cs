@@ -43,6 +43,7 @@ namespace KretaDesktop.ViewModel
         public ContentListSubjectViewModel()
         {
             DeleteCommand = new RelayCommand(parameter => Delete(parameter));
+            NewCommand = new RelayCommand(execute => New());
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
             selectedSubject = new Subject();
@@ -79,12 +80,21 @@ namespace KretaDesktop.ViewModel
             }
         }
 
+        async public void New()
+        {
+            if (subjectService!= null)
+            {
+                long newId = await subjectService.GetNextSubjectIdAsync();
+                SelectedSubject.Id=newId;
+                SelectedSubject.SubjectName = string.Empty;
+                OnPropertyChanged(nameof(SelectedSubject));
+            }
+        }
+
         public void Save(Subject entity)
         {
         }
 
-        public void New(Subject entity)
-        {
-        }
+
     }
 }

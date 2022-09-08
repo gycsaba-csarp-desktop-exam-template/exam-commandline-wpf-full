@@ -44,6 +44,7 @@
                 </Grid.RowDefinitions>
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="0" Grid.Column="0"  Content="Azon."></Label>
                 <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbSubjectId" Style="{DynamicResource FormTextBox}"
+                         IsReadOnly="True"
                          Text="{Binding SelectedSubject.Id}"       
                 />
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0" Content="Tantárgy név:"></Label>
@@ -55,7 +56,9 @@
                         Command="{Binding DeleteCommand}" 
                         CommandParameter="{Binding SelectedSubject}" 
                         Margin="100 2 2 2" Grid.Row="1" Grid.Column="2" Content="Törlés"></Button>
-                <Button Style="{DynamicResource ContentButton}" Margin="2 8 2 8" Grid.Row="2"  Grid.Column="1" Content="Új"></Button>
+                <Button Style="{DynamicResource ContentButton}" 
+                        Command="{Binding NewCommand}"
+                        Margin="2 8 2 8" Grid.Row="2"  Grid.Column="1" Content="Új"></Button>
             </Grid>
         </Expander>
         <Grid Grid.Row="2" VerticalAlignment="Top">
