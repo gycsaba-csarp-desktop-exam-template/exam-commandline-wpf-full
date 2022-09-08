@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net;
 using KretaDesktop.ViewModel.BaseClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Helpers;
@@ -98,7 +99,9 @@ namespace KretaDesktop.ViewModel
             if (entity is Subject)
             {
                 Subject subjectToSave= (Subject) entity;
-                await subjectService.Save(subjectToSave);
+                HttpStatusCode statusCode=await subjectService.Save(subjectToSave);
+                if (statusCode==HttpStatusCode.OK)
+                    LoadData();
             }
         }
 
