@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-
 using KretaDesktop.ViewModel.BaseClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.Parameters;
-using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
 
 namespace KretaDesktop.ViewModel
@@ -44,9 +36,16 @@ namespace KretaDesktop.ViewModel
             }
         }
 
+        public RelayCommand DeleteCommand { get; }
+        public RelayCommand SaveCommand { get; }
+        public RelayCommand NewCommand { get; }
 
         public ContentListSubjectViewModel()
         {
+            DeleteCommand = new RelayCommand(parameter => Delete(parameter));
+            NewCommand = new RelayCommand(execute => New());
+            SaveCommand = new RelayCommand(parameter => Save(parameter));
+
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
             selectedSubject = new Subject();
@@ -71,5 +70,38 @@ namespace KretaDesktop.ViewModel
             }
             SelectedItemIndex = 0;
         }
+
+        async public void Delete(object entity)
+        {
+            if (entity is Subject)
+            {
+                Subject subjectToDelete = (Subject)entity;
+                if (subjectService != null)
+                    await subjectService.DeleteSubjectAsync(subjectToDelete.Id);
+                LoadData();
+            }
+        }
+
+        async public void New()
+        {
+            if (subjectService!= null)
+            {
+                long newId = await subjectService.GetNextSubjectIdAsync();
+                SelectedSubject.Id=newId;
+                SelectedSubject.SubjectName = string.Empty;
+                OnPropertyChanged(nameof(SelectedSubject));
+            }
+        }
+
+        public async void Save(object entity)
+        {
+            if (entity is Subject)
+            {
+                Subject subjectToSave= (Subject) entity;
+                await subjectService.Save(subjectToSave);
+            }
+        }
+
+
     }
 }

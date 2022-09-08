@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KretaDesktop.ViewModel.BaseClass;
+﻿using KretaDesktop.ViewModel.BaseClass;
+
 
 namespace KretaDesktop.ViewModel
 {
-    public class HeaderWithContentListViewModel : ViewModelBase
+    public class HeaderWithContentListViewModel : ViewModelBase 
     {
-        private RelayCommand UpdateContentViewCommand;
+        private RelayCommand UpdateContentViewCommand { get; }
         private ViewModelBase selectedView;
         private ViewModelBase headerAppName;
 
@@ -50,5 +46,7 @@ namespace KretaDesktop.ViewModel
                 }
             }
         }
+
+
     }
 }

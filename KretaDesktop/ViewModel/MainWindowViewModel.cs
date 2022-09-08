@@ -23,7 +23,7 @@ namespace KretaDesktop.ViewModel
             }
         }
             
-        public RelayCommand UpdateViewCommand { get; set; }
+        public RelayCommand UpdateViewCommand { get; }
 
         public MainWindowViewModel()
         {
