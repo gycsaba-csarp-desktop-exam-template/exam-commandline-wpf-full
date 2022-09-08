@@ -135,10 +135,9 @@ namespace ServiceKretaAPI.Services
         {
             bool isExsist = await IsSubjectExsist(subject);
             if (isExsist)
-                await UpdateSubjectAsync(subject.Id, subject);
+                return await UpdateSubjectAsync(subject.Id, subject);
             else
-                await InsertNewSubjectAsync(subject);
-            return HttpStatusCode.OK;
+                return await InsertNewSubjectAsync(subject);
         }
 
         public async Task<HttpStatusCode> InsertNewSubjectAsync(Subject subject)

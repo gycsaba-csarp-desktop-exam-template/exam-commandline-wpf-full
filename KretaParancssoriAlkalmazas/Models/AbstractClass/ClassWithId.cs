@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KretaParancssoriAlkalmazas.Models.AbstractClass
 {
-    public class ClassWithId
+    public abstract class ClassWithId
     {
         public long Id { get; set; }
     }

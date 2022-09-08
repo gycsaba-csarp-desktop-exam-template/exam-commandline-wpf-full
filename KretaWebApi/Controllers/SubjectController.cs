@@ -170,15 +170,15 @@ namespace KretaWebApi.Controllers
                     logger.LogError("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy null.");
                     return BadRequest("Subject is null");
                 }
+                logger.LogInfo("Új tantárgy adatok rendben.");
+
+                var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
+
                 if (!ModelState.IsValid)
                 {
                     logger.LogInfo("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy nem elfogadható.");
                     return BadRequest("Invalid model object!");
                 }
-
-                logger.LogInfo("Új tantárgy adatok rendben.");
-
-                var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
 
                 repositoryWrapper.SubjectRepo.CreateSubject(insertedEFSubject);
                 repositoryWrapper.Save();
