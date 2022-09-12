@@ -72,17 +72,10 @@
                     <Button Command="{Binding SaveCommand}"
                             CommandParameter="{Binding SelectedSubject}"
                             Margin="2 2 2 4"  Content="Mentés">
-                        <!--<Button.Style>
+                        <Button.Style>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ContentButton}">
-                                <Style.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding ElementName=txtSubjectName, Path=(Validation.HasErrors)}" Value="false" />
-                                        </MultiDataTrigger.Conditions>
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
                             </Style>
-                        </Button.Style>-->
+                        </Button.Style>
                         <Button.IsEnabled>
                             <MultiBinding Converter="{StaticResource InverseAndBooleansToBooleanConverter}" UpdateSourceTrigger="PropertyChanged">
                                 <Binding ElementName="txtSubjectName" Path="(Validation.HasError)"/>
