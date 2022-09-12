@@ -12,6 +12,7 @@ using KretaParancssoriAlkalmazas.Models.DataModel;
 using ApplicationPropertiesSettings;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Http;
 
 namespace ServiceKretaAPI.Services
 {
@@ -153,7 +154,10 @@ namespace ServiceKretaAPI.Services
                 var response = await httpClient.PostAsync("/Subject/api/subject", httpContent);
 
                 //string error = "" + response.Content + " : " + response.StatusCode;
-                return response.StatusCode;
+                if (response.StatusCode == HttpStatusCode.NoContent)
+                    return HttpStatusCode.OK;
+                else
+                    return HttpStatusCode.InternalServerError;
             }
         }
 

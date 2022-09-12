@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Net;
-using KretaDesktop.ViewModel.BaseClass;
+﻿using KretaDesktop.ViewModel.BaseClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using ServiceKretaAPI.Services;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net;
 
-namespace KretaDesktop.ViewModel
+namespace KretaDesktop.ViewModel.Content
 {
     // TODO: A datagrid oszlopa olyan széles legyen mint az adatbázisban lévő max hosszúságú adat
     public class ContentListSubjectViewModel : PagedViewModel
@@ -18,8 +19,8 @@ namespace KretaDesktop.ViewModel
         public ObservableCollection<Subject> Subjects
         {
             get { return subjects; }
-            set 
-            { 
+            set
+            {
                 subjects = value;
                 OnPropertyChanged(nameof(Subjects));
             }
@@ -53,7 +54,6 @@ namespace KretaDesktop.ViewModel
 
             SortBy = "SubjectName";
 
-            LoadData();
         }
 
         async public override void LoadData()
@@ -64,12 +64,12 @@ namespace KretaDesktop.ViewModel
                 SaveParameter(pagedSubjectList);
                 if (pagedSubjectList != null)
                 {
-                    Subjects = new ObservableCollection<Subject>((List<Subject>)pagedSubjectList);
+                    Subjects = new ObservableCollection<Subject>(pagedSubjectList);
                 }
                 else
                     Subjects = new ObservableCollection<Subject>();
             }
-            SelectedItemIndex = 0;
+            SelectRow();
         }
 
         async public void Delete(object entity)
@@ -85,12 +85,15 @@ namespace KretaDesktop.ViewModel
 
         async public void New()
         {
-            if (subjectService!= null)
+            if (subjectService != null)
             {
-                long newId = await subjectService.GetNextSubjectIdAsync();
-                SelectedSubject.Id=newId;
-                SelectedSubject.SubjectName = string.Empty;
-                OnPropertyChanged(nameof(SelectedSubject));
+                if (SelectedSubject != null)
+                {
+                    long newId = await subjectService.GetNextSubjectIdAsync();
+                    SelectedSubject.Id = newId;
+                    SelectedSubject.SubjectName = string.Empty;
+                    OnPropertyChanged(nameof(SelectedSubject));
+                }
             }
         }
 
@@ -98,13 +101,41 @@ namespace KretaDesktop.ViewModel
         {
             if (entity is Subject)
             {
-                Subject subjectToSave= (Subject) entity;
-                HttpStatusCode statusCode=await subjectService.Save(subjectToSave);
-                if (statusCode==HttpStatusCode.OK)
+                Subject subjectToSave = (Subject)entity;
+                HttpStatusCode statusCode = await subjectService.Save(subjectToSave);
+                if (statusCode == HttpStatusCode.OK)
                     LoadData();
+                SelectedSubject = subjectToSave;
+                SelectRow(SelectedSubject);
             }
         }
 
+        private void SelectRow(Subject? subjectToSelect = null)
+        {
+
+            if (subjectToSelect == null)
+            {
+                SelectFirstRow();
+            }
+            else
+            {
+                LoadDataAndSelectRowContains(subjectToSelect);
+            }
+        }
+
+        private void SelectFirstRow()
+        {
+            if (Subjects.Count > 0)
+                SelectedItemIndex = 0;
+        }
+
+        private void LoadDataAndSelectRowContains(Subject subjectToSelect)
+        {
+            var list = subjects.Select(subject => subject.Id).ToList();
+            int index = list.IndexOf(subjectToSelect.Id);
+            if (index >= 0)
+                SelectedItemIndex = index;
+        }
 
     }
 }

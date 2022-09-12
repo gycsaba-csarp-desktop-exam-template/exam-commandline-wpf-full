@@ -1,4 +1,5 @@
 ﻿using KretaDesktop.ViewModel.BaseClass;
+using KretaDesktop.ViewModel.Content;
 
 
 namespace KretaDesktop.ViewModel

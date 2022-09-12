@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <converter:BoolToSortIconConverter x:Key="boolToIconConverter"></converter:BoolToSortIconConverter>
         <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"></converter:BoolToVisibilityConverter>
+        <converter:InverseAndBooleansToBooleanConverter x:Key="InverseAndBooleansToBooleanConverter"></converter:InverseAndBooleansToBooleanConverter>
     </UserControl.Resources>
     <!--
     <UserControl.DataContext>
@@ -44,26 +45,41 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="0" Grid.Column="0"  Content="Azon."></Label>
-                <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbSubjectId" Style="{DynamicResource FormTextBox}"
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtSubjectId" Style="{DynamicResource FormTextBox}"
                          IsReadOnly="True"
                          Text="{Binding SelectedSubject.Id}"       
                 />
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0" Content="Tantárgy név:"></Label>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbSubjectName" 
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtSubjectName" 
                          Style="{DynamicResource FormTextBox}"
                          Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
                     <TextBox.Text>
-                        <Binding Path="SelectedSubject.SubjectName" ValidatesOnDataErrors="True">
+                        <Binding Path="SelectedSubject.SubjectName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:NameValidation/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <Button Style="{DynamicResource ContentButton}" 
-                        Command="{Binding SaveCommand}"
+                <Button Command="{Binding SaveCommand}"
                         CommandParameter="{Binding SelectedSubject}"
                         Margin="100 2 2 2" Grid.Row="0" Grid.Column="2" Content="Mentés">
+                    <!--<Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ContentButton}">
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ElementName=txtSubjectName, Path=(Validation.HasErrors)}" Value="false" />
+                                    </MultiDataTrigger.Conditions>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>-->
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource InverseAndBooleansToBooleanConverter}" UpdateSourceTrigger="PropertyChanged">
+                            <Binding ElementName="txtSubjectName" Path="(Validation.HasError)"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
                 </Button>
                 <Button Style="{DynamicResource ContentButton}" 
                         Command="{Binding DeleteCommand}" 
