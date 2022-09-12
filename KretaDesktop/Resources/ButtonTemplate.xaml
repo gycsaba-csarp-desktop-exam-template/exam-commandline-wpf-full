@@ -36,11 +36,8 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="True">
-                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}"></Setter>
-            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{StaticResource StandardEnabledFalseBackground}"></Setter>
+                <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -5,12 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KretaDesktop.View"
              xmlns:viewmodels="clr-namespace:KretaDesktop.ViewModel"
+             xmlns:validations="clr-namespace:ValidationProject.Validations"
              xmlns:converter="clr-namespace:KretaDesktop.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converter:BoolToSortIconConverter x:Key="boolToIconConverter"></converter:BoolToSortIconConverter>
         <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"></converter:BoolToVisibilityConverter>
+        <converter:InverseAndBooleansToBooleanConverter x:Key="InverseAndBooleansToBooleanConverter"></converter:InverseAndBooleansToBooleanConverter>
     </UserControl.Resources>
     <!--
     <UserControl.DataContext>
@@ -41,29 +43,52 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Style="{DynamicResource FormLabel}" Grid.Row="0" Grid.Column="0"  Content="Azon."></Label>
-                <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbSubjectId" Style="{DynamicResource FormTextBox}"
+                <Button Style="{DynamicResource ContentButton}" 
+                        Command="{Binding NewCommand}"
+                        Margin="2 8 2 8" Grid.Row="0"  Grid.Column="1" Content="Új">
+
+                </Button>
+                <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0"  Content="Azon."></Label>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtSubjectId" Style="{DynamicResource FormTextBox}"
                          IsReadOnly="True"
                          Text="{Binding SelectedSubject.Id}"       
                 />
-                <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0" Content="Tantárgy név:"></Label>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbSubjectName" Style="{DynamicResource FormTextBox}"
-                         Text="{Binding SelectedSubject.SubjectName}"        
-                 />
-                <Button Style="{DynamicResource ContentButton}" 
-                        Command="{Binding SaveCommand}"
-                        CommandParameter="{Binding SelectedSubject}"
-                        Margin="100 2 2 2" Grid.Row="0" Grid.Column="2" Content="Mentés">
-                    
-                </Button>
-                <Button Style="{DynamicResource ContentButton}" 
-                        Command="{Binding DeleteCommand}" 
-                        CommandParameter="{Binding SelectedSubject}" 
-                        Margin="100 2 2 2" Grid.Row="1" Grid.Column="2" Content="Törlés"></Button>
-                <Button Style="{DynamicResource ContentButton}" 
-                        Command="{Binding NewCommand}"
-                        Margin="2 8 2 8" Grid.Row="2"  Grid.Column="1" Content="Új"></Button>
+                <Label Style="{DynamicResource FormLabel}" Grid.Row="2" Grid.Column="0" Content="Tantárgy név:"></Label>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtSubjectName" 
+                         Style="{DynamicResource FormTextBox}"
+                         Validation.ErrorTemplate="{StaticResource ValidationTemplate3}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedSubject.SubjectName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validations:NameValidation/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
+                    <Button Command="{Binding SaveCommand}"
+                            CommandParameter="{Binding SelectedSubject}"
+                            Margin="2 2 2 4"  Content="Mentés">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ContentButton}">
+                            </Style>
+                        </Button.Style>
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource InverseAndBooleansToBooleanConverter}" UpdateSourceTrigger="PropertyChanged">
+                                <Binding ElementName="txtSubjectName" Path="(Validation.HasError)"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
+                    </Button>
+                    <Button Style="{DynamicResource ContentButton}" 
+                            Command="{Binding DeleteCommand}" 
+                            CommandParameter="{Binding SelectedSubject}" 
+                            Margin="4 2 2 2" Content="Törlés">
+
+                    </Button>
+                </StackPanel>
             </Grid>
         </Expander>
         <Grid Grid.Row="2" VerticalAlignment="Top">
