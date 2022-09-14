@@ -24,6 +24,11 @@ namespace ApplicationPropertiesSettings
             return rowPerPageData;
         }
 
+        public static int getNameLengthInDatabase()
+        {
+            return int.Parse(Resources.ResourceManager.GetString("MaxNameLength"));
+        }
+
         public static List<string> GetPossibleNumberOfRowOnTheDataGridTableToList()
         {
             string rowPerPageData = Resources.ResourceManager.GetString("GetPossibleNumberOfRowOnTheDataGridTable");

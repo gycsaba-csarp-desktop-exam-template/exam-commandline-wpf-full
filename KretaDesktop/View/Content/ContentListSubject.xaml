@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="KretaDesktop.View.ContentListSubject"
+﻿<UserControl x:Class="KretaDesktop.View.Content.ContentListSubject"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -116,11 +116,11 @@
             </TextBox>
             <Button Grid.Column="3" Style="{DynamicResource ContentButton}"  Content="Keresés" Command="{Binding SearchCommand}" Margin="2 2 2 2"/>
             <Button Grid.Column="4" Style="{DynamicResource ContentButton}"  Content="Összes" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
-            <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 2 2 2">
+            <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 6 150 2">
                 <TextBlock HorizontalAlignment="Right" Margin="2" Foreground="{DynamicResource ContentForegroundColor}" Text="Elem/oldal:"></TextBlock>
                 <ComboBox HorizontalAlignment="Right" Grid.Column="5"
                             ItemsSource="{Binding RowPerPagePossibilities}"
-                            SelectedValue="{Binding PageSize}"
+                            SelectedItem="{Binding PageSize, UpdateSourceTrigger=PropertyChanged}"
                             SelectedIndex="0"
                 />
             </StackPanel>

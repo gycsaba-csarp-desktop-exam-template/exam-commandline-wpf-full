@@ -95,5 +95,14 @@ namespace ApplicationPropertiesSettings.Properties {
                 return ResourceManager.GetString("GetPossibleNumberOfRowOnTheDataGridTable", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 30.
+        /// </summary>
+        internal static string MaxNameLength {
+            get {
+                return ResourceManager.GetString("MaxNameLength", resourceCulture);
+            }
+        }
     }
 }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ApplicationPropertiesSettings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace ValidationProject.Validations.ValidationRules
 {
@@ -24,6 +26,17 @@ namespace ValidationProject.Validations.ValidationRules
                     return true;
                 else
                     return false;
+            }
+        }
+
+        public bool IsNameLong
+        {
+            get
+            {
+                bool answer = false;
+                if (nameToValidate.Length > ApplicationProperties.getNameLengthInDatabase())
+                    answer = true;
+                return answer;
             }
         }
 

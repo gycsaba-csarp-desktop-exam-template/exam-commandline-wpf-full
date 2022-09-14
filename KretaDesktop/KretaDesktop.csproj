@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="App.config" />
     <None Remove="Resources\icons\sort-alpha-down.png" />
     <None Remove="Resources\icons\sort-alpha-up-alt.png" />
   </ItemGroup>
@@ -31,6 +30,12 @@
     <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
     <ProjectReference Include="..\ServiceKretaAPI\ServiceKretaAPI.csproj" />
     <ProjectReference Include="..\StaticClasses\StaticClasses.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Localization\Resources\en\StringResources.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

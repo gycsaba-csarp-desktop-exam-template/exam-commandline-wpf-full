@@ -1,4 +1,5 @@
-﻿using KretaDesktop.ViewModel;
+﻿using ApplicationPropertiesSettings;
+using KretaDesktop.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,8 @@ namespace KretaDesktop
         {
             viewModel = new MainWindowViewModel();
             InitializeComponent();
+            AppConfiguration appConfiguration = new AppConfiguration();
+            appConfiguration.setCultureInfo();
             this.DataContext=viewModel;
         }
     }
