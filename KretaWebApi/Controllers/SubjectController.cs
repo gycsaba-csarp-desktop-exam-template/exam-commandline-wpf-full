@@ -30,10 +30,10 @@ Az attribútumos útválasztás az attribútumokat használja, hogy az útvonala
 
 namespace KretaWebApi.Controllers
 {
-    //TODO: Herouke
-    // https://www.c-sharpcorner.com/article/deploy-a-net-api-to-heroku-through-github-actions/
-    // https://enlear.academy/how-to-deploy-a-dockerized-web-app-to-heroku-using-the-github-actions-f16c00b19621
-    // https://www.youtube.com/watch?v=BqI1hu0gIb0
+    //TODO: Docker
+    // https://www.youtube.com/watch?v=3s-RfwvijpY&t=54s
+    // https://referbruv.com/blog/dockerizing-a-simple-aspnet-core-application-for-release-build/
+    // https://www.codeguru.com/dotnet/asp-net-docker/
 
     //TODO: NoDatabase    
 
