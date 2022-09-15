@@ -154,7 +154,7 @@ namespace KretaDesktop.ViewModel.BaseClass
             SearchAllCommand = new RelayCommand(execute => SearrchAll(), canExecute => CanExecuteSeachAllCommand());
 
 
-            AppConfiguration appConfiguration = new AppConfiguration();
+            DataGridRowProperties appConfiguration = new DataGridRowProperties();
             rowPerPagePossibilities=new ObservableCollection<string>(appConfiguration.GetPossibleNumberOfRowOnTheDataGridTable());
 
             SortingAscending = true;

@@ -190,7 +190,8 @@ namespace ServiceKretaAPI.Services
         private Uri GetHttpClientUri()
         {
             UriBuilder uri = new UriBuilder();
-            uri = ApplicationProperties.GetAPIUri(uri);
+            APIUriProperties apiUriProperties = new APIUriProperties();
+            uri = apiUriProperties.GetAPIUri(uri);
             return uri.Uri;
         }
     }

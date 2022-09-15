@@ -28,7 +28,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 // Localization 
-var supportedCultures = new[] { ApplicationProperties.GetDefaultCulture(), "en-US"};
+CultureProperties properties = new CultureProperties();
+var supportedCultures = new[] { properties.GetDefaultCulture(), "en-US"};
 
 var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture(supportedCultures[0])
