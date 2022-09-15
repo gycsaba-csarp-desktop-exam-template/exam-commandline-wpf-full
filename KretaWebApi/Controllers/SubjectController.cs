@@ -30,17 +30,10 @@ Az attribútumos útválasztás az attribútumokat használja, hogy az útvonala
 
 namespace KretaWebApi.Controllers
 {
-    //TODO: Herouke
-    // https://stackoverflow.com/questions/72623037/asp-net-6-api-deployed-to-heroku-returning-status-404-on-any-route
-    // https://dev.to/programadriano/deploying-net-6-web-api-to-heroku-using-docker-576o
-    // https://www.c-sharpcorner.com/article/deploy-a-net-api-to-heroku-through-github-actions/
-    // https://enlear.academy/how-to-deploy-a-dockerized-web-app-to-heroku-using-the-github-actions-f16c00b19621
-    // https://blog.kritner.com/2021/11/29/cicd-for-net6-with-github-actions/
-    // How to containerize .Net 6 Web API using docker
-    // https://www.youtube.com/watch?v=8LgTG5oNF_Q
-
-
-
+    //TODO: Docker
+    // https://www.youtube.com/watch?v=3s-RfwvijpY&t=54s
+    // https://referbruv.com/blog/dockerizing-a-simple-aspnet-core-application-for-release-build/
+    // https://www.codeguru.com/dotnet/asp-net-docker/
     //TODO: NoDatabase    
 
     [Route("[controller]")]
