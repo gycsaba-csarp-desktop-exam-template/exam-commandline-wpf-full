@@ -33,4 +33,10 @@
     <ProjectReference Include="..\StaticClasses\StaticClasses.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Localization\Resources\en-En\StringResources.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

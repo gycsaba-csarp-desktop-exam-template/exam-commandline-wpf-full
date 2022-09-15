@@ -88,7 +88,7 @@ namespace ApplicationPropertiesSettings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to hu-HU.
+        ///   Looks up a localized string similar to en-En.
         /// </summary>
         internal static string CultureInfo {
             get {

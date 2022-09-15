@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Globalization;
 using ValidationProject.Validations.ValidationRules;
-
-using ValidationProject.Static;
+using KretaDesktop.Localization;
 
 namespace ValidationProject.Validations
 {

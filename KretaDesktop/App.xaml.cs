@@ -1,4 +1,6 @@
-﻿using KretaDesktop.ViewModel;
+﻿using ApplicationPropertiesSettings;
+using KretaDesktop.Localization;
+using KretaDesktop.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,7 +20,13 @@ namespace KretaDesktop
         {
             base.OnStartup(e);
 
-           /* var window = new MainWindow() { DataContext = new MainWindowViewModel()};
+            CultureProperties cultureProperties = new CultureProperties();
+            cultureProperties.SetCurrentCultureToDefaultCulture();
+
+            ProjectLocalization projectLocalization=new ProjectLocalization();
+            projectLocalization.SwitchToCurrentCuture();
+
+            /* var window = new MainWindow() { DataContext = new MainWindowViewModel()};
             window.Show();*/
         }
     }
