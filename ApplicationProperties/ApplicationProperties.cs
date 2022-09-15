@@ -10,6 +10,9 @@ namespace ApplicationPropertiesSettings
         {
             uri.Scheme = Resources.ResourceManager.GetString("APIScheme");
             uri.Host = Resources.ResourceManager.GetString("APIHost");
+            string port = Resources.ResourceManager.GetString("APIPort");
+            if (!string.IsNullOrEmpty(port))
+                uri.Port = int.Parse(port);
             return uri;
         }
 

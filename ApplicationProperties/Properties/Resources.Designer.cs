@@ -61,7 +61,7 @@ namespace ApplicationPropertiesSettings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to kreta.azurewebsites.net.
+        ///   Looks up a localized string similar to localhost.
         /// </summary>
         internal static string APIHost {
             get {
@@ -70,7 +70,16 @@ namespace ApplicationPropertiesSettings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https.
+        ///   Looks up a localized string similar to 5000.
+        /// </summary>
+        internal static string APIPort {
+            get {
+                return ResourceManager.GetString("APIPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http.
         /// </summary>
         internal static string APIScheme {
             get {
