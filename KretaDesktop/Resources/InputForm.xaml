@@ -11,4 +11,8 @@
         <Setter Property="Margin" Value="18 4 2 2"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource ContentForegroundColor}"></Setter>
     </Style>
+    <Style x:Key="FormTextBlock" TargetType="TextBlock">
+        <Setter Property="Margin" Value="18 4 2 2"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource ContentForegroundColor}"></Setter>
+    </Style>
 </ResourceDictionary>

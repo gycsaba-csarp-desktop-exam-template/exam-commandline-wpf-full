@@ -1,4 +1,5 @@
 ﻿using ApplicationPropertiesSettings;
+using KretaDesktop.Localization;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.Parameters;
@@ -81,7 +82,8 @@ namespace KretaDesktop.ViewModel.BaseClass
             get 
             {
                 int index = ((QueryString.CurrentPage-1) * QueryString.PageSize) + (SelectedItemIndex + 1);
-                return $"Tantárgy adatai: {index}  /  {NumberOfItem}"; 
+                ProjectLocalization localization=new ProjectLocalization();
+                return  localization.GetStringResource("contentListSubjectProperties")+$"{index}  /  {NumberOfItem}"; 
             }
         }
             

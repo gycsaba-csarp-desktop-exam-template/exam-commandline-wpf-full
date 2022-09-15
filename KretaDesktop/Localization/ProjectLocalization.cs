@@ -67,6 +67,35 @@ namespace KretaDesktop.Localization
             }
         }
 
+        private void LoadStringResource(string locale)
+        {
+            var resources = new ResourceDictionary();
+
+            resources.Source = new Uri("pack://application:,,,/Resources_" + locale + ";component/Strings.xaml", UriKind.Absolute);
+
+            var current = Application.Current.Resources.MergedDictionaries.FirstOrDefault(
+                             m => m.Source.OriginalString.EndsWith("Strings.xaml"));
+
+
+            if (current != null)
+            {
+                Application.Current.Resources.MergedDictionaries.Remove(current);
+            }
+
+            Application.Current.Resources.MergedDictionaries.Add(resources);
+        }
+
+        private void US_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadStringResource("en-US");
+        }
+
+        private void GB_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadStringResource("en-GB");
+        }
+
+
         private string GetLocXAMLFilePath(string cultureName)
         {
             //String Directory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
