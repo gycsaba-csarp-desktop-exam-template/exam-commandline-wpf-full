@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KretaDesktop.View
+namespace KretaDesktop.View.Content
 {
     /// <summary>
     /// Interaction logic for ContentListSubject.xaml

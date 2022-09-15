@@ -5,8 +5,12 @@
     https://tipsfordev.com/wpf-localization-multiple-languages-resourcedictionary-vs-resource-file-resx
     https://docs.microsoft.com/et-ee/dotnet/desktop/wpf/advanced/how-to-use-a-resourcedictionary-to-manage-localizable-string-resources?view=netframeworkdesktop-4.8
     -->
-    <system:String x:Key="validationNameIsShort">A név nem elég hosszú!</system:String>
+    <system:String x:Key="validationNameIsShort">The name is required! The name must be at least 3 characters long!</system:String>
+    <system:String x:Key="validationNameIsLong">The name cannot be longer than 30 characters!</system:String>
     <system:String x:Key="validationNameFirstLetterNotUppercase">A név nem nagybetűvel kezdődik!</system:String>
-    <system:String x:Key="validationOtherLetterNotLowercase">A kezdőbetűk után kisbetűket írjon!</system:String>
-    <system:String x:Key="validationNameOnlyLetters">A névben csak batűk lehetnek!</system:String>
+    <system:String x:Key="validationOtherLetterNotLowercase">First letter must be uppercase, other lowercase!</system:String>
+    <system:String x:Key="validationNameOnlyLetters">First letter must be uppercase, other lowercase!</system:String>
+
+    <system:String x:Key="contentSorting">Sorting:</system:String>
+    
 </ResourceDictionary>

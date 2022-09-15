@@ -34,7 +34,6 @@ namespace KretaWebApi.Controllers
     // https://www.youtube.com/watch?v=3s-RfwvijpY&t=54s
     // https://referbruv.com/blog/dockerizing-a-simple-aspnet-core-application-for-release-build/
     // https://www.codeguru.com/dotnet/asp-net-docker/
-
     //TODO: NoDatabase    
 
     [Route("[controller]")]

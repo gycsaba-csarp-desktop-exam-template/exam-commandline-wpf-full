@@ -9,6 +9,7 @@ using System.Globalization;
 using ValidationProject.Validations.ValidationRules;
 
 using ValidationProject.Static;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ValidationProject.Validations
 {
@@ -22,28 +23,29 @@ namespace ValidationProject.Validations
                 NameValidationRules nvr=new NameValidationRules(nameToValidate);
                 ProjectLocalization projectLocalization = new ProjectLocalization();
 
+                string errContent = string.Empty;
                 if (nvr.IsNameShort)
-                {
-        
-                    string errContent= projectLocalization.GetStringResource("validationNameIsShort");
-                    return new ValidationResult(false, errContent);
+                {       
+                    errContent= projectLocalization.GetStringResource("validationNameIsShort");
                 }
-
+                if (nvr.IsNameLong)
+                {
+                    errContent = projectLocalization.GetStringResource("validationNameIsLong");
+                }
                 if (!nvr.IsFirstLetterUppercase)
                 {
-                    string errContent = projectLocalization.GetStringResource("validationNameFirstLetterNotUppercase");
-                    return new ValidationResult(false, errContent);
+                    errContent = projectLocalization.GetStringResource("validationNameFirstLetterNotUppercase");
                 }
                 if (!nvr.IsOtherLetterLowercase)
                 {
-                    string errContent = projectLocalization.GetStringResource("validationOtherLetterNotLowercase");
-                    return new ValidationResult(false, errContent);
+                    errContent = projectLocalization.GetStringResource("validationOtherLetterNotLowercase");
                 }
                 if (!nvr.IsOnlyLetters)
                 {
-                    string errContent = projectLocalization.GetStringResource("validationNameOnlyLetters");
-                    return new ValidationResult(false, errContent);
+                    errContent = projectLocalization.GetStringResource("validationNameOnlyLetters");
                 }
+                return new ValidationResult(false, errContent);
+
             }
             return new ValidationResult(true, "");
         }

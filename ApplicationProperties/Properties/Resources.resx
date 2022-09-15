@@ -132,4 +132,7 @@
   <data name="GetPossibleNumberOfRowOnTheDataGridTable" xml:space="preserve">
     <value>10,20,30</value>
   </data>
+  <data name="MaxNameLength" xml:space="preserve">
+    <value>30</value>
+  </data>
 </root>
