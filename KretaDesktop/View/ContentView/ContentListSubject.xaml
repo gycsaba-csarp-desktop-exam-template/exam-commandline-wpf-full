@@ -27,11 +27,12 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label FontSize="24" HorizontalAlignment="Left"
+        <TextBlock FontSize="24" HorizontalAlignment="Left"
                Foreground="{DynamicResource ContentForegroundColor}"
                Margin=" 16 16 2 2"
-               >Tantárgyak
-        </Label>
+               Text="{DynamicResource contentListSubjectTitle}"
+               >
+        </TextBlock>
         <Expander Grid.Row="1" Header="{Binding ItemData}" Margin="0 24 2 2" Foreground="{DynamicResource ContentForegroundColor}" >
             <Grid Background="{DynamicResource ExpanderBackgroundColor}">
                 <Grid.ColumnDefinitions>
@@ -48,7 +49,7 @@
                 </Grid.RowDefinitions>
                 <Button Style="{DynamicResource ContentButton}" 
                         Command="{Binding NewCommand}"
-                        Margin="2 8 2 8" Grid.Row="0"  Grid.Column="1" Content="Új">
+                        Margin="2 8 2 8" Grid.Row="0"  Grid.Column="1" Content="{DynamicResource buttonNew}">
 
                 </Button>
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0"  Content="Azon."></Label>
@@ -71,7 +72,9 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
                     <Button Command="{Binding SaveCommand}"
                             CommandParameter="{Binding SelectedSubject}"
-                            Margin="2 2 2 4"  Content="Mentés">
+                            Margin="2 2 2 4"    
+                            Content="{DynamicResource buttonSave}"
+                            >
                         <Button.Style>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ContentButton}">
                             </Style>
@@ -85,7 +88,7 @@
                     <Button Style="{DynamicResource ContentButton}" 
                             Command="{Binding DeleteCommand}" 
                             CommandParameter="{Binding SelectedSubject}" 
-                            Margin="4 2 2 2" Content="Törlés">
+                            Margin="4 2 2 2" Content="{DynamicResource buttonDelete}">
 
                     </Button>
                 </StackPanel>
@@ -95,29 +98,31 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel  Grid.Column="0" Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" Margin="0">
-                <TextBlock  Margin="6 8 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="Rendezés:"></TextBlock>
-                <StackPanel Margin="2 2 2 2" Background="{DynamicResource ContentForegroundColor}" Height="18" Width="18">
-                    <Button Command="{Binding SortingCommand}">
-                        <Image Source="{Binding SortingAscending, Converter={StaticResource boolToIconConverter}}" />
-                    </Button>
-                </StackPanel>
+                <TextBlock  Margin="6 8 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="{DynamicResource tbSorting}"></TextBlock>
+                <Button Style="{DynamicResource ContentButton}" Command="{Binding SortingCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding SortingAscending, Converter={StaticResource boolToIconConverter}}"/>
+                        <TextBlock Text="{DynamicResource tbSortingLowerCase}"></TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
-            <Label Grid.Column="1" Style="{DynamicResource FormLabel}" Content="Szűrés:" Margin="64 2 2 2"></Label>
-            <TextBox Grid.Column="2" x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}" Margin="2 2 2 2"                     
-                        Text="{Binding UserFiltringParameter,Mode=TwoWay}"
-                        >
-            </TextBox>
-            <Button Grid.Column="3" Style="{DynamicResource ContentButton}"  Content="Keresés" Command="{Binding SearchCommand}" Margin="2 2 2 2"/>
-            <Button Grid.Column="4" Style="{DynamicResource ContentButton}"  Content="Összes" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
-            <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 2 2 2">
-                <TextBlock HorizontalAlignment="Right" Margin="2" Foreground="{DynamicResource ContentForegroundColor}" Text="Elem/oldal:"></TextBlock>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBlock Style="{DynamicResource FormTextBlock}" Text="{DynamicResource tbFiltring}" Margin="64 2 2 2"></TextBlock>
+                <TextBox x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}" Margin="2 2 2 2"                     
+                            Text="{Binding UserFiltringParameter,Mode=TwoWay}"
+                            >
+                </TextBox>
+                <Button Style="{DynamicResource ContentButton}" Content="{DynamicResource buttonFind}" Command="{Binding SearchCommand}" Margin="2 2 2 2"/>
+                <Button Style="{DynamicResource ContentButton}"  Content="{DynamicResource buttonFindAll}" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
+            </StackPanel>
+            <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 2 100 2">
+                <TextBlock HorizontalAlignment="Right" Margin="2" 
+                           Foreground="{DynamicResource ContentForegroundColor}" 
+                           Text="{DynamicResource tbRowPerPage}"></TextBlock>
                 <ComboBox HorizontalAlignment="Right" Grid.Column="5"
                             ItemsSource="{Binding RowPerPagePossibilities}"
                             SelectedValue="{Binding PageSize}"
@@ -135,15 +140,15 @@
                       ColumnHeaderStyle="{DynamicResource DataGridCRUDHeaderStyle}"
              >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="40" Header="Azon." Binding="{Binding Id}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="220" Header="Tantárgy név" Binding="{Binding SubjectName}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="40" Header="{DynamicResource id}" Binding="{Binding Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="220" Header="{DynamicResource subjectName}" Binding="{Binding SubjectName}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Style="{DynamicResource ContentButton}" 
                     VerticalAlignment="Bottom"
                         Command="{Binding DeleteCommand}" 
                         CommandParameter="{Binding SelectedSubject}" 
-                        Margin="100 2 2 2" Grid.Row="1" Grid.Column="2" Content="Törlés">
+                        Margin="100 2 2 2" Grid.Row="1" Grid.Column="2" Content="{DynamicResource buttonDelete}">
             </Button>
         </StackPanel>
         <Grid Background="{DynamicResource NavigationBackgroundColor}" Grid.Row="5" Margin="5">
@@ -157,7 +162,7 @@
             <Button x:Name="btFirstPage"  Style="{DynamicResource ContentButton}" Command="{Binding FirstPageCommand}" Content="&lt;&lt;" Grid.Column="0" />
             <Button x:Name="btPreviusPage" Style="{DynamicResource ContentButton}" Command="{Binding PreviusPageCommand}" Content="&lt;" Grid.Column="1" />
             <StackPanel Orientation="Horizontal" Grid.Column="2">
-                <Label x:Name="Page" Foreground="{DynamicResource ContentForegroundColor}" Content="Oldal:"></Label>
+                <Label x:Name="Page" Foreground="{DynamicResource ContentForegroundColor}" Content="{DynamicResource tbPage}"></Label>
                 <Label x:Name="tbCurrentPage" Foreground="{DynamicResource ContentForegroundColor}" Content="{Binding CurrentPage}"/>
                 <Label Content="/"></Label>
                 <Label x:Name="tbNumberOfPage" Foreground="{DynamicResource ContentForegroundColor}" Content="{Binding NumberOfPage}"/>

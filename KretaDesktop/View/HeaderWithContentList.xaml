@@ -14,9 +14,14 @@
         </Grid.RowDefinitions>
         <ContentControl Grid.Row="0" Content="{Binding HeaderAppName}"></ContentControl>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}" Command="{Binding UpdateContentView}" CommandParameter="Tantargyak">Tantárgyak</Button>
-            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Tanárok</Button>
-            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}">Osztályok</Button>
+            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}" 
+                    Command="{Binding UpdateContentView}" 
+                    CommandParameter="Tantargyak"
+                    Content="{DynamicResource headerSubject}">
+                    
+            </Button>
+            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}"></Button>
+            <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}"></Button>
         </StackPanel>
         <ContentControl Grid.Row="2" Content="{Binding SelectedView}"></ContentControl>
     </Grid>

@@ -16,16 +16,20 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical" Background="{DynamicResource HeaderBackgroundColor}">
-            <TextBlock FontSize="24" Foreground="{DynamicResource ContentForegroundColor}" Margin="2 22 2 36">Kréta</TextBlock>
+            <TextBlock FontSize="24" 
+                       Foreground="{DynamicResource ContentForegroundColor}" 
+                       Margin="2 22 2 36"
+                       Text="{DynamicResource menuTitle}">
+            </TextBlock>
             <Menu Margin="2 2 2 2" Background="{DynamicResource HeaderBackgroundColor}">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel Orientation="Vertical"></VirtualizingStackPanel>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Listák" Command="{Binding UpdateViewCommand}" CommandParameter="Listak"></MenuItem>
-                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Áthelyezések" Command="{Binding UpdateViewCommand}" CommandParameter="Athelyezesek"></MenuItem>
-                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="Műveletek"></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="{DynamicResource menuLists}" Command="{Binding UpdateViewCommand}" CommandParameter="Listak"></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="" Command="{Binding UpdateViewCommand}" CommandParameter="Athelyezesek"></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header=""></MenuItem>
             </Menu>
         </StackPanel>
         <GridSplitter  Grid.Column="1" Width="2" Background="Black"></GridSplitter>

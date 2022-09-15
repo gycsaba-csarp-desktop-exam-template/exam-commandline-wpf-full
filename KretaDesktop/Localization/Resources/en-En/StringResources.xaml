@@ -1,6 +1,38 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- Menu -->
+    <system:String x:Key="menuTitle">CRETA</system:String>
+    <system:String x:Key="menuLists">Lists</system:String>
+
+    <!-- Header -->
+    <system:String x:Key="headerTitle">C R E T A - School administration programme</system:String>
+    <system:String x:Key="headerSubject">Subjects</system:String>
+    
+    <!-- TextBlock -->
+    <system:String x:Key="tbSorting">Sorting:</system:String>
+    <system:String x:Key="tbSortingLowerCase">sorting:</system:String>
+    <system:String x:Key="tbFiltring">Filtring:</system:String>
+    <system:String x:Key="tbRowPerPage">Row/page:</system:String>
+    <system:String x:Key="tbPage">Page:</system:String>
+
+    <!-- Button -->
+    <system:String x:Key="buttonSave">Save</system:String>
+    <system:String x:Key="buttonFind">Find</system:String>
+    <system:String x:Key="buttonFindAll">Find all</system:String>
+    <system:String x:Key="buttonNew">Új</system:String>
+    <system:String x:Key="buttonDelete">Delete</system:String>
+    <!-- Content -->
+    <!-- ContentListSubject -->
+    <system:String x:Key="contentListSubjectTitle">Subjects</system:String>
+    <system:String x:Key="contentListSubjectProperties">Subject properties: </system:String>
+
+    <!-- DataProperties -->
+    <system:String x:Key="id">Id.</system:String>
+    <!-- Subject -->
+    <system:String x:Key="subjectName">Subject name</system:String>
+
+
     <!--
     https://tipsfordev.com/wpf-localization-multiple-languages-resourcedictionary-vs-resource-file-resx
     https://docs.microsoft.com/et-ee/dotnet/desktop/wpf/advanced/how-to-use-a-resourcedictionary-to-manage-localizable-string-resources?view=netframeworkdesktop-4.8

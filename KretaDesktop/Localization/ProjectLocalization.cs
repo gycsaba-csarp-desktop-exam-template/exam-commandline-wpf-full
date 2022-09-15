@@ -17,7 +17,6 @@ namespace KretaDesktop.Localization
     {
         // https://stackoverflow.com/questions/53441784/showing-different-message-in-multilanguage-dynamically
 
-
         public void SwitchToCurrentCuture()
         {
             var languageDictionary = new ResourceDictionary();
@@ -68,26 +67,32 @@ namespace KretaDesktop.Localization
             }
         }
 
-        /*public void SwitchToCurrentCutureLanguage()
+        private void LoadStringResource(string locale)
         {
-            string path = GetLocXAMLFilePath(CultureInfo.CurrentCulture.Name);
-            SwitchLanguage(path);
-        }*/
+            var resources = new ResourceDictionary();
 
-        private void SwitchLanguage(string path)
-        {
-            /* if (CultureInfo.CurrentCulture.Name.Equals(inFiveCharLang))
-                 return;*/
+            resources.Source = new Uri("pack://application:,,,/Resources_" + locale + ";component/Strings.xaml", UriKind.Absolute);
 
-            /*var ci = new CultureInfo(inFiveCharLang);
-            Thread.CurrentThread.CurrentCulture = ci;
-            Thread.CurrentThread.CurrentUICulture = ci;*/
+            var current = Application.Current.Resources.MergedDictionaries.FirstOrDefault(
+                             m => m.Source.OriginalString.EndsWith("Strings.xaml"));
 
-            SetLanguageResourceDictionary(path);
-            /*if (null != LanguageChangedEvent)
+
+            if (current != null)
             {
-                LanguageChangedEvent(this, new EventArgs());
-            }*/
+                Application.Current.Resources.MergedDictionaries.Remove(current);
+            }
+
+            Application.Current.Resources.MergedDictionaries.Add(resources);
+        }
+
+        private void US_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadStringResource("en-US");
+        }
+
+        private void GB_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadStringResource("en-GB");
         }
 
 
@@ -102,44 +107,6 @@ namespace KretaDesktop.Localization
             path.Append("..\\Localization\\Resources\\" + cultureName + "\\StringResources.xaml");
             return path.ToString();
         }
-
-        private void SetLanguageResourceDictionary(String inFile)
-        {
-            if (!File.Exists(inFile))
-            {
-                // Read in ResourceDictionary File
-                var languageDictionary = new ResourceDictionary();
-                languageDictionary.Source = new Uri(inFile, UriKind.Relative);
-
-                // Remove any previous Localization dictionaries loaded
-                int langDictId = -1;
-                for (int i = 0; i < Application.Current.Resources.MergedDictionaries.Count; i++)
-                {
-                    var md = Application.Current.Resources.MergedDictionaries[i];
-                    // Make sure your Localization ResourceDictionarys have the ResourceDictionaryName
-                    // key and that it is set to a value starting with "Loc-".
-                    if (md.Contains("ResourceDictionaryName"))
-                    {
-                        if (md["ResourceDictionaryName"].ToString().StartsWith("Loc-"))
-                        {
-                            langDictId = i;
-                            break;
-                        }
-                    }
-                }
-                if (langDictId == -1)
-                {
-                    // Add in newly loaded Resource Dictionary
-                    Application.Current.Resources.MergedDictionaries.Add(languageDictionary);
-                }
-                else
-                {
-                    // Replace the current langage dictionary with the new one
-                    Application.Current.Resources.MergedDictionaries[langDictId] = languageDictionary;
-                }
-            }
-        }
-
 
         public string GetStringResource(string stringResourceName)
         {
