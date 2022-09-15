@@ -17,7 +17,8 @@ namespace KretaRazorPages.Extensions
 
         public static void ConfigureLocalization(this IServiceCollection services)
         {
-            var supportedCultures = new[] { APIUriProperties.GetDefaultCulture(), "en-US" };
+            CultureProperties properties = new CultureProperties();
+            var supportedCultures = new[] { properties.GetDefaultCulture(), "en-US" };
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
