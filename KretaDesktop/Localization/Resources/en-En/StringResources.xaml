@@ -30,7 +30,10 @@
     <!-- ContentListSubject -->
     <system:String x:Key="contentListSubjectTitle">Subjects</system:String>
     <system:String x:Key="contentListSubjectProperties">Subject properties: </system:String>
-
+    <!-- ContentAppConfiguratonLocalization -->
+    <system:String x:Key="contentLocalizationCurrentLanguage">Current language:</system:String>
+    <system:String x:Key="contentLocalizationSelectLanguage">SelectLanguage</system:String>
+    
     <!-- DataProperties -->
     <system:String x:Key="id">Id.</system:String>
     <!-- Subject -->

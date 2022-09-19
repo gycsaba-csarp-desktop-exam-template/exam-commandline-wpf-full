@@ -16,15 +16,13 @@ namespace KretaDesktop.Localization
     public class ProjectLocalization
     {
         // https://stackoverflow.com/questions/53441784/showing-different-message-in-multilanguage-dynamically
+        // https://stackoverflow.com/questions/45407108/how-to-change-ui-language-using-resource-dictionary-at-run-time
 
         public void SwitchToCurrentCuture()
         {
             var languageDictionary = new ResourceDictionary();
 
             string currentCultureName = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
-
-            // CultureInfo.CurrentCulture.Name
-
             string url = GetLocXAMLFilePath(currentCultureName);
             //string url = GetLocXAMLFilePath(Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName);
             languageDictionary.Source = new Uri(url, UriKind.Relative);
@@ -85,16 +83,6 @@ namespace KretaDesktop.Localization
             Application.Current.Resources.MergedDictionaries.Add(resources);
         }
 
-        private void US_OnClick(object sender, RoutedEventArgs e)
-        {
-            LoadStringResource("en-US");
-        }
-
-        private void GB_OnClick(object sender, RoutedEventArgs e)
-        {
-            LoadStringResource("en-GB");
-        }
-
 
         private string GetLocXAMLFilePath(string cultureName)
         {
@@ -119,6 +107,21 @@ namespace KretaDesktop.Localization
             if ((res != null) && (res.Contains(stringResourceName)))
                 result = res[stringResourceName].ToString();
             return result;
+
+        }
+
+        public List<string> GetsupportedCultures()
+        {
+            List<string> supportedCultures = new List<string>();
+            foreach(string file in Directory.GetFiles(Assembly.GetExecutingAssembly().Location))
+            {
+                supportedCultures.Add(file);
+            }
+            return supportedCultures;
+            /*if (Application.Current.Resources != null)
+            {
+
+            }*/
 
         }
     }

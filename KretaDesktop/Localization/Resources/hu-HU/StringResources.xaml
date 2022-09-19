@@ -32,7 +32,10 @@
     <!-- ContentListSubject -->
     <system:String x:Key="contentListSubjectTitle">Tantárgyak</system:String>
     <system:String x:Key="contentListSubjectProperties">Tantárgy adatai: </system:String>
-    
+    <!-- ContentAppConfiguratonLocalization -->
+    <system:String x:Key="contentLocalizationCurrentLanguage">Aktuális nyelv:</system:String>
+    <system:String x:Key="contentLocalizationSelectLanguage">Nyelv választás</system:String>
+
     <!-- DataProperties -->
     <system:String x:Key="id">Azon.</system:String>
     <!-- Subject -->

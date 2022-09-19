@@ -16,8 +16,7 @@ namespace KretaDesktop.ViewModel
         {
             UpdateContentViewCommand = new RelayCommand(parameter => UpdateContentView(parameter));            
             HeaderAppName = new HeaderAppNameViewModel();
-
-            //SelectedView = new ContentListSubjectViewModel();
+            SelectedView = new ContentLocalizationViewModel();
         }
 
         public void UpdateContentView(object parameter)
@@ -26,7 +25,7 @@ namespace KretaDesktop.ViewModel
             {
                 if (parameter.ToString() == "Localization")
                 {
-                    SelectedView = new ContentLocalicationViewModel();
+                    SelectedView = new ContentLocalizationViewModel();
                 }
             }
         }

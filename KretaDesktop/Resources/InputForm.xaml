@@ -7,6 +7,12 @@
         <Setter Property="Height" Value="22"></Setter>
         <Setter Property="Margin" Value="2 2 2 2"></Setter>
     </Style>
+    <Style x:Key="FormComboBox" TargetType="ComboBox">
+        <Setter Property="Foreground"  Value="{DynamicResource ContentTextBoxForgraound}"></Setter>
+    </Style>
+    <Style x:Key="FormComboBoxItem" TargetType="ComboBoxItem">
+        <Setter Property="Background" Value="{DynamicResource ContentTextBoxBackground}"></Setter>
+    </Style>
     <Style x:Key="FormLabel" TargetType="Label">
         <Setter Property="Margin" Value="18 4 2 2"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource ContentForegroundColor}"></Setter>
