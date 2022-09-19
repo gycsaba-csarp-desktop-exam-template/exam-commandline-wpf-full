@@ -5,6 +5,8 @@
     <system:String x:Key="menuTitle">Kréta</system:String>
     <system:String x:Key="menuLists">Listák</system:String>
     <system:String x:Key="menuOperation">Műveletek</system:String>
+    <system:String x:Key="menuConfiguration">Konfiguráció</system:String>
+    <system:String x:Key="menuExit">Kilépés</system:String>
     <!-- Header -->
     <system:String x:Key="headerTitle">K R É T A  -  Iskolai adminisztrációs program</system:String>
     <system:String x:Key="headerSubject">Tantárgyak</system:String>

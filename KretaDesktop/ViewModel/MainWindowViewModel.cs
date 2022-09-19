@@ -11,6 +11,8 @@ namespace KretaDesktop.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private MainWindow mainWindow;
+
         private ViewModelBase selectedView;
 
         public ViewModelBase SelectedView
@@ -25,8 +27,9 @@ namespace KretaDesktop.ViewModel
             
         public RelayCommand UpdateViewCommand { get; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(MainWindow mainWindow)
         {
+            this.mainWindow = mainWindow;
             UpdateViewCommand = new RelayCommand((parameter) => UpdateView(parameter));
             selectedView = new HeaderWithContentListViewModel();            
         }
@@ -36,14 +39,25 @@ namespace KretaDesktop.ViewModel
             // https://www.youtube.com/watch?v=1_cUgpWqS0Y
             if (parameter is string)
             {
-                if (parameter.ToString() == "Listak")
+                if (parameter.ToString() == "Lists")
                 {
                     SelectedView = new HeaderWithContentListViewModel();
                 }
-                if (parameter.ToString() == "Athelyezesek")
+                if (parameter.ToString() == "Operation")
                 {
                     SelectedView = new HeaderWithContentMoveViewModel();
                 }
+                if (parameter.ToString()== "Configuration")
+                {
+
+                }
+                if (parameter.ToString() == "Exit")
+                {
+                    //https://stackoverflow.com/questions/16172462/close-window-from-viewmodel
+                    //Application.Current.Windows[0].Close();
+                    mainWindow.Close();
+                }
+
             }
         }
     }

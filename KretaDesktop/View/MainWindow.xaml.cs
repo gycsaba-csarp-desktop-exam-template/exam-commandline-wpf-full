@@ -25,7 +25,7 @@ namespace KretaDesktop
 
         public MainWindow()
         {
-            viewModel = new MainWindowViewModel();
+            viewModel = new MainWindowViewModel(this);
             InitializeComponent();
             this.DataContext=viewModel;
         }

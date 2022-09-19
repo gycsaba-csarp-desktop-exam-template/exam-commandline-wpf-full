@@ -27,9 +27,28 @@
                         <VirtualizingStackPanel Orientation="Vertical"></VirtualizingStackPanel>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
-                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="{DynamicResource menuLists}" Command="{Binding UpdateViewCommand}" CommandParameter="Listak"></MenuItem>
-                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="{DynamicResource menuOperation}" Command="{Binding UpdateViewCommand}" CommandParameter="Athelyezesek"></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" 
+                          Header="{DynamicResource menuLists}" 
+                          Command="{Binding UpdateViewCommand}" 
+                          CommandParameter="Lists">
+                </MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" 
+                          Header="{DynamicResource menuOperation}" 
+                          Command="{Binding UpdateViewCommand}" 
+                          CommandParameter="Operation">
+                </MenuItem>
                 <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header=""></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" 
+                          Header="{DynamicResource menuConfiguration}"
+                          Command="{Binding UpdateViewCommand}"
+                          CommandParameter="Configuration">
+                </MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" 
+                          Header="{DynamicResource menuExit}"
+                          Command="{Binding UpdateViewCommand}"
+                          CommandParameter="Exit">
+                </MenuItem>
+
             </Menu>
         </StackPanel>
         <GridSplitter  Grid.Column="1" Width="2" Background="Black"></GridSplitter>
