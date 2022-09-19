@@ -10,7 +10,7 @@
         <views:HeaderWithContentListView></views:HeaderWithContentListView>
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:HeaderWithContentMoveViewModel}">
-        <views:HeaderWithContentMove></views:HeaderWithContentMove>
+        <views:HeaderWithContentMoveView></views:HeaderWithContentMoveView>
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodelscontent:ContentListSubjectViewModel}">
         <views:ContentListSubject></views:ContentListSubject>
