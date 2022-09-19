@@ -23,4 +23,7 @@
     <DataTemplate DataType="{x:Type viewmodelscontent:ContentListSubjectViewModel}">
         <viewscontent:ContentListSubjectView></viewscontent:ContentListSubjectView>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodelscontent:ContentLocalizationViewModel}">
+        <viewscontent:ContentLocalizationView></viewscontent:ContentLocalizationView>
+    </DataTemplate>
 </ResourceDictionary>

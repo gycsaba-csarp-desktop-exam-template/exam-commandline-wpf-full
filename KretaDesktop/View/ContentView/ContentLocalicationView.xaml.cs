@@ -18,9 +18,9 @@ namespace KretaDesktop.View.ContentView
     /// <summary>
     /// Interaction logic for ContentLocalicationView.xaml
     /// </summary>
-    public partial class ContentLocalicationView : UserControl
+    public partial class ContentLocalizationView : UserControl
     {
-        public ContentLocalicationView()
+        public ContentLocalizationView()
         {
             InitializeComponent();
         }
