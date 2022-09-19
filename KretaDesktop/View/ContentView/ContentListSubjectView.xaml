@@ -124,9 +124,11 @@
                            Foreground="{DynamicResource ContentForegroundColor}" 
                            Text="{DynamicResource tbRowPerPage}"></TextBlock>
                 <ComboBox HorizontalAlignment="Right" Grid.Column="5"
-                            ItemsSource="{Binding RowPerPagePossibilities}"
-                            SelectedValue="{Binding PageSize}"
-                            SelectedIndex="0"
+                          Style="{DynamicResource FormComboBox}"
+                          ItemContainerStyle="{DynamicResource FormComboBoxItem}"
+                          ItemsSource="{Binding RowPerPagePossibilities}"
+                          SelectedValue="{Binding PageSize}"
+                          SelectedIndex="0"
                 />
             </StackPanel>
         </Grid>
