@@ -4,6 +4,7 @@
     <!-- Menu -->
     <system:String x:Key="menuTitle">CRETA</system:String>
     <system:String x:Key="menuLists">Lists</system:String>
+    <system:String x:Key="menuOperation">Operation</system:String>
 
     <!-- Header -->
     <system:String x:Key="headerTitle">C R E T A - School administration programme</system:String>

@@ -28,7 +28,7 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
                 <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="{DynamicResource menuLists}" Command="{Binding UpdateViewCommand}" CommandParameter="Listak"></MenuItem>
-                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="" Command="{Binding UpdateViewCommand}" CommandParameter="Athelyezesek"></MenuItem>
+                <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header="{DynamicResource menuOperation}" Command="{Binding UpdateViewCommand}" CommandParameter="Athelyezesek"></MenuItem>
                 <MenuItem Style="{StaticResource MenuItemBaseStyle}" Header=""></MenuItem>
             </Menu>
         </StackPanel>

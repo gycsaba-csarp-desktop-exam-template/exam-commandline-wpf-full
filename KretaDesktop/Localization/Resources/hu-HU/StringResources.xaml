@@ -4,6 +4,7 @@
     <!-- Menu -->
     <system:String x:Key="menuTitle">Kréta</system:String>
     <system:String x:Key="menuLists">Listák</system:String>
+    <system:String x:Key="menuOperation">Műveletek</system:String>
     <!-- Header -->
     <system:String x:Key="headerTitle">K R É T A  -  Iskolai adminisztrációs program</system:String>
     <system:String x:Key="headerSubject">Tantárgyak</system:String>

@@ -12,13 +12,12 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ContentControl Grid.Row="0" Content="{Binding HeaderAppName}"></ContentControl>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <ContentControl Grid.Row="0" Content="{DynamicResource headerTitle}" Style="{DynamicResource HeaderAppTitle}"></ContentControl>
+        <StackPanel Grid.Row="1" Style="{DynamicResource HeaderMenu}">
             <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}" 
                     Command="{Binding UpdateContentView}" 
                     CommandParameter="Tantargyak"
                     Content="{DynamicResource headerSubject}">
-                    
             </Button>
             <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}"></Button>
             <Button Style="{DynamicResource HeaderButtonMenuItemEllpse}"></Button>
