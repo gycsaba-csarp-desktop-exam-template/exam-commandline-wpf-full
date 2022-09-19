@@ -26,7 +26,7 @@ namespace KretaDesktop.ViewModel
             {
                 if (parameter.ToString() == "Localization")
                 {
-                    SelectedView = new ContentListSubjectViewModel();
+                    SelectedView = new ContentLocalicationViewModel();
                 }
             }
         }
