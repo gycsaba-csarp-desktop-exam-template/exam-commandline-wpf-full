@@ -17,6 +17,8 @@ namespace KretaDesktop.Localization
     {
         // https://stackoverflow.com/questions/53441784/showing-different-message-in-multilanguage-dynamically
         // https://stackoverflow.com/questions/45407108/how-to-change-ui-language-using-resource-dictionary-at-run-time
+        // https://kontext.tech/article/768/read-embedded-assembly-resource-files-in-net
+        // http://www.codedigest.com/CodeDigest/207-Get-All-Language-Country-Code-List-for-all-Culture-in-C---ASP-Net.aspx
 
         public void SwitchToCurrentCuture()
         {
@@ -113,7 +115,7 @@ namespace KretaDesktop.Localization
         public List<string> GetsupportedCultures()
         {
             List<string> supportedCultures = new List<string>();
-            foreach(string file in Directory.GetFiles(Assembly.GetExecutingAssembly().Location))
+            foreach (string file in Directory.GetDirectories("..\\Localization\\Resources\\"))
             {
                 supportedCultures.Add(file);
             }

@@ -1,4 +1,5 @@
-﻿using KretaDesktop.ViewModel.BaseClass;
+﻿using KretaDesktop.Localization;
+using KretaDesktop.ViewModel.BaseClass;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,5 +13,11 @@ namespace KretaDesktop.ViewModel.Content
     {
         public string CurrentLanguage{ get; set; }
         public ObservableCollection<string> AllLanguage { get; set; }
+
+        public ContentLocalizationViewModel()
+        {
+            ProjectLocalization localization=new ProjectLocalization();
+            AllLanguage = new ObservableCollection<string>(localization.GetsupportedCultures());
+        }
     }
 }
