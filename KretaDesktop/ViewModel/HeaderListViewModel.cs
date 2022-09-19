@@ -4,7 +4,7 @@ using KretaDesktop.ViewModel.Content;
 
 namespace KretaDesktop.ViewModel
 {
-    public class HeaderWithContentListViewModel : ViewModelBase 
+    public class HeaderListViewModel : ViewModelBase 
     {
         private RelayCommand UpdateContentViewCommand { get; }
         private ViewModelBase selectedView;
@@ -30,7 +30,7 @@ namespace KretaDesktop.ViewModel
             }
         }
 
-        public HeaderWithContentListViewModel()
+        public HeaderListViewModel()
         {
             UpdateContentViewCommand = new RelayCommand(parameter => UpdateContentView(parameter));
             SelectedView = new ContentListSubjectViewModel();

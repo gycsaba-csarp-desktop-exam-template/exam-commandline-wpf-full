@@ -31,7 +31,7 @@ namespace KretaDesktop.ViewModel
         {
             this.mainWindow = mainWindow;
             UpdateViewCommand = new RelayCommand((parameter) => UpdateView(parameter));
-            selectedView = new HeaderWithContentListViewModel();            
+            selectedView = new HeaderListViewModel();            
         }
 
         public void UpdateView(object parameter)
@@ -41,11 +41,11 @@ namespace KretaDesktop.ViewModel
             {
                 if (parameter.ToString() == "Lists")
                 {
-                    SelectedView = new HeaderWithContentListViewModel();
+                    SelectedView = new HeaderListViewModel();
                 }
                 if (parameter.ToString() == "Operation")
                 {
-                    SelectedView = new HeaderWithContentMoveViewModel();
+                    SelectedView = new HeaderOperationViewModel();
                 }
                 if (parameter.ToString()== "Configuration")
                 {
