@@ -49,7 +49,7 @@ namespace KretaDesktop.ViewModel
                 }
                 if (parameter.ToString()== "Configuration")
                 {
-
+                    SelectedView = new HeaderAppConfigurationViewModel();
                 }
                 if (parameter.ToString() == "Exit")
                 {

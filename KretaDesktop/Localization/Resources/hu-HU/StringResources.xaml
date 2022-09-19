@@ -10,6 +10,7 @@
     <!-- Header -->
     <system:String x:Key="headerTitle">K R É T A  -  Iskolai adminisztrációs program</system:String>
     <system:String x:Key="headerSubject">Tantárgyak</system:String>
+    <system:String x:Key="headerLocalization">Nyelv választás</system:String>
     
     
     <!-- TextBlock -->

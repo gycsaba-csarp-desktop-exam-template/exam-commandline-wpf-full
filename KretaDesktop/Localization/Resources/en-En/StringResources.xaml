@@ -11,7 +11,8 @@
     <!-- Header -->
     <system:String x:Key="headerTitle">C R E T A - School administration programme</system:String>
     <system:String x:Key="headerSubject">Subjects</system:String>
-    
+    <system:String x:Key="headerLocalization">Select language</system:String>
+
     <!-- TextBlock -->
     <system:String x:Key="tbSorting">Sorting:</system:String>
     <system:String x:Key="tbSortingLowerCase">sorting:</system:String>

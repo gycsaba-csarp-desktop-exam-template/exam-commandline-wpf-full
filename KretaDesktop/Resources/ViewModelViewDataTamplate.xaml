@@ -6,13 +6,20 @@
     <DataTemplate DataType="{x:Type viewmodels:HeaderAppNameViewModel}">
         <views:HeaderAppName></views:HeaderAppName>
     </DataTemplate>
+    
+    
     <DataTemplate DataType="{x:Type viewmodels:HeaderListViewModel}">
         <views:HeaderListView></views:HeaderListView>
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:HeaderOperationViewModel}">
         <views:HeaderOperationView></views:HeaderOperationView>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:HeaderAppConfigurationViewModel}">
+        <views:HeaderAppConfigurationView></views:HeaderAppConfigurationView>
+    </DataTemplate>
+
+
     <DataTemplate DataType="{x:Type viewmodelscontent:ContentListSubjectViewModel}">
-        <views:ContentListSubject></views:ContentListSubject>
+        <views:ContentListSubjectView></views:ContentListSubjectView>
     </DataTemplate>
 </ResourceDictionary>
