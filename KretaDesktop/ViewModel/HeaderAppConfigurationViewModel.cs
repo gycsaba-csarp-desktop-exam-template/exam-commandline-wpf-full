@@ -1,26 +1,30 @@
 ﻿using KretaDesktop.ViewModel.BaseClass;
 using KretaDesktop.ViewModel.Content;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KretaDesktop.ViewModel
 {
-    public class HeaderListViewModel : HeaderViewModel
+    public class HeaderAppConfigurationViewModel : HeaderViewModel
     {
         private RelayCommand UpdateContentViewCommand { get; }
-
-        public HeaderListViewModel()
+       
+        public HeaderAppConfigurationViewModel()
         {
             UpdateContentViewCommand = new RelayCommand(parameter => UpdateContentView(parameter));            
             HeaderAppName = new HeaderAppNameViewModel();
 
-            SelectedView = new ContentListSubjectViewModel();
+            //SelectedView = new ContentListSubjectViewModel();
         }
 
         public void UpdateContentView(object parameter)
         {
             if (parameter is string)
             {
-                if (parameter.ToString()== "Tantargyak")
+                if (parameter.ToString() == "Localization")
                 {
                     SelectedView = new ContentListSubjectViewModel();
                 }
