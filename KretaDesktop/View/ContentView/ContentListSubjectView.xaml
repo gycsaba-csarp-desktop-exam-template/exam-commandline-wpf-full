@@ -111,7 +111,7 @@
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <TextBlock Style="{DynamicResource FormTextBlock}" Text="{DynamicResource tbFiltring}" Margin="64 2 2 2"></TextBlock>
+                <TextBlock Style="{DynamicResource FormTextBlock}" Text="{DynamicResource tbFiltring}" Margin="64 8 2 2"></TextBlock>
                 <TextBox x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}" Margin="2 2 2 2"                     
                             Text="{Binding UserFiltringParameter,Mode=TwoWay}"
                             >
@@ -120,10 +120,10 @@
                 <Button Style="{DynamicResource ContentButton}"  Content="{DynamicResource buttonFindAll}" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
             </StackPanel>
             <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 2 100 2">
-                <TextBlock HorizontalAlignment="Right" Margin="2" 
+                <TextBlock HorizontalAlignment="Right" Margin="2 8 2 2 " 
                            Foreground="{DynamicResource ContentForegroundColor}" 
                            Text="{DynamicResource tbRowPerPage}"></TextBlock>
-                <ComboBox HorizontalAlignment="Right" Grid.Column="5"
+                <ComboBox HorizontalAlignment="Right" Grid.Column="5" Margin="2 2 540 2"
                           Style="{DynamicResource FormComboBox}"
                           ItemContainerStyle="{DynamicResource FormComboBoxItem}"
                           ItemsSource="{Binding RowPerPagePossibilities}"
