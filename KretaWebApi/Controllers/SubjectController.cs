@@ -51,7 +51,7 @@ namespace KretaWebApi.Controllers
             this.logger = logger;
             this.repositoryWrapper = repositoryWrapper;
             this.mapper = mapper;
-            logger.LogInfo($"Szükséges adatok elérhetőek!");
+            logger.LogInfo($"Szükséges objektumokat a controller megkapta!");
         }
 
         [HttpGet("api/subject",Name = "All subjects")]

@@ -13,6 +13,7 @@ using ApplicationPropertiesSettings;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Http;
+using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 
 namespace ServiceKretaAPI.Services
 {
@@ -147,6 +148,10 @@ namespace ServiceKretaAPI.Services
             {
 
                 httpClient.BaseAddress = GetHttpClientUri();
+
+
+                //SubjectForCreationDto subjectForCreation = new SubjectForCreationDto();  // clone
+                //subjectForCreation.Clone(subject);
 
                 String jsonString = JsonConvert.SerializeObject(subject);
                 StringContent httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");

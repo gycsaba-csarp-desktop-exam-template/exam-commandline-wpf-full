@@ -9,7 +9,7 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
     public abstract class SubjectBase : ClassWithId
     {
 
-        public SubjectBase(long id, string subName)
+      /*  public SubjectBase(long id, string subName)
         {
             this.Id = id;
             this.SubjectName = subName;
@@ -20,7 +20,7 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
             this.Id = -1;
             this.SubjectName = String.Empty;
         }
-
+*/
         public virtual string SubjectName { get; set; }
 
         public override string ToString()

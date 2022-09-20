@@ -34,9 +34,24 @@ namespace KretaDesktop.ViewModel.Content
             set
             {
                 selectedSubject = value;
-                OnPropertyChanged(nameof(SelectedSubject));
+                OnPropertyChanged(nameof(DisplayedSubject));
+                if (selectedSubject != null)
+                {
+                    displayedSubject = (Subject)selectedSubject.Clone();
+                    OnPropertyChanged(nameof(SelectedSubject));
+                }
             }
         }
+
+        // https://levelup.gitconnected.com/5-ways-to-clone-an-object-in-c-d1374ec28efa
+        private Subject displayedSubject;
+
+        public Subject DisplayedSubject
+        {
+            get { return displayedSubject; }
+            set { displayedSubject = value; }
+        }
+
 
         public RelayCommand DeleteCommand { get; }
         public RelayCommand SaveCommand { get; }
@@ -51,6 +66,7 @@ namespace KretaDesktop.ViewModel.Content
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
             selectedSubject = new Subject();
+            displayedSubject = new Subject();
 
             SortBy = "SubjectName";
 
@@ -87,12 +103,12 @@ namespace KretaDesktop.ViewModel.Content
         {
             if (subjectService != null)
             {
-                if (SelectedSubject != null)
+                if (DisplayedSubject != null)
                 {
                     long newId = await subjectService.GetNextSubjectIdAsync();
-                    SelectedSubject.Id = newId;
-                    SelectedSubject.SubjectName = string.Empty;
-                    OnPropertyChanged(nameof(SelectedSubject));
+                    DisplayedSubject.Id = newId;
+                    DisplayedSubject.SubjectName = string.Empty;
+                    OnPropertyChanged(nameof(DisplayedSubject));
                 }
             }
         }

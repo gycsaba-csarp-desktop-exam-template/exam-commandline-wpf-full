@@ -55,14 +55,14 @@
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0"  Content="Azon."></Label>
                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtSubjectId" Style="{DynamicResource FormTextBox}"
                          IsReadOnly="True"
-                         Text="{Binding SelectedSubject.Id}"       
+                         Text="{Binding DisplayedSubject.Id, Mode=TwoWay}"       
                 />
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="2" Grid.Column="0" Content="Tantárgy név:"></Label>
                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtSubjectName" 
                          Style="{DynamicResource FormTextBox}"
                          Validation.ErrorTemplate="{StaticResource ValidationTemplate3}">
                     <TextBox.Text>
-                        <Binding Path="SelectedSubject.SubjectName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="DisplayedSubject.SubjectName" Mode="TwoWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:NameValidation/>
                             </Binding.ValidationRules>
@@ -71,7 +71,7 @@
                 </TextBox>
                 <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
                     <Button Command="{Binding SaveCommand}"
-                            CommandParameter="{Binding SelectedSubject}"
+                            CommandParameter="{Binding DisplayedSubject}"
                             Margin="2 2 2 4"    
                             Content="{DynamicResource buttonSave}"
                             >
@@ -87,7 +87,7 @@
                     </Button>
                     <Button Style="{DynamicResource ContentButton}" 
                             Command="{Binding DeleteCommand}" 
-                            CommandParameter="{Binding SelectedSubject}" 
+                            CommandParameter="{Binding DisplayedSubject}" 
                             Margin="4 2 2 2" Content="{DynamicResource buttonDelete}">
 
                     </Button>
