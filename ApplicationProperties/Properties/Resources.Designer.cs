@@ -104,5 +104,14 @@ namespace ApplicationPropertiesSettings.Properties {
                 return ResourceManager.GetString("GetPossibleNumberOfRowOnTheDataGridTable", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to en-En,hu-Hu.
+        /// </summary>
+        internal static string SupportedCulture {
+            get {
+                return ResourceManager.GetString("SupportedCulture", resourceCulture);
+            }
+        }
     }
 }
