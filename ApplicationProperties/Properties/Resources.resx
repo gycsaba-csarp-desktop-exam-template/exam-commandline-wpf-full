@@ -127,9 +127,12 @@
     <value>http</value>
   </data>
   <data name="CultureInfo" xml:space="preserve">
-    <value>en-En</value>
+    <value>hu-Hu</value>
   </data>
   <data name="GetPossibleNumberOfRowOnTheDataGridTable" xml:space="preserve">
     <value>10,20,30</value>
+  </data>
+  <data name="SupportedCulture" xml:space="preserve">
+    <value>en-En,hu-Hu</value>
   </data>
 </root>

@@ -88,7 +88,7 @@ namespace ApplicationPropertiesSettings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en-En.
+        ///   Looks up a localized string similar to hu-Hu.
         /// </summary>
         internal static string CultureInfo {
             get {
@@ -102,6 +102,15 @@ namespace ApplicationPropertiesSettings.Properties {
         internal static string GetPossibleNumberOfRowOnTheDataGridTable {
             get {
                 return ResourceManager.GetString("GetPossibleNumberOfRowOnTheDataGridTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to en-En,hu-Hu.
+        /// </summary>
+        internal static string SupportedCulture {
+            get {
+                return ResourceManager.GetString("SupportedCulture", resourceCulture);
             }
         }
     }

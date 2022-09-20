@@ -1,6 +1,8 @@
-﻿using KretaDesktop.ViewModel;
+﻿using KretaParancssoriAlkalmazas.Models.DataModel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,20 +16,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KretaDesktop
+namespace KretaDesktop.View.ContentView
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ContentListSubject.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ContentListSubjectView : UserControl
     {
-        private MainWindowViewModel viewModel;
-
-        public MainWindow()
+        public ContentListSubjectView()
         {
-            viewModel = new MainWindowViewModel(this);
             InitializeComponent();
-            this.DataContext=viewModel;
         }
     }
 }

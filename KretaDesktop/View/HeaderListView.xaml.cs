@@ -19,9 +19,9 @@ namespace KretaDesktop.View
     /// <summary>
     /// Interaction logic for HeaderWithContentList.xaml
     /// </summary>
-    public partial class HeaderWithContentListView : UserControl
+    public partial class HeaderListView : UserControl
     {
-        public HeaderWithContentListView()
+        public HeaderListView()
         {           
             InitializeComponent();
         }

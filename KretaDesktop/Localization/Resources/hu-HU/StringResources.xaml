@@ -5,9 +5,12 @@
     <system:String x:Key="menuTitle">Kréta</system:String>
     <system:String x:Key="menuLists">Listák</system:String>
     <system:String x:Key="menuOperation">Műveletek</system:String>
+    <system:String x:Key="menuConfiguration">Konfiguráció</system:String>
+    <system:String x:Key="menuExit">Kilépés</system:String>
     <!-- Header -->
     <system:String x:Key="headerTitle">K R É T A  -  Iskolai adminisztrációs program</system:String>
     <system:String x:Key="headerSubject">Tantárgyak</system:String>
+    <system:String x:Key="headerLocalization">Nyelv választás</system:String>
     
     
     <!-- TextBlock -->
@@ -21,15 +24,17 @@
     <system:String x:Key="buttonSave">Mentés</system:String>
     <system:String x:Key="buttonFind">Keresés</system:String>
     <system:String x:Key="buttonFindAll">Összes</system:String>
-    <system:String x:Key="buttonNew">New</system:String>
-    <system:String x:Key="buttonSave">Save</system:String>
-    <system:String x:Key="buttonDelete">Delete</system:String>
+    <system:String x:Key="buttonNew">Új</system:String>
+    <system:String x:Key="buttonDelete">Törlés</system:String>
 
     <!-- Content -->
     <!-- ContentListSubject -->
     <system:String x:Key="contentListSubjectTitle">Tantárgyak</system:String>
     <system:String x:Key="contentListSubjectProperties">Tantárgy adatai: </system:String>
-    
+    <!-- ContentAppConfiguratonLocalization -->
+    <system:String x:Key="contentLocalizationCurrentLanguage">Aktuális nyelv:</system:String>
+    <system:String x:Key="contentLocalizationSelectLanguage">Nyelv választás</system:String>
+
     <!-- DataProperties -->
     <system:String x:Key="id">Azon.</system:String>
     <!-- Subject -->

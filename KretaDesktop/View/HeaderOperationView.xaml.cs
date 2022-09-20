@@ -19,9 +19,9 @@ namespace KretaDesktop.View
     /// <summary>
     /// Interaction logic for HeaderWithContentMove.xaml
     /// </summary>
-    public partial class HeaderWithContentMoveView : UserControl        
+    public partial class HeaderOperationView : UserControl        
     {
-        public HeaderWithContentMoveView()
+        public HeaderOperationView()
         {
             InitializeComponent();
         }

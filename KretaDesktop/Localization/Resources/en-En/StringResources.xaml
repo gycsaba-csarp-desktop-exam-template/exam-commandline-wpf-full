@@ -5,11 +5,14 @@
     <system:String x:Key="menuTitle">CRETA</system:String>
     <system:String x:Key="menuLists">Lists</system:String>
     <system:String x:Key="menuOperation">Operation</system:String>
+    <system:String x:Key="menuConfiguration">Configuration</system:String>
+    <system:String x:Key="menuExit">Exit</system:String>
 
     <!-- Header -->
     <system:String x:Key="headerTitle">C R E T A - School administration programme</system:String>
     <system:String x:Key="headerSubject">Subjects</system:String>
-    
+    <system:String x:Key="headerLocalization">Select language</system:String>
+
     <!-- TextBlock -->
     <system:String x:Key="tbSorting">Sorting:</system:String>
     <system:String x:Key="tbSortingLowerCase">sorting:</system:String>
@@ -27,7 +30,10 @@
     <!-- ContentListSubject -->
     <system:String x:Key="contentListSubjectTitle">Subjects</system:String>
     <system:String x:Key="contentListSubjectProperties">Subject properties: </system:String>
-
+    <!-- ContentAppConfiguratonLocalization -->
+    <system:String x:Key="contentLocalizationCurrentLanguage">Current language:</system:String>
+    <system:String x:Key="contentLocalizationSelectLanguage">SelectLanguage</system:String>
+    
     <!-- DataProperties -->
     <system:String x:Key="id">Id.</system:String>
     <!-- Subject -->

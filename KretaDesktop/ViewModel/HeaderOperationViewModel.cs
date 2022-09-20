@@ -7,7 +7,7 @@ using KretaDesktop.ViewModel.BaseClass;
 
 namespace KretaDesktop.ViewModel
 {
-    public class HeaderWithContentMoveViewModel : ViewModelBase
+    public class HeaderOperationViewModel : HeaderViewModel
     {
     }
 }

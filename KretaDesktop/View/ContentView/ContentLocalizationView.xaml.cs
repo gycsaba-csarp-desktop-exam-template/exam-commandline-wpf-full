@@ -1,8 +1,5 @@
-﻿using KretaParancssoriAlkalmazas.Models.DataModel;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KretaDesktop.View
+namespace KretaDesktop.View.ContentView
 {
     /// <summary>
-    /// Interaction logic for ContentListSubject.xaml
+    /// Interaction logic for ContentLocalicationView.xaml
     /// </summary>
-    public partial class ContentListSubject : UserControl
+    public partial class ContentLocalizationView : UserControl
     {
-        public ContentListSubject()
+        public ContentLocalizationView()
         {
             InitializeComponent();
         }

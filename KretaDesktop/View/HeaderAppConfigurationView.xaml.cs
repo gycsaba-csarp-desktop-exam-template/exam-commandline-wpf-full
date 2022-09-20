@@ -1,5 +1,4 @@
-﻿using KretaDesktop.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KretaDesktop
+namespace KretaDesktop.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HeaderAppConfigurationView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HeaderAppConfigurationView : UserControl
     {
-        private MainWindowViewModel viewModel;
-
-        public MainWindow()
+        public HeaderAppConfigurationView()
         {
-            viewModel = new MainWindowViewModel(this);
             InitializeComponent();
-            this.DataContext=viewModel;
         }
     }
 }

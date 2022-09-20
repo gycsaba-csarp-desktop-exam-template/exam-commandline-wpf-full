@@ -17,19 +17,19 @@ namespace ApplicationPropertiesSettings
             List<string>  rowPerPage = AppConfigControl.getAppSettingsToList("PossibleNumberOfElementsOnDataGridTable");
             if (rowPerPage == null)
             {
-                rowPerPage = GetPossibleNumberOfRowOnTheDataGridTableToList();
-                AppConfigControl.AddOrUpdateAppSettings("PossibleNumberOfElementsOnDataGridTable", GetPossibleNumberOfRowOnTheDataGridTableToString());
+                rowPerPage = GetPossibleNumberOfRowOnTheDataGridTableFromResourcesToList();
+                AppConfigControl.AddOrUpdateAppSettings("PossibleNumberOfElementsOnDataGridTable", GetPossibleNumberOfRowOnTheDataGridTableFromResourcesToString());
             }
             return rowPerPage;
         }
 
-        public string GetPossibleNumberOfRowOnTheDataGridTableToString()
+        public string GetPossibleNumberOfRowOnTheDataGridTableFromResourcesToString()
         {
             string rowPerPageData = Resources.ResourceManager.GetString("GetPossibleNumberOfRowOnTheDataGridTable");
             return rowPerPageData;
         }
 
-        public static List<string> GetPossibleNumberOfRowOnTheDataGridTableToList()
+        public List<string> GetPossibleNumberOfRowOnTheDataGridTableFromResourcesToList()
         {
             string rowPerPageData = Resources.ResourceManager.GetString("GetPossibleNumberOfRowOnTheDataGridTable");
             List<string> result = new List<string>();

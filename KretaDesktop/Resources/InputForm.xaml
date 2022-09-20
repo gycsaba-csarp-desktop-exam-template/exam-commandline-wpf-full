@@ -15,4 +15,19 @@
         <Setter Property="Margin" Value="18 4 2 2"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource ContentForegroundColor}"></Setter>
     </Style>
+    <Style x:Key="FormComboBox" TargetType="ComboBox">
+        <Setter Property="Foreground"  Value="{DynamicResource ContentTextBoxForgraound}"></Setter>
+    </Style>
+    <Style x:Key="FormListBox" TargetType="ListBox">
+        <Setter Property="Foreground"  Value="{DynamicResource ContentTextBoxForgraound}"></Setter>
+        <Setter Property="Background" Value="{DynamicResource ContentTextBoxBackground}"></Setter>
+    </Style>
+
+    <Style x:Key="FormComboBoxItem" TargetType="ComboBoxItem">
+        <Setter Property="Background" Value="{DynamicResource ContentTextBoxBackground}"></Setter>
+    </Style>
+    <Style x:Key="FormListBoxItem" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="{DynamicResource ContentTextBoxBackground}"></Setter>
+    </Style>
+
 </ResourceDictionary>
