@@ -19,7 +19,9 @@ namespace KretaDesktop.Localization
         // https://stackoverflow.com/questions/45407108/how-to-change-ui-language-using-resource-dictionary-at-run-time
         // https://kontext.tech/article/768/read-embedded-assembly-resource-files-in-net
         // http://www.codedigest.com/CodeDigest/207-Get-All-Language-Country-Code-List-for-all-Culture-in-C---ASP-Net.aspx
+        // https://stackoverflow.com/questions/42001289/how-do-i-refresh-wpf-window-and-controls-after-changing-the-culture-language
 
+                   
         public void SwitchToCurrentCuture()
         {
             var languageDictionary = new ResourceDictionary();

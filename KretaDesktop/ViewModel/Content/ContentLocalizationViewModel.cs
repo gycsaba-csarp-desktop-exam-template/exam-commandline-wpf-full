@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Interop;
 
 namespace KretaDesktop.ViewModel.Content
 {
@@ -34,6 +35,8 @@ namespace KretaDesktop.ViewModel.Content
                 CultureProperties cultureProperties = new CultureProperties();
                 CultureInfo culture = new CultureInfo(SelectedLanguage);
                 cultureProperties.SetCurrentCulture(culture);
+                ProjectLocalization localization = new ProjectLocalization();
+                localization.SwitchToCurrentCuture();
                 OnPropertyChanged(nameof(CurrentLanguage));  
 
             }
