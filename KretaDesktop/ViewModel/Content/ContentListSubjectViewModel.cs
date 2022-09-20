@@ -21,9 +21,17 @@ namespace KretaDesktop.ViewModel.Content
             { 
                 waitingForNewData = value;
                 OnPropertyChanged(nameof(waitingForNewData));
+                OnPropertyChanged(nameof(NoWaitingForNewData)); 
             }
         }
 
+        public bool NoWaitingForNewData 
+        { 
+            get
+            {
+                return !waitingForNewData;
+            }
+        }
 
         SubjectService subjectService;
 
@@ -85,6 +93,7 @@ namespace KretaDesktop.ViewModel.Content
             SortBy = "SubjectName";
 
             waitingForNewData = false;
+            OnPropertyChanged(nameof(WaitingForNewData));
         }
 
         async public override void LoadData()
@@ -101,8 +110,7 @@ namespace KretaDesktop.ViewModel.Content
                     subjects = new ObservableCollection<Subject>();
             }
             OnPropertyChanged(nameof(Subjects));          
-            SelectRow(displayedSubject);
-            
+            SelectRow(displayedSubject);            
         }
 
         async public void Delete(object entity)
@@ -128,6 +136,7 @@ namespace KretaDesktop.ViewModel.Content
                     OnPropertyChanged(nameof(DisplayedSubject));
                 }
                 waitingForNewData = true;
+                OnPropertyChanged(nameof(WaitingForNewData));
                 // Mégsem gomb
                 // Törlés nincs 
                 // Datagirdre nem lehet kattintani

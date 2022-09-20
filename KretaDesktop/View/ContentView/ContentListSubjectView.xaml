@@ -88,7 +88,8 @@
                     <Button Style="{DynamicResource ContentButton}" 
                             Command="{Binding DeleteCommand}" 
                             CommandParameter="{Binding DisplayedSubject}" 
-                            Margin="4 2 2 2" Content="{DynamicResource buttonDelete}">
+                            Margin="4 2 2 2" Content="{DynamicResource buttonDelete}"
+                            Visibility="{Binding NoWaitingForNewData,Converter={StaticResource boolToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}">
 
                     </Button>
                 </StackPanel>
@@ -96,12 +97,13 @@
         </Expander>
         <Grid Grid.Row="2" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="12.126"></ColumnDefinition>
+                <ColumnDefinition Width="95.874"/>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel  Grid.Column="0" Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" Margin="0">
+            <StackPanel  Grid.Column="0" Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <TextBlock  Margin="6 8 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="{DynamicResource tbSorting}"></TextBlock>
                 <Button Style="{DynamicResource ContentButton}" Command="{Binding SortingCommand}">
                     <StackPanel Orientation="Horizontal">
@@ -110,7 +112,7 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" Grid.Column="2">
                 <TextBlock Style="{DynamicResource FormTextBlock}" Text="{DynamicResource tbFiltring}" Margin="64 8 2 2"></TextBlock>
                 <TextBox x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}" Margin="2 2 2 2"                     
                             Text="{Binding UserFiltringParameter,Mode=TwoWay}"
@@ -119,7 +121,7 @@
                 <Button Style="{DynamicResource ContentButton}" Content="{DynamicResource buttonFind}" Command="{Binding SearchCommand}" Margin="2 2 2 2"/>
                 <Button Style="{DynamicResource ContentButton}"  Content="{DynamicResource buttonFindAll}" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
             </StackPanel>
-            <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 2 100 2">
+            <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="2,2,100,2">
                 <TextBlock HorizontalAlignment="Right" Margin="2 8 2 2 " 
                            Foreground="{DynamicResource ContentForegroundColor}" 
                            Text="{DynamicResource tbRowPerPage}"></TextBlock>
