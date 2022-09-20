@@ -12,6 +12,19 @@ namespace KretaDesktop.ViewModel.Content
     // TODO: A datagrid oszlopa olyan széles legyen mint az adatbázisban lévő max hosszúságú adat
     public class ContentListSubjectViewModel : PagedViewModel
     {
+        private bool waitingForNewData;
+
+        public bool WaitingForNewData
+        {
+            get { return waitingForNewData; }
+            set 
+            { 
+                waitingForNewData = value;
+                OnPropertyChanged(nameof(waitingForNewData));
+            }
+        }
+
+
         SubjectService subjectService;
 
         private ObservableCollection<Subject> subjects;
@@ -71,6 +84,7 @@ namespace KretaDesktop.ViewModel.Content
 
             SortBy = "SubjectName";
 
+            waitingForNewData = false;
         }
 
         async public override void LoadData()
@@ -113,6 +127,7 @@ namespace KretaDesktop.ViewModel.Content
                     displayedSubject.SubjectName = string.Empty;
                     OnPropertyChanged(nameof(DisplayedSubject));
                 }
+                waitingForNewData = true;
                 // Mégsem gomb
                 // Törlés nincs 
                 // Datagirdre nem lehet kattintani
