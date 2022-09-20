@@ -113,6 +113,9 @@ namespace KretaDesktop.ViewModel.Content
                     displayedSubject.SubjectName = string.Empty;
                     OnPropertyChanged(nameof(DisplayedSubject));
                 }
+                // Mégsem gomb
+                // Törlés nincs 
+                // Datagirdre nem lehet kattintani
             }
         }
 
@@ -152,18 +155,21 @@ namespace KretaDesktop.ViewModel.Content
 
         private void SelectRowContains(Subject subjectToSelect)
         {
+            if (subjectToSelect==null)
+            {
+                SelectFirstRow();
+                return;
+            }                
             var list = subjects.Select(subject => subject.Id).ToList();
             int index = list.IndexOf(subjectToSelect.Id);
             if (index >= 0)
             {
-                selectedItemIndex = index;
-                
+                selectedItemIndex = index;                
             }
             else
             {
                 selectedItemIndex = 0;
             }
-
             OnPropertyChanged(nameof(SelectedItemIndex));
             selectedSubject = subjectToSelect;
             OnPropertyChanged(nameof(selectedSubject));
