@@ -28,17 +28,18 @@ namespace KretaDesktop.ViewModel.Content
 
         private Subject selectedSubject;
 
+        // https://stackoverflow.com/questions/4902039/difference-between-selecteditem-selectedvalue-and-selectedvaluepath
         public Subject SelectedSubject
         {
             get { return selectedSubject; }
             set
             {
                 selectedSubject = value;
-                OnPropertyChanged(nameof(DisplayedSubject));
+                OnPropertyChanged(nameof(SelectedSubject));
                 if (selectedSubject != null)
                 {
                     displayedSubject = (Subject)selectedSubject.Clone();
-                    OnPropertyChanged(nameof(SelectedSubject));
+                    OnPropertyChanged(nameof(DisplayedSubject));
                 }
             }
         }
@@ -80,12 +81,14 @@ namespace KretaDesktop.ViewModel.Content
                 SaveParameter(pagedSubjectList);
                 if (pagedSubjectList != null)
                 {
-                    Subjects = new ObservableCollection<Subject>(pagedSubjectList);
+                    subjects = new ObservableCollection<Subject>(pagedSubjectList);
                 }
                 else
-                    Subjects = new ObservableCollection<Subject>();
+                    subjects = new ObservableCollection<Subject>();
             }
-            SelectRow();
+            OnPropertyChanged(nameof(Subjects));          
+            SelectRow(displayedSubject);
+            
         }
 
         async public void Delete(object entity)
@@ -106,8 +109,8 @@ namespace KretaDesktop.ViewModel.Content
                 if (DisplayedSubject != null)
                 {
                     long newId = await subjectService.GetNextSubjectIdAsync();
-                    DisplayedSubject.Id = newId;
-                    DisplayedSubject.SubjectName = string.Empty;
+                    displayedSubject.Id = newId;
+                    displayedSubject.SubjectName = string.Empty;
                     OnPropertyChanged(nameof(DisplayedSubject));
                 }
             }
@@ -120,9 +123,9 @@ namespace KretaDesktop.ViewModel.Content
                 Subject subjectToSave = (Subject)entity;
                 HttpStatusCode statusCode = await subjectService.Save(subjectToSave);
                 if (statusCode == HttpStatusCode.OK)
-                    LoadData();
-                SelectedSubject = subjectToSave;
-                SelectRow(SelectedSubject);
+                {
+                    LoadData();                    
+                }
             }
         }
 
@@ -135,23 +138,35 @@ namespace KretaDesktop.ViewModel.Content
             }
             else
             {
-                LoadDataAndSelectRowContains(subjectToSelect);
+                SelectRowContains(subjectToSelect);
             }
         }
 
         private void SelectFirstRow()
         {
             if (Subjects.Count > 0)
-                SelectedItemIndex = 0;
+                selectedItemIndex = 0;
+            OnPropertyChanged(nameof(SelectedItemIndex));
+            
         }
 
-        private void LoadDataAndSelectRowContains(Subject subjectToSelect)
+        private void SelectRowContains(Subject subjectToSelect)
         {
             var list = subjects.Select(subject => subject.Id).ToList();
             int index = list.IndexOf(subjectToSelect.Id);
             if (index >= 0)
-                SelectedItemIndex = index;
-        }
+            {
+                selectedItemIndex = index;
+                
+            }
+            else
+            {
+                selectedItemIndex = 0;
+            }
 
+            OnPropertyChanged(nameof(SelectedItemIndex));
+            selectedSubject = subjectToSelect;
+            OnPropertyChanged(nameof(selectedSubject));
+        }
     }
 }

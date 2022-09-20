@@ -135,7 +135,7 @@
         <StackPanel Grid.Row="3"  Orientation="Horizontal">
             <DataGrid x:Name="dgSubjects"                 
                       ItemsSource="{Binding Subjects}"
-                      SelectedItem="{Binding SelectedSubject}"
+                      SelectedItem="{Binding SelectedSubject}"                      
                       SelectedIndex="{Binding SelectedItemIndex}"
                       Style="{DynamicResource DataGridCrudStyle}"
                       Width="300"
