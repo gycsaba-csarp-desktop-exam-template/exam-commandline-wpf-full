@@ -13,13 +13,25 @@ namespace ApplicationPropertiesSettings
         public void SetCurrentCultureToDefaultCulture()
         {
             string cultureName = GetDefaultCulture(); 
-            System.Threading.Thread.CurrentThread.CurrentCulture=new CultureInfo(cultureName);
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
+            CultureInfo culture = new CultureInfo(cultureName);
+            SetCurrentCulture(culture);
+
+        }
+
+        public void SetCurrentCulture(CultureInfo culture)
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
         }
 
         public string GetDefaultCulture()
         {
             return Resources.ResourceManager.GetString("CultureInfo");
+        }
+
+        public string GetCurrentCulture()
+        {
+            return System.Threading.Thread.CurrentThread.CurrentCulture.DisplayName;
         }
     }
 }

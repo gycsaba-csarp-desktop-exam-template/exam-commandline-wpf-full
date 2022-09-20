@@ -24,9 +24,8 @@
     <system:String x:Key="buttonSave">Mentés</system:String>
     <system:String x:Key="buttonFind">Keresés</system:String>
     <system:String x:Key="buttonFindAll">Összes</system:String>
-    <system:String x:Key="buttonNew">New</system:String>
-    <system:String x:Key="buttonSave">Save</system:String>
-    <system:String x:Key="buttonDelete">Delete</system:String>
+    <system:String x:Key="buttonNew">Új</system:String>
+    <system:String x:Key="buttonDelete">Törlés</system:String>
 
     <!-- Content -->
     <!-- ContentListSubject -->
