@@ -127,7 +127,7 @@
                           Style="{DynamicResource FormComboBox}"
                           ItemContainerStyle="{DynamicResource FormComboBoxItem}"
                           ItemsSource="{Binding RowPerPagePossibilities}"
-                          SelectedValue="{Binding PageSize}"
+                          SelectedItem="{Binding PageSize}"
                           SelectedIndex="0"
                 />
             </StackPanel>
