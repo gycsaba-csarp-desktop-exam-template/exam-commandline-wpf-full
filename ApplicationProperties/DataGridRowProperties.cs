@@ -29,7 +29,7 @@ namespace ApplicationPropertiesSettings
             return rowPerPageData;
         }
 
-        public static List<string> GetPossibleNumberOfRowOnTheDataGridTableFromResourcesToList()
+        public List<string> GetPossibleNumberOfRowOnTheDataGridTableFromResourcesToList()
         {
             string rowPerPageData = Resources.ResourceManager.GetString("GetPossibleNumberOfRowOnTheDataGridTable");
             List<string> result = new List<string>();

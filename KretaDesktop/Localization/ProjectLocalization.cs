@@ -112,13 +112,14 @@ namespace KretaDesktop.Localization
 
         }
 
-        public List<string> GetsupportedCultures()
+        public List<string> GetSupportedCultures()
         {
+            //TODO A lokalizációs nyelvek meghatározása Localization/ mappában lévő fájlok alapján
             List<string> supportedCultures = new List<string>();
-            foreach (string file in Directory.GetDirectories("..\\Localization\\Resources\\"))
+           /* foreach (string file in Directory.GetDirectories("..\\Localization\\Resources\\"))
             {
                 supportedCultures.Add(file);
-            }
+            }*/
             return supportedCultures;
             /*if (Application.Current.Resources != null)
             {
