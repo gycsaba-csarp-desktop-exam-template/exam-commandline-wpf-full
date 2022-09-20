@@ -21,8 +21,8 @@ namespace KretaDesktop.ViewModel.Content
             //AllLanguage = new ObservableCollection<string>(localization.GetSupportedCultures());
             LocalizationProperties localizationProperties = new LocalizationProperties();
             List<string> supportedCulture = localizationProperties.GetSupportedCulture();
+            AllLanguage = new ObservableCollection<string>(supportedCulture);
             
-
         }
     }
 }

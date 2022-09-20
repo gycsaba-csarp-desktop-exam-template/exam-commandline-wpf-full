@@ -18,11 +18,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Style="{DynamicResource FormLabel}" Content="{DynamicResource contentLocalizationSelectLanguage}"></Label>
-                <ComboBox Style="{DynamicResource FormComboBox}" 
-                          ItemContainerStyle="{DynamicResource FormComboBoxItem}"
+                <ListBox Style="{DynamicResource FormListBox}" 
+                          ItemContainerStyle="{DynamicResource ListBoxItem}"
                           ItemsSource="{Binding AllLanguage}"
                           >
-                </ComboBox>
+                </ListBox>
             </StackPanel>
         </StackPanel>
     </Grid>
