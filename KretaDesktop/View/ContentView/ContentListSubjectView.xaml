@@ -146,6 +146,7 @@
                       SelectedItem="{Binding SelectedSubject}"                      
                       SelectedIndex="{Binding SelectedItemIndex}"
                       Style="{DynamicResource DataGridCrudStyle}"
+                      Visibility="{Binding NoWaitingForNewData,Converter={StaticResource boolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
                       Width="300"
                       ColumnHeaderStyle="{DynamicResource DataGridCRUDHeaderStyle}"
              >
