@@ -12,6 +12,27 @@ namespace KretaDesktop.ViewModel.Content
     // TODO: A datagrid oszlopa olyan széles legyen mint az adatbázisban lévő max hosszúságú adat
     public class ContentListSubjectViewModel : PagedViewModel
     {
+        private bool waitingForNewData;
+
+        public bool WaitingForNewData
+        {
+            get { return waitingForNewData; }
+            set 
+            { 
+                waitingForNewData = value;
+                OnPropertyChanged(nameof(waitingForNewData));
+                OnPropertyChanged(nameof(NoWaitingForNewData)); 
+            }
+        }
+
+        public bool NoWaitingForNewData 
+        { 
+            get
+            {
+                return !waitingForNewData;
+            }
+        }
+
         SubjectService subjectService;
 
         private ObservableCollection<Subject> subjects;
@@ -28,6 +49,7 @@ namespace KretaDesktop.ViewModel.Content
 
         private Subject selectedSubject;
 
+        // https://stackoverflow.com/questions/4902039/difference-between-selecteditem-selectedvalue-and-selectedvaluepath
         public Subject SelectedSubject
         {
             get { return selectedSubject; }
@@ -35,25 +57,45 @@ namespace KretaDesktop.ViewModel.Content
             {
                 selectedSubject = value;
                 OnPropertyChanged(nameof(SelectedSubject));
+                if (selectedSubject != null)
+                {
+                    displayedSubject = (Subject)selectedSubject.Clone();
+                    OnPropertyChanged(nameof(DisplayedSubject));
+                }
             }
         }
+
+        // https://levelup.gitconnected.com/5-ways-to-clone-an-object-in-c-d1374ec28efa
+        private Subject displayedSubject;
+
+        public Subject DisplayedSubject
+        {
+            get { return displayedSubject; }
+            set { displayedSubject = value; }
+        }
+
 
         public RelayCommand DeleteCommand { get; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand NewCommand { get; }
+        public RelayCommand CancelCommand { get; }
 
         public ContentListSubjectViewModel()
         {
             DeleteCommand = new RelayCommand(parameter => Delete(parameter));
             NewCommand = new RelayCommand(execute => New());
             SaveCommand = new RelayCommand(parameter => Save(parameter));
+            CancelCommand = new RelayCommand(execute => Cancel());
 
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
             selectedSubject = new Subject();
+            displayedSubject = new Subject();
 
             SortBy = "SubjectName";
 
+            waitingForNewData = false;
+            OnPropertyChanged(nameof(WaitingForNewData));
         }
 
         async public override void LoadData()
@@ -64,12 +106,13 @@ namespace KretaDesktop.ViewModel.Content
                 SaveParameter(pagedSubjectList);
                 if (pagedSubjectList != null)
                 {
-                    Subjects = new ObservableCollection<Subject>(pagedSubjectList);
+                    subjects = new ObservableCollection<Subject>(pagedSubjectList);
                 }
                 else
-                    Subjects = new ObservableCollection<Subject>();
+                    subjects = new ObservableCollection<Subject>();
             }
-            SelectRow();
+            OnPropertyChanged(nameof(Subjects));          
+            SelectRow(displayedSubject);            
         }
 
         async public void Delete(object entity)
@@ -87,13 +130,22 @@ namespace KretaDesktop.ViewModel.Content
         {
             if (subjectService != null)
             {
-                if (SelectedSubject != null)
+                if (DisplayedSubject != null)
                 {
                     long newId = await subjectService.GetNextSubjectIdAsync();
-                    SelectedSubject.Id = newId;
-                    SelectedSubject.SubjectName = string.Empty;
-                    OnPropertyChanged(nameof(SelectedSubject));
+                    displayedSubject.Id = newId;
+                    displayedSubject.SubjectName = string.Empty;
+                    OnPropertyChanged(nameof(DisplayedSubject));
                 }
+                WaitingForNewData = true;
+                selectedItemIndex = -1;
+                OnPropertyChanged(nameof(SelectedItemIndex));
+                selectedSubject = null;
+                OnPropertyChanged(nameof(SelectedSubject));
+                //OnPropertyChanged(nameof(WaitingForNewData));
+                // Mégsem gomb
+                // Törlés nincs 
+                // Datagirdre nem lehet kattintani
             }
         }
 
@@ -104,10 +156,16 @@ namespace KretaDesktop.ViewModel.Content
                 Subject subjectToSave = (Subject)entity;
                 HttpStatusCode statusCode = await subjectService.Save(subjectToSave);
                 if (statusCode == HttpStatusCode.OK)
-                    LoadData();
-                SelectedSubject = subjectToSave;
-                SelectRow(SelectedSubject);
+                {
+                    LoadData();                    
+                }
             }
+        }
+
+        public void Cancel()
+        {
+            WaitingForNewData = false;
+            SelectRow();
         }
 
         private void SelectRow(Subject? subjectToSelect = null)
@@ -119,23 +177,38 @@ namespace KretaDesktop.ViewModel.Content
             }
             else
             {
-                LoadDataAndSelectRowContains(subjectToSelect);
+                SelectRowContains(subjectToSelect);
             }
         }
 
         private void SelectFirstRow()
         {
             if (Subjects.Count > 0)
-                SelectedItemIndex = 0;
+                selectedItemIndex = 0;
+            OnPropertyChanged(nameof(SelectedItemIndex));
+            
         }
 
-        private void LoadDataAndSelectRowContains(Subject subjectToSelect)
+        private void SelectRowContains(Subject subjectToSelect)
         {
+            if (subjectToSelect==null)
+            {
+                SelectFirstRow();
+                return;
+            }                
             var list = subjects.Select(subject => subject.Id).ToList();
             int index = list.IndexOf(subjectToSelect.Id);
             if (index >= 0)
-                SelectedItemIndex = index;
+            {
+                selectedItemIndex = index;                
+            }
+            else
+            {
+                selectedItemIndex = 0;
+            }
+            OnPropertyChanged(nameof(SelectedItemIndex));
+            selectedSubject = subjectToSelect;
+            OnPropertyChanged(nameof(SelectedSubject));
         }
-
     }
 }

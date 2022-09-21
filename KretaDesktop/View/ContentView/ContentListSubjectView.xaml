@@ -55,14 +55,14 @@
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0"  Content="Azon."></Label>
                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtSubjectId" Style="{DynamicResource FormTextBox}"
                          IsReadOnly="True"
-                         Text="{Binding SelectedSubject.Id}"       
+                         Text="{Binding DisplayedSubject.Id, Mode=TwoWay}"       
                 />
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="2" Grid.Column="0" Content="Tantárgy név:"></Label>
                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtSubjectName" 
                          Style="{DynamicResource FormTextBox}"
                          Validation.ErrorTemplate="{StaticResource ValidationTemplate3}">
                     <TextBox.Text>
-                        <Binding Path="SelectedSubject.SubjectName" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="DisplayedSubject.SubjectName" Mode="TwoWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validations:NameValidation/>
                             </Binding.ValidationRules>
@@ -71,7 +71,7 @@
                 </TextBox>
                 <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
                     <Button Command="{Binding SaveCommand}"
-                            CommandParameter="{Binding SelectedSubject}"
+                            CommandParameter="{Binding DisplayedSubject}"
                             Margin="2 2 2 4"    
                             Content="{DynamicResource buttonSave}"
                             >
@@ -87,8 +87,15 @@
                     </Button>
                     <Button Style="{DynamicResource ContentButton}" 
                             Command="{Binding DeleteCommand}" 
-                            CommandParameter="{Binding SelectedSubject}" 
-                            Margin="4 2 2 2" Content="{DynamicResource buttonDelete}">
+                            CommandParameter="{Binding DisplayedSubject}" 
+                            Margin="4 2 2 2" Content="{DynamicResource buttonDelete}"
+                            Visibility="{Binding NoWaitingForNewData,Converter={StaticResource boolToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}">
+
+                    </Button>
+                    <Button Style="{DynamicResource ContentButton}" 
+                            Command="{Binding CancelCommand}" 
+                            Margin="4 2 2 2" Content="{DynamicResource buttonCancel}"
+                            Visibility="{Binding WaitingForNewData,Converter={StaticResource boolToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}">
 
                     </Button>
                 </StackPanel>
@@ -97,11 +104,12 @@
         <Grid Grid.Row="2" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel  Grid.Column="0" Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" Margin="0">
+            <StackPanel  Grid.Column="0" Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal">
                 <TextBlock  Margin="6 8 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="{DynamicResource tbSorting}"></TextBlock>
                 <Button Style="{DynamicResource ContentButton}" Command="{Binding SortingCommand}">
                     <StackPanel Orientation="Horizontal">
@@ -110,8 +118,8 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <TextBlock Style="{DynamicResource FormTextBlock}" Text="{DynamicResource tbFiltring}" Margin="64 2 2 2"></TextBlock>
+            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                <TextBlock Style="{DynamicResource FormTextBlock}" Text="{DynamicResource tbFiltring}" Margin="64 8 2 2"></TextBlock>
                 <TextBox x:Name="tbFiltringSubjectName" Style="{DynamicResource FormTextBox}" Margin="2 2 2 2"                     
                             Text="{Binding UserFiltringParameter,Mode=TwoWay}"
                             >
@@ -119,15 +127,15 @@
                 <Button Style="{DynamicResource ContentButton}" Content="{DynamicResource buttonFind}" Command="{Binding SearchCommand}" Margin="2 2 2 2"/>
                 <Button Style="{DynamicResource ContentButton}"  Content="{DynamicResource buttonFindAll}" Command="{Binding SearchAllCommand}" Margin="2 2 2 2"/>
             </StackPanel>
-            <StackPanel Grid.Column="6" Orientation="Horizontal" Margin="2 2 100 2">
-                <TextBlock HorizontalAlignment="Right" Margin="2" 
+            <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="2,2,100,2">
+                <TextBlock HorizontalAlignment="Right" Margin="2 8 2 2 " 
                            Foreground="{DynamicResource ContentForegroundColor}" 
                            Text="{DynamicResource tbRowPerPage}"></TextBlock>
-                <ComboBox HorizontalAlignment="Right" Grid.Column="5"
+                <ComboBox HorizontalAlignment="Right" Grid.Column="5" Margin="2 2 540 2"
                           Style="{DynamicResource FormComboBox}"
                           ItemContainerStyle="{DynamicResource FormComboBoxItem}"
                           ItemsSource="{Binding RowPerPagePossibilities}"
-                          SelectedValue="{Binding PageSize}"
+                          SelectedItem="{Binding PageSize}"
                           SelectedIndex="0"
                 />
             </StackPanel>
@@ -135,9 +143,10 @@
         <StackPanel Grid.Row="3"  Orientation="Horizontal">
             <DataGrid x:Name="dgSubjects"                 
                       ItemsSource="{Binding Subjects}"
-                      SelectedItem="{Binding SelectedSubject}"
+                      SelectedItem="{Binding SelectedSubject}"                      
                       SelectedIndex="{Binding SelectedItemIndex}"
                       Style="{DynamicResource DataGridCrudStyle}"
+                      Visibility="{Binding NoWaitingForNewData,Converter={StaticResource boolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
                       Width="300"
                       ColumnHeaderStyle="{DynamicResource DataGridCRUDHeaderStyle}"
              >

@@ -15,7 +15,7 @@
     
     <!-- TextBlock -->
     <system:String x:Key="tbSorting">Rendezés:</system:String>
-    <system:String x:Key="tbSortingLowerCase">rendezés:</system:String>
+    <system:String x:Key="tbSortingLowerCase">rendezés</system:String>
     <system:String x:Key="tbFiltring">Szűrés:</system:String>
     <system:String x:Key="tbRowPerPage">Sor/oldal:</system:String>
     <system:String x:Key="tbPage">Oldal:</system:String>
@@ -26,6 +26,7 @@
     <system:String x:Key="buttonFindAll">Összes</system:String>
     <system:String x:Key="buttonNew">Új</system:String>
     <system:String x:Key="buttonDelete">Törlés</system:String>
+    <system:String x:Key="buttonCancel">Mégsem</system:String>
 
     <!-- Content -->
     <!-- ContentListSubject -->

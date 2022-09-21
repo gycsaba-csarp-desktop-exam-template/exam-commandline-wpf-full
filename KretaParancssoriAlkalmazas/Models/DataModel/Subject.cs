@@ -8,7 +8,14 @@ using KretaParancssoriAlkalmazas.Models.AbstractClass;
 
 namespace KretaParancssoriAlkalmazas.Models.DataModel
 {
-    public class Subject : SubjectBase
+    public class Subject : SubjectBase, ICloneable
     {
+        public object Clone()
+        {
+            Subject subject = new Subject();
+            subject.Id = Id;
+            subject.SubjectName = SubjectName;
+            return subject;
+        }
     }
 }

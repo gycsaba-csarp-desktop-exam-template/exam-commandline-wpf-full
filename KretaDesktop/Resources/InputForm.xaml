@@ -16,7 +16,8 @@
         <Setter Property="Foreground" Value="{DynamicResource ContentForegroundColor}"></Setter>
     </Style>
     <Style x:Key="FormComboBox" TargetType="ComboBox">
-        <Setter Property="Foreground"  Value="{DynamicResource ContentTextBoxForgraound}"></Setter>
+        <Setter Property="Background" Value="{DynamicResource ContentBackgraoundColor}"></Setter>
+        <Setter Property="Foreground"  Value="{DynamicResource StandardButtonForeground}"></Setter>
     </Style>
     <Style x:Key="FormListBox" TargetType="ListBox">
         <Setter Property="Foreground"  Value="{DynamicResource ContentTextBoxForgraound}"></Setter>

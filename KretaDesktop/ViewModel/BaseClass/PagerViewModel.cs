@@ -83,7 +83,7 @@ namespace KretaDesktop.ViewModel.BaseClass
             {
                 int index = ((QueryString.CurrentPage-1) * QueryString.PageSize) + (SelectedItemIndex + 1);
                 ProjectLocalization localization=new ProjectLocalization();
-                return  localization.GetStringResource("contentListSubjectProperties")+$"{index}  /  {NumberOfItem}"; 
+                return  localization.GetStringResource("contentListSubjectProperties")+$"  {index}  /  {NumberOfItem}"; 
             }
         }
             
