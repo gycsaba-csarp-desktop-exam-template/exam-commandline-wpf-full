@@ -26,6 +26,7 @@
     <system:String x:Key="buttonFindAll">Find all</system:String>
     <system:String x:Key="buttonNew">Új</system:String>
     <system:String x:Key="buttonDelete">Delete</system:String>
+    <system:String x:Key="buttonCancel">Delete</system:String>
     <!-- Content -->
     <!-- ContentListSubject -->
     <system:String x:Key="contentListSubjectTitle">Subjects</system:String>

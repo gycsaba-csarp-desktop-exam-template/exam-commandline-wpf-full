@@ -78,12 +78,14 @@ namespace KretaDesktop.ViewModel.Content
         public RelayCommand DeleteCommand { get; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand NewCommand { get; }
+        public RelayCommand CancelCommand { get; }
 
         public ContentListSubjectViewModel()
         {
             DeleteCommand = new RelayCommand(parameter => Delete(parameter));
             NewCommand = new RelayCommand(execute => New());
             SaveCommand = new RelayCommand(parameter => Save(parameter));
+            CancelCommand = new RelayCommand(execute => Cancel());
 
             subjects = new ObservableCollection<Subject>();
             subjectService = new SubjectService();
@@ -135,8 +137,12 @@ namespace KretaDesktop.ViewModel.Content
                     displayedSubject.SubjectName = string.Empty;
                     OnPropertyChanged(nameof(DisplayedSubject));
                 }
-                waitingForNewData = true;
-                OnPropertyChanged(nameof(WaitingForNewData));
+                WaitingForNewData = true;
+                selectedItemIndex = -1;
+                OnPropertyChanged(nameof(SelectedItemIndex));
+                selectedSubject = null;
+                OnPropertyChanged(nameof(SelectedSubject));
+                //OnPropertyChanged(nameof(WaitingForNewData));
                 // Mégsem gomb
                 // Törlés nincs 
                 // Datagirdre nem lehet kattintani
@@ -154,6 +160,12 @@ namespace KretaDesktop.ViewModel.Content
                     LoadData();                    
                 }
             }
+        }
+
+        public void Cancel()
+        {
+            WaitingForNewData = false;
+            SelectRow();
         }
 
         private void SelectRow(Subject? subjectToSelect = null)
@@ -196,7 +208,7 @@ namespace KretaDesktop.ViewModel.Content
             }
             OnPropertyChanged(nameof(SelectedItemIndex));
             selectedSubject = subjectToSelect;
-            OnPropertyChanged(nameof(selectedSubject));
+            OnPropertyChanged(nameof(SelectedSubject));
         }
     }
 }

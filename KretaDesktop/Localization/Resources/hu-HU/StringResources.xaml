@@ -26,6 +26,7 @@
     <system:String x:Key="buttonFindAll">Összes</system:String>
     <system:String x:Key="buttonNew">Új</system:String>
     <system:String x:Key="buttonDelete">Törlés</system:String>
+    <system:String x:Key="buttonCancel">Mégsem</system:String>
 
     <!-- Content -->
     <!-- ContentListSubject -->
