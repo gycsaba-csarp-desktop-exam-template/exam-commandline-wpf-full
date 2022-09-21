@@ -11,6 +11,7 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
 {
     public abstract class SubjectBaseWithAttributes : SubjectBase
     {
+
         [Column("name")]
         [Display(Name = "Subject name:")]
         [Required(ErrorMessage = "The name is required")]
@@ -19,7 +20,7 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
         //[RegularExpression(@"^[A-ZÁÉIÍOÓÖŐUÚÜŰ+]a-záéiíoóöőuúüű]*$", ErrorMessage = "First letter must be uppercase, other lowercase")]
         public override string SubjectName { get; set; }
 
-      /*  public SubjectBaseWithAttributes(long id, string subName)
+       public SubjectBaseWithAttributes(long id, string subName)
             : base(id, subName)
         {        
         }
@@ -27,6 +28,6 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
         public SubjectBaseWithAttributes()
             : base()
         {
-        }*/
+        }
     }
 }

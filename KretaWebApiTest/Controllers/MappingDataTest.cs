@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace KretaWebApiTest.Controllers
 {
+    // https://stackoverflow.com/questions/43817242/how-to-mock-automapper-imapper-in-controller
     public class MappingDataTest
     {
         public Mock<IMapper> MappingData()
