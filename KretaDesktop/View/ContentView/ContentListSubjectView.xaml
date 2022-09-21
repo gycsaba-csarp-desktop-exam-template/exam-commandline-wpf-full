@@ -97,13 +97,13 @@
         </Expander>
         <Grid Grid.Row="2" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="12.126"></ColumnDefinition>
-                <ColumnDefinition Width="95.874"/>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel  Grid.Column="0" Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <StackPanel  Grid.Column="0" Visibility="{Binding IsSortingVisible, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal">
                 <TextBlock  Margin="6 8 2 2" Foreground="{DynamicResource ContentForegroundColor}" Text="{DynamicResource tbSorting}"></TextBlock>
                 <Button Style="{DynamicResource ContentButton}" Command="{Binding SortingCommand}">
                     <StackPanel Orientation="Horizontal">

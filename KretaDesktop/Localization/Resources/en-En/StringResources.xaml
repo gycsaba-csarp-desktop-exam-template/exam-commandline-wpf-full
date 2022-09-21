@@ -15,7 +15,7 @@
 
     <!-- TextBlock -->
     <system:String x:Key="tbSorting">Sorting:</system:String>
-    <system:String x:Key="tbSortingLowerCase">sorting:</system:String>
+    <system:String x:Key="tbSortingLowerCase">sorting</system:String>
     <system:String x:Key="tbFiltring">Filtring:</system:String>
     <system:String x:Key="tbRowPerPage">Row/page:</system:String>
     <system:String x:Key="tbPage">Page:</system:String>

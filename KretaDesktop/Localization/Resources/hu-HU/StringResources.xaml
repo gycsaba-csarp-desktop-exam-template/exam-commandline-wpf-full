@@ -15,7 +15,7 @@
     
     <!-- TextBlock -->
     <system:String x:Key="tbSorting">Rendezés:</system:String>
-    <system:String x:Key="tbSortingLowerCase">rendezés:</system:String>
+    <system:String x:Key="tbSortingLowerCase">rendezés</system:String>
     <system:String x:Key="tbFiltring">Szűrés:</system:String>
     <system:String x:Key="tbRowPerPage">Sor/oldal:</system:String>
     <system:String x:Key="tbPage">Oldal:</system:String>
