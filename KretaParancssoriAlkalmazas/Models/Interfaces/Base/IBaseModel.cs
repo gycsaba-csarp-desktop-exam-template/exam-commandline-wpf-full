@@ -10,6 +10,6 @@ namespace Kreta.Models.Interfaces.Base
     {
         public long Id { get; set; }
 
-        public void Set(Object obj);
+        // public void Set(Object obj);
     }
 }

@@ -1,3 +1,7 @@
+// TODO Legyen fenn mit csinálok
+// TODO A weblapon egy funkció legyen csak
+// Tesztek és fejlesztés
+
 using ApplicationPropertiesSettings;
 using KretaRazorPages.Extensions;
 

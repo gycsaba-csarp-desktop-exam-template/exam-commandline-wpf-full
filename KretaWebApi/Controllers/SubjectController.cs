@@ -15,6 +15,13 @@ using ServiceKretaLogger;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 
 
+// TODO API
+// Tesztek
+// Biztonság
+// Távoli elérés
+// InMemeory database
+// VUE összekapcsolás
+
 /*
 Kétféle útvonalválasztás létezik:
 
