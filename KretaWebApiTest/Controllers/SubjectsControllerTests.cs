@@ -37,7 +37,7 @@ namespace KretaWebApiTest.Controllers
         // https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-controllers-in-web-api
 
         [Fact]
-        public GetReturnSubjectSameId()
+        public void GetReturnSubjectSameId()
         {
             var mockRepository = new Mock<IRepositoryWrapper>();
 
@@ -47,13 +47,12 @@ namespace KretaWebApiTest.Controllers
             FieldsParameter fieldsParameter = new FieldsParameter();
 
             var actionResult = controller.GetSubjectById(42, fieldsParameter);
-            var contentResult = actionResult as OkObjectResult<EFSubject>;
+            var objectResult = actionResult as OkObjectResult;
+            Assert.NotNull(objectResult);
+            var modelResult = objectResult.Value as EFSubject;            
             
-            Assert.NotNull(result);
-            Assert.NotNull(result.Content);
-            Assert.NotNull(42, result.Content.Id);
-
-
+            Assert.NotNull(modelResult);
+            Assert.Equal(42, modelResult.Id);
         }
     }
 }
