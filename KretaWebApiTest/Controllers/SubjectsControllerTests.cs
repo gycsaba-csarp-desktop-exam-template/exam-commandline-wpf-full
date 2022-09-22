@@ -41,7 +41,6 @@ namespace KretaWebApiTest.Controllers
         {
             var mockRepository = new Mock<IRepositoryWrapper>();
 
-
             mockRepository.Setup(x => x.SubjectRepo.GetSubjectById(42)).Returns(new EFSubject(42, "Történelem"));
             var controller = new SubjectController(mockLogger.Object, mockRepository.Object, mappingData.MappingData().Object);
             FieldsParameter fieldsParameter = new FieldsParameter();
