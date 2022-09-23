@@ -43,7 +43,7 @@ namespace Kreta.Repositories
             this.subjectDataShaper = subjectDataShaper;
         }
 
-        public ISchoolClassRepo SchoolClass
+      /*  public ISchoolClassRepo SchoolClass
         {
             get
             {
@@ -65,7 +65,7 @@ namespace Kreta.Repositories
                 }
                 return subjectRepo;
             }
-        }
+        }*/
 
         public void Save()
         {

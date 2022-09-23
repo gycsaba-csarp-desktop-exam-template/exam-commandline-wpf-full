@@ -47,6 +47,7 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
         //[TestCase(3)]
         public void SubjectGetByIdOk(int exptectedId)
         {
+            context = new KretaContext(contextOptions);
             var subjects = new List<EFSubject>
             {
                 new EFSubject { Id = 1, SubjectName="Tesi" },

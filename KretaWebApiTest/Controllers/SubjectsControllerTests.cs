@@ -7,6 +7,7 @@ using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using KretaWebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using ServiceKretaLogger;
 using System;
@@ -24,6 +25,14 @@ namespace KretaWebApiTest.Controllers
         private Mock<ILoggerManager> mockLogger;
         private MappingDataTest mappingData;
 
+        public static DbContextOptions<KretaContext> contextOptions = new DbContextOptionsBuilder<KretaContext>()
+            .UseInMemoryDatabase(databaseName: "KretaTest")
+            .Options;
+
+        private KretaContext context;
+        private SubjectRepo subjectRepo;
+        private RepositoryWrapper wrapper;
+
         public SubjectsControllerTests()
         {
             //KretaContext context = new KretaContext();
@@ -31,7 +40,9 @@ namespace KretaWebApiTest.Controllers
             mockLogger = new Mock<ILoggerManager>();
             mappingData= new MappingDataTest();
 
-                                    
+            context = new KretaContext(contextOptions);
+            wrapper=new RepositoryWrapper(context);
+
         }
 
         // https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-controllers-in-web-api
@@ -39,11 +50,20 @@ namespace KretaWebApiTest.Controllers
         [Fact]
         public void GetReturnSubjectSameId()
         {
-            var mockRepository = new Mock<IRepositoryWrapper>();
             FieldsParameter fieldsParameter = new FieldsParameter();
 
-            mockRepository.Setup(x => x.SubjectRepo.GetSubjectById(42)).Returns(new EFSubject(42, "Történelem"));
-            var controller = new SubjectController(mockLogger.Object, mockRepository.Object, mappingData.MappingData().Object);
+            context = new KretaContext(contextOptions);
+            var subjects = new List<EFSubject>
+            {
+                new EFSubject { Id = 1, SubjectName="Tesi" },
+                new EFSubject { Id = 2, SubjectName="Tori" },
+                new EFSubject { Id = 3, SubjectName="Angol" },
+            };
+            context.Subjects.AddRange(subjects);
+            context.SaveChanges();
+
+
+            var controller = new SubjectController(mockLogger.Object, wrapper, mappingData.MappingData().Object);
 
 
             var actionResult = controller.GetSubjectById(42, fieldsParameter);
