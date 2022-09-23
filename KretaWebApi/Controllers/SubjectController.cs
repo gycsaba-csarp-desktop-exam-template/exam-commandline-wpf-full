@@ -34,6 +34,8 @@ Az attribútumos útválasztás az attribútumokat használja, hogy az útvonala
  */
 
 //https://code-maze.com
+//https://github.com/Arshu/ASP.NET-Core-In-Fly.io
+//https://solrevdev.com/2020/05/18/deploy-aspnet-core-web-api-to-fly-via-docker.html
 
 namespace KretaWebApi.Controllers
 {
