@@ -19,8 +19,8 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
         private KretaContext context;
         private SubjectRepo subjectRepo;
 
-        [SetUp]
-        //[OneTimeSetUp]
+        //[SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             // https://stackoverflow.com/questions/48061096/why-cant-i-call-the-useinmemorydatabase-method-on-dbcontextoptionsbuilder
@@ -42,8 +42,10 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
         }
 
         [Test]
-        [TestCase(1, 1)]
-        public void SubjectGetByIdOk(int exptectedId, int actualId)
+        [TestCase(1)]
+        //[TestCase(2)]
+        //[TestCase(3)]
+        public void SubjectGetByIdOk(int exptectedId)
         {
             var subjects = new List<EFSubject>
             {
@@ -53,10 +55,9 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
             };
             context.AddRange(subjects);
             context.SaveChanges();
-            EFSubject subject=subjectRepo.GetSubjectById(actualId);
+            EFSubject subject=subjectRepo.GetSubjectById(exptectedId);
             Assert.IsNotNull(subject,"SubjectRepo:GetSubjectById->Jó adat esetén null");
-            Assert.AreEqual(exptectedId, actualId, "SubjectRepo:GetSubjectById->Jó adat esetén nem megfelelõ id-t ad vissza.");                 
-            Assert.Pass();
+            Assert.AreEqual(exptectedId, subject.Id, "SubjectRepo:GetSubjectById->Jó adat esetén nem megfelelõ id-t ad vissza.");         
         }
     }
 }
