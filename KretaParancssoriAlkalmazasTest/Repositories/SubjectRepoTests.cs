@@ -7,7 +7,7 @@ using System.Drawing.Text;
 
 namespace KretaParancssoriAlkalmazasTest.Repositories
 {
-
+    // https://github.com/etrupja/complete-guide-to-aspnetcore-web-api
     public class SubjectRepoTests
     {
         public static DbContextOptions<KretaContext> contextOptions = new DbContextOptionsBuilder<KretaContext>()
