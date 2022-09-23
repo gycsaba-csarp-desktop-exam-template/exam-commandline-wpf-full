@@ -16,6 +16,8 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
 
         private ISortHelper<EFSubject> sortHelper;
         private IDataShaper<EFSubject> dataShaper;
+        private KretaContext context;
+        private SubjectRepo subjectRepo;
 
         [SetUp]
         //[OneTimeSetUp]
@@ -23,19 +25,37 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
         {
             // https://stackoverflow.com/questions/48061096/why-cant-i-call-the-useinmemorydatabase-method-on-dbcontextoptionsbuilder
 
-            KretaContext context = new KretaContext(contextOptions);
+             context = new KretaContext(contextOptions);
             /*using (var context = new KretaContext(options))
             {
               
             }*/
             sortHelper = new SortHelper<EFSubject>();
             dataShaper = new DataShaper<EFSubject>();
-            SubjectRepo subjectRepo = new SubjectRepo(context,sortHelper,dataShaper);
+            subjectRepo = new SubjectRepo(context,sortHelper,dataShaper);
+        }
+
+        [OneTimeTearDown]
+        public void CleanUp()
+        {
+            context.Database.EnsureDeleted();
         }
 
         [Test]
-        public void Test1()
+        [TestCase(1, 1)]
+        public void SubjectGetByIdOk(int exptectedId, int actualId)
         {
+            var subjects = new List<EFSubject>
+            {
+                new EFSubject { Id = 1, SubjectName="Tesi" },
+                new EFSubject { Id = 2, SubjectName="Tori" },
+                new EFSubject { Id = 3, SubjectName="Angol" },
+            };
+            context.AddRange(subjects);
+            context.SaveChanges();
+            EFSubject subject=subjectRepo.GetSubjectById(actualId);
+            Assert.IsNotNull(subject,"SubjectRepo:GetSubjectById->Jó adat esetén null");
+            Assert.AreEqual(exptectedId, actualId, "SubjectRepo:GetSubjectById->Jó adat esetén nem megfelelõ id-t ad vissza.");                 
             Assert.Pass();
         }
     }
