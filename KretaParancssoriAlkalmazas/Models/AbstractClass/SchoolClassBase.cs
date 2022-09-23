@@ -10,6 +10,7 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
     {
 
         public SchoolClassBase(long id, int schoolYear, char classType, int teacherId)
+            :base(id)
         {
             this.Id = id;
             this.SchoolYear = schoolYear;
@@ -18,6 +19,7 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
         }
 
         public SchoolClassBase()
+            :base(-1)
         {
             this.Id = -1;
             this.SchoolYear = 9;

@@ -40,15 +40,16 @@ namespace KretaWebApiTest.Controllers
         public void GetReturnSubjectSameId()
         {
             var mockRepository = new Mock<IRepositoryWrapper>();
+            FieldsParameter fieldsParameter = new FieldsParameter();
 
             mockRepository.Setup(x => x.SubjectRepo.GetSubjectById(42)).Returns(new EFSubject(42, "Történelem"));
             var controller = new SubjectController(mockLogger.Object, mockRepository.Object, mappingData.MappingData().Object);
-            FieldsParameter fieldsParameter = new FieldsParameter();
+
 
             var actionResult = controller.GetSubjectById(42, fieldsParameter);
             var objectResult = actionResult as OkObjectResult;
             Assert.NotNull(objectResult);
-            var modelResult = objectResult.Value as EFSubject;            
+            var modelResult = objectResult.Value as Subject;            
             
             Assert.NotNull(modelResult);
             Assert.Equal(42, modelResult.Id);

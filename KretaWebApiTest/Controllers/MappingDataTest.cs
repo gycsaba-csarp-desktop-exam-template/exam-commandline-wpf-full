@@ -21,6 +21,7 @@ namespace KretaWebApiTest.Controllers
             mappingService.Setup(m => m.Map<UserDetail, UserDetailViewModel>(It.IsAny<UserDetail>())).Returns(interview); // mapping data
             mappingService.Setup(m => m.Map<UserDetailViewModel, UserDetail>(It.IsAny<UserDetailtViewModel>())).Returns(im); // mapping data
             */
+
             return mappingService;
         }
     }
