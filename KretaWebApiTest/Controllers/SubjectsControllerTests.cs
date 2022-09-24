@@ -1,4 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using ServiceKretaLogger;
 using Kreta.Models.Context;
 using Kreta.Repositories;
 using Kreta.Repositories.Interfaces;
@@ -6,15 +16,7 @@ using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using KretaWebApi.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using ServiceKretaLogger;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KretaWebApi;
 
 namespace KretaWebApiTest.Controllers
 {
@@ -23,7 +25,8 @@ namespace KretaWebApiTest.Controllers
         private readonly SubjectController controller;
 
         private Mock<ILoggerManager> mockLogger;
-        private MappingDataTest mappingData;
+        //private Mock<IMapper> mockMapper;
+        private IMapper mapper;
 
         public static DbContextOptions<KretaContext> contextOptions = new DbContextOptionsBuilder<KretaContext>()
             .UseInMemoryDatabase(databaseName: "KretaTest")
@@ -38,9 +41,24 @@ namespace KretaWebApiTest.Controllers
             //KretaContext context = new KretaContext();
 
             mockLogger = new Mock<ILoggerManager>();
-            mappingData= new MappingDataTest();
+            // https://stackoverflow.com/questions/36074324/how-to-mock-an-automapper-imapper-object-in-web-api-tests-with-structuremap-depe
+            //https://www.thecodebuzz.com/unit-test-mock-automapper-asp-net-core-imapper/
+            //mockMapper = new Mock<IMapper>();
+            //mockMapper.Setup(x => x.Map<Subject>(It.IsAny<Subject>()))
+            //    .Returns(It.IsAny<Subject>());
+            if (mapper == null)
+            {
+                var mappingConfig = new MapperConfiguration(mc =>
+                {
+                    mc.AddProfile(new MappingProfile());
+                });
+                IMapper newMapper = mappingConfig.CreateMapper();
+                mapper = newMapper;
+            }
 
         }
+          
+        
 
         // https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-controllers-in-web-api
 
@@ -61,8 +79,7 @@ namespace KretaWebApiTest.Controllers
             RepositoryWrapper wrapper = new RepositoryWrapper(context);
 
 
-            var controller = new SubjectController(mockLogger.Object, wrapper, mappingData.MappingData().Object);
-
+            var controller = new SubjectController(mockLogger.Object, wrapper, mockMapper.Object);
 
             var actionResult = controller.GetSubjectById(1, fieldsParameter);
             Assert.NotNull(actionResult);

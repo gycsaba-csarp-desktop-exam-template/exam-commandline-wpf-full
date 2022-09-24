@@ -155,8 +155,7 @@ namespace KretaWebApi.Controllers
                 else
                 {
                     logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
-                    //Subject subjectResult = mapper.Map<Subject>(subject);
-                    EFSubject subjectResult = subject;
+                    Subject subjectResult = mapper.Map<Subject>(subject);
                     return Ok(subjectResult);
                 }
             }
