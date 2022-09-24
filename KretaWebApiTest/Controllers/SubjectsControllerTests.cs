@@ -79,7 +79,7 @@ namespace KretaWebApiTest.Controllers
             RepositoryWrapper wrapper = new RepositoryWrapper(context);
 
 
-            var controller = new SubjectController(mockLogger.Object, wrapper, mockMapper.Object);
+            var controller = new SubjectController(mockLogger.Object, wrapper, mapper);
 
             var actionResult = controller.GetSubjectById(1, fieldsParameter);
             Assert.NotNull(actionResult);
