@@ -29,9 +29,9 @@ namespace KretaWebApiTest.Controllers
             .UseInMemoryDatabase(databaseName: "KretaTest")
             .Options;
 
-        private KretaContext context;
-        private SubjectRepo subjectRepo;
-        private RepositoryWrapper wrapper;
+        //private KretaContext context;
+        //private SubjectRepo subjectRepo;
+        //private RepositoryWrapper wrapper;
 
         public SubjectsControllerTests()
         {
@@ -39,9 +39,6 @@ namespace KretaWebApiTest.Controllers
 
             mockLogger = new Mock<ILoggerManager>();
             mappingData= new MappingDataTest();
-
-            context = new KretaContext(contextOptions);
-            wrapper=new RepositoryWrapper(context);
 
         }
 
@@ -52,7 +49,7 @@ namespace KretaWebApiTest.Controllers
         {
             FieldsParameter fieldsParameter = new FieldsParameter();
 
-            context = new KretaContext(contextOptions);
+            KretaContext context = new KretaContext(contextOptions);
             var subjects = new List<EFSubject>
             {
                 new EFSubject { Id = 1, SubjectName="Tesi" },
@@ -61,18 +58,20 @@ namespace KretaWebApiTest.Controllers
             };
             context.Subjects.AddRange(subjects);
             context.SaveChanges();
+            RepositoryWrapper wrapper = new RepositoryWrapper(context);
 
 
             var controller = new SubjectController(mockLogger.Object, wrapper, mappingData.MappingData().Object);
 
 
-            var actionResult = controller.GetSubjectById(42, fieldsParameter);
+            var actionResult = controller.GetSubjectById(1, fieldsParameter);
+            Assert.NotNull(actionResult);
             var objectResult = actionResult as OkObjectResult;
             Assert.NotNull(objectResult);
-            var modelResult = objectResult.Value as Subject;            
+            var modelResult = objectResult.Value as EFSubject;            
             
             Assert.NotNull(modelResult);
-            Assert.Equal(42, modelResult.Id);
+            Assert.Equal(1, modelResult.Id);
         }
     }
 }

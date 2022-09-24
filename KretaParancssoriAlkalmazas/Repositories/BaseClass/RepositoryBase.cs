@@ -19,7 +19,7 @@ namespace Kreta.Repositories.BaseClass
 
         public RepositoryBase(KretaContext kretaContext)
         {
-            KretaContext = kretaContext;
+            KretaContext = kretaContext;            
         }   
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
