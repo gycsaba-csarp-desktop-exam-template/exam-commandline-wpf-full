@@ -21,12 +21,19 @@ namespace Kreta.Repositories
         private ISortHelper<EFSubject> sortHelper;
         private IDataShaper<EFSubject> dataShaper;
 
-        public SubjectRepo(KretaContext kretaContext, ISortHelper<EFSubject> sortHelper, IDataShaper<EFSubject> dataShaper)
-            : base(kretaContext)
+        public SubjectRepo(KretaContext kretaContext)
         {
-            this.sortHelper = sortHelper;
-            this.dataShaper = dataShaper;
+            this.sortHelper = new SortHelper<EFSubject>();
+            this.dataShaper = new ;
         }
+
+
+        /* public SubjectRepo(KretaContext kretaContext, ISortHelper<EFSubject> sortHelper, IDataShaper<EFSubject> dataShaper)
+             : base(kretaContext)
+         {
+             this.sortHelper = sortHelper;
+             this.dataShaper = dataShaper;
+         }*/
 
         public PagedList<ExpandoObject> GetAllSubjects(SubjectParameters subjectParameters)
         {
@@ -52,8 +59,7 @@ namespace Kreta.Repositories
             KretaContext dBContext = base.KretaContext;
             List<EFSubject> proba = dBContext.Set<EFSubject>().ToList();
             EFSubject fSubject = dBContext.Set<EFSubject>().Where(x => x.Id == 1).FirstOrDefault();
-            EFSubject subject = FindByCondition(subject => subject.Id.Equals(subjectId))
-                   .FirstOrDefault();
+            EFSubject subject = FindByCondition(subject => subject.Id.Equals(subjectId)).FirstOrDefault();
             return subject;
    
         }

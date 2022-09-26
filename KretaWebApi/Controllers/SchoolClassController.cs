@@ -19,7 +19,7 @@ namespace KretaWebApi.Controllers
     public class SchoolClassController : ControllerBase
     {
         private ILoggerManager logger;
-        private IRepositoryWrapper wrapper;
+        //private IRepositoryWrapper wrapper;
         private IMapper mapper;
         private LinkGenerator linkGenerator;
 

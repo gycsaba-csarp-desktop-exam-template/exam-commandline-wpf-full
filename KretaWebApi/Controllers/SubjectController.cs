@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-using Kreta.Repositories.Interfaces;
 using AutoMapper;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
@@ -9,10 +7,9 @@ using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using Newtonsoft.Json;
-using System.Dynamic;
-using System.ComponentModel.DataAnnotations;
 using ServiceKretaLogger;
-using KretaParancssoriAlkalmazas.Models.Helpers;
+using KretaParancssoriAlkalmazas.Services;
+
 
 
 // TODO API
@@ -55,15 +52,17 @@ namespace KretaWebApi.Controllers
     public class SubjectController : ControllerBase
     {
         private ILoggerManager logger;
-        private IRepositoryWrapper repositoryWrapper;
+        private ISubjectService service;
         private IMapper mapper;
 
-        public SubjectController(ILoggerManager logger, IRepositoryWrapper repositoryWrapper, IMapper mapper)
+        public SubjectController(ILoggerManager logger, IMapper mapper)
         {
             logger.LogInfo($"Tantárgy vezérlő kérést kapott!");
             this.logger = logger;
-            this.repositoryWrapper = repositoryWrapper;
+            //this.service = service;
             this.mapper = mapper;
+
+            service = new SubjectService();
             logger.LogInfo($"Szükséges objektumokat a controller megkapta!");
         }
 
@@ -75,7 +74,7 @@ namespace KretaWebApi.Controllers
                 logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
                 logger.LogInfo($"Paraméterek {subjectParameters}");
 
-                var subjects = repositoryWrapper.SubjectRepo.GetAllSubjects(subjectParameters);
+                var subjects = service.GetAllSubjects(subjectParameters);
                 logger.LogInfo($"Kiolvasva {subjects.Count} tantárgy adat az adatbázisból");
 
                 // pagination data in header

@@ -6,6 +6,7 @@ using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using ServiceKretaLogger;
+using ServiceKreta;
 
 
 /*
@@ -24,6 +25,8 @@ namespace KretaWebApi.Extensions
 {
     public static class ServiceExtenxions
     {
+        // TODO ConfigureCors: https://code-maze.com/enabling-cors-in-asp-net-core/
+
         public static void ConfigureCors(this IServiceCollection services)
         {
             // Cors-> külső erőforrások elérése
@@ -81,6 +84,11 @@ namespace KretaWebApi.Extensions
             services.AddScoped<IDataShaper<EFSubject>, DataShaper<EFSubject>>();
 
             services.AddScoped<IRepositoryWrapper,RepositoryWrapper>();
+        }
+
+        public static void ConfigureService(this IServiceCollection services)
+        {
+            services.AddScoped<IRepoService,RepoService>();
         }
     }
 }
