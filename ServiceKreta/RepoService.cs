@@ -13,10 +13,12 @@ namespace ServiceKreta
     public class RepoService : IRepoService
     {
         private SubjectService subjectService;
+        private KretaContext context;
 
-        public RepoService()
+        public RepoService(KretaContext context)
         {
-            subjectService = new SubjectService();
+            this.context = context;
+            subjectService = new SubjectService(context);
         }
     }
 }

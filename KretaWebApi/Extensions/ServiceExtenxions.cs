@@ -7,6 +7,7 @@ using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using ServiceKretaLogger;
 using ServiceKreta;
+using KretaParancssoriAlkalmazas.Services;
 
 
 /*
@@ -89,6 +90,7 @@ namespace KretaWebApi.Extensions
         public static void ConfigureService(this IServiceCollection services)
         {
             services.AddScoped<IRepoService,RepoService>();
+            services.AddScoped<ISubjectService, SubjectService>();
         }
     }
 }

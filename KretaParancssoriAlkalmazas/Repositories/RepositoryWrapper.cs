@@ -61,7 +61,7 @@ namespace Kreta.Repositories
             {
                 if (subjectRepo==null)
                 {
-                    subjectRepo = new SubjectRepo(kretaContext,subjectSortHelper,subjectDataShaper);
+                    subjectRepo = new SubjectRepo(kretaContext);
                 }
                 return subjectRepo;
             }

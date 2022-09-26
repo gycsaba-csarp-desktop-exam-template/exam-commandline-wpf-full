@@ -24,7 +24,7 @@ namespace Kreta.Repositories
         public SubjectRepo(KretaContext kretaContext)
         {
             this.sortHelper = new SortHelper<EFSubject>();
-            this.dataShaper = new ;
+            this.dataShaper = new DataShaper<EFSubject>();
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using Kreta.Models.Context;
 using Kreta.Repositories;
+using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using System;
@@ -14,16 +15,51 @@ namespace KretaParancssoriAlkalmazas.Services
     public class SubjectService : ISubjectService
     {
         private SubjectRepo subjectRepo;
+        private KretaContext context;
 
         public SubjectService(KretaContext context)
         {
-            subjectRepo = new SubjectRepo();
+            this.context = context;
+            subjectRepo = new SubjectRepo(context);
+        }
+
+        public void CreateSubject(EFSubject insertedEFSubject)
+        {
+            subjectRepo.CreateSubject(insertedEFSubject);
+            context.SaveChanges();
+        }
+
+        public void DeleteSubject(EFSubject subject)
+        {
+            subjectRepo.Delete(subject);
+            context.SaveChanges();
         }
 
         public PagedList<ExpandoObject> GetAllSubjects(SubjectParameters subjectParameters)
         {
-
-            
+            return subjectRepo.GetAllSubjects(subjectParameters);            
         }
+
+        public long GetNextId()
+        {
+            return subjectRepo.GetNextId();
+        }
+
+        public EFSubject GetSubjectById(long id)
+        {
+            return subjectRepo.GetSubjectById(id);
+        }
+
+        public IQueryable<EFSubject> SearchSubjectNameStartWith(string name)
+        {
+            return subjectRepo.SearchSubjectNameStartWith(name);
+        }
+
+        public void Update(EFSubject updatedEFSubject)
+        {
+            subjectRepo.Update(updatedEFSubject);
+            context.SaveChanges();
+        }
+
     }
 }
