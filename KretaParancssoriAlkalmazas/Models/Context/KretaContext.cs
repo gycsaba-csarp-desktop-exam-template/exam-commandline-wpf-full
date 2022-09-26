@@ -16,9 +16,9 @@ namespace Kreta.Models.Context
         public DbSet<EFSchoolClass> SchoolClasses { get; set; }
         public DbSet<EFSubject> Subjects { get; set; }
 
-        public KretaContext()
+        /*public KretaContext()
         {
-        }
+        }*/
 
         public KretaContext(DbContextOptions<KretaContext> options)
             : base(options)

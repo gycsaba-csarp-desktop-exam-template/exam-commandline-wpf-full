@@ -9,18 +9,18 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
     public abstract class SubjectBase : ClassWithId
     {
 
-      /*  public SubjectBase(long id, string subName)
+        public SubjectBase(long id, string subName)
+            :base(id)
         {
-            this.Id = id;
             this.SubjectName = subName;
         }
-
+        
         public SubjectBase()
-        {
-            this.Id = -1;
+            :base(-1)
+        {            
             this.SubjectName = String.Empty;
         }
-*/
+
         public virtual string SubjectName { get; set; }
 
         public override string ToString()

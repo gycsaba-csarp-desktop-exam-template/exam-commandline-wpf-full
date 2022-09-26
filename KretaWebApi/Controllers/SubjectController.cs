@@ -34,6 +34,8 @@ Az attribútumos útválasztás az attribútumokat használja, hogy az útvonala
  */
 
 //https://code-maze.com
+//https://github.com/Arshu/ASP.NET-Core-In-Fly.io
+//https://solrevdev.com/2020/05/18/deploy-aspnet-core-web-api-to-fly-via-docker.html
 
 namespace KretaWebApi.Controllers
 {
@@ -136,23 +138,24 @@ namespace KretaWebApi.Controllers
 
             try
             {
-                var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id,fields.Fields);
-
-                if (subject==default(ExpandoObject))
+                // fields visszaállítás, a tesztbe ExpandoObjectel nem megy meg
+                //var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id,fields.Fields);
+                var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id);
+                /*if (subject==default(ExpandoObject))
                 {
                     logger.LogError($"{id}-jú tantárgy nem létezik");
                     return NotFound();
-                }
+                }*/
 
-                /*if (subject == null)
+                if (subject == null)
                 {
                     logger.LogError($"GetSubjet(id)->Tantárgy id alapján: {id} -jű tantárgy nem létezik");
                     return NotFound();
-                }*/
+                }
                 else
                 {
                     logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
-                    var subjectResult = mapper.Map<Subject>(subject);
+                    Subject subjectResult = mapper.Map<Subject>(subject);
                     return Ok(subjectResult);
                 }
             }

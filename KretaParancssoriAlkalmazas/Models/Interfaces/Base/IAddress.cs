@@ -10,7 +10,6 @@ namespace Kreta.Models.Interfaces.Base
     {
         public string City { get; set; }
         public string StreetAndNumber { get; set; }
-
         public int PostCode { get; set; }
 
         public string WritingAddresses

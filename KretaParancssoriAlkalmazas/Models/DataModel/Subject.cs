@@ -10,6 +10,16 @@ namespace KretaParancssoriAlkalmazas.Models.DataModel
 {
     public class Subject : SubjectBase, ICloneable
     {
+        public Subject(long id, string subName)
+            : base(id,subName)
+        {
+        }
+
+        public Subject()
+            : base()
+        {
+        }
+
         public object Clone()
         {
             Subject subject = new Subject();
