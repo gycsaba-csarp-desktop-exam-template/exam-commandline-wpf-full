@@ -68,27 +68,33 @@ namespace KretaWebApiTest.Controllers
             FieldsParameter fieldsParameter = new FieldsParameter();
 
             KretaContext context = new KretaContext(contextOptions);
-            var subjects = new List<EFSubject>
+            var subjectTableData = new List<EFSubject>
             {
                 new EFSubject { Id = 1, SubjectName="Tesi" },
                 new EFSubject { Id = 2, SubjectName="Tori" },
                 new EFSubject { Id = 3, SubjectName="Angol" },
             };
-            context.Subjects.AddRange(subjects);
+            context.Subjects.AddRange(subjectTableData);
             context.SaveChanges();
             RepositoryWrapper wrapper = new RepositoryWrapper(context);
 
-
+            //arrange
+            int exptectedTestedElementInTableId = 1;
+            EFSubject exptedtedSubject = subjectTableData.Where(subject => subject.Id.Equals(exptectedTestedElementInTableId)).FirstOrDefault();
             var controller = new SubjectController(mockLogger.Object, wrapper, mapper);
 
-            var actionResult = controller.GetSubjectById(1, fieldsParameter);
+            // act
+            var actionResult = controller.GetSubjectById(exptectedTestedElementInTableId, fieldsParameter);
+            
+            // assert
             Assert.NotNull(actionResult);
             var objectResult = actionResult as OkObjectResult;
             Assert.NotNull(objectResult);
-            var modelResult = objectResult.Value as EFSubject;            
+            var modelResult = objectResult.Value as Subject;            
             
             Assert.NotNull(modelResult);
-            Assert.Equal(1, modelResult.Id);
+            Assert.Equal(exptedtedSubject.Id, modelResult.Id);
+            Assert.Equal(exptedtedSubject.SubjectName, modelResult.SubjectName);
         }
     }
 }
