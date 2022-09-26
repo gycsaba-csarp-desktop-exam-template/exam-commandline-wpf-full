@@ -46,6 +46,10 @@ namespace KretaWebApi.Controllers
 
     //TODO: NoDatabase    
 
+    // ToDo Best practice, secure
+    // https://code-maze.com/aspnetcore-webapi-best-practices/
+    // https://www.c-sharpcorner.com/UploadFile/1492b1/restful-day-2-inversion-of-control-using-dependency-injecti/
+
     [Route("[controller]")]
     [ApiController]
     public class SubjectController : ControllerBase
