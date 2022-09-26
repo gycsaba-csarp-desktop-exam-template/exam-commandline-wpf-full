@@ -1,21 +1,21 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:63059",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:50921/",
+      "sslPort": 44307
     }
   },
   "profiles": {
     "KretaRazorPages": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5288",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:5288",
+      "dotnetRunMessages": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
