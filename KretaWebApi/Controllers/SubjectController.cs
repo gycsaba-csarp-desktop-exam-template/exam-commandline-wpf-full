@@ -65,213 +65,159 @@ namespace KretaWebApi.Controllers
             logger.LogInfo($"Szükséges objektumokat a controller megkapta!");
         }
 
-        [HttpGet("api/subject",Name = "All subjects")]
+        [HttpGet("api/subject", Name = "All subjects")]
         public IActionResult GetAllSubjects([FromQuery] SubjectParameters subjectParameters)
         {
-            try
+
+            logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
+            logger.LogInfo($"Paraméterek {subjectParameters}");
+
+            var subjects = service.GetAllSubjects(subjectParameters);
+
+            logger.LogInfo($"Kiolvasva {subjects.Count} tantárgy adat az adatbázisból");
+
+            // pagination data in header
+            var paginationMetadata = new
             {
-                logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
+                subjects.QueryString.NumberOfItem,
+                subjects.QueryString.PageSize,
+                subjects.QueryString.CurrentPage,
+                subjects.QueryString.NumberOfPage,
+            };
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
+
+            // nextId header data to insert new subject
+            long nextId = 0;
+            if (subjects != null && subjects.Count > 0)
+                nextId = service.GetNextId();
+            logger.LogInfo($"Meghatározva {nextId} a következő lehetséges id");
+            Dictionary<string, string> nextIDToSerialize = new Dictionary<string, string>();
+            nextIDToSerialize.Add("NextId", nextId.ToString());
+            Response.Headers.Add("X-NextId", JsonConvert.SerializeObject(nextIDToSerialize));
+
+            logger.LogInfo($"Visszatérés {subjects.Count} tantárgy adattal az adatbázisból");
+
+            // ha nincs adat
+            if ((subjects == null) || (subjects.Count == 0))
+            {
                 logger.LogInfo($"Paraméterek {subjectParameters}");
-
-                var subjects = service.GetAllSubjects(subjectParameters);
-                logger.LogInfo($"Kiolvasva {subjects.Count} tantárgy adat az adatbázisból");
-
-                // pagination data in header
-                var paginationMetadata = new
-                {
-                    subjects.QueryString.NumberOfItem,
-                    subjects.QueryString.PageSize,
-                    subjects.QueryString.CurrentPage,
-                    subjects.QueryString.NumberOfPage,
-                };
-                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
-
-                // nextId header data to insert new subject
-                long nextId = 0;
-                if (subjects!=null && subjects.Count>0)
-                    nextId = service.GetNextId();
-                logger.LogInfo($"Meghatározva {nextId} a következő lehetséges id");
-                Dictionary<string,string> nextIDToSerialize=new Dictionary<string,string>();
-                nextIDToSerialize.Add("NextId", nextId.ToString());
-                Response.Headers.Add("X-NextId", JsonConvert.SerializeObject(nextIDToSerialize));
-
-                logger.LogInfo($"Visszatérés {subjects.Count} tantárgy adattal az adatbázisból");
-
-                // ha nincs adat
-                if ((subjects == null) || (subjects.Count == 0))
-                {
-                    logger.LogInfo($"Paraméterek {subjectParameters}");
-                    return NoContent();
-                }
-
-                // ha van adat
-                var subjectResult = mapper.Map<IEnumerable>(subjects);
-                return Ok(subjectResult);
+                return NoContent();
             }
-            catch (Exception ex)
-            {
-                logger.LogError($"Valami nem működik a GetAllSubjects metódusban: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+
+            // ha van adat
+            var subjectResult = mapper.Map<IEnumerable>(subjects);
+            return Ok(subjectResult);
+
         }
 
         [HttpGet("api/subject-search-by-name", Name = "All subject search by name")]
         public IActionResult SearchBySubjectName([FromQuery] SubjectNameSearchingParameters subjectNameSearchingParameters)
         {
-            try
-            {
-                var subjects = service.SearchSubjectNameStartWith(subjectNameSearchingParameters.Name);
-                logger.LogInfo($"Az összes tantárgy lekérdezése amelynek nevében szerepel '{subjectNameSearchingParameters.Name}' szó.");
+            var subjects = service.SearchSubjectNameStartWith(subjectNameSearchingParameters.Name);
+            logger.LogInfo($"Az összes tantárgy lekérdezése amelynek nevében szerepel '{subjectNameSearchingParameters.Name}' szó.");
 
-                var subjectResult = mapper.Map<IEnumerable>(subjects);
-                return Ok(subjectResult);
+            var subjectResult = mapper.Map<IEnumerable>(subjects);
+            return Ok(subjectResult);
 
-            }
-            catch (Exception ex)
-            {
-                logger.LogError($"Valami nem működik a GetAllSubjectSearchByName metódusban: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
         }
+
         [HttpGet("api/subject/{id}", Name = "Subject by id")]
         public IActionResult GetSubjectById(int id, [FromQuery] FieldsParameter fields)
         {
             //TODO: Nem működik, FieldsParameter nulla lesz. URI hiba?
 
-            try
+            // fields visszaállítás, a tesztbe ExpandoObjectel nem megy meg
+            //var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id,fields.Fields);
+            var subject = service.GetSubjectById(id);
+            /*if (subject==default(ExpandoObject))
             {
-                // fields visszaállítás, a tesztbe ExpandoObjectel nem megy meg
-                //var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id,fields.Fields);
-                var subject = service.GetSubjectById(id);
-                /*if (subject==default(ExpandoObject))
-                {
-                    logger.LogError($"{id}-jú tantárgy nem létezik");
-                    return NotFound();
-                }*/
+                logger.LogError($"{id}-jú tantárgy nem létezik");
+                return NotFound();
+            }*/
 
-                if (subject == null)
-                {
-                    logger.LogError($"GetSubjet(id)->Tantárgy id alapján: {id} -jű tantárgy nem létezik");
-                    return NotFound();
-                }
-                else
-                {
-                    logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
-                    Subject subjectResult = mapper.Map<Subject>(subject);
-                    return Ok(subjectResult);
-                }
-            }
-            catch (Exception ex)
+            if (subject == null)
             {
-                logger.LogError($"Valami nem működik a GetSubject(int id) metódusban:" + ex.Message);
-                return StatusCode(500, "Internal server error");
+                logger.LogError($"GetSubjet(id)->Tantárgy id alapján: {id} -jű tantárgy nem létezik");
+                return NotFound();
             }
+            else
+            {
+                logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
+                Subject subjectResult = mapper.Map<Subject>(subject);
+                return Ok(subjectResult);
+            }
+
         }
 
-        [HttpPost("api/subject",Name ="Insert subject")]
+        [HttpPost("api/subject", Name = "Insert subject")]
         public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
-            try
+            logger.LogInfo("Új tantárgy felvétele az adatbázisba");
+            logger.LogInfo("Új tantárgy azonosító:" + subjectForCreation.Id);
+            logger.LogInfo("Új tantárgy neve:" + subjectForCreation.SubjectName);
+
+            if (subjectForCreation == null)
             {
-                logger.LogInfo("Új tantárgy felvétele az adatbázisba");
-                logger.LogInfo("Új tantárgy azonosító:" + subjectForCreation.Id);
-                logger.LogInfo("Új tantárgy neve:" + subjectForCreation.SubjectName);
-
-                if (subjectForCreation == null)
-                {
-                    logger.LogError("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy null.");
-                    return BadRequest("Subject is null");
-                }
-                logger.LogInfo("Új tantárgy adatok rendben.");
-
-                var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
-
-                if (!ModelState.IsValid)
-                {
-                    logger.LogInfo("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy nem elfogadható.");
-                    return BadRequest("Invalid model object!");
-                }
-
-                service.CreateSubject(insertedEFSubject);
-
-                var createdSubject = mapper.Map<Subject>(insertedEFSubject);
-
-                logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
-
-                return NoContent();
+                logger.LogError("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy null.");
+                return BadRequest("Subject is null");
             }
-            catch (Exception ex)
+            logger.LogInfo("Új tantárgy adatok rendben.");
+
+            var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
+
+            if (!ModelState.IsValid)
             {
-                logger.LogError($"Valami nem működik a CreateSubject metódusban:" + ex.Message);
-                return StatusCode(500, "Internal server error");
+                logger.LogInfo("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy nem elfogadható.");
+                return BadRequest("Invalid model object!");
             }
+
+            service.CreateSubject(insertedEFSubject);
+
+            var createdSubject = mapper.Map<Subject>(insertedEFSubject);
+
+            logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
+
+            return NoContent();
         }
 
-        [HttpPut("api/subject/{id}", Name ="Update subject")]
+        [HttpPut("api/subject/{id}", Name = "Update subject")]
         public IActionResult UpdateSubject(long id, [FromBody] SubjectForUpdateDto subjectForUpdate)
         {
-            try
+            logger.LogInfo("Tantárgy módosítása az adatbázisba");
+            logger.LogInfo("Módosítandó tantárgy id-je:" + subjectForUpdate.Id);
+            logger.LogInfo("Módosítandó tantárgy neve-je:" + subjectForUpdate.SubjectName);
+
+
+            if (subjectForUpdate == null)
             {
-                logger.LogInfo("Tantárgy módosítása az adatbázisba");
-                logger.LogInfo("Módosítandó tantárgy id-je:" + subjectForUpdate.Id);
-                logger.LogInfo("Módosítandó tantárgy neve-je:" + subjectForUpdate.SubjectName);
-
-
-                if (subjectForUpdate == null)
-                {
-                    logger.LogError("UpdateSubject->Tantárgy módosítás során a klienstől küldött tantárgy null.");
-                    return BadRequest("Subject is null");
-                }
-                if (!ModelState.IsValid)
-                {
-                    logger.LogInfo("UpdateSubject->Tantárgy módosítás során a klienstől küldött tantárgy nem elfogadható.");
-                }
-
-                var updatedEFSubject = mapper.Map<EFSubject>(subjectForUpdate);
-
-                service.Update(updatedEFSubject);
-
-                var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
-
-                logger.LogInfo($"UpdateSubject->{updatedSubject.Id} id-jű tantárgy módosítva {updatedSubject}-re)");
-
-                return NoContent();
+                logger.LogError("UpdateSubject->Tantárgy módosítás során a klienstől küldött tantárgy null.");
+                return BadRequest("Subject is null");
             }
-            catch (Exception ex)
+            if (!ModelState.IsValid)
             {
-                logger.LogError($"UpdateSubject->Valami nem sikerült a metóduson belül: {ex.Message}");
-                //return StatusCode(500, "Internal server error");
-                return Ok(ex.Message);
+                logger.LogInfo("UpdateSubject->Tantárgy módosítás során a klienstől küldött tantárgy nem elfogadható.");
             }
+
+            var updatedEFSubject = mapper.Map<EFSubject>(subjectForUpdate);
+            service.Update(updatedEFSubject);
+
+            var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
+            logger.LogInfo($"UpdateSubject->{updatedSubject.Id} id-jű tantárgy módosítva {updatedSubject}-re)");
+            return NoContent();
         }
-        [HttpDelete("api/subject/{id}", Name ="Delete subject")]
+        [HttpDelete("api/subject/{id}", Name = "Delete subject")]
         public IActionResult DeleteSubject(long id)
         {
-            try
+            var subject = service.GetSubjectById(id);
+            if (subject == null)
             {
-                var subject =  service.GetSubjectById(id);
-                if (subject == null)
-                {
-                    logger.LogError($"DeleteSubject->A törlendő tantárgy {id} id-vel nem található az adatbázisban.");
-                    return NotFound();
-                }
-
-                service.DeleteSubject(subject);
-
-                logger.LogInfo($"DeleteSubject->{id}-id-jű tantárgy törölve lett!");
-
-                return NoContent();
+                logger.LogError($"DeleteSubject->A törlendő tantárgy {id} id-vel nem található az adatbázisban.");
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                logger.LogError($"DeleteSubject->Valami nem sikerült a metóduson belül: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+            service.DeleteSubject(subject);
+            logger.LogInfo($"DeleteSubject->{id}-id-jű tantárgy törölve lett!");
+            return NoContent();
         }
-
-
-
-
     }
 }
 

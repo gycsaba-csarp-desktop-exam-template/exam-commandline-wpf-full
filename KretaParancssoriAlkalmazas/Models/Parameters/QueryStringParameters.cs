@@ -47,5 +47,10 @@ namespace KretaParancssoriAlkalmazas.Models.Parameters
             OrderBy = string.Empty;
             Fields = string.Empty;
         }
+
+        public override string ToString()
+        {
+            return $"Curent page:{CurrentPage}, Number of page:{NumberOfPage}, Page size:{PageSize}, NumberOfItem:{NumberOfItem}";
+        }
     }
 }

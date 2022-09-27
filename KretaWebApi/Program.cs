@@ -1,8 +1,9 @@
+using KretaWebApi.ExceptionHandler;
 using KretaWebApi.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using MySqlConnector;
 using NLog;
-
+using ServiceKretaLogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,5 +67,10 @@ app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
+
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+
+//app.ConfigureExceptionHandler(logger, app.Environment.IsDevelopment());
+app.ConfigureCustomExceptionMiddleware();
 
 app.Run();
