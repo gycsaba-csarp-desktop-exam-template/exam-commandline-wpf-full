@@ -10,7 +10,7 @@ namespace KretaWebApi.ExceptionHandler
 
     public static class ExceptionMiddleware
     {
-        public static void ConfigureExceptionHandler(this IApplicationBuilder app, bool isDev)
+        public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILogger logger, bool isDev)
         {
             app.UseExceptionHandler(appError =>
             {
@@ -22,17 +22,17 @@ namespace KretaWebApi.ExceptionHandler
                     var contextFeature = context.Features.Get<IExceptionHandlerPathFeature>();
                     if (contextFeature != null)
                     {
+                        logger.LogError($"Valami hiba történt: {contextFeature.Error}");
                         var ex = contextFeature?.Error;
                         await context.Response.WriteAsync(JsonConvert.SerializeObject(
                             new ProblemDetails
                             {
-
                                 Type = ex.GetType().Name,
                                 Status = (int)HttpStatusCode.InternalServerError,
                                 Instance = contextFeature?.Path,
                                 Title = isDev ? $"{ex.Message}" : "An error occurred.",
                                 Detail = isDev ? ex.StackTrace : null
-                            }));
+                            }.ToString()));
                     }
                 });
             });
