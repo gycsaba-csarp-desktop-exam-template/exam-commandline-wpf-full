@@ -1,0 +1,13 @@
+﻿    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+	  <PublishSingleFile>true</PublishSingleFile>
+	  <SelfContained>false</SelfContained>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	  <UseWPF>true</UseWPF>
+	  <Version>0.2.0.0</Version>
+	  <Authors>Gyuris Csaba</Authors>
+	  <Company>Vasvári</Company>
+	  <Product />
+	  <Description>Vizsgaremek</Description>
+	  <Copyright></Copyright>
+  </PropertyGroup>

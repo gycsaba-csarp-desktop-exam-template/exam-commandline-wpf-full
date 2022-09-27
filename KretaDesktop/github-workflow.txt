@@ -1,0 +1,41 @@
+﻿name: "Deploy Vizsgaremek"
+
+on:
+ push:
+   tags:
+     - "d*"
+env:
+ PROJECT_PATH: Desktop/src/Vizsgaremek/Vizsgaremek.csproj
+
+jobs:
+ deploy:
+  runs-on: windows-latest
+  steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - run: dotnet restore  ${{ env.PROJECT_PATH }} -r win-x64
+
+    - run: dotnet build  ${{ env.PROJECT_PATH }} -c Release  --no-restore -p:PublishSingleFile=true
+
+    - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release  -r win-x64 --self-contained false -p:PublishSingleFile=true --no-build --output ./publish
+
+    - uses: actions/create-release@v1
+      id: create_release
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+    - run: |
+           dir
+           cd publish
+           dir
+    - uses: csexton/release-asset-action@v2
+      with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: ./publish/*.*
+          release-url: ${{ steps.create_release.outputs.upload_url }}
