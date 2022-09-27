@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticClasses", "StaticClas
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F793279-6139-451C-841F-F7BDD1D45615}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		Dockerfile = Dockerfile
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -28,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaWebApiTest", "KretaWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KretaParancssoriAlkalmazasTest", "KretaParancssoriAlkalmazasTest\KretaParancssoriAlkalmazasTest.csproj", "{8E807B9F-829F-426F-8B45-C87E307C5AC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceKreta", "ServiceKreta\ServiceKreta.csproj", "{463C4934-2081-4A7E-A669-866CC9F050B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceKreta", "ServiceKreta\ServiceKreta.csproj", "{463C4934-2081-4A7E-A669-866CC9F050B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
