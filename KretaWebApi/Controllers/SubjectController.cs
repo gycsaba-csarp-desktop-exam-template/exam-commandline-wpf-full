@@ -59,10 +59,9 @@ namespace KretaWebApi.Controllers
         {
             logger.LogInfo($"Tantárgy vezérlő kérést kapott!");
             this.logger = logger;
-            //this.service = service;
+            this.service = service;
             this.mapper = mapper;
 
-            service = service;
             logger.LogInfo($"Szükséges objektumokat a controller megkapta!");
         }
 
