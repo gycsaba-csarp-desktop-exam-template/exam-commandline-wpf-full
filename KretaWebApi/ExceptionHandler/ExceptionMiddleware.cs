@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using ServiceKretaLogger;
 using System.Net;
 
 namespace KretaWebApi.ExceptionHandler
@@ -10,7 +11,7 @@ namespace KretaWebApi.ExceptionHandler
 
     public static class ExceptionMiddleware
     {
-        public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILogger logger, bool isDev)
+        public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILoggerManager logger, bool isDev)
         {
             app.UseExceptionHandler(appError =>
             {
@@ -32,7 +33,7 @@ namespace KretaWebApi.ExceptionHandler
                                 Instance = contextFeature?.Path,
                                 Title = isDev ? $"{ex.Message}" : "An error occurred.",
                                 Detail = isDev ? ex.StackTrace : null
-                            }.ToString()));
+                            }));
                     }
                 });
             });

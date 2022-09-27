@@ -3,7 +3,7 @@ using KretaWebApi.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using MySqlConnector;
 using NLog;
-
+using ServiceKretaLogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,7 +68,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-var logger = app.Services.GetRequiredService<Microsoft.Extensions.Logging.ILogger>();
+var logger = app.Services.GetRequiredService<ILoggerManager>();
 
 app.ConfigureExceptionHandler(logger, app.Environment.IsDevelopment());
 
