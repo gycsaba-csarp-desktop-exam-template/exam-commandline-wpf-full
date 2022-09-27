@@ -73,7 +73,6 @@ namespace KretaWebApi.Controllers
             logger.LogInfo($"Paraméterek {subjectParameters}");
 
             var subjects = service.GetAllSubjects(subjectParameters);
-            throw new AccessViolationException("Violation Exception while accessing the resource.");
 
             logger.LogInfo($"Kiolvasva {subjects.Count} tantárgy adat az adatbázisból");
 

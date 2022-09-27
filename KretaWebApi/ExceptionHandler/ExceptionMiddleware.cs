@@ -34,27 +34,25 @@ namespace KretaWebApi.ExceptionHandler
             }
         }
 
-        private async Task HandleExceptionAsync(HttpContext httpContext, Exception ex)
+        private async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
         {
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            var contextFeature=httpContext.Features.Get<IExceptionHandlerPathFeature>();
-            //if (contextFeature != null)
-            //{
-            //    var error = contextFeature.Error;
-                await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(
-                    new ProblemDetails
-                    {
-                        //Type = error.GetType().Name,
-                        Status = (int)HttpStatusCode.InternalServerError,
-                        //Instance = contextFeature.Path,
-                        Title =$"{ex.Message}",
-                        Detail = isDev ? ex.StackTrace :null
 
-                    }
-                )); 
-            //}
-        }
-        
+            var message = exception switch
+            {
+                AccessViolationException => "Access violation error",
+                _ => "Internal server error",
+
+            };
+
+            await httpContext.Response.WriteAsync(
+                new ErrorDetails()
+                {
+                    StatusCode = httpContext.Response.StatusCode,
+                    Message = message,
+                }.ToString()
+           );
+        }        
     }
 }
