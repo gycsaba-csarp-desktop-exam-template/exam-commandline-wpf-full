@@ -5,6 +5,9 @@ using System.Net;
 
 namespace KretaWebApi.ExceptionHandler
 {
+    // https://code-maze.com/global-error-handling-aspnetcore/
+    // https://www.puresourcecode.com/dotnet/net6/handling-exceptions-globally-with-net6/
+
     public static class ExceptionMiddleware
     {
         public static void ConfigureExceptionHandler(this IApplicationBuilder app, bool isDev)
