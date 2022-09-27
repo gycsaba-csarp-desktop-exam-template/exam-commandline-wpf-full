@@ -32,7 +32,8 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
             }*/
             sortHelper = new SortHelper<EFSubject>();
             dataShaper = new DataShaper<EFSubject>();
-            subjectRepo = new SubjectRepo(context,sortHelper,dataShaper);
+            //subjectRepo = new SubjectRepo(context,sortHelper,dataShaper);
+            subjectRepo = new SubjectRepo(context);
         }
 
         [OneTimeTearDown]

@@ -1,5 +1,6 @@
 using KretaWebApi.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using MySqlConnector;
 using NLog;
 
 
@@ -20,6 +21,8 @@ builder.Services.ConfigureLoggerService();
 // Mysql server elérés konfigurálás
 builder.Services.ConfigureMySqlContext(builder.Configuration);
 
+// KretaService
+builder.Services.ConfigureService();
 // RepositoryWrapper
 builder.Services.ConfigureWrapperRepository();
 
@@ -38,6 +41,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // forward proxy headers to the current request. This will help us during the Linux deployment.
     app.UseDeveloperExceptionPage();
 }
 else
@@ -49,6 +53,7 @@ else
 
 app.UseHttpsRedirection();
 
+// enables using static files for the request. If we don’t set a path to the static files, it will use a wwwroot folder in our solution explorer by default.
 app.UseStaticFiles();
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions

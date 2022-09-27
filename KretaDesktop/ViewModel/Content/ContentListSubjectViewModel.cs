@@ -33,7 +33,7 @@ namespace KretaDesktop.ViewModel.Content
             }
         }
 
-        SubjectService subjectService;
+        APISubjectService subjectService;
 
         private ObservableCollection<Subject> subjects;
 
@@ -88,7 +88,7 @@ namespace KretaDesktop.ViewModel.Content
             CancelCommand = new RelayCommand(execute => Cancel());
 
             subjects = new ObservableCollection<Subject>();
-            subjectService = new SubjectService();
+            subjectService = new APISubjectService();
             selectedSubject = new Subject();
             displayedSubject = new Subject();
 

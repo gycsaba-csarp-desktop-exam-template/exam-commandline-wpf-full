@@ -4,7 +4,7 @@ using KretaParancssoriAlkalmazas.Models.Parameters;
 
 namespace ServiceKretaAPI
 {
-    public interface ISubjectService
+    public interface IAPISubjectService
     {
         Task<List<Subject>>? GetSubjectsAsync(QueryStringParameters queryStringParameter);
         Task<PagedList<Subject>>? GetSubjectsAsyncWithPageData(QueryStringParameters queryStringParameter);

@@ -16,7 +16,7 @@ namespace KretaRazorPages.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            ISubjectService subjectService = new SubjectService();
+            IAPISubjectService subjectService = new APISubjectService();
             var pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(null);
             // TODO: ide rakjak-e vizsgálatot 
             if (pagedSubjectList == null)

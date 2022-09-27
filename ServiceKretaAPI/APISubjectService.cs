@@ -17,7 +17,7 @@ using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 
 namespace ServiceKretaAPI.Services
 {
-    public class SubjectService : ISubjectService
+    public class APISubjectService : IAPISubjectService
     {
         public async Task<List<Subject>>? GetSubjectsAsync(QueryStringParameters queryStringParameter)
         {

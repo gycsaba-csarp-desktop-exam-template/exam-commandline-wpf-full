@@ -29,7 +29,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
         {
             if (ModelState.IsValid)
             {
-                ISubjectService subjectService = new SubjectService();
+                IAPISubjectService subjectService = new APISubjectService();
                 Subject subjectToCreate = mapper.Map<Subject>(Subject);
                 var statusCode = await subjectService.InsertNewSubjectAsync(subjectToCreate);
                 if (statusCode == System.Net.HttpStatusCode.NoContent)

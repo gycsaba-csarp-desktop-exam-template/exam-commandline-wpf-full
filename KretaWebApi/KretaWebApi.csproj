@@ -27,6 +27,7 @@
     <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
     <ProjectReference Include="..\ServiceKretaAPI\ServiceKretaAPI.csproj" />
     <ProjectReference Include="..\ServiceKretaLogger\ServiceKretaLogger.csproj" />
+    <ProjectReference Include="..\ServiceKreta\ServiceKreta.csproj" />
   </ItemGroup>
 
   <Target Name="CreateLogsFolder" AfterTargets="Publish">

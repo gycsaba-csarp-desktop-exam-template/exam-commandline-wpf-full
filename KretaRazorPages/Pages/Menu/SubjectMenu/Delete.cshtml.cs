@@ -23,7 +23,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
         public void OnGet(long id)
         {
             _subjectIdToModify = id;
-            ISubjectService subjectService = new SubjectService();
+            IAPISubjectService subjectService = new APISubjectService();
             Task<Subject> obj = subjectService.GetSubjectByIdAsync(id);
             if (obj != null)
             {
@@ -40,7 +40,7 @@ namespace KretaRazorPages.Pages.Menu.SubjectMenu
             }
             if (ModelState.IsValid)
             {
-                ISubjectService subjectService = new SubjectService();
+                IAPISubjectService subjectService = new APISubjectService();
                 var statusCode = await subjectService.DeleteSubjectAsync(SubjectIdToModify);
                 if (statusCode == System.Net.HttpStatusCode.NoContent)
                     TempData["success"] = "Subject created successfully";

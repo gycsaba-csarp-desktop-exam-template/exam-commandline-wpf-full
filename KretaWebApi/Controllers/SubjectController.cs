@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-using Kreta.Repositories.Interfaces;
 using AutoMapper;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
@@ -9,10 +7,9 @@ using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using Newtonsoft.Json;
-using System.Dynamic;
-using System.ComponentModel.DataAnnotations;
 using ServiceKretaLogger;
-using KretaParancssoriAlkalmazas.Models.Helpers;
+using KretaParancssoriAlkalmazas.Services;
+
 
 
 // TODO API
@@ -55,15 +52,16 @@ namespace KretaWebApi.Controllers
     public class SubjectController : ControllerBase
     {
         private ILoggerManager logger;
-        private IRepositoryWrapper repositoryWrapper;
+        private ISubjectService service;
         private IMapper mapper;
 
-        public SubjectController(ILoggerManager logger, IRepositoryWrapper repositoryWrapper, IMapper mapper)
+        public SubjectController(ILoggerManager logger, ISubjectService service, IMapper mapper)
         {
             logger.LogInfo($"Tantárgy vezérlő kérést kapott!");
             this.logger = logger;
-            this.repositoryWrapper = repositoryWrapper;
+            this.service = service;
             this.mapper = mapper;
+
             logger.LogInfo($"Szükséges objektumokat a controller megkapta!");
         }
 
@@ -75,7 +73,7 @@ namespace KretaWebApi.Controllers
                 logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
                 logger.LogInfo($"Paraméterek {subjectParameters}");
 
-                var subjects = repositoryWrapper.SubjectRepo.GetAllSubjects(subjectParameters);
+                var subjects = service.GetAllSubjects(subjectParameters);
                 logger.LogInfo($"Kiolvasva {subjects.Count} tantárgy adat az adatbázisból");
 
                 // pagination data in header
@@ -91,7 +89,7 @@ namespace KretaWebApi.Controllers
                 // nextId header data to insert new subject
                 long nextId = 0;
                 if (subjects!=null && subjects.Count>0)
-                    nextId = repositoryWrapper.SubjectRepo.GetNextId();
+                    nextId = service.GetNextId();
                 logger.LogInfo($"Meghatározva {nextId} a következő lehetséges id");
                 Dictionary<string,string> nextIDToSerialize=new Dictionary<string,string>();
                 nextIDToSerialize.Add("NextId", nextId.ToString());
@@ -122,7 +120,7 @@ namespace KretaWebApi.Controllers
         {
             try
             {
-                var subjects = repositoryWrapper.SubjectRepo.SearchSubjectNameStartWith(subjectNameSearchingParameters.Name);
+                var subjects = service.SearchSubjectNameStartWith(subjectNameSearchingParameters.Name);
                 logger.LogInfo($"Az összes tantárgy lekérdezése amelynek nevében szerepel '{subjectNameSearchingParameters.Name}' szó.");
 
                 var subjectResult = mapper.Map<IEnumerable>(subjects);
@@ -144,7 +142,7 @@ namespace KretaWebApi.Controllers
             {
                 // fields visszaállítás, a tesztbe ExpandoObjectel nem megy meg
                 //var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id,fields.Fields);
-                var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id);
+                var subject = service.GetSubjectById(id);
                 /*if (subject==default(ExpandoObject))
                 {
                     logger.LogError($"{id}-jú tantárgy nem létezik");
@@ -194,8 +192,7 @@ namespace KretaWebApi.Controllers
                     return BadRequest("Invalid model object!");
                 }
 
-                repositoryWrapper.SubjectRepo.CreateSubject(insertedEFSubject);
-                repositoryWrapper.Save();
+                service.CreateSubject(insertedEFSubject);
 
                 var createdSubject = mapper.Map<Subject>(insertedEFSubject);
 
@@ -232,8 +229,7 @@ namespace KretaWebApi.Controllers
 
                 var updatedEFSubject = mapper.Map<EFSubject>(subjectForUpdate);
 
-                repositoryWrapper.SubjectRepo.Update(updatedEFSubject);
-                repositoryWrapper.Save();
+                service.Update(updatedEFSubject);
 
                 var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
 
@@ -253,15 +249,14 @@ namespace KretaWebApi.Controllers
         {
             try
             {
-                var subject =  repositoryWrapper.SubjectRepo.GetSubjectById(id);
+                var subject =  service.GetSubjectById(id);
                 if (subject == null)
                 {
                     logger.LogError($"DeleteSubject->A törlendő tantárgy {id} id-vel nem található az adatbázisban.");
                     return NotFound();
                 }
 
-                repositoryWrapper.SubjectRepo.DeleteSubject(subject);
-                repositoryWrapper.Save();
+                service.DeleteSubject(subject);
 
                 logger.LogInfo($"DeleteSubject->{id}-id-jű tantárgy törölve lett!");
 

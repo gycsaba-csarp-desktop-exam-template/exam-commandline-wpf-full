@@ -4,7 +4,7 @@
 @using ServiceKretaAPI.Services
 
 @{
-    var subjectService = new SubjectService();
+    var subjectService = new APISubjectService();
     long nextId = await subjectService.GetNextSubjectIdAsync();
 }
 

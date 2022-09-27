@@ -17,6 +17,7 @@ using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.Parameters;
 using KretaWebApi.Controllers;
 using KretaWebApi;
+using KretaParancssoriAlkalmazas.Services;
 
 namespace KretaWebApiTest.Controllers
 {
@@ -76,12 +77,14 @@ namespace KretaWebApiTest.Controllers
             };
             context.Subjects.AddRange(subjectTableData);
             context.SaveChanges();
-            RepositoryWrapper wrapper = new RepositoryWrapper(context);
+            //RepositoryWrapper wrapper = new RepositoryWrapper(context);
+            SubjectService subjectService=new SubjectService(context);
+            
 
             //arrange
             int exptectedTestedElementInTableId = 1;
             EFSubject exptedtedSubject = subjectTableData.Where(subject => subject.Id.Equals(exptectedTestedElementInTableId)).FirstOrDefault();
-            var controller = new SubjectController(mockLogger.Object, wrapper, mapper);
+            var controller = new SubjectController(mockLogger.Object, subjectService, mapper);
 
             // act
             var actionResult = controller.GetSubjectById(exptectedTestedElementInTableId, fieldsParameter);
