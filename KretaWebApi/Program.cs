@@ -70,6 +70,7 @@ app.MapControllers();
 
 var logger = app.Services.GetRequiredService<ILoggerManager>();
 
-app.ConfigureExceptionHandler(logger, app.Environment.IsDevelopment());
+//app.ConfigureExceptionHandler(logger, app.Environment.IsDevelopment());
+app.ConfigureCustomExceptionMiddleware();
 
 app.Run();
