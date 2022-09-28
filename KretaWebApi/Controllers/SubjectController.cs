@@ -72,7 +72,6 @@ namespace KretaWebApi.Controllers
 
             logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
             logger.LogInfo($"Paraméterek {subjectParameters}");
-
             var subjects = service.GetAllSubjects(subjectParameters);
 
             logger.LogInfo($"Kiolvasva {subjects.Count} tantárgy adat az adatbázisból");
@@ -151,7 +150,7 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpPost("api/subject", Name = "Insert subject")]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        //[ServiceFilter(typeof(ValidationFilterAttribute))]
         public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
             logger.LogInfo("Új tantárgy felvétele az adatbázisba");
@@ -173,7 +172,16 @@ namespace KretaWebApi.Controllers
                 return BadRequest("Subject is not valid!");
             }*/
 
-            service.CreateSubject(insertedEFSubject);
+            try
+            {
+                service.CreateSubject(insertedEFSubject);
+            }
+            catch (Exception exception)
+            {
+                logger.LogError("CreateSubject->Hiba a tantárgy mentése során.");
+                logger.LogError(exception.Message);
+                return BadRequest("Subject can not save.");
+            }
 
             var createdSubject = mapper.Map<Subject>(insertedEFSubject);
 

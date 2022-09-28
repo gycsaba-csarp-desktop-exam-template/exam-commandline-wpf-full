@@ -3,6 +3,7 @@ using Kreta.Repositories;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using KretaParancssoriAlkalmazas.Models.Parameters;
+using ServiceKretaLogger;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -26,7 +27,14 @@ namespace KretaParancssoriAlkalmazas.Services
         public void CreateSubject(EFSubject insertedEFSubject)
         {
             subjectRepo.CreateSubject(insertedEFSubject);
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.InnerException.Message);
+            }
         }
 
         public void DeleteSubject(EFSubject subject)
