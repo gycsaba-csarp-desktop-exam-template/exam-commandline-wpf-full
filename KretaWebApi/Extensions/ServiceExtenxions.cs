@@ -8,6 +8,7 @@ using KretaParancssoriAlkalmazas.Models.EFClass;
 using ServiceKretaLogger;
 using ServiceKreta;
 using KretaParancssoriAlkalmazas.Services;
+using KretaWebApi.ActionFilters;
 
 
 /*
@@ -73,6 +74,11 @@ namespace KretaWebApi.Extensions
                      maxRetryDelay: System.TimeSpan.FromSeconds(3000),
                      errorNumbersToAdd: null)
                  ));
+        }
+
+        public static void ConfigreValidationFilter(this IServiceCollection service)
+        {
+            service.AddScoped<ValidationFilterAttribute>();
         }
 
         // Repository Wrapper

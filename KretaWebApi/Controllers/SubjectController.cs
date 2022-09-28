@@ -9,6 +9,7 @@ using KretaParancssoriAlkalmazas.Models.Parameters;
 using Newtonsoft.Json;
 using ServiceKretaLogger;
 using KretaParancssoriAlkalmazas.Services;
+using KretaWebApi.ActionFilters;
 
 
 
@@ -150,6 +151,7 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpPost("api/subject", Name = "Insert subject")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
             logger.LogInfo("Új tantárgy felvétele az adatbázisba");
@@ -165,11 +167,11 @@ namespace KretaWebApi.Controllers
 
             var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
 
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 logger.LogInfo("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy nem elfogadható.");
                 return BadRequest("Subject is not valid!");
-            }
+            }*/
 
             service.CreateSubject(insertedEFSubject);
 
@@ -177,7 +179,7 @@ namespace KretaWebApi.Controllers
 
             logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
 
-            return NoContent();
+            return CreatedAtRoute("Insert subject",new {id = createdSubject.Id}, createdSubject);
         }
 
         [HttpPut("api/subject/{id}", Name = "Update subject")]
