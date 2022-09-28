@@ -1,0 +1,5 @@
+ sudo docker  build --rm -t kretawebapi  .
+
+ sudo docker image ls | grep kretawebapi
+
+  sudo docker run --rm -p kretawebapi
