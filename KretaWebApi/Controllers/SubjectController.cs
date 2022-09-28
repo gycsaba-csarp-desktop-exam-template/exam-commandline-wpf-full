@@ -168,7 +168,7 @@ namespace KretaWebApi.Controllers
             if (!ModelState.IsValid)
             {
                 logger.LogInfo("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy nem elfogadható.");
-                return BadRequest("Invalid model object!");
+                return BadRequest("Subject is not valid!");
             }
 
             service.CreateSubject(insertedEFSubject);
