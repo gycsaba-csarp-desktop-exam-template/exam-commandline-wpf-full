@@ -35,7 +35,7 @@ namespace KretaWebApiTest.Controllers
             .Options;
 
         // Test database;
-        List<Subject> subjectTableDataWith3Data;
+        List<EFSubject> subjectTableDataWith3Data;
 
         public SubjectsControllerTests()
         {
