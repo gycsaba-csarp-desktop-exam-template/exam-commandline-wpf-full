@@ -22,6 +22,9 @@ builder.Services.ConfigureLoggerService();
 // Mysql server elérés konfigurálás
 builder.Services.ConfigureMySqlContext(builder.Configuration);
 
+// Validation filter
+builder.Services.ConfigreActionFilter();
+
 // KretaService
 builder.Services.ConfigureService();
 // RepositoryWrapper
