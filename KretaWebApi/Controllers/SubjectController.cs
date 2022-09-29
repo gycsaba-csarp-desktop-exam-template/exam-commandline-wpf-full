@@ -122,55 +122,39 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpGet("api/subject/{id}", Name = "Subject by id")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
         public IActionResult GetSubjectById(int id, [FromQuery] FieldsParameter fields)
         {
-            //TODO: Nem működik, FieldsParameter nulla lesz. URI hiba?
-
-            // fields visszaállítás, a tesztbe ExpandoObjectel nem megy meg
-            //var subject = repositoryWrapper.SubjectRepo.GetSubjectById(id,fields.Fields);
-            var subject = service.GetSubjectById(id);
-            /*if (subject==default(ExpandoObject))
+            EFSubject subject = null;
+            try
             {
-                logger.LogError($"{id}-jú tantárgy nem létezik");
-                return NotFound();
-            }*/
-
-            if (subject == null)
-            {
-                logger.LogError($"GetSubjet(id)->Tantárgy id alapján: {id} -jű tantárgy nem létezik");
-                return NotFound();
+                subject = service.GetSubjectById(id);
             }
-            else
+            catch (Exception exception)
             {
-                logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
-                Subject subjectResult = mapper.Map<Subject>(subject);
-                return Ok(subjectResult);
+                logger.LogError($"GetSubjectById->{id} azonosítójú tantárgy nem található.");
+                logger.LogError(exception.Message);
+                return BadRequest($"No subject identified by {id} id.");
             }
 
+            logger.LogInfo($"GetSubject(id)->{id}-jű tantárgy lekérése sikeres");
+            Subject subjectResult = mapper.Map<Subject>(subject);
+            return Ok(subjectResult);
+ 
         }
 
         [HttpPost("api/subject", Name = "Insert subject")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
         public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
             logger.LogInfo("Új tantárgy felvétele az adatbázisba");
             logger.LogInfo("Új tantárgy azonosító:" + subjectForCreation.Id);
             logger.LogInfo("Új tantárgy neve:" + subjectForCreation.SubjectName);
-
-            if (subjectForCreation == null)
-            {
-                logger.LogError("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy null.");
-                return BadRequest("Subject is null");
-            }
             logger.LogInfo("Új tantárgy adatok rendben.");
 
             var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
-
-            /*if (!ModelState.IsValid)
-            {
-                logger.LogInfo("CreateSubject->Tantárgy létrehozás során a klienstől küldött tantárgy nem elfogadható.");
-                return BadRequest("Subject is not valid!");
-            }*/
 
             try
             {
@@ -178,53 +162,59 @@ namespace KretaWebApi.Controllers
             }
             catch (Exception exception)
             {
-                logger.LogError("CreateSubject->Hiba a tantárgy mentése során.");
+                logger.LogError($"CreateSubject->Hiba a {subjectForCreation.Id} azonosítójú tantárgy mentése során.");
                 logger.LogError(exception.Message);
-                return BadRequest("Subject can not save.");
+                return BadRequest("New subject can not save.");
             }
 
             var createdSubject = mapper.Map<Subject>(insertedEFSubject);
 
             logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
 
-            return CreatedAtRoute("Insert subject",new {id = createdSubject.Id}, createdSubject);
+            return CreatedAtRoute("Subject by id", new {id = createdSubject.Id}, createdSubject);
         }
 
         [HttpPut("api/subject/{id}", Name = "Update subject")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
         public IActionResult UpdateSubject(long id, [FromBody] SubjectForUpdateDto subjectForUpdate)
         {
             logger.LogInfo("Tantárgy módosítása az adatbázisba");
             logger.LogInfo("Módosítandó tantárgy id-je:" + subjectForUpdate.Id);
             logger.LogInfo("Módosítandó tantárgy neve-je:" + subjectForUpdate.SubjectName);
 
-
-            if (subjectForUpdate == null)
-            {
-                logger.LogError("UpdateSubject->Tantárgy módosítás során a klienstől küldött tantárgy null.");
-                return BadRequest("Subject is null");
-            }
-            if (!ModelState.IsValid)
-            {
-                logger.LogInfo("UpdateSubject->Tantárgy módosítás során a klienstől küldött tantárgy nem elfogadható.");
-            }
-
             var updatedEFSubject = mapper.Map<EFSubject>(subjectForUpdate);
-            service.Update(updatedEFSubject);
+            try
+            {
+                service.Update(updatedEFSubject);
+            }
+            catch (Exception exception)
+            {
+                logger.LogError($"UpdateSubject->Hiba a {updatedEFSubject.Id} azonosítójú tantárgy frissítése során.");
+                logger.LogError(exception.Message);
+                return BadRequest("Subject can not save.");
+            }
 
             var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
             logger.LogInfo($"UpdateSubject->{updatedSubject.Id} id-jű tantárgy módosítva {updatedSubject}-re)");
-            return NoContent();
+            return CreatedAtRoute("Subject by id", new { id = updatedSubject.Id }, updatedSubject);
         }
         [HttpDelete("api/subject/{id}", Name = "Delete subject")]
+        [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
         public IActionResult DeleteSubject(long id)
         {
-            var subject = service.GetSubjectById(id);
-            if (subject == null)
+            try
             {
-                logger.LogError($"DeleteSubject->A törlendő tantárgy {id} id-vel nem található az adatbázisban.");
-                return NotFound();
+                var subject = service.GetSubjectById(id);
+                service.DeleteSubject(subject);
             }
-            service.DeleteSubject(subject);
+            catch (Exception exception)
+            {
+                logger.LogError($"DeleteSubject->Hiba a {id} azonosítójú tantárgy törlése során.");
+                logger.LogError(exception.Message);
+                return BadRequest("Subject can not delete.");
+            }
+
             logger.LogInfo($"DeleteSubject->{id}-id-jű tantárgy törölve lett!");
             return NoContent();
         }

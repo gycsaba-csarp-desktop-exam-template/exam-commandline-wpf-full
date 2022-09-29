@@ -76,9 +76,10 @@ namespace KretaWebApi.Extensions
                  ));
         }
 
-        public static void ConfigreValidationFilter(this IServiceCollection service)
+        public static void ConfigreActionFilter(this IServiceCollection service)
         {
             service.AddScoped<ValidationFilterAttribute>();
+            service.AddScoped<ValidateEntityExistsAttribute<EFSubject>>();
         }
 
         // Repository Wrapper

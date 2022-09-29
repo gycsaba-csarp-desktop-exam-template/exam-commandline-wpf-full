@@ -23,7 +23,7 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureMySqlContext(builder.Configuration);
 
 // Validation filter
-builder.Services.ConfigreValidationFilter();
+builder.Services.ConfigreActionFilter();
 
 // KretaService
 builder.Services.ConfigureService();
@@ -71,10 +71,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
 var logger = app.Services.GetRequiredService<ILoggerManager>();
-app.ConfigureExceptionHandler(logger, app.Environment.IsDevelopment());
 
-//app.ConfigureCustomExceptionMiddleware();
+//app.ConfigureExceptionHandler(logger, app.Environment.IsDevelopment());
+app.ConfigureCustomExceptionMiddleware();
 
 app.Run();
