@@ -18,6 +18,8 @@ using KretaParancssoriAlkalmazas.Models.Parameters;
 using KretaWebApi.Controllers;
 using KretaWebApi;
 using KretaParancssoriAlkalmazas.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace KretaWebApiTest.Controllers
 {
@@ -26,27 +28,21 @@ namespace KretaWebApiTest.Controllers
         private readonly SubjectController controller;
 
         private Mock<ILoggerManager> mockLogger;
-        //private Mock<IMapper> mockMapper;
         private IMapper mapper;
 
         public static DbContextOptions<KretaContext> contextOptions = new DbContextOptionsBuilder<KretaContext>()
             .UseInMemoryDatabase(databaseName: "KretaTest")
             .Options;
 
-        //private KretaContext context;
-        //private SubjectRepo subjectRepo;
-        //private RepositoryWrapper wrapper;
+        // Test database;
+        List<Subject> subjectTableDataWith3Data;
 
         public SubjectsControllerTests()
         {
-            //KretaContext context = new KretaContext();
 
             mockLogger = new Mock<ILoggerManager>();
             // https://stackoverflow.com/questions/36074324/how-to-mock-an-automapper-imapper-object-in-web-api-tests-with-structuremap-depe
             //https://www.thecodebuzz.com/unit-test-mock-automapper-asp-net-core-imapper/
-            //mockMapper = new Mock<IMapper>();
-            //mockMapper.Setup(x => x.Map<Subject>(It.IsAny<Subject>()))
-            //    .Returns(It.IsAny<Subject>());
             if (mapper == null)
             {
                 var mappingConfig = new MapperConfiguration(mc =>
@@ -58,18 +54,11 @@ namespace KretaWebApiTest.Controllers
             }
 
         }
-          
-        
 
-        // https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-controllers-in-web-api
-
-        [Fact]
-        public void GetReturnSubjectSameId()
+        private void MakeTestDatabase()
         {
-            FieldsParameter fieldsParameter = new FieldsParameter();
-
             KretaContext context = new KretaContext(contextOptions);
-            var subjectTableData = new List<EFSubject>
+            subjectTableDataWith3Data = new List<EFSubject>
             {
                 new EFSubject { Id = 1, SubjectName="Tesi" },
                 new EFSubject { Id = 2, SubjectName="Tori" },
@@ -77,27 +66,50 @@ namespace KretaWebApiTest.Controllers
             };
             context.Subjects.AddRange(subjectTableData);
             context.SaveChanges();
-            //RepositoryWrapper wrapper = new RepositoryWrapper(context);
-            SubjectService subjectService=new SubjectService(context);
+        }
+
+        // https://xunit.net/docs/getting-started/netfx/visual-studio
+        // https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-controllers-in-web-api
+        // https://dotnetthoughts.net/how-to-unit-test-async-controllers-in-asp-net-5/
+        // https://stackoverflow.com/questions/58234104/difficulties-using-inlinedata-in-unit-test-parameter-is-a-controller
+        // https://www.anycodings.com/1questions/448002/unit-testing-controller-methods-which-return-iactionresult
+
+        [Theory]
+        [InlineData(1,StatusCodes.Status200OK)]
+        [InlineData(2, StatusCodes.Status200OK)]
+        [InlineData(3,StatusCodes.Status200OK)]
+        public async void GetReturnSubjectSameId(int exptectedElementIid, int exptectedCode )
+        {
+            FieldsParameter fieldsParameter = new FieldsParameter();
+
             
 
+            
+
+            SubjectService subjectService = new SubjectService(context);
+
+
             //arrange
-            int exptectedTestedElementInTableId = 1;
-            EFSubject exptedtedSubject = subjectTableData.Where(subject => subject.Id.Equals(exptectedTestedElementInTableId)).FirstOrDefault();
+            EFSubject exptedtedSubject = subjectTableData.Where(subject => subject.Id.Equals(exptectedElementIid)).FirstOrDefault();
             var controller = new SubjectController(mockLogger.Object, subjectService, mapper);
 
             // act
-            var actionResult = controller.GetSubjectById(exptectedTestedElementInTableId, fieldsParameter);
-            
+            var actionResult = await controller.GetSubjectById(exptectedElementIid, fieldsParameter);
+
             // assert
             Assert.NotNull(actionResult);
             var objectResult = actionResult as OkObjectResult;
             Assert.NotNull(objectResult);
-            var modelResult = objectResult.Value as Subject;            
-            
+            Assert.IsType<Subject>(objectResult.Value);
+            var modelResult = objectResult.Value as Subject;
+
             Assert.NotNull(modelResult);
             Assert.Equal(exptedtedSubject.Id, modelResult.Id);
             Assert.Equal(exptedtedSubject.SubjectName, modelResult.SubjectName);
+
+            var statusCodeReulst = (IStatusCodeActionResult)(actionResult);
+            Assert.Equal(exptectedCode, statusCodeReulst.StatusCode);
+
         }
     }
 }

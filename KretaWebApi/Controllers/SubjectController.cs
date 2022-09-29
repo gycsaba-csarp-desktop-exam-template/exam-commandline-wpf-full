@@ -121,10 +121,13 @@ namespace KretaWebApi.Controllers
 
         }
 
+        //https://stackoverflow.com/questions/57678813/net-core-api-purpose-of-producesresponsetype
         [HttpGet("api/subject/{id}", Name = "Subject by id")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Subject))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
-        public IActionResult GetSubjectById(int id, [FromQuery] FieldsParameter fields)
+        public async Task<IActionResult> GetSubjectById(int id, [FromQuery] FieldsParameter fields)
         {
             EFSubject subject = null;
             try
@@ -171,7 +174,7 @@ namespace KretaWebApi.Controllers
 
             logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
 
-            return CreatedAtRoute("Subject by id", new {id = createdSubject.Id}, createdSubject);
+            return CreatedAtRoute(nameof(GetSubjectById), new {id = createdSubject.Id}, createdSubject);
         }
 
         [HttpPut("api/subject/{id}", Name = "Update subject")]
@@ -197,7 +200,7 @@ namespace KretaWebApi.Controllers
 
             var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
             logger.LogInfo($"UpdateSubject->{updatedSubject.Id} id-jű tantárgy módosítva {updatedSubject}-re)");
-            return CreatedAtRoute("Subject by id", new { id = updatedSubject.Id }, updatedSubject);
+            return CreatedAtRoute(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
         }
         [HttpDelete("api/subject/{id}", Name = "Delete subject")]
         [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
