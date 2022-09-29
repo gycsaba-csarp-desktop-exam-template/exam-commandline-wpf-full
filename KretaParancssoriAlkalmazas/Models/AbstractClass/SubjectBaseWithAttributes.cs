@@ -17,7 +17,7 @@ namespace KretaParancssoriAlkalmazas.Models.AbstractClass
         [Required(ErrorMessage = "The name is required")]
         [StringLength(30, ErrorMessage = "The name cannot be longer than 30 characters")]
         [MinLength(3,ErrorMessage ="The name must be at least 3 characters long")]
-        //[RegularExpression(@"^[A-ZÁÉIÍOÓÖŐUÚÜŰ+]a-záéiíoóöőuúüű]*$", ErrorMessage = "First letter must be uppercase, other lowercase")]
+        [RegularExpression(@"^[A-ZÁÉIÍOÓÖŐUÚÜŰ+][a-záéiíoóöőuúüű]*$", ErrorMessage = "First letter must be uppercase, other lowercase")]
         public override string SubjectName { get; set; }
 
        public SubjectBaseWithAttributes(long id, string subName)

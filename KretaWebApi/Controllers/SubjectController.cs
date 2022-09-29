@@ -150,7 +150,7 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpPost("api/subject", Name = "Insert subject")]
-        //[ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
             logger.LogInfo("Új tantárgy felvétele az adatbázisba");
