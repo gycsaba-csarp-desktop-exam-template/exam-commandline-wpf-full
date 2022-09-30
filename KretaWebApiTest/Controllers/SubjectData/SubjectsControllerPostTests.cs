@@ -108,9 +108,9 @@ namespace KretaWebApiTest.Controllers.SubjectData
         //https://www.codegrepper.com/code-examples/csharp/xunit+inlinedata+but+declare+only+last+object
         //https://hamidmosalla.com/2017/02/25/xunit-theory-working-with-inlinedata-memberdata-classdata/
         //https://andrewlock.net/creating-parameterised-tests-in-xunit-with-inlinedata-classdata-and-memberdata/
-        public class SubjectClssData : IEnumerable<object>
+        public class SubjectClssData : IEnumerable<object[]>
         {
-            IEnumerator<object> IEnumerable<object>.GetEnumerator()
+            public IEnumerator<object[]> GetEnumerator()
             {
                 yield return new object[] {
                     goodSubject01,
@@ -118,15 +118,13 @@ namespace KretaWebApiTest.Controllers.SubjectData
                 };
             }
 
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                throw new NotImplementedException();
-            }
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
         [Theory]
-        [InlineData(3, typeof(), StatusCodes.Status200OK)]
-        public async void CreateSubjectPossible(int exptectedElementIid, SubjectForCreationDto newSubject, int exptectedStatusCode)
+        //[InlineData(3, goodSubject01, StatusCodes.Status200OK)]
+        [ClassData(typeof(SubjectClssData))]
+        public async void CreateSubjectPossible(SubjectForCreationDto newSubject)
         {
             //arrange            
             // Database with subject id: 1,2,3
