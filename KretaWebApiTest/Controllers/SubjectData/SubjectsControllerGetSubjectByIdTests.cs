@@ -22,7 +22,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Security.Cryptography.X509Certificates;
 
-namespace KretaWebApiTest.Controllers.Subject
+namespace KretaWebApiTest.Controllers.SubjectData
 {
     public class SubjectsControllerGetSubjectByIdTests
     {
