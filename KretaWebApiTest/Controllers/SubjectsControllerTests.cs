@@ -83,32 +83,45 @@ namespace KretaWebApiTest.Controllers
         [InlineData(1,StatusCodes.Status200OK)]
         [InlineData(2,StatusCodes.Status200OK)]
         [InlineData(3,StatusCodes.Status200OK)]
-        public async void GetReturnSubjectSameId(int exptectedElementIid, int exptectedCode )
+        public async void GetReturnSubjectStatus200Ok(int exptectedElementIid, int exptectedCode )
         {
-            //arrange
-            FieldsParameter fieldsParameter = new FieldsParameter();
-            KretaContext context = MakeTestDatabaseWith3Data();        
-            SubjectService subjectService = new SubjectService(context);
+            //arrange            
+            // Database with subject id: 1,2,3
+            KretaContext context = MakeTestDatabaseWith3Data();
             
-            EFSubject exptedtedSubject = context.Subjects.Where(subject => subject.Id.Equals(exptectedElementIid)).FirstOrDefault();
+            SubjectService subjectService = new SubjectService(context);
+            FieldsParameter fieldsParameter = new FieldsParameter();
+            
             var controller = new SubjectController(mockLogger.Object, subjectService, mapper);
 
             // act
-            var actionResult = await controller.GetSubjectById(exptectedElementIid, fieldsParameter);
+            EFSubject exptedtedSubject = context.Subjects.Where(subject => subject.Id.Equals(exptectedElementIid)).FirstOrDefault();
+            if (exptedtedSubject != null)
+            {
+                var actionResult = await controller.GetSubjectById(exptectedElementIid, fieldsParameter);
 
-            // assert
-            Assert.NotNull(actionResult);
-            var objectResult = actionResult as OkObjectResult;
-            Assert.NotNull(objectResult);
-            Assert.IsType<Subject>(objectResult.Value);
-            var modelResult = objectResult.Value as Subject;
+                // assert
+                Assert.NotNull(actionResult);
+                Assert.IsType<OkObjectResult>(actionResult);
+                var statusCodeReulst = (IStatusCodeActionResult)(actionResult);
+                Assert.Equal(exptectedCode, statusCodeReulst.StatusCode);
 
-            Assert.NotNull(modelResult);
-            Assert.Equal(exptedtedSubject.Id, modelResult.Id);
-            Assert.Equal(exptedtedSubject.SubjectName, modelResult.SubjectName);
 
-            var statusCodeReulst = (IStatusCodeActionResult)(actionResult);
-            Assert.Equal(exptectedCode, statusCodeReulst.StatusCode);
+                var objectResult = actionResult as OkObjectResult;
+                Assert.NotNull(objectResult);
+                if (objectResult != null)
+                {
+
+                    Assert.IsType<Subject>(objectResult.Value);                    
+                    var modelResult = objectResult.Value as Subject;
+                    if (modelResult != null)
+                    {
+                        Assert.NotNull(modelResult);
+                        Assert.Equal(exptedtedSubject.Id, modelResult.Id);
+                        Assert.Equal(exptedtedSubject.SubjectName, modelResult.SubjectName);
+                    }
+                }
+            }
         }
     }
 }
