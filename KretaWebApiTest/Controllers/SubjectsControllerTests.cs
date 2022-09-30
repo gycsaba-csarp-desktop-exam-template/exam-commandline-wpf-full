@@ -30,12 +30,12 @@ namespace KretaWebApiTest.Controllers
         private Mock<ILoggerManager> mockLogger;
         private IMapper mapper;
 
-        public static DbContextOptions<KretaContext> contextOptions = new DbContextOptionsBuilder<KretaContext>()
+        private static DbContextOptions<KretaContext> contextOptions = new DbContextOptionsBuilder<KretaContext>()
             .UseInMemoryDatabase(databaseName: "KretaTest")
             .Options;
 
-        // Test database;
-        List<EFSubject> subjectTableDataWith3Data;
+        private KretaContext context;
+
 
         public SubjectsControllerTests()
         {
@@ -52,20 +52,25 @@ namespace KretaWebApiTest.Controllers
                 IMapper newMapper = mappingConfig.CreateMapper();
                 mapper = newMapper;
             }
-
+            context = new KretaContext(contextOptions);
+            context.Subjects.AddRange(new List<EFSubject>());
         }
 
-        private void MakeTestDatabase()
-        {
-            KretaContext context = new KretaContext(contextOptions);
-            subjectTableDataWith3Data = new List<EFSubject>
+        private KretaContext MakeTestDatabaseWith3Data()
+        {            
+            if (context.Subjects.Count()==0)
             {
-                new EFSubject { Id = 1, SubjectName="Tesi" },
-                new EFSubject { Id = 2, SubjectName="Tori" },
-                new EFSubject { Id = 3, SubjectName="Angol" },
-            };
-            context.Subjects.AddRange(subjectTableData);
-            context.SaveChanges();
+                //context = new KretaContext(contextOptions);
+                List<EFSubject> subjectTableDataWith3Data = new List<EFSubject>
+                { 
+                    new EFSubject { Id = 1, SubjectName="Tesi" },
+                    new EFSubject { Id = 2, SubjectName="Tori" },
+                    new EFSubject { Id = 3, SubjectName="Angol" },
+                };
+                context.Subjects.AddRange(subjectTableDataWith3Data);
+                context.SaveChanges();
+            }
+            return context;
         }
 
         // https://xunit.net/docs/getting-started/netfx/visual-studio
@@ -76,21 +81,16 @@ namespace KretaWebApiTest.Controllers
 
         [Theory]
         [InlineData(1,StatusCodes.Status200OK)]
-        [InlineData(2, StatusCodes.Status200OK)]
+        [InlineData(2,StatusCodes.Status200OK)]
         [InlineData(3,StatusCodes.Status200OK)]
         public async void GetReturnSubjectSameId(int exptectedElementIid, int exptectedCode )
         {
-            FieldsParameter fieldsParameter = new FieldsParameter();
-
-            
-
-            
-
-            SubjectService subjectService = new SubjectService(context);
-
-
             //arrange
-            EFSubject exptedtedSubject = subjectTableData.Where(subject => subject.Id.Equals(exptectedElementIid)).FirstOrDefault();
+            FieldsParameter fieldsParameter = new FieldsParameter();
+            KretaContext context = MakeTestDatabaseWith3Data();        
+            SubjectService subjectService = new SubjectService(context);
+            
+            EFSubject exptedtedSubject = context.Subjects.Where(subject => subject.Id.Equals(exptectedElementIid)).FirstOrDefault();
             var controller = new SubjectController(mockLogger.Object, subjectService, mapper);
 
             // act
@@ -109,7 +109,6 @@ namespace KretaWebApiTest.Controllers
 
             var statusCodeReulst = (IStatusCodeActionResult)(actionResult);
             Assert.Equal(exptectedCode, statusCodeReulst.StatusCode);
-
         }
     }
 }
