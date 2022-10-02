@@ -1,0 +1,6 @@
+flyctl apps create kretawebapi
+flyctl launch --dockerfile Dockerfile --name kretawebapi
+
+
+get:
+http://kretawebapi.fly.dev:5000/Subject/api/subject?orderBy=subjectName desc

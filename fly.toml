@@ -1,9 +1,12 @@
-# fly.toml file generated for kretawebapi on 2022-09-26T20:03:09+02:00
+# fly.toml file generated for kretawebapi on 2022-10-01T12:32:03+02:00
 
 app = "kretawebapi"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
+
+[build]
+  dockerfile = "Dockerfile"
 
 [env]
 
@@ -13,7 +16,7 @@ processes = []
 
 [[services]]
   http_checks = []
-  internal_port = 8080
+  internal_port = 5000
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
@@ -25,7 +28,7 @@ processes = []
   [[services.ports]]
     force_https = true
     handlers = ["http"]
-    port = 80
+    port = 5000
 
   [[services.ports]]
     handlers = ["tls", "http"]
