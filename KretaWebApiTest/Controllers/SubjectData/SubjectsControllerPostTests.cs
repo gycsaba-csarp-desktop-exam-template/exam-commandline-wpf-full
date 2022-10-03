@@ -2,28 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using ServiceKretaLogger;
 using Kreta.Models.Context;
-using Kreta.Repositories;
-using Kreta.Repositories.Interfaces;
 using KretaParancssoriAlkalmazas.Models.DataModel;
 using KretaParancssoriAlkalmazas.Models.EFClass;
-using KretaParancssoriAlkalmazas.Models.Parameters;
 using KretaWebApi.Controllers;
 using KretaWebApi;
 using KretaParancssoriAlkalmazas.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using System.Security.Cryptography.X509Certificates;
 using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
-using System.Runtime.ConstrainedExecution;
 
 namespace KretaWebApiTest.Controllers.SubjectData
 {

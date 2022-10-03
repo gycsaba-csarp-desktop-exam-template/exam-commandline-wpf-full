@@ -57,12 +57,12 @@ namespace Kreta.Repositories
 
         public EFSubject? GetSubjectById(long subjectId)
         {
-            KretaContext dBContext = base.KretaContext;
+            /*KretaContext dBContext = base.KretaContext;
             List<EFSubject> proba = dBContext.Set<EFSubject>().ToList();
             EFSubject fSubject = dBContext.Set<EFSubject>().Where(x => x.Id == 1).FirstOrDefault();
             EFSubject subject = FindByCondition(subject => subject.Id.Equals(subjectId)).FirstOrDefault();
-            return subject;
-   
+            return subject;*/
+            return Get(subjectId);   
         }
 
         public ExpandoObject? GetSubjectById(long subjectId,string fields)
