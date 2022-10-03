@@ -32,7 +32,7 @@ namespace KretaWebApiTest.Controllers.SubjectData
         private IMapper mapper;
 
         private static DbContextOptions<KretaContext> contextOptions = new DbContextOptionsBuilder<KretaContext>()
-            .UseInMemoryDatabase(databaseName: "KretaTest")
+            .UseInMemoryDatabase(databaseName: "KretaTest"+ Guid.NewGuid().ToString())
             .Options;
 
         private KretaContext context;
@@ -57,20 +57,28 @@ namespace KretaWebApiTest.Controllers.SubjectData
             context.Subjects.AddRange(new List<EFSubject>());
         }
 
+
+        private void ClearSubjectTable()
+        {
+            foreach(var entity in context.Subjects)
+            {
+                context.Subjects.Remove(entity);
+            }
+            context.SaveChanges();
+        }
+
         private KretaContext MakeTestDatabaseWith3Data()
         {
-            if (context.Subjects.Count() == 0)
-            {
-                //context = new KretaContext(contextOptions);
-                List<EFSubject> subjectTableDataWith3Data = new List<EFSubject>
+            ClearSubjectTable(); ;
+            List<EFSubject> subjectTableDataWith3Data = new List<EFSubject>
                 {
                     new EFSubject { Id = 1, SubjectName="Tesi" },
                     new EFSubject { Id = 2, SubjectName="Tori" },
                     new EFSubject { Id = 3, SubjectName="Angol" },
                 };
-                context.Subjects?.AddRange(subjectTableDataWith3Data);
-                context.SaveChanges();
-            }
+            context.Subjects?.AddRange(subjectTableDataWith3Data);
+            context.SaveChanges();
+
             return context;
         }
 

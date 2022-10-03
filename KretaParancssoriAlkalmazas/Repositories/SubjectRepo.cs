@@ -77,6 +77,7 @@ namespace Kreta.Repositories
             Insert(subject);
         }
 
+
         public void UpdateSubject(EFSubject subject)
         {
             Update(subject);
@@ -85,6 +86,11 @@ namespace Kreta.Repositories
         public void DeleteSubject(EFSubject subject)
         {
             Delete(subject);
+        }
+
+        public void DeleteAll()
+        {
+            DeleteAll();
         }
     }
 }
