@@ -3,7 +3,6 @@ using Kreta.Repositories;
 using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaParancssoriAlkalmazas.Models.Helpers;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing.Text;
 
 namespace KretaParancssoriAlkalmazasTest.Repositories
 {
@@ -11,7 +10,7 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
     public class SubjectRepoTests
     {
         public static DbContextOptions<KretaContext> contextOptions = new DbContextOptionsBuilder<KretaContext>()
-            .UseInMemoryDatabase(databaseName: "KretaTest")
+            .UseInMemoryDatabase(databaseName: "KretaTest"+Guid.NewGuid().ToString())
             .Options;
 
         private ISortHelper<EFSubject> sortHelper;
@@ -23,18 +22,11 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
         [OneTimeSetUp]
         public void Setup()
         {
-            // https://stackoverflow.com/questions/48061096/why-cant-i-call-the-useinmemorydatabase-method-on-dbcontextoptionsbuilder
-
-             context = new KretaContext(contextOptions);
-            /*using (var context = new KretaContext(options))
-            {
-              
-            }*/
+            context = new KretaContext(contextOptions);
             sortHelper = new SortHelper<EFSubject>();
             dataShaper = new DataShaper<EFSubject>();
-            //subjectRepo = new SubjectRepo(context,sortHelper,dataShaper);
             subjectRepo = new SubjectRepo(context);
-        }
+        }   
 
         [OneTimeTearDown]
         public void CleanUp()
@@ -42,24 +34,76 @@ namespace KretaParancssoriAlkalmazasTest.Repositories
             context.Database.EnsureDeleted();
         }
 
+        private void ClearSubjects()
+        {
+            foreach (var entity in context.Subjects)
+            {
+                context.Subjects.Remove(entity);
+            }
+            context.SaveChanges();
+        }
+
+        private KretaContext MakeTestDatabaseWith3Data()
+        {
+            ClearSubjects(); ;
+            List<EFSubject> subjectTableDataWith3Data = new List<EFSubject>
+                {
+                    new EFSubject { Id = 1, SubjectName="Tesi" },
+                    new EFSubject { Id = 2, SubjectName="Tori" },
+                    new EFSubject { Id = 3, SubjectName="Angol" },
+                };
+            context.Subjects?.AddRange(subjectTableDataWith3Data);
+            context.SaveChanges();
+
+            return context;
+        }
+
+        // Van subject
         [Test]
         [TestCase(1)]
-        //[TestCase(2)]
-        //[TestCase(3)]
+        [TestCase(2)]
+        [TestCase(3)]
         public void SubjectGetByIdOk(int exptectedId)
         {
-            context = new KretaContext(contextOptions);
-            var subjects = new List<EFSubject>
+            MakeTestDatabaseWith3Data();
+            if (subjectRepo != null)
             {
-                new EFSubject { Id = 1, SubjectName="Tesi" },
-                new EFSubject { Id = 2, SubjectName="Tori" },
-                new EFSubject { Id = 3, SubjectName="Angol" },
-            };
-            context.AddRange(subjects);
-            context.SaveChanges();
-            EFSubject subject=subjectRepo.GetSubjectById(exptectedId);
-            Assert.IsNotNull(subject,"SubjectRepo:GetSubjectById->Jó adat esetén null");
-            Assert.AreEqual(exptectedId, subject.Id, "SubjectRepo:GetSubjectById->Jó adat esetén nem megfelelõ id-t ad vissza.");         
+                EFSubject subject = subjectRepo.GetSubjectById(exptectedId);
+                if (subject != null)
+                {
+                    Assert.IsNotNull(subject, "SubjectRepo:GetSubjectById->Létezõ tantárgyat id alapján nem talál meg.");
+                    Assert.AreEqual(exptectedId, subject.Id, "SubjectRepo:GetSubjectById->Létezõ tantárgyak esetén a megtalált id-je nem a keresett!");
+                }
+            }
+        }
+
+        // Nincs subject
+        [Test]
+        [TestCase(0)]
+        [TestCase(4)]
+        [TestCase(5)]
+        public void SubjectGetByIdNoSubject(int exptectedId)
+        {
+            MakeTestDatabaseWith3Data();
+            if (subjectRepo != null)
+            {
+                EFSubject subject = subjectRepo.GetSubjectById(exptectedId);
+                Assert.IsNull(subject, "SubjectRepo:GetSubjectById->Nem létezõ id-jú tantárgyak megtalál");
+            }
+        }
+
+        // Nincs subject
+        [Test]
+        [TestCase(1)]
+        [TestCase(3)]
+        [TestCase(5)]
+        public void SubjectGetByIdEmptyRepo(int exptectedId)
+        {           
+            if (subjectRepo != null)
+            {
+                EFSubject subject = subjectRepo.GetSubjectById(exptectedId);
+                Assert.IsNull(subject, "SubjectRepo:GetSubjectById->Üres tantárgy repo esetén talál adatot");
+            }
         }
     }
 }

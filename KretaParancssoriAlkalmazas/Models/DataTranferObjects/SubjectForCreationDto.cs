@@ -13,7 +13,7 @@ namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
 {
     public class SubjectForCreationDto : SubjectBaseWithAttributes
     {
-        /*  public SubjectForCreationDto(Subject subject)
+          public SubjectForCreationDto(Subject subject)
           {
               this.Id = subject.Id;
               this.SubjectName= subject.SubjectName;
@@ -26,7 +26,7 @@ namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
 
           public SubjectForCreationDto()
               : base()
-          { }*/
+          { }
         /*public void Clone(Subject subject)
         {
             this.Id = subject.Id;

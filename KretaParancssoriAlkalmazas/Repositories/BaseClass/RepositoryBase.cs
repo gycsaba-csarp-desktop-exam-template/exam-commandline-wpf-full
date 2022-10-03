@@ -58,11 +58,19 @@ namespace Kreta.Repositories.BaseClass
             if (entity != null)
             {
                 KretaContext.Remove(entity);
-                KretaContext.SaveChanges();
+                //KretaContext.SaveChanges();
             }
         }
 
         public void Delete(T entyty) => KretaContext.Set<T>().Remove(entyty);
+
+        public void DeleteAll()
+        {
+            foreach(var entity in KretaContext.Set<T>())
+            {
+                Delete(entity);
+            }
+        }
 
         protected virtual void Dispose(bool disposing)
         {

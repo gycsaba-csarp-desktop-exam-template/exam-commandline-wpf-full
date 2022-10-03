@@ -67,7 +67,7 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpGet("api/subject", Name = "All subjects")]
-        public IActionResult GetAllSubjects([FromQuery] SubjectParameters subjectParameters)
+        public async Task<IActionResult> GetAllSubjects([FromQuery] SubjectParameters subjectParameters)
         {
 
             logger.LogInfo($"Az összes tantárgy lekérdezése az adatbázisból");
@@ -111,7 +111,7 @@ namespace KretaWebApi.Controllers
         }
 
         [HttpGet("api/subject-search-by-name", Name = "All subject search by name")]
-        public IActionResult SearchBySubjectName([FromQuery] SubjectNameSearchingParameters subjectNameSearchingParameters)
+        public async Task<IActionResult> SearchBySubjectName([FromQuery] SubjectNameSearchingParameters subjectNameSearchingParameters)
         {
             var subjects = service.SearchSubjectNameStartWith(subjectNameSearchingParameters.Name);
             logger.LogInfo($"Az összes tantárgy lekérdezése amelynek nevében szerepel '{subjectNameSearchingParameters.Name}' szó.");
@@ -121,10 +121,13 @@ namespace KretaWebApi.Controllers
 
         }
 
+        //https://stackoverflow.com/questions/57678813/net-core-api-purpose-of-producesresponsetype
         [HttpGet("api/subject/{id}", Name = "Subject by id")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Subject))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
-        public IActionResult GetSubjectById(int id, [FromQuery] FieldsParameter fields)
+        public async Task<IActionResult> GetSubjectById(int id, [FromQuery] FieldsParameter fields)
         {
             EFSubject subject = null;
             try
@@ -147,7 +150,7 @@ namespace KretaWebApi.Controllers
         [HttpPost("api/subject", Name = "Insert subject")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
-        public IActionResult CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
+        public async Task<IActionResult> CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
             logger.LogInfo("Új tantárgy felvétele az adatbázisba");
             logger.LogInfo("Új tantárgy azonosító:" + subjectForCreation.Id);
@@ -171,13 +174,13 @@ namespace KretaWebApi.Controllers
 
             logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
 
-            return CreatedAtRoute("Subject by id", new {id = createdSubject.Id}, createdSubject);
+            return CreatedAtRoute(nameof(GetSubjectById), new {id = createdSubject.Id}, createdSubject);
         }
 
         [HttpPut("api/subject/{id}", Name = "Update subject")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
-        public IActionResult UpdateSubject(long id, [FromBody] SubjectForUpdateDto subjectForUpdate)
+        public async Task<IActionResult> UpdateSubject(long id, [FromBody] SubjectForUpdateDto subjectForUpdate)
         {
             logger.LogInfo("Tantárgy módosítása az adatbázisba");
             logger.LogInfo("Módosítandó tantárgy id-je:" + subjectForUpdate.Id);
@@ -197,11 +200,11 @@ namespace KretaWebApi.Controllers
 
             var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
             logger.LogInfo($"UpdateSubject->{updatedSubject.Id} id-jű tantárgy módosítva {updatedSubject}-re)");
-            return CreatedAtRoute("Subject by id", new { id = updatedSubject.Id }, updatedSubject);
+            return CreatedAtRoute(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
         }
         [HttpDelete("api/subject/{id}", Name = "Delete subject")]
         [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
-        public IActionResult DeleteSubject(long id)
+        public async Task<IActionResult> DeleteSubject(long id)
         {
             try
             {
