@@ -64,7 +64,6 @@ namespace KretaWebApiTest.Controllers.SubjectData
         {
             if (context.Subjects.Count() == 0)
             {
-                //context = new KretaContext(contextOptions);
                 List<EFSubject> subjectTableDataWith3Data = new List<EFSubject>
                 {
                     new EFSubject { Id = 1, SubjectName="Tesi" },
@@ -93,37 +92,32 @@ namespace KretaWebApiTest.Controllers.SubjectData
         // 5. Ékezeteket tartalmaz a név
         // 6. Nincs név
 
-
-        private static readonly SubjectForCreationDto goodSubject01 = new SubjectForCreationDto
-        {
-            Id = 4,
-            SubjectName = "Magyar" 
-        };
-        private static readonly SubjectForCreationDto goodSubject02 = new SubjectForCreationDto
-        {
-            Id = 6,
-            SubjectName = "Magyar"
-        };
-
         //https://www.codegrepper.com/code-examples/csharp/xunit+inlinedata+but+declare+only+last+object
         //https://hamidmosalla.com/2017/02/25/xunit-theory-working-with-inlinedata-memberdata-classdata/
         //https://andrewlock.net/creating-parameterised-tests-in-xunit-with-inlinedata-classdata-and-memberdata/
-        public class SubjectClssData : IEnumerable<object[]>
+        public class TestDataGenerator : IEnumerable<object[]>
         {
             public IEnumerator<object[]> GetEnumerator()
             {
                 yield return new object[] {
-                    goodSubject01,
-                    goodSubject02
+                  new SubjectForCreationDto
+                  {
+                        Id = 4,
+                        SubjectName = "Magyar"
+                  },
+/*                  new SubjectForCreationDto
+                  {
+                        Id = 6,
+                        SubjectName = "Magyar"
+                  }*/
                 };
             }
-
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
         [Theory]
-        //[InlineData(3, goodSubject01, StatusCodes.Status200OK)]
-        [ClassData(typeof(SubjectClssData))]
+        [ClassData(typeof(TestDataGenerator))]
+        //[MemberData(nameof(TestDataGenerator.GetEnumerator),MemberType =typeof(TestDataGenerator))]
         public async void CreateSubjectPossible(SubjectForCreationDto newSubject)
         {
             //arrange            
@@ -131,51 +125,20 @@ namespace KretaWebApiTest.Controllers.SubjectData
             KretaContext context = MakeTestDatabaseWith3Data();
 
             SubjectService subjectService = new SubjectService(context);
-            FieldsParameter fieldsParameter = new FieldsParameter();
 
             var controller = new SubjectController(mockLogger.Object, subjectService, mapper);
 
             if (context.Subjects != null)
             {
                 // act
-                EFSubject exptedtedSubject = context.Subjects.Where(subject => subject.Id.Equals(exptectedElementIid)).FirstOrDefault();
-                if (exptedtedSubject != null)
-                {
-                    var actionResult = await controller.GetSubjectById(exptectedElementIid, fieldsParameter);
+                var actionResult = await controller.CreateSubject(newSubject);
 
-                    // assert
-                    Assert.NotNull(actionResult);
-                    Assert.IsType<OkObjectResult>(actionResult);
-                    var statusCodeReulst = (IStatusCodeActionResult)actionResult;
-                    Assert.Equal(exptectedStatusCode, statusCodeReulst.StatusCode);
-
-
-                    var objectResult = actionResult as OkObjectResult;
-                    Assert.NotNull(objectResult);
-                    if (objectResult != null)
-                    {
-
-                        Assert.IsType<Subject>(objectResult.Value);
-                        var modelResult = objectResult.Value as Subject;
-                        if (modelResult != null)
-                        {
-                            Assert.NotNull(modelResult);
-                            Assert.Equal(exptedtedSubject.Id, modelResult.Id);
-                            Assert.Equal(exptedtedSubject.SubjectName, modelResult.SubjectName);
-                        }
-                    }
-                }
+                // assert
+               // Assert.NotNull(actionResult);
+                //Assert.IsType<OkObjectResult>(actionResult);
+                //var statusCodeReulst = (IStatusCodeActionResult)actionResult;
+                //Assert.Equal(exptectedStatusCode, statusCodeReulst.StatusCode);
             }
         }
-
-            IEnumerator<object> IEnumerable<object>.GetEnumerator()
-            {
-                throw new NotImplementedException();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                throw new NotImplementedException();
-            }
-        }
+    }
 }
