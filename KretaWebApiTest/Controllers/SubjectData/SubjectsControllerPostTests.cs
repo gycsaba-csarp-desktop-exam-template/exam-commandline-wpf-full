@@ -93,6 +93,7 @@ namespace KretaWebApiTest.Controllers.SubjectData
         //https://www.codegrepper.com/code-examples/csharp/xunit+inlinedata+but+declare+only+last+object
         //https://hamidmosalla.com/2017/02/25/xunit-theory-working-with-inlinedata-memberdata-classdata/
         //https://andrewlock.net/creating-parameterised-tests-in-xunit-with-inlinedata-classdata-and-memberdata/
+        //http://www.tomdupont.net/2012/04/xunit-theory-data-driven-unit-test.html
         public class TestDataGenerator : IEnumerable<object[]>
         {
             public IEnumerator<object[]> GetEnumerator()
@@ -103,11 +104,6 @@ namespace KretaWebApiTest.Controllers.SubjectData
                         Id = 4,
                         SubjectName = "Magyar"
                   },
-/*                  new SubjectForCreationDto
-                  {
-                        Id = 6,
-                        SubjectName = "Magyar"
-                  }*/
                 };
             }
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
