@@ -69,5 +69,10 @@ namespace KretaParancssoriAlkalmazas.Services
             context.SaveChanges();
         }
 
+        public long GetNumberOfSubject()
+        {
+            return subjectRepo.GetNumberOfSubject();
+        }
+
     }
 }

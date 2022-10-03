@@ -19,5 +19,6 @@ namespace KretaParancssoriAlkalmazas.Services
         void CreateSubject(EFSubject insertedEFSubject);
         void Update(EFSubject updatedEFSubject);
         void DeleteSubject(EFSubject subject);
+        public long GetNumberOfSubject();
     }
 }

@@ -20,6 +20,7 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
 
 // Mysql server elérés konfigurálás
+// Production or test database: https://stackoverflow.com/questions/73245454/asp-net-core-web-api-use-production-and-test-database-connection-strings
 builder.Services.ConfigureMySqlContext(builder.Configuration);
 
 // Validation filter

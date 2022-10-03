@@ -159,6 +159,12 @@ namespace KretaWebApi.Controllers
 
             var insertedEFSubject = mapper.Map<EFSubject>(subjectForCreation);
 
+            long count = service.GetNumberOfSubject();
+            if (count>50)
+            {
+                return BadRequest("The number of subject in database are limited");
+            }
+
             try
             {
                 service.CreateSubject(insertedEFSubject);

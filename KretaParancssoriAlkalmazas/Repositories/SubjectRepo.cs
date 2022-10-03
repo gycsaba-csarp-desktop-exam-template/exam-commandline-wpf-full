@@ -92,5 +92,10 @@ namespace Kreta.Repositories
         {
             DeleteAll();
         }
+
+        public  long GetNumberOfSubject()
+        {
+            return Count();
+        }
     }
 }

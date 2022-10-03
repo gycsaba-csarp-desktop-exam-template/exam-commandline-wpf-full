@@ -72,6 +72,12 @@ namespace Kreta.Repositories.BaseClass
             }
         }
 
+        public long Count()
+        {
+            var count = KretaContext.Set<T>().Count();
+            return count;
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
