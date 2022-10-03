@@ -134,10 +134,22 @@ namespace KretaWebApiTest.Controllers.SubjectData
                 var actionResult = await controller.CreateSubject(newSubject);
 
                 // assert
-               // Assert.NotNull(actionResult);
-                //Assert.IsType<OkObjectResult>(actionResult);
-                //var statusCodeReulst = (IStatusCodeActionResult)actionResult;
-                //Assert.Equal(exptectedStatusCode, statusCodeReulst.StatusCode);
+                Assert.NotNull(actionResult);
+                Assert.IsType<CreatedAtRouteResult>(actionResult);
+                
+                var statusCodeReulst = (IStatusCodeActionResult)actionResult;
+                Assert.Equal(StatusCodes.Status201Created, statusCodeReulst.StatusCode);
+
+                var route = actionResult as CreatedAtRouteResult;
+                Assert.NotNull(route);
+                Assert.Equal(nameof(controller.GetSubjectById), route.RouteName);
+
+                Assert.NotNull(route.Value);
+                Assert.IsType<Subject>(route.Value);
+                Subject savedSubject = route.Value as Subject;
+
+                Assert.Equal(newSubject.Id, savedSubject.Id);
+                Assert.Equal(newSubject.SubjectName,savedSubject.SubjectName);
             }
         }
     }
