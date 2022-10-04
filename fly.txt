@@ -1,5 +1,14 @@
 flyctl apps create kretawebapi
 flyctl launch --dockerfile Dockerfile --name kretawebapi
+flyctl version update
+flyctl volumes create mysqldata --size 1 --region fra
+
+Postgres cluster kretawebapi-db created
+  Username:    postgres
+  Password:    55fd3fcfb5e8bcde20c48ad1fe9b9560e98139bd8d928df6
+  Hostname:    kretawebapi-db.internal
+  Proxy Port:  5432
+  PG Port: 5433
 
 
 get:
