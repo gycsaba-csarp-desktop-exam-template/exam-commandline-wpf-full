@@ -6,6 +6,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = Localizer["Title"];
+    Layout = "/Pages/Shared/_Layout.cshtml";
 
 }
 
@@ -13,53 +14,10 @@
     <h1 class="display-4">@Localizer["Welcome"]</h1>
     <p>Az oldal célja a különbőző fejlesztéseim bemutatása.</p>
 </div>
+<p>Olvassa el a fejlesztéseim <a asp-page="/Menu/AboutMe/Index"> összefoglalóját.</a></p>
 
-<!-- 
-https://www.youtube.com/watch?v=OoAATsyPbGs
--->
-<div class="flex flex-column min-h-screen" >
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <span class="img-thumbnail">
-            <a class="navbar-brand" asp-controller="home" asp-action="index">
-                <img src="~/images/profil.png" width="30" height="30">
-            </a>
-        </span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li>
-                    <a class="nav-link" asp-page="Index">Magamról</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">C# Backend</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">C# Desktop</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">C# Razor</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">C# Testek</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">C# VUE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Spring Backend</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Spring Tymleaf, JSP</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container body-content">
-        
-    </div> 
-</div>
+
+
 
 
 
