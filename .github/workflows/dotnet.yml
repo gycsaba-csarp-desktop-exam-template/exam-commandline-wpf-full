@@ -1,10 +1,14 @@
+# Leírás: 
+# 1. https://www.dotnetcurry.com/dotnetcore/github-actions-for-dotnet-developers
+# 2. https://github.com/microsoft/github-actions-for-desktop-apps/blob/main/.github/workflows/cd.yml
+# 3. https://www.youtube.com/watch?v=VIlDni8-iWM
 name: .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "production-desktop" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "production-desktop" ]
 
 jobs:
   build:
