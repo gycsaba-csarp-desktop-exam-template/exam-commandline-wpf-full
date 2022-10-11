@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using AutoMapper;
-using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
-using KretaParancssoriAlkalmazas.Models.EFClass;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Parameters;
 using Newtonsoft.Json;
 using ServiceKretaLogger;
-using KretaParancssoriAlkalmazas.Services;
 using KretaWebApi.ActionFilters;
+using Kreta.Models.DataModel;
+using Kreta.Models.EFClass;
+using Kreta.Models.Parameters;
+using Kreta.Services;
+using Kreta.Models.DataTranferObjects;
 
 
 

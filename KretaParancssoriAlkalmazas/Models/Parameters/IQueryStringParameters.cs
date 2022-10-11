@@ -1,11 +1,11 @@
-﻿using KretaParancssoriAlkalmazas.Models.Helpers;
+﻿using Kreta.Models.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KretaParancssoriAlkalmazas.Models.Parameters
+namespace Kreta.Models.Parameters
 {
     public interface IQueryStringParameters : IPaginationData
     {

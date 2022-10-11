@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.EFClass;
-using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.Parameters;
+using Kreta.Models.DataModel;
+using Kreta.Models.EFClass;
+using Kreta.Models.Helpers;
+using Kreta.Models.Parameters;
 
 namespace Kreta.Repositories.Interfaces
 {

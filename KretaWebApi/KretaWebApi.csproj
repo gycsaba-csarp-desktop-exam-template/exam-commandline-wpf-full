@@ -12,6 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Properties\ServiceDependencies\**" />
+    <Content Remove="Properties\ServiceDependencies\**" />
+    <EmbeddedResource Remove="Properties\ServiceDependencies\**" />
+    <None Remove="Properties\ServiceDependencies\**" />
+    <_WebToolingArtifacts Remove="Properties\ServiceDependencies\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\PublishProfiles\kreta - Zip Deploy.pubxml" />
   </ItemGroup>
 
@@ -24,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
+    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazasMsTest.csproj" />
     <ProjectReference Include="..\ServiceKretaAPI\ServiceKretaAPI.csproj" />
     <ProjectReference Include="..\ServiceKretaLogger\ServiceKretaLogger.csproj" />
     <ProjectReference Include="..\ServiceKreta\ServiceKreta.csproj" />

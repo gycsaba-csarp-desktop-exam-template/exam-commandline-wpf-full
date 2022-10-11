@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace Kreta.Models.Interfaces.Base
 {
-    public interface IEmployeeData
+    public interface IEmployeeData : IEntityIdentify
     {
-        public int GrossSalary { get; set; }
+        public ulong GrossSalary { get; set; }
 
-        public int NumberOfChildren { get; set; }
+        public uint NumberOfChildren { get; set; }
 
         public bool HasChild
         {
             get => this.NumberOfChildren > 0;
+        }
+
+        public bool HasNoChild
+        {
+            get => this.NumberOfChildren == 0;
         }
     }
 }

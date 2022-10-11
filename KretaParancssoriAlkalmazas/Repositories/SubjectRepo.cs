@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Kreta.Repositories.Interfaces;
 using Kreta.Repositories.BaseClass;
 using Kreta.Models.Context;
-using KretaParancssoriAlkalmazas.Models.EFClass;
-using KretaParancssoriAlkalmazas.Models.Parameters;
-using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.HTEOS;
+using Kreta.Models.EFClass;
+using Kreta.Models.Parameters;
+using Kreta.Models.Helpers;
+using Kreta.Models.HTEOS;
 using System.Dynamic;
-using KretaParancssoriAlkalmazas.Models.DataModel;
+using Kreta.Models.DataModel;
 
 namespace Kreta.Repositories
 {

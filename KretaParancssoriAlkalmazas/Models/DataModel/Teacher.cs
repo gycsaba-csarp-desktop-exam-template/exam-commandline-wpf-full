@@ -1,157 +1,34 @@
-﻿using System;
+﻿using Kreta.Models.Interfaces.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Kreta.Models.Interfaces;
-using Kreta.Models.Interfaces.Base;
-using Kreta.Models.BaseClass;
-
-namespace KretaParancssoriAlkalmazas.Models.DataModel
+namespace Kreta.Models.DataModel
 {
-    public class Teacher : ITeacher, IComparable, IEquatable<Teacher>
+    public class Teacher : Person, IEmployeeData
     {
-        public long Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public bool Wooman { get; set; }
-        public DateTime DataOfBirth { get; set; }
-        public string City { get; set; }
-        public string StreetAndNumber { get; set; }
-        public int PostCode { get; set; }
-        public string LoginName { get; set; }
-        public string Password { get; set; }
-        public int GrossSalary { get; set; }
-        public int NumberOfChildren { get; set; }
+        public IAccount? Account { get; }
+        public IAddress? Address { get; set; }
+        public ulong GrossSalary { get; set; }
+        public uint NumberOfChildren { get; set; }
 
-        public Teacher()
+        public Teacher(long id, string firstName, string lastName, bool woman, DateTime dateOfBirth, IAddress address, IAccount account, ulong grossSalary, uint numberOfChildren)
+            : base(id, firstName, lastName, woman, dateOfBirth)
         {
-            Id = -1;
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            Wooman = false;
-            DataOfBirth = DateTime.MinValue;
-            City = string.Empty;
-            StreetAndNumber = string.Empty;
-            PostCode = -1;
-            LoginName = string.Empty;
-            Password = string.Empty;
-            GrossSalary = -1;
-            NumberOfChildren = -1;
-        }
-
-        public Teacher(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth)
-        {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Wooman = wooman;
-            DataOfBirth = dataOfBirth;
-            City = string.Empty;
-            StreetAndNumber = string.Empty;
-            PostCode = -1;
-            LoginName = string.Empty;
-            Password = string.Empty;
-            GrossSalary = -1;
-            NumberOfChildren = -1;
-        }
-
-        public Teacher(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth, string city, string streetAndNumber, int postCode, string loginName, string password, int grossSalary, int numberOfChildren)
-        {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Wooman = wooman;
-            DataOfBirth = dataOfBirth;
-            City = city;
-            StreetAndNumber = streetAndNumber;
-            PostCode = postCode;
-            LoginName = loginName;
-            Password = password;
+            Account = account;
+            Address = address;
             GrossSalary = grossSalary;
             NumberOfChildren = numberOfChildren;
         }
 
-        public bool Equals(Teacher other)
+        public Teacher() : base()
         {
-            if (!(other is Teacher))
-                return false;
-            else
-            {
-                if (this == other)
-                    return true;
-                else
-                {
-                    Person person = new Person(other.Id, other.FirstName, other.LastName, other.Wooman, other.DataOfBirth);
-                    Account account = new Account(other.LoginName, other.Password);
-                    EmployeeData employeeData = new EmployeeData(other.GrossSalary, NumberOfChildren);
-
-                    Person otherPerson = new Person(other.Id, other.FirstName, other.LastName, other.Wooman, other.DataOfBirth);
-                    Account otherAccount = new Account(other.LoginName, other.Password);
-                    EmployeeData otherEmloyeeData = new EmployeeData(other.GrossSalary, NumberOfChildren);
-
-                    return person.Equals(otherPerson) && account.Equals(otherAccount) && employeeData.Equals(otherEmloyeeData);
-                }
-            }
-
-        }
-
-        public int CompareTo(object obj)
-        {
-            if (!(obj is Teacher))
-                return 0;
-            else
-            {
-                ITeacher objITeacher = (ITeacher)obj;
-                ITeacher thisITeacher = this;
-
-                int teacherFullNameCompareResult = thisITeacher.FullName.CompareTo(objITeacher.FullName);
-                if (teacherFullNameCompareResult == 0)
-                    return 0;
-                else
-                {
-                    int teacherDataOfBirthComapreResult = DataOfBirth.CompareTo(objITeacher.DataOfBirth);
-                    if (teacherDataOfBirthComapreResult == 0)
-                        return 0;
-                    else
-                    {
-                        Teacher objTeacher = (Teacher)obj;
-                        return Id.CompareTo(objTeacher.Id);
-                    }
-                }
-            }
-        }
-
-        public override string ToString()
-        {
-
-            return "(" + Id + ") " + GetInterfaceObject.FullName;
-        }
-
-        public void Set(object obj)
-        {
-            if (obj is Teacher)
-            {
-                Teacher t = (Teacher)obj;
-                Id = t.Id;
-                FirstName = t.FirstName;
-                LastName = t.LastName;
-                Wooman = t.Wooman;
-                DataOfBirth = t.DataOfBirth;
-                City = t.City;
-                StreetAndNumber = t.StreetAndNumber;
-                PostCode = t.PostCode;
-                LoginName = t.LoginName;
-                Password = t.Password;
-                GrossSalary = t.GrossSalary;
-                NumberOfChildren = t.NumberOfChildren;
-            }
-        }
-
-        private ITeacher GetInterfaceObject
-        {
-            get { return this; }
+            Account = null;
+            Address = null;
+            GrossSalary = ulong.MaxValue;
+            NumberOfChildren = uint.MaxValue;
         }
     }
 }

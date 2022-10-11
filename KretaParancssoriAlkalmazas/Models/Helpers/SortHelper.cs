@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq.Dynamic.Core;
 
-namespace KretaParancssoriAlkalmazas.Models.Helpers
+namespace Kreta.Models.Helpers
 {
     public class SortHelper<T> : ISortHelper<T>
     {

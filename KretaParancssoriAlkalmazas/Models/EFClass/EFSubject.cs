@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using KretaParancssoriAlkalmazas.Models.AbstractClass;
+using Kreta.Models.AbstractClass;
 
-namespace KretaParancssoriAlkalmazas.Models.EFClass
+namespace Kreta.Models.EFClass
 {
     [Table("subject")]
     public class EFSubject : SubjectBaseWithAttributes

@@ -8,6 +8,7 @@ using KretaRazorPages.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Rebuild nélküli cshtml frissítés
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 builder.Services.ConfigureRazorPageServices();

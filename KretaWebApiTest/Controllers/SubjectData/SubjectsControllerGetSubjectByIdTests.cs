@@ -12,15 +12,16 @@ using ServiceKretaLogger;
 using Kreta.Models.Context;
 using Kreta.Repositories;
 using Kreta.Repositories.Interfaces;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.EFClass;
-using KretaParancssoriAlkalmazas.Models.Parameters;
+
 using KretaWebApi.Controllers;
 using KretaWebApi;
-using KretaParancssoriAlkalmazas.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Security.Cryptography.X509Certificates;
+using Kreta.Models.EFClass;
+using Kreta.Services;
+using Kreta.Models.Parameters;
+using Kreta.Models.DataModel;
 
 namespace KretaWebApiTest.Controllers.SubjectData
 {

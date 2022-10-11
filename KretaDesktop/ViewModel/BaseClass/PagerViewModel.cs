@@ -1,8 +1,8 @@
 ﻿using ApplicationPropertiesSettings;
+using Kreta.Models.DataModel;
+using Kreta.Models.Helpers;
+using Kreta.Models.Parameters;
 using KretaDesktop.Localization;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.Parameters;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json.Linq;

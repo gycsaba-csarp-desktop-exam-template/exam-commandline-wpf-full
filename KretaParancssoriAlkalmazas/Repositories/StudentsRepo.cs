@@ -1,4 +1,4 @@
-﻿using KretaParancssoriAlkalmazas.Models.DataModel;
+﻿using Kreta.Models.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace Kreta.Repositories
         }  
         public void MakeTestData()
         {
-            students.Add(new Student(1,"Kis","Zoltán", false, new DateTime(2004, 10, 24),1));
+           /* students.Add(new Student(1,"Kis","Zoltán", false, new DateTime(2004, 10, 24),1));
             students.Add(new Student(2,"Nagy","Anna", true, new DateTime(2003, 3, 2), 1));
             students.Add(new Student(3,"Szabó", "Imre", false, new DateTime(2004, 7, 4), 3));
             students.Add(new Student(4, "Péter","Zoltán", false, new DateTime(2003, 9, 9), 4));
@@ -45,7 +45,7 @@ namespace Kreta.Repositories
             students.Add(new Student(12, "Nagy", "Virág", true, new DateTime(2003, 2, 4), 4));
             students.Add(new Student(13, "Tanuló", "Péter", false, new DateTime(2003, 12, 31), 0));
             students.Add(new Student(14, "Nagy","Lajos", false, new DateTime(2004, 1, 14), 0));
-            students.Add(new Student(15, "Péter", "László", false, new DateTime(2003, 1, 12), 0));
+            students.Add(new Student(15, "Péter", "László", false, new DateTime(2003, 1, 12), 0));*/
         }
     }
 }

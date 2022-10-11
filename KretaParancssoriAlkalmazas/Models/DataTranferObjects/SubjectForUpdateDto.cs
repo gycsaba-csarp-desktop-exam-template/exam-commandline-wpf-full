@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using KretaParancssoriAlkalmazas.Models.AbstractClass;
+using Kreta.Models.AbstractClass;
 
-namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
+namespace Kreta.Models.DataTranferObjects
 {
     public class SubjectForUpdateDto : SubjectBaseWithAttributes
     {

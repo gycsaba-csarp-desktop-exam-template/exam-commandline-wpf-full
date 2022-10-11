@@ -1,0 +1,56 @@
+﻿@page
+@{
+    ViewData["Title"] = "C# Desktop";
+    Layout = "~/Pages/Shared/_AboutMeLayout.cshtml";
+}
+
+<h5 class="pt-3">@ViewData["Title"]</h5>
+<p class="lead bg-light small pt-2">A tanítás során a legfontosabb témám a desktop programozás volt, így ebben C#-ban sokat kellett tanuljak.</p>
+<p class="pt-2">A fejlesztés .net 6 verzióban történik. Összegyűjtöttem a legfontosabb kódrészleteket a Git-Hub-ról:</p>
+<p class="pt-2"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6">Repository</a></p>
+<ul>
+    <li class="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/Converter">Converterek</a></li>
+    <li class ="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/Localization">Lokalizáció</a></li>
+    <li class="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/Validations">Validáció</a></li>
+    <li class="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/ServiceKretaAPI">API elérés library</a></li>
+    <ul>
+        <li>Név validálás</li>
+    </ul>
+    <li class="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/production-backend/KretaParancssoriAlkalmazas/Services">Service réteg</a></li>
+    <li class="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/production-backend/KretaParancssoriAlkalmazas/Repositories">Repository réteg</a></li>
+    <li class ="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/Resources">XAML - formázás</a></li>
+    <li class="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/production-backend/KretaParancssoriAlkalmazas/Models">Model réteg</a></li>
+    <li>View</li>
+    <ul>
+        <li>
+            <a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/View/ContentView">
+                Tantárgy kezelés
+            </a>
+            <ul>
+                <li>Lapozás, sor/lap, CRUD műveletek, validálás, rendezés, szűrés.</li>
+                <li>Nyelv választás és automatikus nyelv váltás a view-n.</li>
+           </ul>
+        </li>
+        <li><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/View">           
+            MVVM navigáció - view réteg             
+            </a>
+        </li>
+    </ul>
+    <li class="pt-1">ViewModel</li>
+    <ul>
+        <li><a class ="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/ViewModel/BaseClass"> Alapvető segéd osztályok</a></li>
+        <ul>
+            <li>INotifyPropertyChanged, RelayCommand, Pages</li>
+        </ul>
+        <li><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/ViewModel/Content">CRUD műveletek - ViewModel réteg</a></li>
+        <ul>
+            <li>TODO: megírni úgy, hogy átlalánosan jó legyen más hasonló osztályra...</li>
+        </ul>
+        <li>
+            <a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/KretaDesktop/ViewModel">
+                MVVM navigáció - viewmodel réteg
+            </a>
+        </li>
+    </ul>
+    <li class="pt-1"><a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6/tree/main/ApplicationProperties">Applikáció konfigurálás library</a></li>
+</ul>

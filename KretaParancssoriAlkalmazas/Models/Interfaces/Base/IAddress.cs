@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kreta.Models.Interfaces.Base
 {
-    public interface IAddress
+    public interface IAddress : IEntityIdentify
     {
         public string City { get; set; }
         public string StreetAndNumber { get; set; }

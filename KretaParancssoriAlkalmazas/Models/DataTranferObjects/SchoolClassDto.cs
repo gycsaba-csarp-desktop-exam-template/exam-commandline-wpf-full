@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using Kreta.Models.Interfaces;
 using Kreta.Models;
 
-namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
+namespace Kreta.Models.DataTranferObjects
 {
     public class SchoolClassDto
     {

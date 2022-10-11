@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KretaParancssoriAlkalmazas.Models.Helpers
+namespace Kreta.Models.Helpers
 {
     // https://code-maze.com/data-shaping-aspnet-core-webapi/
 

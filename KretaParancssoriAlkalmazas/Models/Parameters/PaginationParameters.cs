@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using KretaParancssoriAlkalmazas.Models.Helpers;
+using Kreta.Models.Helpers;
 
-namespace KretaParancssoriAlkalmazas.Models.Parameters
+namespace Kreta.Models.Parameters
 {
     public class PaginationParameter : IPaginationData
     {

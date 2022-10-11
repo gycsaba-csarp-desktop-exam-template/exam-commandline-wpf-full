@@ -1,21 +1,29 @@
-﻿using System;
+﻿using Kreta.Models.Interfaces.Base;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Kreta.Models.Interfaces.Base;
-
-namespace Kreta.Models.BaseClass
+namespace Kreta.Models.DataModel
 {
     public class Account : IAccount, IComparable, IEquatable<Account>
     {
+        public long Id { get; set; }
         public string LoginName { get; set; }
         public string Password { get; set; }
 
-        public Account(string loginName, string password)
+        public Account()
         {
+            Id = -1;
+            LoginName=String.Empty;
+            Password=String.Empty;
+        }
+
+        public Account(long id, string loginName, string password)
+        {
+            Id = id;
             LoginName = loginName;
             Password = password;
         }
@@ -26,14 +34,14 @@ namespace Kreta.Models.BaseClass
                 return false;
             else
             {
-                Account otherAccount = (Account)other;
-                if (this.LoginName.Equals(otherAccount.LoginName) && (this.Password.Equals(otherAccount.Password)))
+                Account otherAccount = other;
+                if (LoginName.Equals(otherAccount.LoginName) && Password.Equals(otherAccount.Password))
                     return true;
                 else
                     return false;
 
             }
-            
+
         }
 
         public int GetHashCode([DisallowNull] Account obj)
@@ -47,9 +55,9 @@ namespace Kreta.Models.BaseClass
                 return 0;
             {
                 Account objAccount = (Account)obj;
-                return this.LoginName.CompareTo(objAccount.LoginName);
+                return LoginName.CompareTo(objAccount.LoginName);
             }
- 
+
         }
 
     }

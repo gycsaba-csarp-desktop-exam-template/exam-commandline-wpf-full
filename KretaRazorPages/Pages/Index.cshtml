@@ -5,11 +5,41 @@
 
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = Localizer["Title"];
+    Layout = "/Pages/Shared/_Layout.cshtml";
 
 }
 
 <div class="text-center">
     <h1 class="display-4">@Localizer["Welcome"]</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Az oldal célja a különbőző fejlesztéseim bemutatása.</p>
 </div>
+<ul>
+
+    <li>
+        Olvassa el a fejlesztéseim <a asp-page="/Menu/AboutMe/Index"> összefoglalóját.</a>
+    </li>
+    <li>
+        Telefonos eléhrtőségem: 30/5653930.
+    </li>
+    <li>
+    Lépj kapcsolatba <a href="mailto:gycsaba72ATgmailDOTcom"
+                        onclick="this.href=this.href
+                .replace(/AT/,'&#64;')
+                .replace(/DOT/,'&#46;')">velem</a>...
+    </li>
+
+</ul>
+<ul>
+    <li>
+        Nézze meg a kódjaimat:
+    </li>
+    <ul>
+        <li class ="pt-2">
+            <a class="nav-link text-bg-light" target="_blank" href="https://github.com/gycsaba-kreta-exam/kreta-exam-api-web-desktop-dotnet-6">C# Repository</a>
+        </li>
+        <li class="pt-2">
+            <a class="nav-link text-bg-light" target="_blank" href="https://github.com/java-backend/java-kreta-backend">Spring</a>
+        </li>
+    </ul>
+</ul>

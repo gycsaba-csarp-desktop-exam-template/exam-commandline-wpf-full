@@ -1,10 +1,10 @@
 using Kreta.Models.Context;
 using Kreta.Repositories;
-using KretaParancssoriAlkalmazas.Models.EFClass;
-using KretaParancssoriAlkalmazas.Models.Helpers;
+using Kreta.Models.EFClass;
+using Kreta.Models.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-namespace KretaParancssoriAlkalmazasTest.Repositories
+namespace Kreta.Repositories.Tests
 {
     // https://github.com/etrupja/complete-guide-to-aspnetcore-web-api
     public class SubjectRepoTests

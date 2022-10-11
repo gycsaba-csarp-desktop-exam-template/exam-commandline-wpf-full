@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KretaParancssoriAlkalmazas.Models.HTEOS
+namespace Kreta.Models.HTEOS
 {
     internal class LinkCollectionWrapper
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Kreta.Models.Relationship;
 using Kreta.Repositories;
 using Kreta.Repositories.Relationship;
-using KretaParancssoriAlkalmazas.Models.DataModel;
+using Kreta.Models.DataModel;
 
 namespace Kreta.Services
 {

@@ -5,15 +5,15 @@ using Moq;
 
 using ServiceKretaLogger;
 using Kreta.Models.Context;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.EFClass;
 using KretaWebApi.Controllers;
 using KretaWebApi;
-using KretaParancssoriAlkalmazas.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
 using System.Collections;
+using Kreta.Models.DataTranferObjects;
+using Kreta.Services;
+using Kreta.Models.DataModel;
+using Kreta.Models.EFClass;
 
 namespace KretaWebApiTest.Controllers.SubjectData
 {

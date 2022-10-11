@@ -1,7 +1,5 @@
 ﻿using Kreta.Models.Context;
-using Kreta.Repositories;
-using Kreta.Repositories.Interfaces;
-using KretaParancssoriAlkalmazas.Services;
+using Kreta.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

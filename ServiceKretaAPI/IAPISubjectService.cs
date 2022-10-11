@@ -1,6 +1,6 @@
-﻿using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.Parameters;
+﻿using Kreta.Models.DataModel;
+using Kreta.Models.Helpers;
+using Kreta.Models.Parameters;
 
 namespace ServiceKretaAPI
 {

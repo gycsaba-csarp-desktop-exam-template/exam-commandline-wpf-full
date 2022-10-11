@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KretaParancssoriAlkalmazas.Models.AbstractClass
+namespace Kreta.Models.AbstractClass
 {
     public abstract class SchoolClassBase :ClassWithId
     {

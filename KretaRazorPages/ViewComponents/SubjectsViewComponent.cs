@@ -1,5 +1,5 @@
-﻿using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Helpers;
+﻿using Kreta.Models.DataModel;
+using Kreta.Models.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
