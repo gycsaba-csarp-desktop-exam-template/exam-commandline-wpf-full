@@ -32,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazasMsTest.csproj" />
     <ProjectReference Include="..\ServiceKretaAPI\ServiceKretaAPI.csproj" />
     <ProjectReference Include="..\ServiceKretaLogger\ServiceKretaLogger.csproj" />
     <ProjectReference Include="..\ServiceKreta\ServiceKreta.csproj" />

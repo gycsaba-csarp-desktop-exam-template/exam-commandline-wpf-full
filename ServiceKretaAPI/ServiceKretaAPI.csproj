@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ApplicationProperties\ApplicationPropertiesSettings.csproj" />
     <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
-    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazasMsTest.csproj" />
     <ProjectReference Include="..\ServiceKretaLogger\ServiceKretaLogger.csproj" />
   </ItemGroup>
 

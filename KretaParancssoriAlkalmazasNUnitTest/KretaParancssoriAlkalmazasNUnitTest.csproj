@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazas.csproj" />
-    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazasMsTest.csproj" />
   </ItemGroup>
 
 </Project>

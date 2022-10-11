@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KretaParancssoriAlkalmazas\KretaParancssoriAlkalmazasMsTest.csproj" />
     <ProjectReference Include="..\KretaWebApi\KretaWebApi.csproj" />
   </ItemGroup>
 
