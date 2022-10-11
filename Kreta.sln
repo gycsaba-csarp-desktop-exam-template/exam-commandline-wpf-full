@@ -20,6 +20,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F793279-6139-451C-841F-F7BDD1D45615}"
 	ProjectSection(SolutionItems) = preProject
 		Docker\DockerParancsok.txt = Docker\DockerParancsok.txt
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		Docker\Fly\fly.toml = Docker\Fly\fly.toml
 		Docker\Fly\fly.txt = Docker\Fly\fly.txt
 		README.md = README.md
