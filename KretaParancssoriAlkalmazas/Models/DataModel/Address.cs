@@ -32,14 +32,29 @@ namespace Kreta.Models.DataModel
             PostCode = postCode;
         }
 
-        public bool Equals(Address other)
+        public bool Equals(Address? other)
         {
-            throw new NotImplementedException();
+            if (other is null)
+                return false;
+
+            if (Object.ReferenceEquals(this, other))
+                return true;
+
+            if (other is Address)
+            {
+                Address address = (Address)other;
+                return this.City == address.City
+                    && this.StreetAndNumber == address.StreetAndNumber
+                    && this.PostCode == address.PostCode
+                    && this.Id == address.Id;
+            }
+            return false;
         }
 
         public int CompareTo(object obj)
         {
             throw new NotImplementedException();
         }
+
     }
 }

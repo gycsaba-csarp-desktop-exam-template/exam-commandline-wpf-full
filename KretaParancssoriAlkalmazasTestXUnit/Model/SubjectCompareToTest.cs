@@ -5,6 +5,7 @@ using Xunit;
 
 namespace Kreta.Models.Test
 {
+    /*
     public class SubjectCompareToTest
     {
         [Theory]
@@ -52,5 +53,6 @@ namespace Kreta.Models.Test
             Assert.True(actual > 0);
 
         }
-    }
+        
+    }*/
 }
