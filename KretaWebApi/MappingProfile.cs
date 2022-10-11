@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
-using KretaParancssoriAlkalmazas.Models.EFClass;
+using Kreata.Models.DataModel;
+using Kreta.Models.DataModel;
+using Kreta.Models.DataTranferObjects;
+using Kreta.Models.EFClass;
 
 namespace KretaWebApi
 {

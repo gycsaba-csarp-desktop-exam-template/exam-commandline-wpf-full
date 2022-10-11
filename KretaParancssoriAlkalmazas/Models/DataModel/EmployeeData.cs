@@ -1,20 +1,22 @@
-﻿using System;
+﻿using Kreta.Models.Interfaces.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Kreta.Models.Interfaces.Base;
-
-namespace Kreta.Models.BaseClass
+namespace Kreta.Models.DataModel
 {
     public class EmployeeData : IEmployeeData, IEquatable<EmployeeData>, IComparable
     {
-        public int GrossSalary { get; set; }
-        public int NumberOfChildren { get; set; }
+        public long Id { get; set; }
+        public ulong GrossSalary { get; set; }
+        public uint NumberOfChildren { get; set; }
 
-        public EmployeeData(int grossSalary, int numberOfChildren)
+
+        public EmployeeData(long id, ulong grossSalary, uint numberOfChildren)
         {
+            Id = id;
             GrossSalary = grossSalary;
             NumberOfChildren = numberOfChildren;
         }

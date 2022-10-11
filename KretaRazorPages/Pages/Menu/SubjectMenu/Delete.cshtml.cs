@@ -1,4 +1,4 @@
-using KretaParancssoriAlkalmazas.Models.DataModel;
+using Kreta.Models.DataModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceKretaAPI;

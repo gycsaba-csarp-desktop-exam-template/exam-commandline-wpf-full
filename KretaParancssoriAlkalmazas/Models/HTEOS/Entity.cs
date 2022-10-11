@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace KretaParancssoriAlkalmazas.Models.HTEOS
+namespace Kreta.Models.HTEOS
 {
     public class Entity : DynamicObject, IXmlSerializable, IDictionary<string, object>
 	{

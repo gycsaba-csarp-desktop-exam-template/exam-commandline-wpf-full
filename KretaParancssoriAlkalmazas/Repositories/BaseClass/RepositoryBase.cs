@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Kreta.Repositories.Interfaces;
 using Kreta.Models.Context;
 using Microsoft.EntityFrameworkCore;
-using KretaParancssoriAlkalmazas.Models.AbstractClass;
+using Kreta.Models.AbstractClass;
 
 namespace Kreta.Repositories.BaseClass
 {

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Kreta.Models;
-using Kreta.Models.Interfaces.Base;
 using Kreta.Repositories.Interfaces;
 
 namespace Kreta.Repositories.BaseClass

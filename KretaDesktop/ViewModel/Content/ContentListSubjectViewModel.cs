@@ -1,6 +1,6 @@
-﻿using KretaDesktop.ViewModel.BaseClass;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Helpers;
+﻿using Kreta.Models.DataModel;
+using Kreta.Models.Helpers;
+using KretaDesktop.ViewModel.BaseClass;
 using ServiceKretaAPI.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

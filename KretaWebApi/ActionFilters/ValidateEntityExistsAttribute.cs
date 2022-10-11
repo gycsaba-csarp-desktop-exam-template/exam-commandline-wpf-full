@@ -1,5 +1,5 @@
-﻿using Kreta.Models.Context;
-using KretaParancssoriAlkalmazas.Models.AbstractClass;
+﻿using Kreta.Models.AbstractClass;
+using Kreta.Models.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using ServiceKretaLogger;

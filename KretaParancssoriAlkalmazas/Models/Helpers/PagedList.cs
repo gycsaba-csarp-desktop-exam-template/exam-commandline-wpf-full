@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KretaParancssoriAlkalmazas.Models.Parameters;
+using Kreta.Models.Parameters;
 
-namespace KretaParancssoriAlkalmazas.Models.Helpers
+namespace Kreta.Models.Helpers
 {
     public class PagedList<T> : List<T>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KretaParancssoriAlkalmazas.Models.Helpers
+namespace Kreta.Models.Helpers
 {
     public interface ISortHelper<T>
     {

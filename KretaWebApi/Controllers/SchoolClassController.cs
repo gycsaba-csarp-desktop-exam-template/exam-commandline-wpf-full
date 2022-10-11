@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Kreta.Repositories.Interfaces;
 using AutoMapper;
 using System.Collections;
-using KretaParancssoriAlkalmazas.Models.Parameters;
 using System.Dynamic;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.HTEOS;
 using System.Net.Http.Headers;
 using ServiceKretaLogger;
+using Kreta.Models.Parameters;
+using Kreata.Models.DataModel;
+using Kreta.Models.HTEOS;
 
 namespace KretaWebApi.Controllers
 {

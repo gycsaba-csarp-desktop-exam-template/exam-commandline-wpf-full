@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace KretaParancssoriAlkalmazas.Models.AbstractClass
+namespace Kreta.Models.AbstractClass
 {
     public abstract class SubjectBaseWithAttributes : SubjectBase
     {

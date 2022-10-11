@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Kreta.Repositories.Interfaces;
 using Kreta.Repositories.BaseClass;
 using Kreta.Models.Context;
-using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
+using Kreta.Models.DataTranferObjects;
 using System.Linq.Expressions;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.Parameters;
+using Kreta.Models.DataModel;
+using Kreta.Models.Parameters;
 using System.Reflection;
 
-using KretaParancssoriAlkalmazas.Models.Helpers;
+using Kreta.Models.Helpers;
 using System.Dynamic;
-using KretaParancssoriAlkalmazas.Models.EFClass;
+using Kreta.Models.EFClass;
 using System.Linq.Dynamic.Core;
 
 namespace Kreta.Repositories

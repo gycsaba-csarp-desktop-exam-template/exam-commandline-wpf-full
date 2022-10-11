@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Kreta.Models.Interfaces.Base
 {
-    public interface IBaseModel
+    public interface IScholarship : IEntityIdentify
     {
-        public long Id { get; set; }
-
-        // public void Set(Object obj);
+        public ulong TaxNumber { get; set; }
+        public ulong Amount { get; set; }
     }
 }

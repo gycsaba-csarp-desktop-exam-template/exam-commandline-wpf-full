@@ -1,8 +1,8 @@
 ﻿using Kreta.Models.Context;
 using Kreta.Repositories;
-using KretaParancssoriAlkalmazas.Models.EFClass;
-using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.Parameters;
+using Kreta.Models.EFClass;
+using Kreta.Models.Helpers;
+using Kreta.Models.Parameters;
 using ServiceKretaLogger;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KretaParancssoriAlkalmazas.Services
+namespace Kreta.Services
 {
     public class SubjectService : ISubjectService
     {

@@ -1,4 +1,4 @@
-﻿using KretaParancssoriAlkalmazas.Models.Parameters;
+﻿using Kreta.Models.Parameters;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 

@@ -1,4 +1,4 @@
-﻿using KretaParancssoriAlkalmazas.Models.AbstractClass;
+﻿using Kreta.Models.AbstractClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using StaticClasses;
 
-namespace KretaParancssoriAlkalmazas.Models.Parameters
+namespace Kreta.Models.Parameters
 {
     public  class SubjectParameters : QueryStringParameters
     {

@@ -1,19 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
 using System.Net;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Reflection.Metadata;
 
 using ServiceKretaAPI.Lib;
-using KretaParancssoriAlkalmazas.Models.Parameters;
 using Microsoft.Extensions.Primitives;
-using KretaParancssoriAlkalmazas.Models.DataModel;
 using ApplicationPropertiesSettings;
-using KretaParancssoriAlkalmazas.Models.Helpers;
-using System.ComponentModel;
 using Microsoft.AspNetCore.Http;
-using KretaParancssoriAlkalmazas.Models.DataTranferObjects;
+using Kreta.Models.DataModel;
+using Kreta.Models.Parameters;
+using Kreta.Models.Helpers;
 
 namespace ServiceKretaAPI.Services
 {

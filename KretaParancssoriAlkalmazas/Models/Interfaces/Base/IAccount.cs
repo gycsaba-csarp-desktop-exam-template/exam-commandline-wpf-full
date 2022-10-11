@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kreta.Models.Interfaces.Base
 {
-    public interface IAccount 
+    public interface IAccount : IEntityIdentify
     {
         public string LoginName { get; set; }
 

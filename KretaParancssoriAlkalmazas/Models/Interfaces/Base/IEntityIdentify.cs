@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KretaParancssoriAlkalmazas.Models.Interfaces.Base
+namespace Kreta.Models.Interfaces.Base
 {
-    public  class IEntityIdentify
+    public  interface IEntityIdentify
     {
         public long Id { get; set; }
     }

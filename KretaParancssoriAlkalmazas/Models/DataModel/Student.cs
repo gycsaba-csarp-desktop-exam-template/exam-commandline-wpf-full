@@ -1,192 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Kreta.Models.Interfaces.Base;
 
-using Kreta.Models.Interfaces;
-using Kreta.Models.Interfaces.Base;
-
-namespace KretaParancssoriAlkalmazas.Models.DataModel
+namespace Kreta.Models.DataModel
 {
-    public class Student : IBaseModel, IStudent
+    public class Student : Person
     {
-        public int StudentId { get; set; }
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public bool Wooman { get; set; }
-        public DateTime DataOfBirth { get; set; }
-        public string City { get; set; }
-        public string StreetAndNumber { get; set; }
-        public int PostCode { get; set; }
-        public string LoginName { get; set; }
-        public string Password { get; set; }
-        public long SchoolClassId { get; set; }
+        public IAccount? Account { get; }
+        public IAddress? Address { get; set; }
 
-
-        public Student()
+        public Student(long id, string firstName, string lastName, bool woman, DateTime dateOfBirth, IAddress address, IAccount account)
+            : base(id, firstName, lastName, woman, dateOfBirth)
         {
-            Id = -1;
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            Wooman = false;
-            DataOfBirth = DateTime.MinValue;
-            City = string.Empty;
-            StreetAndNumber = string.Empty;
-            PostCode = -1;
-            LoginName = string.Empty;
-            Password = string.Empty;
-            SchoolClassId = -1;
+            Account = account;
+            Address = address;
         }
 
-        public Student(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth)
+        public Student() : base()
         {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Wooman = wooman;
-            DataOfBirth = dataOfBirth;
-            City = string.Empty;
-            StreetAndNumber = string.Empty;
-            PostCode = -1;
-            LoginName = string.Empty;
-            Password = string.Empty;
-            SchoolClassId = -1;
-        }
-
-        public Student(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth, int schoolClassId)
-        {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Wooman = wooman;
-            DataOfBirth = dataOfBirth;
-            City = string.Empty;
-            StreetAndNumber = string.Empty;
-            PostCode = -1;
-            LoginName = string.Empty;
-            Password = string.Empty;
-            SchoolClassId = schoolClassId;
-        }
-
-        public Student(int id, string firstName, string lastName, bool wooman, DateTime dataOfBirth, string city, string streetAndNumber, int postCode, string loginName, string password, int schoolClassId)
-        {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Wooman = wooman;
-            DataOfBirth = dataOfBirth;
-            City = city;
-            StreetAndNumber = streetAndNumber;
-            PostCode = postCode;
-            LoginName = loginName;
-            Password = password;
-            SchoolClassId = schoolClassId;
-        }
-
-        private IStudent GetInterfaceObject
-        {
-            get { return this; }
-        }
-
-        public string Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        long IBaseModel.Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public int CompareTo(object obj)
-        {
-            if (obj is Student)
-            {
-                IStudent otherIStudent = (Student)obj;
-                Student otherStudent = (Student)obj;
-                int fullNameCompareResult = GetInterfaceObject.FullName.CompareTo(otherIStudent.FullName);
-                if (fullNameCompareResult == 0)
-                {
-                    if (Id == otherStudent.Id)
-                    {
-                        return 0;
-                    }
-                    else if (Id < otherStudent.Id)
-                    {
-                        return -1;
-                    }
-                    else
-                    {
-                        return 1;
-                    }
-                }
-                else
-                {
-                    return fullNameCompareResult;
-                }
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is Student || obj is IStudent)
-            {
-                IStudent other = (Student)obj;
-                Student otherStudent = (Student)obj;
-                int fullNameCompareResult = GetInterfaceObject.FullName.CompareTo(other.FullName);
-                if (fullNameCompareResult != 0)
-                    return false;
-                else if (Id == otherStudent.Id && SchoolClassId == otherStudent.SchoolClassId)
-                    return true;
-                else
-                    return false;
-            }
-            else
-                return false;
-        }
-
-        public override string ToString()
-        {
-            return Id + ". " + GetInterfaceObject.FullName;
-        }
-
-        public bool IsLoginNameCorrect(string givenLoginName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsPasswordCorrect(string givenPassword)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool VerifyLoginName(string givenLoginName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool VerifyPassword(string givenPassword)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Set(object obj)
-        {
-            if (obj is Student)
-            {
-                Student s = (Student)obj;
-
-                Id = s.Id;
-                FirstName = s.FirstName;
-                LastName = s.LastName;
-                Wooman = s.Wooman;
-                DataOfBirth = s.DataOfBirth;
-                City = s.City;
-                StreetAndNumber = s.StreetAndNumber;
-                PostCode = s.PostCode;
-                LoginName = s.LoginName;
-                Password = s.Password;
-                SchoolClassId = s.SchoolClassId;
-            }
+            Account = null;
+            Address = null;
         }
     }
 }

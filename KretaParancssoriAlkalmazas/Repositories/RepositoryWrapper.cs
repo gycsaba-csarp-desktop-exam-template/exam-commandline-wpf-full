@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using Kreta.Repositories.Interfaces;
 using Kreta.Models.Context;
-using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.EFClass;
+using Kreta.Models.Helpers;
+using Kreta.Models.DataModel;
+using Kreta.Models.EFClass;
 
 namespace Kreta.Repositories
 {

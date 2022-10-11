@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Kreta.Repositories;
 using Kreta.Repositories.Interfaces;
-using KretaParancssoriAlkalmazas.Models.Helpers;
-using KretaParancssoriAlkalmazas.Models.DataModel;
-using KretaParancssoriAlkalmazas.Models.EFClass;
 using ServiceKretaLogger;
 using ServiceKreta;
-using KretaParancssoriAlkalmazas.Services;
 using KretaWebApi.ActionFilters;
+using Kreta.Models.EFClass;
+using Kreta.Models.Helpers;
+using Kreta.Services;
 
 
 /*

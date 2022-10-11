@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using KretaParancssoriAlkalmazas.Models.AbstractClass;
-using KretaParancssoriAlkalmazas.Models.DataModel;
+using Kreta.Models.AbstractClass;
+using Kreta.Models.DataModel;
 
-namespace KretaParancssoriAlkalmazas.Models.DataTranferObjects
+namespace Kreta.Models.DataTranferObjects
 {
     public class SubjectForCreationDto : SubjectBaseWithAttributes
     {

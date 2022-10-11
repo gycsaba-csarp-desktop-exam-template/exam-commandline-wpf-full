@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KretaParancssoriAlkalmazas.Models.AbstractClass;
-using KretaParancssoriAlkalmazas.Models.DataModel;
+using Kreta.Models.AbstractClass;
+using Kreta.Models.DataModel;
 
-namespace KretaParancssoriAlkalmazas.Models.EFClass
+namespace Kreta.Models.EFClass
 {
     [Table("schoolclass")]
     public class EFSchoolClass : SchoolClassBaseWithAttributes

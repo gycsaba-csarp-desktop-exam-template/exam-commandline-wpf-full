@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kreta.Models.Interfaces.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Kreta.Models.Interfaces
 {
-    interface ISchoolClass
+    interface ISchoolClass : IEntityIdentify
     {
-        public int Id { get ; set ; }
         public int CLass { get; set; }
         public char CLassType { get ; set ; }
         public int TeacherId { get; set ; }

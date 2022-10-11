@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using KretaParancssoriAlkalmazas.Models.DataModel;
+using Kreta.Models.DataModel;
 
-namespace KretaParancssoriAlkalmazas.Models.AbstractClass
+namespace Kreta.Models.AbstractClass
 {
     public abstract class SchoolClassBaseWithAttributes : SchoolClassBase
     {

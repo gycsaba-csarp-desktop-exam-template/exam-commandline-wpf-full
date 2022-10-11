@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using KretaParancssoriAlkalmazas.Models.DataModel;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
-using KretaParancssoriAlkalmazas.Models.EFClass;
 using AutoMapper;
+using Kreta.Models.EFClass;
+using Kreta.Models.DataModel;
 
 namespace KretaRazorPages.Pages.Menu.SubjectMenu
 {
