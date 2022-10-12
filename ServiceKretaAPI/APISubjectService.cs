@@ -28,12 +28,18 @@ namespace ServiceKretaAPI.Services
                 StringBuilder query = new StringBuilder("/Subject/api/subject");
                 query.Append(queryStringParameter.ToQueryString);
 
-                var respons = await client.GetAsync(query.ToString());
+                try
+                {
+                    var respons = await client.GetAsync(query.ToString());
+                    var content = respons.Content.ReadAsStringAsync();
 
-                var content = respons.Content.ReadAsStringAsync();
-
-                return JsonConvert.DeserializeObject<List<Subject>>(content.Result);
-
+                    return JsonConvert.DeserializeObject<List<Subject>>(content.Result);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new APISubjectException(ex.Message);
+                }
             }
         }
 
@@ -51,32 +57,40 @@ namespace ServiceKretaAPI.Services
 
                 StringBuilder query = new StringBuilder("/Subject/api/subject");
                 query.Append(queryStringParameter.ToQueryString);
-                
-                var respons = await client.GetAsync(query.ToString());
 
-                var content = respons.Content.ReadAsStringAsync();
-
-                List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(content.Result);
-
-                pagedSubjectList.Clear();
-                ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
-                if (subjects != null)
+                try
                 {
-                    pagedSubjectList.AddRange(subjects);
-                    //TODO - a peged listbe benne vannak a paraméterek, a controller ezeket is adhatja...
-                    pagedSubjectList.QueryString.NumberOfPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
-                    pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
-                    pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
-                    pagedSubjectList.QueryString.NumberOfItem = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfItem");
+                    var respons = await client.GetAsync(query.ToString());
+                    var content = respons.Content.ReadAsStringAsync();
+
+
+                    List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(content.Result);
+
+                    pagedSubjectList.Clear();
+                    ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
+                    if (subjects != null)
+                    {
+                        pagedSubjectList.AddRange(subjects);
+                        //TODO - a peged listbe benne vannak a paraméterek, a controller ezeket is adhatja...
+                        pagedSubjectList.QueryString.NumberOfPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfPage");
+                        pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
+                        pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
+                        pagedSubjectList.QueryString.NumberOfItem = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "NumberOfItem");
+                    }
+                    else
+                    {
+                        pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
+                        pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
+                        pagedSubjectList.QueryString.NumberOfItem = 0;
+                        pagedSubjectList.QueryString.NumberOfPage = 0;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    pagedSubjectList.QueryString.CurrentPage = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "CurrentPage");
-                    pagedSubjectList.QueryString.PageSize = apiHeaderHandler.GetHeaderParameter(respons, "X-Pagination", "PageSize");
-                    pagedSubjectList.QueryString.NumberOfItem = 0;
-                    pagedSubjectList.QueryString.NumberOfPage = 0;
+                    Console.WriteLine(ex.Message);
+                    throw new APISubjectException(ex.Message);
                 }
-            }
+            }        
             return pagedSubjectList;
         }
 
@@ -87,14 +101,18 @@ namespace ServiceKretaAPI.Services
             {
                 client.BaseAddress = GetHttpClientUri();
 
-                var respons = await client.GetAsync("Subject/api/subject/" + id.ToString());
+                try
+                {
+                    var respons = await client.GetAsync("Subject/api/subject/" + id.ToString());
+                    var content = respons.Content.ReadAsStringAsync();
 
-                var content = respons.Content.ReadAsStringAsync();
-
-#pragma warning disable CS8603 // Possible null reference return.
-                return JsonConvert.DeserializeObject<Subject>(content.Result);
-#pragma warning restore CS8603 // Possible null reference return.
-
+                    return JsonConvert.DeserializeObject<Subject>(content.Result);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new APISubjectException(ex.Message);
+                }
             }
         }
 
@@ -103,13 +121,17 @@ namespace ServiceKretaAPI.Services
             using (var client=new HttpClient())
             {
                 client.BaseAddress = GetHttpClientUri();
-
-                var respons = await client.GetAsync("Subject/api/subject/" + subject.Id.ToString());
-
-                if (respons.StatusCode == HttpStatusCode.OK)
-                    return true;
-                else
-                    return false;
+                try
+                {
+                    var respons = await client.GetAsync("Subject/api/subject/" + subject.Id.ToString());
+                    if (respons.StatusCode == HttpStatusCode.OK)
+                        return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new APISubjectException(ex.Message);
+                }
             }
             return false;
         }
@@ -120,17 +142,34 @@ namespace ServiceKretaAPI.Services
             {
                 client.BaseAddress = GetHttpClientUri();
 
-                var result = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
+                try
+                {
+                    var result = await client.GetAsync("/Subject/api/subject?orderBy=subjectName");
 
-                ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
-                int id = apiHeaderHandler.GetHeaderParameter(result, "X-NextId","NextId");
-                return id;
+                    ApiHeaderHandler apiHeaderHandler = new ApiHeaderHandler();
+                    int id = apiHeaderHandler.GetHeaderParameter(result, "X-NextId", "NextId");
+                    return id;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new APISubjectException(ex.Message);
+                }
             }
         }
 
         public async Task<HttpStatusCode> Save(Subject subject)
         {
-            bool isExsist = await IsSubjectExsist(subject);
+            bool isExsist;
+            try
+            {
+                isExsist = await IsSubjectExsist(subject);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new APISubjectException(ex.Message);
+            }
             if (isExsist)
                 return await UpdateSubjectAsync(subject.Id, subject);
             else
@@ -148,16 +187,24 @@ namespace ServiceKretaAPI.Services
                 //SubjectForCreationDto subjectForCreation = new SubjectForCreationDto();  // clone
                 //subjectForCreation.Clone(subject);
 
-                String jsonString = JsonConvert.SerializeObject(subject);
-                StringContent httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+                try
+                {
+                    String jsonString = JsonConvert.SerializeObject(subject);
+                    StringContent httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync("/Subject/api/subject", httpContent);
+                    var response = await httpClient.PostAsync("/Subject/api/subject", httpContent);
 
-                //string error = "" + response.Content + " : " + response.StatusCode;
-                if (response.StatusCode == HttpStatusCode.NoContent)
-                    return HttpStatusCode.OK;
-                else
-                    return HttpStatusCode.InternalServerError;
+                    //string error = "" + response.Content + " : " + response.StatusCode;
+                    if (response.StatusCode == HttpStatusCode.NoContent)
+                        return HttpStatusCode.OK;
+                    else
+                        return HttpStatusCode.InternalServerError;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new APISubjectException(ex.Message);
+                }
             }
         }
 
@@ -169,9 +216,16 @@ namespace ServiceKretaAPI.Services
                 String jsonString = JsonConvert.SerializeObject(subject);
                 StringContent httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PutAsync("Subject/api/subject/" + id.ToString(), httpContent);
-
-                return response.StatusCode;
+                try
+                {
+                    var response = await httpClient.PutAsync("Subject/api/subject/" + id.ToString(), httpContent);
+                    return response.StatusCode;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new APISubjectException(ex.Message);
+                }
             }
         }
 
@@ -181,9 +235,17 @@ namespace ServiceKretaAPI.Services
             {
                 httpClient.BaseAddress = GetHttpClientUri();
 
-                var response = await httpClient.DeleteAsync("Subject/api/subject/" + id.ToString());
+                try
+                {
+                    var response = await httpClient.DeleteAsync("Subject/api/subject/" + id.ToString());
 
-                return response.StatusCode;
+                    return response.StatusCode;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new APISubjectException(ex.Message);
+                }
             }
         }
 
