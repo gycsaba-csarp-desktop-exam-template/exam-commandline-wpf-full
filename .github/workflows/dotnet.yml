@@ -24,7 +24,7 @@ on:
     branches: [ "production-desktop" ]
 
 env:
- PROJECT_PATH: Desktop/src/Vizsgaremek/Vizsgaremek.csproj
+ PROJECT_PATH: KretaDesktop/KretaDesktop.csproj
 
 jobs:
  deploy:
