@@ -17,10 +17,8 @@ name:  Wpf Continuous Delivery
 #   git push origin --tags
 on:
   push:
-    #tags:
-    #  - '*'
-    branches: [ "production-desktop" ]
-  pull_request:
+    tags:
+      - 'd*'
     branches: [ "production-desktop" ]
 
 env:
