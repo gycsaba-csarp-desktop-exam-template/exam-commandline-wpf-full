@@ -41,7 +41,7 @@ jobs:
     - run: dotnet build  ${{ env.PROJECT_PATH }} -c Release  --no-restore -p:PublishSingleFile=true
   
     - run: |
-           dir
+           #dir
 
 
     - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release  -r win-x64 --self-contained false /p:DebugType=None /p:DebugSymbols=false  -p:PublishSingleFile=true --no-build --output ./publish
@@ -54,9 +54,9 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
     - run: |
-           dir
-           cd publish
-           dir
+           #dir
+           #cd publish
+           #dir
     - uses: csexton/release-asset-action@v2
       with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
