@@ -12,7 +12,12 @@
     <Company>Vasvári</Company>
     <Product />
     <Description>Vizsgaremek</Description>
-    <Copyright></Copyright>
+    <Copyright></Copyright>    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
