@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="{DynamicResource ContentBackgraoundColor}">
-        <Label FontSize="32" Margin="2 32 2 8" HorizontalAlignment="Center" Foreground="{DynamicResource ContentForegroundColor}">
-            </Label>
+        <Label FontSize="32" Margin="8 232 2 8" HorizontalAlignment="Center" Foreground="{DynamicResource ContentForegroundColor}">
+            K R É T A - iskolai adminisztrációs program
+        </Label>
     </Grid>
 </UserControl>

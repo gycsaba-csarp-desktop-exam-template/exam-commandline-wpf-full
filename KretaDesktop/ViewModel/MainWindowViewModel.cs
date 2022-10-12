@@ -12,7 +12,6 @@ namespace KretaDesktop.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private MainWindow mainWindow;
-
         private ViewModelBase selectedView;
 
         public ViewModelBase SelectedView
@@ -31,7 +30,7 @@ namespace KretaDesktop.ViewModel
         {
             this.mainWindow = mainWindow;
             UpdateViewCommand = new RelayCommand((parameter) => UpdateView(parameter));
-            selectedView = new HeaderListViewModel();            
+            selectedView = new HeaderAppNameViewModel();            
         }
 
         public void UpdateView(object parameter)

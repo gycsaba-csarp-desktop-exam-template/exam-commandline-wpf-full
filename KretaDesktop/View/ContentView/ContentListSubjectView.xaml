@@ -26,6 +26,9 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock FontSize="24" HorizontalAlignment="Left"
                Foreground="{DynamicResource ContentForegroundColor}"
@@ -181,5 +184,8 @@
             <Button x:Name="btNextPage" Style="{DynamicResource ContentButton}" Command="{Binding NextPageCommand}" Content=">" Grid.Column="3" />
             <Button x:Name="btLastPage" Style="{DynamicResource ContentButton}" Command="{Binding LastPageCommand}" Content=">>" Grid.Column="4" />
         </Grid>
+        <StackPanel Grid.Row="8" Orientation="Horizontal" Background="{DynamicResource NavigationBackgroundColor}">
+            <Label Margin="8 0 0 8" Content="{Binding ContentInfo}" Foreground="{DynamicResource ContentLabelErrorForeground}"></Label>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -6,6 +6,8 @@
     <SolidColorBrush x:Key="ContentTextBoxBackground" Color="#0D2644"></SolidColorBrush>
     <SolidColorBrush x:Key="ContentTextBoxForgraound" Color="White"></SolidColorBrush>
 
+    <SolidColorBrush x:Key="ContentLabelErrorForeground" Color="Red"></SolidColorBrush>
+
     <SolidColorBrush x:Key="HeaderBackgroundColor" Color="#ff003f5c"></SolidColorBrush>
     <SolidColorBrush x:Key="ExpanderBackgroundColor" Color="#ff003f5c"></SolidColorBrush>
     <SolidColorBrush x:Key="NavigationBackgroundColor" Color="#ff003f5c"></SolidColorBrush>

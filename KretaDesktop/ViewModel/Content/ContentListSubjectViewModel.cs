@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.Pkcs;
 
 namespace KretaDesktop.ViewModel.Content
 {
@@ -59,19 +60,34 @@ namespace KretaDesktop.ViewModel.Content
                 OnPropertyChanged(nameof(SelectedSubject));
                 if (selectedSubject != null)
                 {
-                    displayedSubject = (Subject)selectedSubject.Clone();
+                    // https://levelup.gitconnected.com/5-ways-to-clone-an-object-in-c-d1374ec28efa
+                    displayedSubject = (Subject) selectedSubject.Clone();
                     OnPropertyChanged(nameof(DisplayedSubject));
                 }
             }
         }
 
-        // https://levelup.gitconnected.com/5-ways-to-clone-an-object-in-c-d1374ec28efa
         private Subject displayedSubject;
 
         public Subject DisplayedSubject
         {
             get { return displayedSubject; }
             set { displayedSubject = value; }
+        }
+
+        public string contentInfo;
+
+        public string ContentInfo
+        {
+            get
+            {
+                return contentInfo;
+            }
+            set
+            {
+                contentInfo = value;
+                OnPropertyChanged(nameof(ContentInfo));
+            }
         }
 
 
@@ -96,6 +112,8 @@ namespace KretaDesktop.ViewModel.Content
 
             waitingForNewData = false;
             OnPropertyChanged(nameof(WaitingForNewData));
+
+            SetInfoText("Iskolai tantárgyak kezelése.");
         }
 
         async public override void LoadData()
@@ -209,6 +227,11 @@ namespace KretaDesktop.ViewModel.Content
             OnPropertyChanged(nameof(SelectedItemIndex));
             selectedSubject = subjectToSelect;
             OnPropertyChanged(nameof(SelectedSubject));
+        }
+
+        private void SetInfoText(string info)
+        {
+            ContentInfo = info;
         }
     }
 }

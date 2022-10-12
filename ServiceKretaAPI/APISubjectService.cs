@@ -31,9 +31,9 @@ namespace ServiceKretaAPI.Services
                 var respons = await client.GetAsync(query.ToString());
 
                 var content = respons.Content.ReadAsStringAsync();
-#pragma warning disable CS8603 // Possible null reference return.
+
                 return JsonConvert.DeserializeObject<List<Subject>>(content.Result);
-#pragma warning restore CS8603 // Possible null reference return.
+
             }
         }
 
