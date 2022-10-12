@@ -1,5 +1,6 @@
 ﻿using Kreta.Models.DataModel;
 using Kreta.Models.Helpers;
+using KretaDesktop.Localization;
 using KretaDesktop.ViewModel.BaseClass;
 using ServiceKretaAPI.Services;
 using System.Collections.Generic;
@@ -113,7 +114,9 @@ namespace KretaDesktop.ViewModel.Content
             waitingForNewData = false;
             OnPropertyChanged(nameof(WaitingForNewData));
 
-            SetInfoText("Iskolai tantárgyak kezelése.");
+            ProjectLocalization projectLocalization = new ProjectLocalization();
+
+            SetInfoText(projectLocalization.GetStringResource("infoSubjectTable"));
         }
 
         async public override void LoadData()
