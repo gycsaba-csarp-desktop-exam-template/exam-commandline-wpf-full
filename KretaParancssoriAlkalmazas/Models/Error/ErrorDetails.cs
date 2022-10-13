@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace KretaWebApi.ExceptionHandler
+namespace Kreta.ExceptionHandler
 {
     public class ErrorDetails
     {

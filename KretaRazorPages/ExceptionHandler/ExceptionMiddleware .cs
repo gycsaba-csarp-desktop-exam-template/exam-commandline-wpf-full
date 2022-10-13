@@ -1,20 +1,15 @@
 ﻿using Kreta.ExceptionHandler;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 using ServiceKretaLogger;
+using System.Diagnostics;
 using System.Net;
 
-namespace KretaWebApi.ExceptionHandler
+namespace KretaRazorPages.ExceptionHandler
 {
-    // https://code-maze.com/global-error-handling-aspnetcore/
-    // https://www.puresourcecode.com/dotnet/net6/handling-exceptions-globally-with-net6/
-
-    public class ExceptionMiddleware
+    public class ExceptionMiddleware : IMiddleware
     {
         private readonly RequestDelegate next;
         private readonly ILoggerManager logger;
-        private readonly bool isDev;
 
         public ExceptionMiddleware(RequestDelegate next, ILoggerManager logger)
         {
@@ -22,23 +17,30 @@ namespace KretaWebApi.ExceptionHandler
             this.logger = logger;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
+            var sw = new Stopwatch();
+            sw.Start();
             try
             {
-                await next(httpContext);
+                await next(context);
             }
             catch (Exception ex)
             {
                 logger.LogError($"Valami hiba történt: {ex}");
-                await HandleExceptionAsync(httpContext, ex);
+                //HandleExceptionAsync(context, ex);
+            }
+            var isHtml = context.Response.ContentType?.ToLower().Contains("text/html");
+            if (context.Response.StatusCode == 200 && isHtml.GetValueOrDefault())
+            {
+                logger.LogInfo($"{context.Request.Path} executed in {sw.ElapsedMilliseconds}ms");
             }
         }
 
-        private async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
+        /*private void HandleExceptionAsync(HttpContext httpContext, Exception exception)
         {
-            httpContext.Response.ContentType = "application/json";
-            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+           httpContext.Response.ContentType = "application/json";
+            httpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
 
             var message = exception switch
             {
@@ -54,6 +56,6 @@ namespace KretaWebApi.ExceptionHandler
                     Message = message,
                 }.ToString()
            );
-        }        
+        }*/
     }
 }

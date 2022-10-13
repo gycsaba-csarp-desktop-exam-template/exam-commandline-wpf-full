@@ -8,7 +8,7 @@ namespace KretaRazorPages.ViewComponents
 {
     public class SubjectsViewComponent : ViewComponent
     {
-        private PagedList<Subject> subjectListWithPaginationData;
+        //private PagedList<Subject> subjectListWithPaginationData;
 
         public SubjectsViewComponent()
         {
@@ -17,12 +17,19 @@ namespace KretaRazorPages.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             IAPISubjectService subjectService = new APISubjectService();
-            var pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(null);
-            // TODO: ide rakjak-e vizsgálatot 
-            if (pagedSubjectList == null)
+            try
+            {
+                var pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(null);
+
+                if (pagedSubjectList == null)
+                    return View(new List<Subject>());
+                else
+                    return View((List<Subject>)pagedSubjectList);
+            }
+            catch (Exception e)
+            {
                 return View(new List<Subject>());
-            else
-                return View((List<Subject>) pagedSubjectList);
+            }
         }
     }
 }

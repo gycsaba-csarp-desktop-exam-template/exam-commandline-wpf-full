@@ -3,6 +3,7 @@
 // Tesztek és fejlesztés
 
 using ApplicationPropertiesSettings;
+using KretaRazorPages.ExceptionHandler;
 using KretaRazorPages.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,14 +22,12 @@ builder.Services.ConfigureLoggerService();
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(Program));
 
-//builder.Services.ConfigureComponentsService();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+   app.UseExceptionHandler("/Error");
 }
 app.UseStaticFiles();
 
@@ -48,5 +47,10 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.UseStatusCodePagesWithRedirects("/errors/{0}");
+
+// hibakezelés
+//app.ConfigureCustomExceptionMiddleware();
 
 app.Run();

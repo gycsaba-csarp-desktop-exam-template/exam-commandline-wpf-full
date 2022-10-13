@@ -1,4 +1,5 @@
 ﻿using ApplicationPropertiesSettings;
+using KretaRazorPages.ExceptionHandler;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using ServiceKretaLogger;
@@ -38,6 +39,12 @@ namespace KretaRazorPages.Extensions
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        // Hibakezelés
+        public static void ConfigureCustomExceptionMiddleware(this IServiceCollection services )
+        {
+            services.AddScoped<IMiddleware,ExceptionMiddleware>();
         }
 
         public static void ConfigureComponentsService(this IServiceCollection services)
