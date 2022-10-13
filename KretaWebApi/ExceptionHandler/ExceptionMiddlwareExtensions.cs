@@ -14,7 +14,7 @@ namespace KretaWebApi.ExceptionHandler
             app.UseMiddleware<ExceptionMiddleware>();
         }
 
-        public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILoggerManager logger, bool isDev)
+        /*public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILoggerManager logger, bool isDev)
         {
             app.UseExceptionHandler(appError =>
             {
@@ -40,6 +40,6 @@ namespace KretaWebApi.ExceptionHandler
                     }
                 });
             });
-        }
+        }*/
     }
 }
