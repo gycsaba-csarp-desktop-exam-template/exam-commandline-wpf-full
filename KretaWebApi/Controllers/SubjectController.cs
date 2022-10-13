@@ -42,6 +42,9 @@ namespace KretaWebApi.Controllers
     // https://referbruv.com/blog/dockerizing-a-simple-aspnet-core-application-for-release-build/
     // https://www.codeguru.com/dotnet/asp-net-docker/
 
+    // https://mydbops.wordpress.com/2020/09/13/getting-started-with-dockerizing-mysql/
+    // https://github.com/TonicAI/docker-testdb/tree/main/mysql
+
     //TODO: NoDatabase    
 
     // ToDo Best practice, secure
