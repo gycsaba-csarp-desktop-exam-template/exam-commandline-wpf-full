@@ -26,6 +26,8 @@ namespace KretaDesktop
             ProjectLocalization projectLocalization=new ProjectLocalization();
             projectLocalization.SwitchToCurrentCuture();
 
+            // https://www.thecodebuzz.com/nlog-file-logging-wpf-application-net/
+
             /* var window = new MainWindow() { DataContext = new MainWindowViewModel()};
             window.Show();*/
         }

@@ -53,4 +53,7 @@
 
     <system:String x:Key="contentSorting">Sorting:</system:String>
 
+    <!-- info -->
+    <system:String x:Key="infoSubjectTable">School subject management.</system:String>
+
 </ResourceDictionary>

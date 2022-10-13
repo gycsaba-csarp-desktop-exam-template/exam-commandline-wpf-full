@@ -1,11 +1,14 @@
 ﻿using Kreta.Models.DataModel;
 using Kreta.Models.Helpers;
+using KretaDesktop.Localization;
 using KretaDesktop.ViewModel.BaseClass;
+using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.Pkcs;
 
 namespace KretaDesktop.ViewModel.Content
 {
@@ -59,19 +62,34 @@ namespace KretaDesktop.ViewModel.Content
                 OnPropertyChanged(nameof(SelectedSubject));
                 if (selectedSubject != null)
                 {
-                    displayedSubject = (Subject)selectedSubject.Clone();
+                    // https://levelup.gitconnected.com/5-ways-to-clone-an-object-in-c-d1374ec28efa
+                    displayedSubject = (Subject) selectedSubject.Clone();
                     OnPropertyChanged(nameof(DisplayedSubject));
                 }
             }
         }
 
-        // https://levelup.gitconnected.com/5-ways-to-clone-an-object-in-c-d1374ec28efa
         private Subject displayedSubject;
 
         public Subject DisplayedSubject
         {
             get { return displayedSubject; }
             set { displayedSubject = value; }
+        }
+
+        public string contentInfo;
+
+        public string ContentInfo
+        {
+            get
+            {
+                return contentInfo;
+            }
+            set
+            {
+                contentInfo = value;
+                OnPropertyChanged(nameof(ContentInfo));
+            }
         }
 
 
@@ -96,20 +114,31 @@ namespace KretaDesktop.ViewModel.Content
 
             waitingForNewData = false;
             OnPropertyChanged(nameof(WaitingForNewData));
+
+            ProjectLocalization projectLocalization = new ProjectLocalization();
+
+            SetInfoText(projectLocalization.GetStringResource("infoSubjectTable"));
         }
 
         async public override void LoadData()
         {
             if (subjectService != null)
             {
-                PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters());
-                SaveParameter(pagedSubjectList);
-                if (pagedSubjectList != null)
+                try
                 {
-                    subjects = new ObservableCollection<Subject>(pagedSubjectList);
+                    PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters());
+                    SaveParameter(pagedSubjectList);
+                    if (pagedSubjectList != null)
+                    {
+                        subjects = new ObservableCollection<Subject>(pagedSubjectList);
+                    }
+                    else
+                        subjects = new ObservableCollection<Subject>();
                 }
-                else
-                    subjects = new ObservableCollection<Subject>();
+                catch(APISubjectException exceptin)
+                {
+                    SetInfoText(exceptin.Message);
+                }
             }
             OnPropertyChanged(nameof(Subjects));          
             SelectRow(displayedSubject);            
@@ -120,9 +149,17 @@ namespace KretaDesktop.ViewModel.Content
             if (entity is Subject)
             {
                 Subject subjectToDelete = (Subject)entity;
-                if (subjectService != null)
-                    await subjectService.DeleteSubjectAsync(subjectToDelete.Id);
-                LoadData();
+                try
+                {
+                    if (subjectService != null)
+                        await subjectService.DeleteSubjectAsync(subjectToDelete.Id);
+                }
+
+                catch (APISubjectException exceptin)
+                {
+                    SetInfoText(exceptin.Message);
+                    LoadData();
+                }
             }
         }
 
@@ -130,9 +167,18 @@ namespace KretaDesktop.ViewModel.Content
         {
             if (subjectService != null)
             {
+                long newId=-1;
                 if (DisplayedSubject != null)
                 {
-                    long newId = await subjectService.GetNextSubjectIdAsync();
+                    try
+                    {
+                        newId = await subjectService.GetNextSubjectIdAsync();
+                    }
+
+                    catch (APISubjectException exceptin)
+                    {
+                        SetInfoText(exceptin.Message);
+                    }
                     displayedSubject.Id = newId;
                     displayedSubject.SubjectName = string.Empty;
                     OnPropertyChanged(nameof(DisplayedSubject));
@@ -153,8 +199,16 @@ namespace KretaDesktop.ViewModel.Content
         {
             if (entity is Subject)
             {
+                HttpStatusCode statusCode=HttpStatusCode.OK;
                 Subject subjectToSave = (Subject)entity;
-                HttpStatusCode statusCode = await subjectService.Save(subjectToSave);
+                try
+                {
+                    statusCode = await subjectService.Save(subjectToSave);
+                }
+                catch (APISubjectException exceptin)
+                {
+                    SetInfoText(exceptin.Message);
+                }
                 if (statusCode == HttpStatusCode.OK)
                 {
                     LoadData();                    
@@ -209,6 +263,11 @@ namespace KretaDesktop.ViewModel.Content
             OnPropertyChanged(nameof(SelectedItemIndex));
             selectedSubject = subjectToSelect;
             OnPropertyChanged(nameof(SelectedSubject));
+        }
+
+        private void SetInfoText(string info)
+        {
+            ContentInfo = info;
         }
     }
 }
