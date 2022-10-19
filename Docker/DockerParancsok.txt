@@ -1,5 +1,13 @@
- sudo docker  build --rm -t kretawebapi  .
+[razor]
+sudo docker  build --rm -t kretawebapi  .
+sudo docker image ls | grep kretawebapi
+sudo docker run --rm -p kretawebapi
 
- sudo docker image ls | grep kretawebapi
-
-  sudo docker run --rm -p kretawebapi
+[mysql]
+sudo docker build --rm -t kretamysql .
+docker images
+sudo docker run -it kretamysql bash
+sudo docker compose up -d
+sudo docker exec -it testdb_mysql bash
+sudo docker logs testdb_mysql
+docker run -d -p 3306:3306 --name container-db  image-db:latest
