@@ -1,1 +1,1 @@
-docker build -f Dockerfile -t testdb_mysql .;
+docker build -f Dockerfile -t kretamysql .;
