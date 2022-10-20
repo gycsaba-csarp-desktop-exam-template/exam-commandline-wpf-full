@@ -1,73 +1,82 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Linux (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.9.5
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: test_data
--- ------------------------------------------------------
--- Server version	8.0.22
+-- Gép: localhost:3306
+-- Létrehozás ideje: 2022. Okt 20. 02:40
+-- Kiszolgáló verziója: 10.3.28-MariaDB-cll-lve
+-- PHP verzió: 7.2.34
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+02:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Current Database: `test_data`
+-- Adatbázis: `kreta`
 --
+CREATE DATABASE IF NOT EXISTS `kreta` DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+USE `kreta`;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `test_data` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `test_data`;
-
---
--- Table structure for table `plants`
---
-
-DROP TABLE IF EXISTS `plants`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `plants` (
-  `id` int NOT NULL,
-  `user_id` int DEFAULT NULL,
-  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `birth_date` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `plants_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tábla szerkezet ehhez a táblához `schoolclass`
+--
+CREATE TABLE `schoolclass` (
+  `id` int(11) NOT NULL,
+  `schoolYear` int(11) NOT NULL,
+  `classType` varchar(1) COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `teacherId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `subject`
 --
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `id` int NOT NULL,
-  `first_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `last_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `gender` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `ip_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+CREATE TABLE `subject` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- A tábla indexei `schoolclass`
+--
+ALTER TABLE `schoolclass`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `SubjectName` (`name`);
+
+--
+-- A kiírt táblák AUTO_INCREMENT értéke
+--
+
+--
+-- AUTO_INCREMENT a táblához `schoolclass`
+--
+ALTER TABLE `schoolclass`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT a táblához `subject`
+--
+ALTER TABLE `subject`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2020-11-18 23:25:45
-
-GRANT ALL ON test_data.* TO 'user';

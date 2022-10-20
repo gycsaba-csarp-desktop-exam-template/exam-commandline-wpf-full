@@ -4,10 +4,38 @@ sudo docker image ls | grep kretawebapi
 sudo docker run --rm -p kretawebapi
 
 [mysql]
-sudo docker build --rm -t kretamysql .
+sudo docker build --rm -t testdb_mysql .
+
+
+[kretamysql]
+https://www.baeldung.com/docker-cant-connect-local-mysql
+sudo docker build --rm -t kretamysql 
+sudo docker compose up -d
 docker images
 sudo docker run -it kretamysql bash
-sudo docker compose up -d
-sudo docker exec -it testdb_mysql bash
-sudo docker logs testdb_mysql
+sudo docker logs kretamysql
+sudo docker inspect kretamysql
 docker run -d -p 3306:3306 --name container-db  image-db:latest
+sudo docker run -d -p 3306:3306 kretamysql
+
+sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kretamysql
+mysql -h 172.24.0.2 -P 3306 --protocol=tcp -u root -p
+
+
+[Docker-compose]
+sudo docker-compose up -d
+
+[Container]
+https://towardsdatascience.com/connect-to-mysql-running-in-docker-container-from-a-local-machine-6d996c574e55
+sudo docker container ls
+sudo docker exec -it ckretamysql bash
+
+
+Delete
+https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes
+ sudo docker stop $(sudo docker ps -aq)
+ sudo docker image rm $(docker images -a -q)
+ sudo docker rm $(docker ps -a -q)
+ sudo docker image prune -a
+ sudo docker system prune -a
+ sudo docker system prune
