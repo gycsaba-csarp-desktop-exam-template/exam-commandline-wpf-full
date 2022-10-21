@@ -23,13 +23,28 @@ mysql -h 172.24.0.2 -P 3306 --protocol=tcp -u root -p
 
 
 [Docker-compose]
-sudo docker-compose up -d
+docker-compose up --build
+sudo docker compose up -d
+sudo docker compose ps
+sudo 
+sudo docker compose pause
+sudo docker compose unpause
+sudo docker compose stop
+sudo docker compose down
+sudo docker exec -it kreta-kretamysql-1 bash
+
+sudo docker compose logs
+sudo docker-compose restart kreta-kretamysql-1
+
+sudo docker compose up -d
+sudo docker compose up -d --build kretamysql
+
 
 [Container]
 https://towardsdatascience.com/connect-to-mysql-running-in-docker-container-from-a-local-machine-6d996c574e55
 sudo docker container ls
-sudo docker exec -it ckretamysql bash
-
+sudo docker exec -it kretamysql bash
+sudo docker exec -it kreta-kretamysql-1 bash
 
 Delete
 https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes

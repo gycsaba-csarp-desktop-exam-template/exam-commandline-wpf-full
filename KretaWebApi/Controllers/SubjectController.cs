@@ -44,6 +44,8 @@ namespace KretaWebApi.Controllers
 
     // https://mydbops.wordpress.com/2020/09/13/getting-started-with-dockerizing-mysql/
     // https://github.com/TonicAI/docker-testdb/tree/main/mysql
+    // https://code-maze.com/mysql-aspnetcore-docker-compose/
+    // https://github.com/binduchinnasamy/aspnetcore-mysql-docker
 
     //TODO: NoDatabase    
 

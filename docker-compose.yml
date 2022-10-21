@@ -1,0 +1,68 @@
+﻿# Use root/example as user/password credentials
+
+version: '3.8'
+
+services:
+    kretamysql:
+#        image: mysql:8
+        container_name: kretamysql
+        build: 
+            context: . 
+            dockerfile: ./KretaWebApi/Mysql/Dockerfile  
+        restart: always
+# https://stackoverflow.com/questions/30063907/docker-compose-how-to-execute-multiple-commands
+        command: --default-authentication-plugin=mysql_native_password --local-infile --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+            
+        environment:
+            MYSQL_ROOT_PASSWORD: kreta
+            #MYSQL_DATABASE: "kreta"
+            MYSQL_USER: kretamysql
+            MYSQL_PASSWORD: kreta
+            LANG: C.UTF-8 # sets the encoding in the init.db scripts which are otherwise assumed to be ascii
+        ports:
+            - 3306:3306        
+        volumes:
+            - /tmp:/tmp
+#          - container-volumes:/var/lib/mysql
+# https://onexlab-io.medium.com/docker-compose-mysql-entry-point-fa6335346791
+#            - ./KretaWebApi/Mysql/sql:/docker-entrypoint-initdb.d
+#            - "./DevOps/Docker/db/script.sh:/docker-entrypoint-initdb.d/script.sh"
+
+    kretawebapi:
+        depends_on:
+            - kretamysql
+        image: kretawebapi
+        container_name: kretawebapi
+        build:
+          context: .
+          dockerfile: ./KretaWebApi/Dockerfile
+        links:
+            - kretamysql
+        ports:
+            - 5000:5000
+        environment:
+            MYSQL_ROOT_PASSWORD: kreta
+
+#    adminer:
+#        image: adminer
+#        restart: always
+#        ports: 
+#            - 8080:8080   
+
+
+# https://stackoverflow.com/questions/59838692/mysql-root-password-is-set-but-getting-access-denied-for-user-rootlocalhost
+#     kretamysql:
+#         build:
+#             context: .
+#             dockerfile: ./KretaWebApi/Mysql/Dockerfile               
+#         image: kretamysql
+#         environment:
+#             MYSQL_ROOT_PASSWORD: kreta
+#             MYSQL_DATABASE: "kreta"
+#             MYSQL_USER: kretamysql
+#             MYSQL_PASSWORD: kreta
+#             LANG: C.UTF-8 # sets the encoding in the init.db scripts which are otherwise assumed to be ascii
+#         ports:
+#             - "3306:3306"
+
+    

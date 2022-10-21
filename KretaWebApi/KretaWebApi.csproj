@@ -37,6 +37,10 @@
     <ProjectReference Include="..\ServiceKreta\ServiceKreta.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mysql\" />
+  </ItemGroup>
+
   <Target Name="CreateLogsFolder" AfterTargets="Publish">
 		<MakeDir Directories="$(PublishDir)logs" Condition="!Exists('$(PublishDir)logs')" />
    </Target>
