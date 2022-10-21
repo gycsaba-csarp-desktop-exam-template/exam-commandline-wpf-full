@@ -19,6 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticClasses", "StaticClas
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F793279-6139-451C-841F-F7BDD1D45615}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
 		Docker\DockerParancsok.txt = Docker\DockerParancsok.txt
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		Docker\Fly\fly.toml = Docker\Fly\fly.toml
