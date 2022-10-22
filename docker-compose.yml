@@ -16,9 +16,12 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: kreta
             #MYSQL_DATABASE: "kreta"
-            MYSQL_USER: kretamysql
-            MYSQL_PASSWORD: kreta
+            #MYSQL_USER: kretamysql
+            #MYSQL_PASSWORD: kreta
             LANG: C.UTF-8 # sets the encoding in the init.db scripts which are otherwise assumed to be ascii
+        networks:
+            kreta-network:
+                ipv4_address: 172.20.0.2
         ports:
             - 3306:3306        
         volumes:
@@ -41,7 +44,17 @@ services:
         ports:
             - 5000:5000
         environment:
-            MYSQL_ROOT_PASSWORD: kreta
+            MYSQL_ROOT_PASSWORD: kreta            
+            ASPNETCORE_ENVIRONMENT: Development
+        networks:
+            kreta-network:
+                ipv4_address: 172.20.0.3
+
+networks:
+    kreta-network:
+        ipam:
+            config:
+                - subnet: 172.20.0.0/16
 
 #    adminer:
 #        image: adminer
