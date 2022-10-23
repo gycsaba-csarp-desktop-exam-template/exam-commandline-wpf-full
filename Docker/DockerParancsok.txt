@@ -4,7 +4,7 @@ sudo docker image ls | grep kretawebapi
 sudo docker run --rm -p kretawebapi
 
 [mysql]
-sudo docker build --rm -t testdb_mysql .
+sudo docker build --rm -t kretamysql .
 
 
 [kretamysql]
