@@ -50,6 +50,16 @@ services:
             kreta-network:
                 ipv4_address: 172.20.0.3
 
+    kretarazor:
+        image: kretarazor
+        container_name: kretarazor
+        build:
+            context: .
+            dockerfile: ./KretaRazorPages/Dockerfile
+        networks:
+            kreta-network:
+                ipv4_address: 172.20.0.4
+
 networks:
     kreta-network:
         ipam:

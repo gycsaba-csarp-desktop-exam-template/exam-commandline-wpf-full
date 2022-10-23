@@ -1,4 +1,4 @@
-# Razor oldal docker fájl
+# Kreta Razor oldal docker fï¿½jl
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
@@ -24,5 +24,5 @@ RUN dotnet publish "KretaRazorPages.csproj" -c Release -o /app/publish /p:UseApp
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=publish /app/build .
 ENTRYPOINT ["dotnet", "KretaRazorPages.dll"]
