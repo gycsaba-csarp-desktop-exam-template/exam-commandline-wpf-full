@@ -25,4 +25,6 @@ RUN dotnet publish "KretaRazorPages.csproj" -c Release -o /app/publish /p:UseApp
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/build .
+EXPOSE 80
+# ENV ASPNETCORE_URLS=http://+:5000
 ENTRYPOINT ["dotnet", "KretaRazorPages.dll"]
