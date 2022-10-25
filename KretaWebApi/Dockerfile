@@ -4,7 +4,7 @@
 #FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS base
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS base
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 80
 EXPOSE 443
 
 #FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
@@ -27,9 +27,8 @@ RUN dotnet publish "KretaWebApi.csproj" -c Release -o /app/publish --no-restore
 FROM base AS final
 WORKDIR /app
 #COPY --from=publish /app/publish .
-#COPY --from=build /app/publish ./
-COPY --from=build /app/build ./
-# flyctl
+COPY --from=build /app/publish ./
+#COPY --from=build /app/build ./
 EXPOSE 5000
 ENV ASPNETCORE_URLS=http://+:5000
 # flyctl
