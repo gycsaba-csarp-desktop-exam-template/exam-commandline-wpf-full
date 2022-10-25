@@ -29,7 +29,7 @@ WORKDIR /app
 #COPY --from=publish /app/publish .
 #COPY --from=build /app/publish ./
 COPY --from=build /app/build ./
-EXPOSE 5000
-#ENV ASPNETCORE_URLS=http://+:5000
+#EXPOSE 5000
+ENV ASPNETCORE_URLS=http://+:5000
 # flyctl
 ENTRYPOINT ["dotnet", "KretaWebApi.dll"]
