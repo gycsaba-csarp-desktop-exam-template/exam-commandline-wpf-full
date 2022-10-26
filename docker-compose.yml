@@ -57,7 +57,7 @@ services:
             context: .
             dockerfile: ./KretaRazorPages/Dockerfile
         ports:
-            - 80:80
+            - 8080:80
         networks:
             kreta-network:
                 ipv4_address: 172.20.0.4
@@ -73,21 +73,5 @@ networks:
 #        restart: always
 #        ports: 
 #            - 8080:8080   
-
-
-# https://stackoverflow.com/questions/59838692/mysql-root-password-is-set-but-getting-access-denied-for-user-rootlocalhost
-#     kretamysql:
-#         build:
-#             context: .
-#             dockerfile: ./KretaWebApi/Mysql/Dockerfile               
-#         image: kretamysql
-#         environment:
-#             MYSQL_ROOT_PASSWORD: kreta
-#             MYSQL_DATABASE: "kreta"
-#             MYSQL_USER: kretamysql
-#             MYSQL_PASSWORD: kreta
-#             LANG: C.UTF-8 # sets the encoding in the init.db scripts which are otherwise assumed to be ascii
-#         ports:
-#             - "3306:3306"
 
     
