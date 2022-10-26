@@ -57,7 +57,7 @@ services:
             context: .
             dockerfile: ./KretaRazorPages/Dockerfile
         ports:
-            - 8080:80
+            - 80:80
         networks:
             kreta-network:
                 ipv4_address: 172.20.0.4
