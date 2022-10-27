@@ -24,6 +24,7 @@ namespace KretaWebApi.ActionFilters
             {
                 try
                 {
+                    loggerManager.LogInfo($"API kérés esetén az azonosított id: {context.ActionArguments["Id"]}");
                     //id = (long)context.ActionArguments["Id"];
                     id = Convert.ToInt64(context.ActionArguments["Id"]);
                 }
@@ -31,8 +32,7 @@ namespace KretaWebApi.ActionFilters
                 {
                     loggerManager.LogError(e.Message);
                     context.Result = new BadRequestObjectResult("The id paramter is not valid type");
-                }
-                
+                }               
             }
             else
             {
