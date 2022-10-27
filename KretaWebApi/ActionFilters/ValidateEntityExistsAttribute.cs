@@ -22,7 +22,8 @@ namespace KretaWebApi.ActionFilters
             long id = -1;
             foreach (var key in context.ActionArguments.Keys)
             {
-                loggerManager.LogInfo($"API kérés esetén a kontexusban kévő kulcs: {key}, érték: {context.ActionArguments["key"]}");
+                // , érték: {context.ActionArguments["key"]}"
+                loggerManager.LogInfo($"API kérés esetén a kontexusban kévő kulcs: {key}");
             }
 
             if (context.ActionArguments.ContainsKey("Id"))
