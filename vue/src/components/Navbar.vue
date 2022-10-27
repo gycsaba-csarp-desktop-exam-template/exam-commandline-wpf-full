@@ -1,15 +1,20 @@
 <template>
-    <b-navbar
-      toggleable="md"
-      type="dark"
-      variant="info">
-      <b-navbar-brand :to="{name:'Home'}">Account-Owner Home</b-navbar-brand>
-      <b-navbar-nav>
-        <b-nav-item href="#">Owner Actions</b-nav-item>
-        <b-nav-item href="#">Owner Actions</b-nav-item>
-      </b-navbar-nav>
-    </b-navbar>
+  <div id="app">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <router-link to="/" class="navbar-brand">Kréta</router-link>
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <router-link to="/subject/index" class="nav-link">Tantárgyak</router-link>
+        </li>
+      </div>
+    </nav>
+
+    <div class="container mt-3">
+      <router-view />
+    </div>
+  </div>
 </template>
+
 <script>
   export default {
     name: 'Navbar'
