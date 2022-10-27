@@ -22,7 +22,17 @@ namespace KretaWebApi.ActionFilters
             long id = -1;
             if (context.ActionArguments.ContainsKey("Id"))
             {
-                id = (long) context.ActionArguments["Id"];
+                try
+                {
+                    //id = (long)context.ActionArguments["Id"];
+                    id = Convert.ToInt64(context.ActionArguments["Id"]);
+                }
+                catch (Exception e)
+                {
+                    loggerManager.LogError(e.Message);
+                    context.Result = new BadRequestObjectResult("The id paramter is not valid type");
+                }
+                
             }
             else
             {
@@ -38,7 +48,7 @@ namespace KretaWebApi.ActionFilters
             }
             else
             {
-                loggerManager.LogError($"API Kérés esetén {id} azonosítójú elem lekérése sikerült.");
+                loggerManager.LogInfo($"API Kérés esetén {id} azonosítójú elem lekérése sikerült.");
                 context.HttpContext.Items.Add("entity", entity);
             }
                 
