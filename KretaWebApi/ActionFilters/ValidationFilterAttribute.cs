@@ -9,11 +9,13 @@ namespace KretaWebApi.ActionFilters
     public class ValidationFilterAttribute : IActionFilter
     {
         //https://code-maze.com/action-filters-aspnetcore/
-        //https://stackoverflow.com/questions/72255726/how-to-register-action-filter-in-net-6
+        //https://stackoverflow.com/questions/72255726/how-to-register-action-filter-in-net-6        
         public void OnActionExecuting(ActionExecutingContext context)
         {
             //var param = context.ActionArguments.SingleOrDefault(p => p.Value is IEntity);
-            var param = context.ActionArguments.SingleOrDefault(p => p.Value is Object);
+            //var param = context.ActionArguments.SingleOrDefault(p => p.Value is Object);
+            //https://stackoverflow.com/questions/22691622/sequence-contains-more-than-one-element-singleordefault-not-helping
+            var param = context.ActionArguments.FirstOrDefault(p => p.Value is Object);
             if (param.Value is null)
              {
                 context.Result=new BadRequestObjectResult("Object is null");
