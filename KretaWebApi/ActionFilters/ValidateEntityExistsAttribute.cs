@@ -20,6 +20,7 @@ namespace KretaWebApi.ActionFilters
         public void OnActionExecuting(ActionExecutingContext context)
         {
             long id = -1;
+            loggerManager.LogInfo($"API kérés esetén a kontexus: {context}");
             if (context.ActionArguments.ContainsKey("Id"))
             {
                 try
@@ -36,19 +37,19 @@ namespace KretaWebApi.ActionFilters
             }
             else
             {
-                loggerManager.LogError("API Kérés esetén a válaszban kapott adatnak nincs id-je");
+                loggerManager.LogError("API kérés esetén a válaszban kapott adatnak nincs id-je");
                 context.Result = new BadRequestObjectResult("The id parameter is bad.");
                 return;
             }
             var entity = kretaContext.Set<T>().SingleOrDefault(entity => entity.Id.Equals(id));
             if (entity == null)
             {
-                loggerManager.LogError($"API Kérés esetén {id} azonosítójú elem nem létezik.");
+                loggerManager.LogError($"API kérés esetén {id} azonosítójú elem nem létezik.");
                 context.Result = new NotFoundResult();
             }
             else
             {
-                loggerManager.LogInfo($"API Kérés esetén {id} azonosítójú elem lekérése sikerült.");
+                loggerManager.LogInfo($"API kérés esetén {id} azonosítójú elem lekérése sikerült.");
                 context.HttpContext.Items.Add("entity", entity);
             }
                 
