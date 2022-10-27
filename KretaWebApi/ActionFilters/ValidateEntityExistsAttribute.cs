@@ -20,7 +20,7 @@ namespace KretaWebApi.ActionFilters
         public void OnActionExecuting(ActionExecutingContext context)
         {
             long id = -1;
-            loggerManager.LogInfo($"API kérés esetén a kontexus: {context}");
+            loggerManager.LogInfo($"API kérés esetén a kontexus: {context.ActionArguments}");
             if (context.ActionArguments.ContainsKey("Id"))
             {
                 try
