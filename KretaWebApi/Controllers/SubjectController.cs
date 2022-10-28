@@ -186,7 +186,7 @@ namespace KretaWebApi.Controllers
 
             // return CreatedAtRoute(nameof(GetSubjectById), new {id = createdSubject.Id}, createdSubject);
             // https://stackoverflow.com/questions/39459348/asp-net-core-web-api-no-route-matches-the-supplied-values
-            CreatedAtAction(nameof(GetSubjectById), new { id = createdSubject.Id }, createdSubject);
+            return CreatedAtAction(nameof(GetSubjectById), new { id = createdSubject.Id }, createdSubject);
         }
 
         [HttpPut("api/subject/{id}", Name = "Update subject")]
