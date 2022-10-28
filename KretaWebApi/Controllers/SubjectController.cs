@@ -184,7 +184,9 @@ namespace KretaWebApi.Controllers
 
             logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
 
-            return CreatedAtRoute(nameof(GetSubjectById), new {id = createdSubject.Id}, createdSubject);
+            // return CreatedAtRoute(nameof(GetSubjectById), new {id = createdSubject.Id}, createdSubject);
+            // https://stackoverflow.com/questions/39459348/asp-net-core-web-api-no-route-matches-the-supplied-values
+            CreatedAtAction(nameof(GetSubjectById), new { id = createdSubject.Id }, createdSubject);
         }
 
         [HttpPut("api/subject/{id}", Name = "Update subject")]
@@ -210,7 +212,8 @@ namespace KretaWebApi.Controllers
 
             var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
             logger.LogInfo($"UpdateSubject->{updatedSubject.Id} id-jű tantárgy módosítva {updatedSubject}-re)");
-            return CreatedAtRoute(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
+            //return CreatedAtRoute(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
+            CreatedAtAction(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
         }
         [HttpDelete("api/subject/{id}", Name = "Delete subject")]
         [ServiceFilter(typeof(ValidateIDAttributeExists<EFSubject>))]
