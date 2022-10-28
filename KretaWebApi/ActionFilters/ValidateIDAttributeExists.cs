@@ -6,12 +6,12 @@ using ServiceKretaLogger;
 
 namespace KretaWebApi.ActionFilters
 {
-    public class ValidateEntityExistsAttribute<T> : IActionFilter where T : ClassWithId
+    public class ValidateIDAttributeExists<T> : IActionFilter where T : ClassWithId
     {
         private KretaContext kretaContext;
         ILoggerManager loggerManager;
 
-        public ValidateEntityExistsAttribute(ILoggerManager loggerManager, KretaContext context)
+        public ValidateIDAttributeExists(ILoggerManager loggerManager, KretaContext context)
         {
             this.kretaContext = context;
             this.loggerManager = loggerManager;
@@ -21,17 +21,15 @@ namespace KretaWebApi.ActionFilters
         {
             long id = -1;
             foreach (string key in context.ActionArguments.Keys)
-            {
-                // , érték: {context.ActionArguments["key"]}"
+            {                
                 loggerManager.LogInfo($"API kérés esetén a kontexusban kévő kulcs: {key}");
             }
 
-            if (context.ActionArguments.ContainsKey("Id"))
+            if (context.ActionArguments.ContainsKey("id"))
             {
                 try
                 {
                     loggerManager.LogInfo($"API kérés esetén az azonosított id: {context.ActionArguments["Id"]}");
-                    //id = (long)context.ActionArguments["Id"];
                     id = Convert.ToInt64(context.ActionArguments["Id"]);
                 }
                 catch (Exception e)
