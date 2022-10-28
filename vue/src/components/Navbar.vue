@@ -8,10 +8,6 @@
         </li>
       </div>
     </nav>
-
-    <div class="container mt-3">
-      <router-view />
-    </div>
   </div>
 </template>
 

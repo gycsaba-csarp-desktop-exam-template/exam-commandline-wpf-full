@@ -1,7 +1,9 @@
 import http from "../http-commons";
 
 class SubjectService {
-    getAll() {
+    getAllSubjects() {
         return http.get("/Subject/api/subjects");
     }
 }
+
+export default new SubjectService();
