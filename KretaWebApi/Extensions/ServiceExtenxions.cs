@@ -78,7 +78,7 @@ namespace KretaWebApi.Extensions
         public static void ConfigreActionFilter(this IServiceCollection service)
         {
             service.AddScoped<ValidationFilterAttribute>();
-            service.AddScoped<ValidateEntityExistsAttribute<EFSubject>>();
+            service.AddScoped<ValidateIDAttributeExists<EFSubject>>();
         }
 
         // Repository Wrapper

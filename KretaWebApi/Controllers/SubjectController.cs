@@ -131,7 +131,7 @@ namespace KretaWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Subject))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
+        [ServiceFilter(typeof(ValidateIDAttributeExists<EFSubject>))]
         public async Task<IActionResult> GetSubjectById(int id, [FromQuery] FieldsParameter fields)
         {
             EFSubject subject = null;
@@ -154,7 +154,6 @@ namespace KretaWebApi.Controllers
 
         [HttpPost("api/subject", Name = "Insert subject")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
         public async Task<IActionResult> CreateSubject([FromBody] SubjectForCreationDto subjectForCreation)
         {
             logger.LogInfo("Új tantárgy felvétele az adatbázisba");
@@ -190,7 +189,7 @@ namespace KretaWebApi.Controllers
 
         [HttpPut("api/subject/{id}", Name = "Update subject")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
+        [ServiceFilter(typeof(ValidateIDAttributeExists<EFSubject>))]
         public async Task<IActionResult> UpdateSubject(long id, [FromBody] SubjectForUpdateDto subjectForUpdate)
         {
             logger.LogInfo("Tantárgy módosítása az adatbázisba");
@@ -214,7 +213,7 @@ namespace KretaWebApi.Controllers
             return CreatedAtRoute(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
         }
         [HttpDelete("api/subject/{id}", Name = "Delete subject")]
-        [ServiceFilter(typeof(ValidateEntityExistsAttribute<EFSubject>))]
+        [ServiceFilter(typeof(ValidateIDAttributeExists<EFSubject>))]
         public async Task<IActionResult> DeleteSubject(long id)
         {
             try
