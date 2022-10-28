@@ -53,7 +53,6 @@ else
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseDeveloperExceptionPage();
     app.UseHsts();
 } 
 
@@ -76,6 +75,6 @@ app.MapControllers();
 var logger = app.Services.GetRequiredService<ILoggerManager>();
 
 //app.ConfigureExceptionHandler(logger, app.Environment.IsDevelopment());
-//app.ConfigureCustomExceptionMiddleware();
+app.ConfigureCustomExceptionMiddleware();
 
 app.Run();
