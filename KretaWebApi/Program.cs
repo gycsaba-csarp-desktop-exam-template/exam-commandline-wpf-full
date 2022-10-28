@@ -53,6 +53,7 @@ else
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
     app.UseHsts();
 } 
 
