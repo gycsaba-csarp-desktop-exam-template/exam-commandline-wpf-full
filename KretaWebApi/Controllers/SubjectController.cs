@@ -213,7 +213,7 @@ namespace KretaWebApi.Controllers
             var updatedSubject = mapper.Map<Subject>(updatedEFSubject);
             logger.LogInfo($"UpdateSubject->{updatedSubject.Id} id-jű tantárgy módosítva {updatedSubject}-re)");
             //return CreatedAtRoute(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
-            CreatedAtAction(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
+            return CreatedAtAction(nameof(GetSubjectById), new { id = updatedSubject.Id }, updatedSubject);
         }
         [HttpDelete("api/subject/{id}", Name = "Delete subject")]
         [ServiceFilter(typeof(ValidateIDAttributeExists<EFSubject>))]
