@@ -61,7 +61,7 @@ namespace ApplicationPropertiesSettings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 10.0.19.220.
+        ///   Looks up a localized string similar to 194.182.83.78.
         /// </summary>
         internal static string APIHost {
             get {
@@ -84,6 +84,15 @@ namespace ApplicationPropertiesSettings.Properties {
         internal static string APIScheme {
             get {
                 return ResourceManager.GetString("APIScheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5.
+        /// </summary>
+        internal static string APITimeoutExpiresSeconds {
+            get {
+                return ResourceManager.GetString("APITimeoutExpiresSeconds", resourceCulture);
             }
         }
         

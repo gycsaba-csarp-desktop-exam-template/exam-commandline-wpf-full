@@ -49,7 +49,7 @@ namespace ValidationProject.Validations.ValidationRules
             {
                 if (nameToValidate.Length >= 2)
                 {
-                    for (int i=1;i<nameToValidate.Length;i=i+1)
+                    for (int i = 1; i < nameToValidate.Length; i = i + 1)
                     {
                         if (char.IsUpper(nameToValidate.ElementAt(i)))
                             return false;
@@ -60,6 +60,13 @@ namespace ValidationProject.Validations.ValidationRules
             }
         }
 
-        public bool IsOnlyLetters => this.nameToValidate.All(Char.IsLetter);
+        public bool IsOnlyLettersOrSpace
+        {
+            get
+            {
+                return nameToValidate.All(Char.IsLetter) || nameToValidate.IndexOf(" ")>0 ;
+            }
+        }
+
     }
 }

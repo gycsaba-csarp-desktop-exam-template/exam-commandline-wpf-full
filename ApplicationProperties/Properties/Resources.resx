@@ -126,6 +126,9 @@
   <data name="APIScheme" xml:space="preserve">
     <value>http</value>
   </data>
+  <data name="APITimeoutExpiresSeconds" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="CultureInfo" xml:space="preserve">
     <value>hu-Hu</value>
   </data>

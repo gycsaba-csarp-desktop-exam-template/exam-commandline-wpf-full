@@ -14,6 +14,7 @@ namespace ServiceKretaAPI.Services
 {
     public class APISubjectService : IAPISubjectService
     {
+
         public async Task<List<Subject>>? GetSubjectsAsync(QueryStringParameters queryStringParameter)
         {
             if (queryStringParameter == null)
@@ -194,11 +195,15 @@ namespace ServiceKretaAPI.Services
 
                     var response = await httpClient.PostAsync("/Subject/api/subject", httpContent);
 
-                    //string error = "" + response.Content + " : " + response.StatusCode;
-                    if (response.StatusCode == HttpStatusCode.NoContent)
+                    if (response.StatusCode == HttpStatusCode.Created)
                         return HttpStatusCode.OK;
                     else
+                    {
+                        
+                        string error =response.Headers + " : " + response.Content + " : " + response.StatusCode ;
+                        Console.WriteLine(error);
                         return HttpStatusCode.InternalServerError;
+                    }
                 }
                 catch (Exception ex)
                 {
