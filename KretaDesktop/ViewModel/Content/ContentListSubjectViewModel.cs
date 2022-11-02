@@ -25,7 +25,7 @@ namespace KretaDesktop.ViewModel.Content
             set 
             { 
                 waitingForNewData = value;
-                OnPropertyChanged(nameof(waitingForNewData));
+                OnPropertyChanged(nameof(WaitingForNewData));
                 OnPropertyChanged(nameof(NoWaitingForNewData)); 
             }
         }
@@ -76,7 +76,11 @@ namespace KretaDesktop.ViewModel.Content
         public Subject DisplayedSubject
         {
             get { return displayedSubject; }
-            set { displayedSubject = value; }
+            set 
+            { 
+                displayedSubject = value;
+                OnPropertyChanged(nameof(DisplayedSubject));
+            }
         }
 
         public string contentInfo;
@@ -126,22 +130,20 @@ namespace KretaDesktop.ViewModel.Content
                 try
                 {
                     PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters());
-                    SaveParameter(pagedSubjectList);
-                    if (pagedSubjectList != null)
-                    {
-                        subjects = new ObservableCollection<Subject>(pagedSubjectList);
-                    }
+                    //PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters()).WaitAsync(TimeSpan.FromSeconds(APITimeOut.GetAPITimeout())); 
+                    SaveParameter(pagedSubjectList);                  
+                    if (pagedSubjectList != null)                    
+                        Subjects = new ObservableCollection<Subject>(pagedSubjectList);
                     else
-                        subjects = new ObservableCollection<Subject>();
+                        Subjects = new ObservableCollection<Subject>();
                 }
                 catch(APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
                 }
-            }
-            OnPropertyChanged(nameof(Subjects));          
+            }     
             SelectRow(displayedSubject);
-            SetInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
+            ConcanetenateInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
         }
 
         async public void Delete(object entity)
@@ -159,8 +161,9 @@ namespace KretaDesktop.ViewModel.Content
                 catch (APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
-                    LoadData();
+
                 }
+                LoadData();
             }
         }
 
@@ -169,27 +172,18 @@ namespace KretaDesktop.ViewModel.Content
             if (subjectService != null)
             {
                 long newId=-1;
-                if (DisplayedSubject != null)
+                try
                 {
-                    try
-                    {
-                        newId = await subjectService.GetNextSubjectIdAsync();
-                    }
-
-                    catch (APISubjectException exceptin)
-                    {
-                        SetInfoText(exceptin.Message);
-                    }
-                    displayedSubject.Id = newId;
-                    displayedSubject.SubjectName = string.Empty;
-                    OnPropertyChanged(nameof(DisplayedSubject));
+                    newId = await subjectService.GetNextSubjectIdAsync();
                 }
+                catch (APISubjectException exceptin)
+                {
+                    SetInfoText(exceptin.Message);
+                }
+                DisplayedSubject = new Subject(newId);
                 WaitingForNewData = true;
-                selectedItemIndex = -1;
-                OnPropertyChanged(nameof(SelectedItemIndex));
-                selectedSubject = null;
-                OnPropertyChanged(nameof(SelectedSubject));
-                //OnPropertyChanged(nameof(WaitingForNewData));
+                SelectedItemIndex = -1;
+                SelectedSubject = null;
                 // Mégsem gomb
                 // Törlés nincs 
                 // Datagirdre nem lehet kattintani
@@ -216,14 +210,12 @@ namespace KretaDesktop.ViewModel.Content
                 {
                     SetInfoText(exception.Message);
                 }
-                if (statusCode == HttpStatusCode.OK)
-                {
-                    LoadData();                    
-                }
-                else
+                if (statusCode != HttpStatusCode.OK)
                 {
                     SetInfoTextWithLocalizedString("errorStatusCode", statusCode);
                 }
+                WaitingForNewData = false;
+                LoadData();
             }
         }
 
@@ -289,6 +281,11 @@ namespace KretaDesktop.ViewModel.Content
         private void SetInfoTextWithLocalizedString(string localizationStringName,object data)
         {
             ContentInfo = string.Format(GetLocalizedString(localizationStringName), data);
+        }
+
+        private void ConcanetenateInfoTextWithLocalizedString(string localizationStringName, object data)
+        {
+            ContentInfo += " "+string.Format(GetLocalizedString(localizationStringName), data);
         }
 
 
