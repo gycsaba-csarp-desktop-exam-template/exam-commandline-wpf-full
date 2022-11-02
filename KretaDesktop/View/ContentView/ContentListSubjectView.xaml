@@ -104,7 +104,8 @@
                 </StackPanel>
             </Grid>
         </Expander>
-        <Grid Grid.Row="2" VerticalAlignment="Top">
+        <Grid Grid.Row="2" VerticalAlignment="Top"
+              Visibility="{Binding NoWaitingForNewData,Converter={StaticResource boolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"/>
@@ -143,13 +144,15 @@
                 />
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="3"  Orientation="Horizontal">
+        <StackPanel Grid.Row="3"  Orientation="Horizontal"
+                    Visibility="{Binding NoWaitingForNewData,Converter={StaticResource boolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+        >
             <DataGrid x:Name="dgSubjects"                 
                       ItemsSource="{Binding Subjects}"
                       SelectedItem="{Binding SelectedSubject}"                      
                       SelectedIndex="{Binding SelectedItemIndex}"
                       Style="{DynamicResource DataGridCrudStyle}"
-                      Visibility="{Binding NoWaitingForNewData,Converter={StaticResource boolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                      
                       Width="300"
                       ColumnHeaderStyle="{DynamicResource DataGridCRUDHeaderStyle}"
              >
@@ -165,7 +168,8 @@
                         Margin="100 2 2 2" Grid.Row="1" Grid.Column="2" Content="{DynamicResource buttonDelete}">
             </Button>
         </StackPanel>
-        <Grid Background="{DynamicResource NavigationBackgroundColor}" Grid.Row="5" Margin="5">
+        <Grid Background="{DynamicResource NavigationBackgroundColor}" Grid.Row="5" Margin="5"
+              Visibility="{Binding NoWaitingForNewData,Converter={StaticResource boolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="100" />
