@@ -25,14 +25,16 @@ namespace Kreta.Repositories.BaseClass
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return KretaContext.Set<T>().Where(expression).AsNoTracking();
-            //return KretaContext.Set<T>().Where(expression);
+            //return KretaContext.Set<T>().Where(expression).AsNoTracking();
+            return KretaContext.Set<T>().Where(expression);
+            //return null;
         }
 
         public IQueryable<T> GetAll()
         {
             return KretaContext.Set<T>().AsNoTracking();
             //return KretaContext.Set<T>();
+            //return null;
         }
 
         public long GetNextId()
@@ -58,7 +60,7 @@ namespace Kreta.Repositories.BaseClass
 
         public void Insert(T entity)
         {
-            if (entity == null)
+            if (entity != null)
             {
                 KretaContext.Set<T>().Add(entity);
                 KretaContext.SaveChanges();
@@ -70,7 +72,7 @@ namespace Kreta.Repositories.BaseClass
             //KretaContext.Set<T>().AsNoTracking();
             if (entity != null)
             {
-                KretaContext.Set<T>().Attach(entity);
+                //KretaContext.Set<T>().Attach(entity);
                 KretaContext.Entry(entity).State = EntityState.Detached;
                 KretaContext.Set<T>().Update(entity);
                 KretaContext.SaveChanges();
@@ -108,26 +110,26 @@ namespace Kreta.Repositories.BaseClass
 
         public long Count()
         {
-            var count = GetAll().Count();
-            return count;
+             var count = GetAll().Count();
+             return count;
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+           /* if (!this.disposed)
             {
                 if (disposing)
                 {
                     KretaContext.Dispose();
                 }
             }
-            this.disposed = true;
+            this.disposed = true;*/
         }
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            /*Dispose(true);
+            GC.SuppressFinalize(this);*/
         }
     }
 

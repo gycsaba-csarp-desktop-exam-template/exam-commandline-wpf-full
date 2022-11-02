@@ -22,7 +22,7 @@ namespace Kreta.Models.Context
 
         public KretaContext(DbContextOptions<KretaContext> options)
             : base(options)
-        {
+        {            
         }
 
 
