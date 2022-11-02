@@ -59,7 +59,10 @@ namespace Kreta.Repositories.BaseClass
         public void Insert(T entity)
         {
             if (entity == null)
-                KretaContext.Set<T>().Add(entity);                
+            {
+                KretaContext.Set<T>().Add(entity);
+                KretaContext.SaveChanges();
+            }
         }
 
         public void Update(T entity)
@@ -70,6 +73,7 @@ namespace Kreta.Repositories.BaseClass
                 KretaContext.Set<T>().Attach(entity);
                 KretaContext.Entry(entity).State = EntityState.Modified;
                 KretaContext.Set<T>().Update(entity);
+                KretaContext.SaveChanges();
             }
         }
 
@@ -80,18 +84,26 @@ namespace Kreta.Repositories.BaseClass
             if (entity != null)
             {
                 KretaContext.Remove(entity);
-                //KretaContext.SaveChanges();
+                KretaContext.SaveChanges();
             }
         }
 
-        public void Delete(T entyty) => KretaContext.Set<T>().Remove(entyty);
+        public void Delete(T entyty)
+        {
+            if (entyty != null)
+            {
+                KretaContext.Set<T>().Remove(entyty);
+                KretaContext.SaveChanges();
+            }
+        }
 
         public void DeleteAll()
         {
-            foreach(var entity in GetAll())
+            /*foreach(var entity in GetAll())
             {
                 Delete(entity);
-            }
+            }*/
+            throw new NotImplementedException();
         }
 
         public long Count()
