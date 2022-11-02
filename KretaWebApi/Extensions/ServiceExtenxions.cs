@@ -84,18 +84,18 @@ namespace KretaWebApi.Extensions
         // Repository Wrapper
         public static void ConfigureWrapperRepository(this IServiceCollection services)
         {
-            services.AddScoped<ISortHelper<EFSchoolClass>, SortHelper<EFSchoolClass>>();
+            /*services.AddScoped<ISortHelper<EFSchoolClass>, SortHelper<EFSchoolClass>>();
             services.AddScoped<IDataShaper<EFSchoolClass>, DataShaper<EFSchoolClass>>();
 
             services.AddScoped<ISortHelper<EFSubject>, SortHelper<EFSubject>>();
             services.AddScoped<IDataShaper<EFSubject>, DataShaper<EFSubject>>();
 
-            services.AddScoped<IRepositoryWrapper,RepositoryWrapper>();
+            services.AddScoped<IRepositoryWrapper,RepositoryWrapper>();*/
         }
 
         public static void ConfigureService(this IServiceCollection services)
         {
-            services.AddScoped<IRepoService,RepoService>();
+            //services.AddScoped<IRepoService,RepoService>();
             services.AddScoped<ISubjectService, SubjectService>();
         }
     }

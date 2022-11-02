@@ -40,7 +40,14 @@ namespace Kreta.Services
         public void DeleteSubject(EFSubject subject)
         {
             subjectRepo.Delete(subject);
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.InnerException.Message);
+            }
         }
 
         public PagedList<ExpandoObject> GetAllSubjects(SubjectParameters subjectParameters)
@@ -66,7 +73,14 @@ namespace Kreta.Services
         public void Update(EFSubject updatedEFSubject)
         {
             subjectRepo.Update(updatedEFSubject);
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.InnerException.Message);
+            }
         }
 
         public long GetNumberOfSubject()

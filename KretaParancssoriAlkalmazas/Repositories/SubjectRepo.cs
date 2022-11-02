@@ -43,6 +43,8 @@ namespace Kreta.Repositories
             var sortedSubject = sortHelper.ApplySort((IQueryable<EFSubject>) subjects, subjectParameters.OrderBy);
             var sortedAndShapedSubject = dataShaper.ShapeData(sortedSubject, subjectParameters.Fields);
 
+            
+
             return PagedList<ExpandoObject>.ToPagedList(sortedAndShapedSubject, subjectParameters.CurrentPage, subjectParameters.PageSize);      
         }
 
@@ -57,11 +59,6 @@ namespace Kreta.Repositories
 
         public EFSubject? GetSubjectById(long subjectId)
         {
-            /*KretaContext dBContext = base.KretaContext;
-            List<EFSubject> proba = dBContext.Set<EFSubject>().ToList();
-            EFSubject fSubject = dBContext.Set<EFSubject>().Where(x => x.Id == 1).FirstOrDefault();
-            EFSubject subject = FindByCondition(subject => subject.Id.Equals(subjectId)).FirstOrDefault();
-            return subject;*/
             return Get(subjectId);   
         }
 
