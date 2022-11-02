@@ -58,7 +58,8 @@
     <system:String x:Key="infoAllSubjectIsLoaded">Az adatbázisból {0} tantárgy beolvasva.</system:String>
     <system:String x:Key="infoSubjectIsDeleted">A {0} tantárgy törtölve lett az adatbázisból.</system:String>
     <system:String x:Key="infoSubjectIsSaved">A {0} tntárgy mentve lett az adatbázisba.</system:String>
-    
+    <system:String x:Key="infoNewSubject">Új tantárgy adatainak megadása.</system:String>
+
     <!-- Status code error -->
     <system:String x:Key="errorStatusCode">Hiba történt. Hibakód: {0}.</system:String>
     

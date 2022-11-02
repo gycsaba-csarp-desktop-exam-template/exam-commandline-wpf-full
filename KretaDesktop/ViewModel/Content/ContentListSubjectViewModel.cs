@@ -66,8 +66,12 @@ namespace KretaDesktop.ViewModel.Content
                 {
                     // https://levelup.gitconnected.com/5-ways-to-clone-an-object-in-c-d1374ec28efa
                     displayedSubject = (Subject) selectedSubject.Clone();
-                    OnPropertyChanged(nameof(DisplayedSubject));
                 }
+                else
+                {
+                    displayedSubject = null;
+                }
+                OnPropertyChanged(nameof(DisplayedSubject));
             }
         }
 
@@ -141,8 +145,12 @@ namespace KretaDesktop.ViewModel.Content
                 {
                     SetInfoText(exceptin.Message);
                 }
+                catch (Exception exception)
+                {
+                    SetInfoText(exception.Message);
+                }
             }     
-            SelectRow(displayedSubject);
+            SelectRow(DisplayedSubject);
             ConcanetenateInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
         }
 
@@ -157,11 +165,14 @@ namespace KretaDesktop.ViewModel.Content
                         await subjectService.DeleteSubjectAsync(subjectToDelete.Id);
                     SetInfoTextWithLocalizedString("infoSubjectIsDeleted", subjectToDelete);
                 }
-
                 catch (APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
 
+                }
+                catch (Exception exception)
+                {
+                    SetInfoText(exception.Message);
                 }
                 LoadData();
             }
@@ -179,11 +190,18 @@ namespace KretaDesktop.ViewModel.Content
                 catch (APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
+                    return;
+                }
+                catch (Exception exception)
+                {
+                    SetInfoText(exception.Message);
+                    return;
                 }
                 DisplayedSubject = new Subject(newId);
                 WaitingForNewData = true;
                 SelectedItemIndex = -1;
                 SelectedSubject = null;
+                SetInfoTextWithLocalizedString("infoNewSubject");
                 // Mégsem gomb
                 // Törlés nincs 
                 // Datagirdre nem lehet kattintani

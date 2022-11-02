@@ -92,7 +92,7 @@ namespace KretaWebApi.Controllers
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetadata));
 
             // nextId header data to insert new subject
-            long nextId = 0;
+            long nextId = 1;
             if (subjects != null && subjects.Count > 0)
                 nextId = service.GetNextId();
             logger.LogInfo($"Meghatározva {nextId} a következő lehetséges id");
