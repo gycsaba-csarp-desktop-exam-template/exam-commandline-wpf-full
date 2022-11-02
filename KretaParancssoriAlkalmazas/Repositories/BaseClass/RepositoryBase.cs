@@ -39,7 +39,8 @@ namespace Kreta.Repositories.BaseClass
 
         public T Get(long id)
         {
-            return KretaContext.Set<T>().Find(id);
+            //return KretaContext.Set<T>().Find(id);
+            return GetAll().AsNoTracking().FirstOrDefault(t => t.Id == id);
         }
 
         public IQueryable<T> GetAll()
@@ -51,7 +52,7 @@ namespace Kreta.Repositories.BaseClass
 
         public void Update(T entity)
         {
-            KretaContext.Set<T>().AsNoTracking();
+            //KretaContext.Set<T>().AsNoTracking();
             KretaContext.Set<T>().Update(entity);
         }
 
