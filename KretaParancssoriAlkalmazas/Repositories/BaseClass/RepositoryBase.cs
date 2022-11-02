@@ -29,7 +29,7 @@ namespace Kreta.Repositories.BaseClass
 
         public long GetNextId()
         {
-            var list = KretaContext.Set<T>().ToList();
+            var list = GetAll().ToList();
             var nextId = list.Select(x => x.Id).Max();
             if (nextId > 0)
                 return nextId+1;
@@ -37,10 +37,15 @@ namespace Kreta.Repositories.BaseClass
                 return 1;
         }
 
-        public T Get(long id)
+        public T? Get(long id)
         {
             //return KretaContext.Set<T>().Find(id);
-            return GetAll().AsNoTracking().FirstOrDefault(t => t.Id == id); 
+            var result=FindByCondition( x => x.Id ==id);
+            if (result != null)
+                return result.FirstOrDefault();
+            else
+                return null;
+
         }
 
         public IQueryable<T> GetAll()
