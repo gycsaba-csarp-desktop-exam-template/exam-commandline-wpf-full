@@ -25,14 +25,14 @@ namespace Kreta.Repositories.BaseClass
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            //return KretaContext.Set<T>().Where(expression).AsNoTracking();
-            return KretaContext.Set<T>().Where(expression);
+            return KretaContext.Set<T>().Where(expression).AsNoTracking();
+            //return KretaContext.Set<T>().Where(expression);
         }
 
         public IQueryable<T> GetAll()
         {
-            //return KretaContext.Set<T>().AsNoTracking();
-            return KretaContext.Set<T>();
+            return KretaContext.Set<T>().AsNoTracking();
+            //return KretaContext.Set<T>();
         }
 
         public long GetNextId()
