@@ -66,13 +66,18 @@ namespace KretaWebApi.Extensions
 
             //services.AddDbContext<KretaContext>(o => o.UseMySql(connectionString,MySqlServerVersion.LatestSupportedServerVersion));
 
-             services.AddDbContext<KretaContext>(o => o.UseMySql(connectionString,
-                 ServerVersion.AutoDetect(connectionString),
-                 options => options.EnableRetryOnFailure(
-                     maxRetryCount: 5,
-                     maxRetryDelay: System.TimeSpan.FromSeconds(3000),
-                     errorNumbersToAdd: null)
-                 ));
+            services.AddDbContext<KretaContext>(o => o.UseMySql(connectionString,
+                ServerVersion.AutoDetect(connectionString),
+                options =>
+                    {   
+                        options.EnableRetryOnFailure(
+                            maxRetryCount: 5,
+                            maxRetryDelay: System.TimeSpan.FromSeconds(3000),
+                            errorNumbersToAdd: null
+                        );
+                        //options
+                    }
+                )) ;
         }
 
         public static void ConfigreActionFilter(this IServiceCollection service)

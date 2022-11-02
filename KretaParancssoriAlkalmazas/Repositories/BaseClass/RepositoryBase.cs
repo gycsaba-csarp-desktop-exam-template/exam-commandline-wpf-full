@@ -25,7 +25,14 @@ namespace Kreta.Repositories.BaseClass
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return KretaContext.Set<T>().Where(expression).AsNoTracking();
+            //return KretaContext.Set<T>().Where(expression).AsNoTracking();
+            return KretaContext.Set<T>().Where(expression);
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            //return KretaContext.Set<T>().AsNoTracking();
+            return KretaContext.Set<T>();
         }
 
         public long GetNextId()
@@ -47,11 +54,6 @@ namespace Kreta.Repositories.BaseClass
             else
                 return null;
 
-        }
-
-        public IQueryable<T> GetAll()
-        {
-            return KretaContext.Set<T>().AsNoTracking();
         }
 
         public void Insert(T entity) => KretaContext.Set<T>().Add(entity);
@@ -109,3 +111,4 @@ namespace Kreta.Repositories.BaseClass
     }
 
 }
+
