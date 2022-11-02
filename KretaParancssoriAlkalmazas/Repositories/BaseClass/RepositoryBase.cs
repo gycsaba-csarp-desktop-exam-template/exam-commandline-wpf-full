@@ -12,6 +12,7 @@ using Kreta.Models.AbstractClass;
 
 namespace Kreta.Repositories.BaseClass
 {
+    // https://code-maze.com/net-core-web-development-part4/
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : ClassWithId
     {
         private bool disposed = false;
@@ -64,7 +65,7 @@ namespace Kreta.Repositories.BaseClass
 
         public void Delete(int id)
         {
-            var entity = KretaContext.Set<T>().Find(id);
+            var entity = Get(id);
             if (entity != null)
             {
                 KretaContext.Remove(entity);
@@ -76,7 +77,7 @@ namespace Kreta.Repositories.BaseClass
 
         public void DeleteAll()
         {
-            foreach(var entity in KretaContext.Set<T>())
+            foreach(var entity in GetAll())
             {
                 Delete(entity);
             }
@@ -84,7 +85,7 @@ namespace Kreta.Repositories.BaseClass
 
         public long Count()
         {
-            var count = KretaContext.Set<T>().Count();
+            var count = GetAll().Count();
             return count;
         }
 
