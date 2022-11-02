@@ -32,7 +32,7 @@ namespace Kreta.Repositories.BaseClass
         public IQueryable<T> GetAll()
         {
             return KretaContext.Set<T>().AsNoTracking();
-            return KretaContext.Set<T>();
+            //return KretaContext.Set<T>();
         }
 
         public long GetNextId()
@@ -71,7 +71,7 @@ namespace Kreta.Repositories.BaseClass
             if (entity != null)
             {
                 KretaContext.Set<T>().Attach(entity);
-                KretaContext.Entry(entity).State = EntityState.Modified;
+                KretaContext.Entry(entity).State = EntityState.Detached;
                 KretaContext.Set<T>().Update(entity);
                 KretaContext.SaveChanges();
             }
