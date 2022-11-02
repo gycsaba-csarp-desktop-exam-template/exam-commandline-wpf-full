@@ -40,7 +40,7 @@ namespace Kreta.Repositories.BaseClass
         public T Get(long id)
         {
             //return KretaContext.Set<T>().Find(id);
-            return GetAll().AsNoTracking().FirstOrDefault(t => t.Id == id);
+            return GetAll().AsNoTracking().FirstOrDefault(t => t.Id == id); 
         }
 
         public IQueryable<T> GetAll()
