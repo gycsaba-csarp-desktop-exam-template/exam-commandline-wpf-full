@@ -12,6 +12,11 @@ namespace Kreta.Models.DataModel
         public Subject() :base()
         { }
 
+        public Subject(long id)
+        : base(id,String.Empty)
+        {
+        }
+
         public Subject(long id, string subjectName)
             : base(id, subjectName)
         {

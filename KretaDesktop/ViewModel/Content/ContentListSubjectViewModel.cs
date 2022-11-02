@@ -1,9 +1,11 @@
-﻿using Kreta.Models.DataModel;
+﻿using ApplicationPropertiesSettings;
+using Kreta.Models.DataModel;
 using Kreta.Models.Helpers;
 using KretaDesktop.Localization;
 using KretaDesktop.ViewModel.BaseClass;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,7 +25,7 @@ namespace KretaDesktop.ViewModel.Content
             set 
             { 
                 waitingForNewData = value;
-                OnPropertyChanged(nameof(waitingForNewData));
+                OnPropertyChanged(nameof(WaitingForNewData));
                 OnPropertyChanged(nameof(NoWaitingForNewData)); 
             }
         }
@@ -74,7 +76,11 @@ namespace KretaDesktop.ViewModel.Content
         public Subject DisplayedSubject
         {
             get { return displayedSubject; }
-            set { displayedSubject = value; }
+            set 
+            { 
+                displayedSubject = value;
+                OnPropertyChanged(nameof(DisplayedSubject));
+            }
         }
 
         public string contentInfo;
@@ -91,7 +97,6 @@ namespace KretaDesktop.ViewModel.Content
                 OnPropertyChanged(nameof(ContentInfo));
             }
         }
-
 
         public RelayCommand DeleteCommand { get; }
         public RelayCommand SaveCommand { get; }
@@ -115,9 +120,7 @@ namespace KretaDesktop.ViewModel.Content
             waitingForNewData = false;
             OnPropertyChanged(nameof(WaitingForNewData));
 
-            ProjectLocalization projectLocalization = new ProjectLocalization();
-
-            SetInfoText(projectLocalization.GetStringResource("infoSubjectTable"));
+            SetInfoText(GetLocalizedString("infoSubjectTable"));
         }
 
         async public override void LoadData()
@@ -127,39 +130,40 @@ namespace KretaDesktop.ViewModel.Content
                 try
                 {
                     PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters());
-                    SaveParameter(pagedSubjectList);
-                    if (pagedSubjectList != null)
-                    {
-                        subjects = new ObservableCollection<Subject>(pagedSubjectList);
-                    }
+                    //PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters()).WaitAsync(TimeSpan.FromSeconds(APITimeOut.GetAPITimeout())); 
+                    SaveParameter(pagedSubjectList);                  
+                    if (pagedSubjectList != null)                    
+                        Subjects = new ObservableCollection<Subject>(pagedSubjectList);
                     else
-                        subjects = new ObservableCollection<Subject>();
+                        Subjects = new ObservableCollection<Subject>();
                 }
                 catch(APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
                 }
-            }
-            OnPropertyChanged(nameof(Subjects));          
-            SelectRow(displayedSubject);            
+            }     
+            SelectRow(displayedSubject);
+            ConcanetenateInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
         }
 
         async public void Delete(object entity)
         {
             if (entity is Subject)
             {
-                Subject subjectToDelete = (Subject)entity;
+                Subject subjectToDelete = (Subject) entity;
                 try
                 {
                     if (subjectService != null)
                         await subjectService.DeleteSubjectAsync(subjectToDelete.Id);
+                    SetInfoTextWithLocalizedString("infoSubjectIsDeleted", subjectToDelete);
                 }
 
                 catch (APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
-                    LoadData();
+
                 }
+                LoadData();
             }
         }
 
@@ -168,27 +172,18 @@ namespace KretaDesktop.ViewModel.Content
             if (subjectService != null)
             {
                 long newId=-1;
-                if (DisplayedSubject != null)
+                try
                 {
-                    try
-                    {
-                        newId = await subjectService.GetNextSubjectIdAsync();
-                    }
-
-                    catch (APISubjectException exceptin)
-                    {
-                        SetInfoText(exceptin.Message);
-                    }
-                    displayedSubject.Id = newId;
-                    displayedSubject.SubjectName = string.Empty;
-                    OnPropertyChanged(nameof(DisplayedSubject));
+                    newId = await subjectService.GetNextSubjectIdAsync();
                 }
+                catch (APISubjectException exceptin)
+                {
+                    SetInfoText(exceptin.Message);
+                }
+                DisplayedSubject = new Subject(newId);
                 WaitingForNewData = true;
-                selectedItemIndex = -1;
-                OnPropertyChanged(nameof(SelectedItemIndex));
-                selectedSubject = null;
-                OnPropertyChanged(nameof(SelectedSubject));
-                //OnPropertyChanged(nameof(WaitingForNewData));
+                SelectedItemIndex = -1;
+                SelectedSubject = null;
                 // Mégsem gomb
                 // Törlés nincs 
                 // Datagirdre nem lehet kattintani
@@ -204,15 +199,23 @@ namespace KretaDesktop.ViewModel.Content
                 try
                 {
                     statusCode = await subjectService.Save(subjectToSave);
+                    //statusCode = await subjectService.Save(subjectToSave).WaitAsync(TimeSpan.FromSeconds(APITimeOut.GetAPITimeout()));
+                    SetInfoTextWithLocalizedString("infoSubjectIsSaved", subjectToSave);
                 }
                 catch (APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
                 }
-                if (statusCode == HttpStatusCode.OK)
+                catch (Exception exception)
                 {
-                    LoadData();                    
+                    SetInfoText(exception.Message);
                 }
+                if (statusCode != HttpStatusCode.OK)
+                {
+                    SetInfoTextWithLocalizedString("errorStatusCode", statusCode);
+                }
+                WaitingForNewData = false;
+                LoadData();
             }
         }
 
@@ -269,5 +272,29 @@ namespace KretaDesktop.ViewModel.Content
         {
             ContentInfo = info;
         }
+
+        private void SetInfoTextWithLocalizedString(string localizationStringName)
+        {
+            ContentInfo = GetLocalizedString(localizationStringName);
+        }
+
+        private void SetInfoTextWithLocalizedString(string localizationStringName,object data)
+        {
+            ContentInfo = string.Format(GetLocalizedString(localizationStringName), data);
+        }
+
+        private void ConcanetenateInfoTextWithLocalizedString(string localizationStringName, object data)
+        {
+            ContentInfo += " "+string.Format(GetLocalizedString(localizationStringName), data);
+        }
+
+
+        private string GetLocalizedString(string localizationStringName)
+        {
+            ProjectLocalization projectLocalization = new ProjectLocalization();
+            return projectLocalization.GetStringResource(localizationStringName);
+        }
+
+        
     }
 }
