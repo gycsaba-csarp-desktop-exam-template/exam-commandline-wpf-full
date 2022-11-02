@@ -49,7 +49,11 @@ namespace Kreta.Repositories.BaseClass
 
         public void Insert(T entity) => KretaContext.Set<T>().Add(entity);
 
-        public void Update(T entity) => KretaContext.Set<T>().Update(entity);
+        public void Update(T entity)
+        {
+            KretaContext.Set<T>().AsNoTracking();
+            KretaContext.Set<T>().Update(entity);
+        }
 
 
         public void Delete(int id)
