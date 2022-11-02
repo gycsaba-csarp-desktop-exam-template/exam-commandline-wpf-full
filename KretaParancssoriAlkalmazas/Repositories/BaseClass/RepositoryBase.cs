@@ -51,6 +51,7 @@ namespace Kreta.Repositories.BaseClass
 
         public void Update(T entity)
         {
+            KretaContext.Set<T>().AsNoTracking();
             KretaContext.Set<T>().Update(entity);
         }
 
