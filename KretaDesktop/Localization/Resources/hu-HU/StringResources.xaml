@@ -48,13 +48,20 @@
     -->
     <system:String x:Key="validationNameIsShort">A név nem elég hosszú!</system:String>
     <system:String x:Key="validationNameFirstLetterNotUppercase">A név nem nagybetűvel kezdődik!</system:String>
-    <system:String x:Key="validationOtherLetterNotLowercase">A kezdőbetűk után kisbetűket írjon!</system:String>
+    <system:String x:Key="validationOtherLetterNotLowercase">A kezdőbetűk után kisbetűket írjon vagy szóközt!</system:String>
     <system:String x:Key="validationNameOnlyLetters">A névben csak batűk lehetnek!</system:String>
 
     <system:String x:Key="contentSorting">Rendezés:</system:String>
 
     <!-- info -->
     <system:String x:Key="infoSubjectTable">Iskolai tantárgyak kezelése.</system:String>
+    <system:String x:Key="infoAllSubjectIsLoaded">Az adatbázisból {0} tantárgy beolvasva.</system:String>
+    <system:String x:Key="infoSubjectIsDeleted">A {0} tantárgy törtölve lett az adatbázisból.</system:String>
+    <system:String x:Key="infoSubjectIsSaved">A {0} tntárgy mentve lett az adatbázisba.</system:String>
+    
+    <!-- Status code error -->
+    <system:String x:Key="errorStatusCode">Hiba történt. Hibakód: {0}.</system:String>
+    
     
   
 </ResourceDictionary>

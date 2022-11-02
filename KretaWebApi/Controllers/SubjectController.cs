@@ -182,7 +182,7 @@ namespace KretaWebApi.Controllers
 
             var createdSubject = mapper.Map<Subject>(insertedEFSubject);
 
-            logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvétele az adatbászba: {createdSubject}");
+            logger.LogInfo($"CreateSubject->{createdSubject.Id} id-jü tantárgy felvéve az adatbászba: {createdSubject}");
 
             // return CreatedAtRoute(nameof(GetSubjectById), new {id = createdSubject.Id}, createdSubject);
             // https://stackoverflow.com/questions/39459348/asp-net-core-web-api-no-route-matches-the-supplied-values

@@ -47,13 +47,19 @@
     -->
     <system:String x:Key="validationNameIsShort">The name is required! The name must be at least 3 characters long!</system:String>
     <system:String x:Key="validationNameIsLong">The name cannot be longer than 30 characters!</system:String>
-    <system:String x:Key="validationNameFirstLetterNotUppercase">A név nem nagybetűvel kezdődik!</system:String>
-    <system:String x:Key="validationOtherLetterNotLowercase">First letter must be uppercase, other lowercase!</system:String>
+    <system:String x:Key="validationNameFirstLetterNotUppercase">The name does not start with a capital letter!</system:String>
+    <system:String x:Key="validationOtherLetterNotLowercase">First letter must be uppercase, other lowercase or space!</system:String>
     <system:String x:Key="validationNameOnlyLetters">First letter must be uppercase, other lowercase!</system:String>
 
     <system:String x:Key="contentSorting">Sorting:</system:String>
 
     <!-- info -->
     <system:String x:Key="infoSubjectTable">School subject management.</system:String>
+    <system:String x:Key="infoAllSubjectIsLoaded">From the database {0} subject readed.</system:String>
+    <system:String x:Key="infoSubjectIsDeleted">The subject {0} has been deleted from the database.</system:String>
+    <system:String x:Key="infoSubjectIsSaved">The object {0} has been saved to the database.</system:String>
+
+    <!-- Status code error -->
+    <system:String x:Key="errorStatusCode">A error has been made. Error code {0}.</system:String>
 
 </ResourceDictionary>

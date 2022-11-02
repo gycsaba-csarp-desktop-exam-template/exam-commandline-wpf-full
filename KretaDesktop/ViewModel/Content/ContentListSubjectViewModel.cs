@@ -1,9 +1,11 @@
-﻿using Kreta.Models.DataModel;
+﻿using ApplicationPropertiesSettings;
+using Kreta.Models.DataModel;
 using Kreta.Models.Helpers;
 using KretaDesktop.Localization;
 using KretaDesktop.ViewModel.BaseClass;
 using ServiceKretaAPI;
 using ServiceKretaAPI.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -92,7 +94,6 @@ namespace KretaDesktop.ViewModel.Content
             }
         }
 
-
         public RelayCommand DeleteCommand { get; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand NewCommand { get; }
@@ -115,9 +116,7 @@ namespace KretaDesktop.ViewModel.Content
             waitingForNewData = false;
             OnPropertyChanged(nameof(WaitingForNewData));
 
-            ProjectLocalization projectLocalization = new ProjectLocalization();
-
-            SetInfoText(projectLocalization.GetStringResource("infoSubjectTable"));
+            SetInfoText(GetLocalizedString("infoSubjectTable"));
         }
 
         async public override void LoadData()
@@ -141,18 +140,20 @@ namespace KretaDesktop.ViewModel.Content
                 }
             }
             OnPropertyChanged(nameof(Subjects));          
-            SelectRow(displayedSubject);            
+            SelectRow(displayedSubject);
+            SetInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
         }
 
         async public void Delete(object entity)
         {
             if (entity is Subject)
             {
-                Subject subjectToDelete = (Subject)entity;
+                Subject subjectToDelete = (Subject) entity;
                 try
                 {
                     if (subjectService != null)
                         await subjectService.DeleteSubjectAsync(subjectToDelete.Id);
+                    SetInfoTextWithLocalizedString("infoSubjectIsDeleted", subjectToDelete);
                 }
 
                 catch (APISubjectException exceptin)
@@ -204,14 +205,24 @@ namespace KretaDesktop.ViewModel.Content
                 try
                 {
                     statusCode = await subjectService.Save(subjectToSave);
+                    //statusCode = await subjectService.Save(subjectToSave).WaitAsync(TimeSpan.FromSeconds(APITimeOut.GetAPITimeout()));
+                    SetInfoTextWithLocalizedString("infoSubjectIsSaved", subjectToSave);
                 }
                 catch (APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
                 }
+                catch (Exception exception)
+                {
+                    SetInfoText(exception.Message);
+                }
                 if (statusCode == HttpStatusCode.OK)
                 {
                     LoadData();                    
+                }
+                else
+                {
+                    SetInfoTextWithLocalizedString("errorStatusCode", statusCode);
                 }
             }
         }
@@ -269,5 +280,24 @@ namespace KretaDesktop.ViewModel.Content
         {
             ContentInfo = info;
         }
+
+        private void SetInfoTextWithLocalizedString(string localizationStringName)
+        {
+            ContentInfo = GetLocalizedString(localizationStringName);
+        }
+
+        private void SetInfoTextWithLocalizedString(string localizationStringName,object data)
+        {
+            ContentInfo = string.Format(GetLocalizedString(localizationStringName), data);
+        }
+
+
+        private string GetLocalizedString(string localizationStringName)
+        {
+            ProjectLocalization projectLocalization = new ProjectLocalization();
+            return projectLocalization.GetStringResource(localizationStringName);
+        }
+
+        
     }
 }

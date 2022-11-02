@@ -38,7 +38,7 @@ namespace ValidationProject.Validations
                     string errContent = projectLocalization.GetStringResource("validationOtherLetterNotLowercase");
                     return new ValidationResult(false, errContent);
                 }
-                if (!nvr.IsOnlyLetters)
+                if (!nvr.IsOnlyLettersOrSpace)
                 {
                     string errContent = projectLocalization.GetStringResource("validationNameOnlyLetters");
                     return new ValidationResult(false, errContent);

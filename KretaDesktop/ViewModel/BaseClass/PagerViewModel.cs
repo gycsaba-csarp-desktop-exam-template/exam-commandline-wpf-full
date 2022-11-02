@@ -153,7 +153,7 @@ namespace KretaDesktop.ViewModel.BaseClass
 
             SortingCommand = new RelayCommand(execute => Sorting());
             SearchCommand = new RelayCommand(execute => Filtring(), canExecute => CanExecuteFiltringCommand());
-            SearchAllCommand = new RelayCommand(execute => SearrchAll(), canExecute => CanExecuteSeachAllCommand());
+            SearchAllCommand = new RelayCommand(execute => SearchAll(), canExecute => CanExecuteSeachAllCommand());
 
 
             DataGridRowProperties appConfiguration = new DataGridRowProperties();
@@ -255,7 +255,7 @@ namespace KretaDesktop.ViewModel.BaseClass
             return true;
         }
 
-        public void SearrchAll()
+        public void SearchAll()
         {
             UserFiltringParameter= String.Empty;
             LoadData();
