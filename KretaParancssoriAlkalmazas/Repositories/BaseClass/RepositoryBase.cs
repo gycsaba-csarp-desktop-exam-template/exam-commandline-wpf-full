@@ -20,8 +20,8 @@ namespace Kreta.Repositories.BaseClass
 
         public RepositoryBase(KretaContext kretaContext)
         {
-            KretaContext = kretaContext;            
-        }   
+            KretaContext = kretaContext;
+        }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
@@ -32,7 +32,7 @@ namespace Kreta.Repositories.BaseClass
         public IQueryable<T> GetAll()
         {
             return KretaContext.Set<T>().AsNoTracking();
-            //return KretaContext.Set<T>();
+            return KretaContext.Set<T>();
         }
 
         public long GetNextId()
@@ -40,7 +40,7 @@ namespace Kreta.Repositories.BaseClass
             var list = GetAll().ToList();
             var nextId = list.Select(x => x.Id).Max();
             if (nextId > 0)
-                return nextId+1;
+                return nextId + 1;
             else
                 return 1;
         }
@@ -48,7 +48,7 @@ namespace Kreta.Repositories.BaseClass
         public T? Get(long id)
         {
             //return KretaContext.Set<T>().Find(id);
-            var result=FindByCondition( x => x.Id ==id);
+            var result = FindByCondition(x => x.Id == id);
             if (result != null)
                 return result.FirstOrDefault();
             else
@@ -56,12 +56,21 @@ namespace Kreta.Repositories.BaseClass
 
         }
 
-        public void Insert(T entity) => KretaContext.Set<T>().Add(entity);
+        public void Insert(T entity)
+        {
+            if (entity == null)
+                KretaContext.Set<T>().Add(entity);                
+        }
 
         public void Update(T entity)
         {
             //KretaContext.Set<T>().AsNoTracking();
-            KretaContext.Set<T>().Update(entity);
+            if (entity != null)
+            {
+                KretaContext.Set<T>().Attach(entity);
+                KretaContext.Entry(entity).State = EntityState.Modified;
+                KretaContext.Set<T>().Update(entity);
+            }
         }
 
 
