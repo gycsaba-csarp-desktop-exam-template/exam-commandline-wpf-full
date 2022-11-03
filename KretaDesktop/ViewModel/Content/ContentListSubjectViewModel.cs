@@ -133,13 +133,25 @@ namespace KretaDesktop.ViewModel.Content
             {
                 try
                 {
+                    Subject subjectToSelect = null;
+                    if (DisplayedSubject != null)
+                        subjectToSelect = DisplayedSubject;
                     PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters());
                     //PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters()).WaitAsync(TimeSpan.FromSeconds(APITimeOut.GetAPITimeout())); 
+                    if (subjectToSelect == null || subjectToSelect.Id==-1 && pagedSubjectList.Count > 0)
+
+                        subjectToSelect = pagedSubjectList.ElementAt(0);
+                    else
+                    {
+
+                    }
                     SaveParameter(pagedSubjectList);                  
                     if (pagedSubjectList != null)                    
                         Subjects = new ObservableCollection<Subject>(pagedSubjectList);
                     else
                         Subjects = new ObservableCollection<Subject>();
+                    SelectRow(subjectToSelect);
+                    ConcanetenateInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
                 }
                 catch(APISubjectException exceptin)
                 {
@@ -149,9 +161,7 @@ namespace KretaDesktop.ViewModel.Content
                 {
                     SetInfoText(exception.Message);
                 }
-            }     
-            SelectRow(DisplayedSubject);
-            ConcanetenateInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
+            }                
         }
 
         async public void Delete(object entity)
@@ -198,9 +208,9 @@ namespace KretaDesktop.ViewModel.Content
                     return;
                 }
                 DisplayedSubject = new Subject(newId);
+                // Nem szükséges Controlerek eltüntetése
                 WaitingForNewData = true;
-                SelectedItemIndex = -1;
-                SelectedSubject = null;
+
                 SetInfoTextWithLocalizedString("infoNewSubject");
                 // Mégsem gomb
                 // Törlés nincs 
@@ -271,19 +281,29 @@ namespace KretaDesktop.ViewModel.Content
                 SelectFirstRow();
                 return;
             }                
-            var list = subjects.Select(subject => subject.Id).ToList();
-            int index = list.IndexOf(subjectToSelect.Id);
+            var subjectInPage = subjects.Select(subject => subject.Id).ToList();
+            int index = subjectInPage.IndexOf(subjectToSelect.Id);
             if (index >= 0)
             {
-                selectedItemIndex = index;                
+                SelectedItemIndex = index;
+                SelectedSubject = subjectToSelect;
             }
-            else
+            else 
             {
-                selectedItemIndex = 0;
+                SelectedItemIndex = 0;
+                SelectedSubject = subjects.ElementAt(SelectedItemIndex);
             }
-            OnPropertyChanged(nameof(SelectedItemIndex));
-            selectedSubject = subjectToSelect;
-            OnPropertyChanged(nameof(SelectedSubject));
+     
+        }
+
+        private void DatagridNoSelection()
+        {
+            // Még nincs használva
+            if (Subjects.Count > 0)
+            {
+                SelectedItemIndex = -1;
+                SelectedSubject = null;
+            }
         }
 
         private void SetInfoText(string info)
@@ -312,7 +332,5 @@ namespace KretaDesktop.ViewModel.Content
             ProjectLocalization projectLocalization = new ProjectLocalization();
             return projectLocalization.GetStringResource(localizationStringName);
         }
-
-        
     }
 }
