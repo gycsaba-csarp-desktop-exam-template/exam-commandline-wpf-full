@@ -61,9 +61,11 @@ namespace ServiceKretaAPI.Services
 
                 try
                 {
+
+                    Console.WriteLine("GetSubjectsAsyncWithPageData::query-string:"+query.ToString());
+                    Console.WriteLine("GetSubjectsAsyncWithPageData:client-baseaddress:" +client.BaseAddress);
                     var respons = await client.GetAsync(query.ToString());
                     var content = respons.Content.ReadAsStringAsync();
-
 
                     List<Subject> subjects = JsonConvert.DeserializeObject<List<Subject>>(content.Result);
 

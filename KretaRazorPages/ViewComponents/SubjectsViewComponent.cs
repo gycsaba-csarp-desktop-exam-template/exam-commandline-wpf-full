@@ -19,6 +19,7 @@ namespace KretaRazorPages.ViewComponents
             IAPISubjectService subjectService = new APISubjectService();
             try
             {
+                Console.WriteLine("Razor subject oldal beolvasás.");
                 var pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(null);
 
                 if (pagedSubjectList == null)
