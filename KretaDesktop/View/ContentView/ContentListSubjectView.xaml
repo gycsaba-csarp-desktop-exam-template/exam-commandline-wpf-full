@@ -58,7 +58,7 @@
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="1" Grid.Column="0"  Content="Azon."></Label>
                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtSubjectId" Style="{DynamicResource FormTextBox}"
                          IsReadOnly="True"
-                         Text="{Binding DisplayedSubject.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"       
+                         Text="{Binding DisplayedSubject.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"       
                 />
                 <Label Style="{DynamicResource FormLabel}" Grid.Row="2" Grid.Column="0" Content="Tantárgy név:"></Label>
                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtSubjectName" 
