@@ -61,7 +61,7 @@ namespace ApplicationPropertiesSettings.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to localhost.
+        ///   Looks up a localized string similar to 194.182.83.78.
         /// </summary>
         internal static string APIHost {
             get {
