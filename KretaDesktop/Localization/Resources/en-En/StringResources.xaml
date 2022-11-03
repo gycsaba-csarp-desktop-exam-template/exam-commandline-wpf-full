@@ -58,6 +58,7 @@
     <system:String x:Key="infoAllSubjectIsLoaded">From the database {0} subject readed.</system:String>
     <system:String x:Key="infoSubjectIsDeleted">The subject {0} has been deleted from the database.</system:String>
     <system:String x:Key="infoSubjectIsSaved">The object {0} has been saved to the database.</system:String>
+    <system:String x:Key="infoNewSubject">Enter the details of a new subject.</system:String>
 
     <!-- Status code error -->
     <system:String x:Key="errorStatusCode">A error has been made. Error code {0}.</system:String>

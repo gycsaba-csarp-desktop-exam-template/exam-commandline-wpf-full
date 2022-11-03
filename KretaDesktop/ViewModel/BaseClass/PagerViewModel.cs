@@ -146,8 +146,9 @@ namespace KretaDesktop.ViewModel.BaseClass
 
         public PagedViewModel()
         {
-            LastPageCommand = new RelayCommand(execute => LastPage());
-            FirstPageCommand = new RelayCommand(execute => FirstPage());
+            
+            FirstPageCommand = new RelayCommand(execute => FirstPage(), canExecute => CanExecuteFirstPageCommand());
+            LastPageCommand = new RelayCommand(execute => LastPage(), canExecute => CanExecuteLastPageCommand());
             PreviusPageCommand = new RelayCommand(execute => PreviusPage(), canExecute => CanExecutePreviusPageCommand());
             NextPageCommand = new RelayCommand(execute => NextPage() , canExecute => CanExecuteNextPageCommand());            
 
@@ -226,6 +227,16 @@ namespace KretaDesktop.ViewModel.BaseClass
         public bool CanExecuteNextPageCommand()
         {
             return QueryString.HasNext;
+        }
+
+        public bool CanExecuteFirstPageCommand()
+        {
+            return QueryString.NumberOfPage > 1 && QueryString.CurrentPage > 1;
+        }
+
+        public bool CanExecuteLastPageCommand()
+        {
+            return QueryString.NumberOfPage > 1 && QueryString.CurrentPage < QueryString.NumberOfPage;
         }
 
         public void Sorting()

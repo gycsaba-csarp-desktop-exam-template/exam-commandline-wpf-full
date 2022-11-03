@@ -66,8 +66,12 @@ namespace KretaDesktop.ViewModel.Content
                 {
                     // https://levelup.gitconnected.com/5-ways-to-clone-an-object-in-c-d1374ec28efa
                     displayedSubject = (Subject) selectedSubject.Clone();
-                    OnPropertyChanged(nameof(DisplayedSubject));
                 }
+                else
+                {
+                    displayedSubject = null;
+                }
+                OnPropertyChanged(nameof(DisplayedSubject));
             }
         }
 
@@ -129,21 +133,35 @@ namespace KretaDesktop.ViewModel.Content
             {
                 try
                 {
+                    Subject subjectToSelect = null;
+                    if (DisplayedSubject != null)
+                        subjectToSelect = DisplayedSubject;
                     PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters());
                     //PagedList<Subject> pagedSubjectList = await subjectService.GetSubjectsAsyncWithPageData(GetParameters()).WaitAsync(TimeSpan.FromSeconds(APITimeOut.GetAPITimeout())); 
+                    if (subjectToSelect == null || subjectToSelect.Id==-1 && pagedSubjectList.Count > 0)
+
+                        subjectToSelect = pagedSubjectList.ElementAt(0);
+                    else
+                    {
+
+                    }
                     SaveParameter(pagedSubjectList);                  
                     if (pagedSubjectList != null)                    
                         Subjects = new ObservableCollection<Subject>(pagedSubjectList);
                     else
                         Subjects = new ObservableCollection<Subject>();
+                    SelectRow(subjectToSelect);
+                    ConcanetenateInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
                 }
                 catch(APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
                 }
-            }     
-            SelectRow(displayedSubject);
-            ConcanetenateInfoTextWithLocalizedString("infoAllSubjectIsLoaded", subjects.Count);
+                catch (Exception exception)
+                {
+                    SetInfoText(exception.Message);
+                }
+            }                
         }
 
         async public void Delete(object entity)
@@ -157,11 +175,14 @@ namespace KretaDesktop.ViewModel.Content
                         await subjectService.DeleteSubjectAsync(subjectToDelete.Id);
                     SetInfoTextWithLocalizedString("infoSubjectIsDeleted", subjectToDelete);
                 }
-
                 catch (APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
 
+                }
+                catch (Exception exception)
+                {
+                    SetInfoText(exception.Message);
                 }
                 LoadData();
             }
@@ -179,11 +200,18 @@ namespace KretaDesktop.ViewModel.Content
                 catch (APISubjectException exceptin)
                 {
                     SetInfoText(exceptin.Message);
+                    return;
+                }
+                catch (Exception exception)
+                {
+                    SetInfoText(exception.Message);
+                    return;
                 }
                 DisplayedSubject = new Subject(newId);
+                // Nem szükséges Controlerek eltüntetése
                 WaitingForNewData = true;
-                SelectedItemIndex = -1;
-                SelectedSubject = null;
+
+                SetInfoTextWithLocalizedString("infoNewSubject");
                 // Mégsem gomb
                 // Törlés nincs 
                 // Datagirdre nem lehet kattintani
@@ -253,19 +281,29 @@ namespace KretaDesktop.ViewModel.Content
                 SelectFirstRow();
                 return;
             }                
-            var list = subjects.Select(subject => subject.Id).ToList();
-            int index = list.IndexOf(subjectToSelect.Id);
+            var subjectInPage = subjects.Select(subject => subject.Id).ToList();
+            int index = subjectInPage.IndexOf(subjectToSelect.Id);
             if (index >= 0)
             {
-                selectedItemIndex = index;                
+                SelectedItemIndex = index;
+                SelectedSubject = subjectToSelect;
             }
-            else
+            else 
             {
-                selectedItemIndex = 0;
+                SelectedItemIndex = 0;
+                SelectedSubject = subjects.ElementAt(SelectedItemIndex);
             }
-            OnPropertyChanged(nameof(SelectedItemIndex));
-            selectedSubject = subjectToSelect;
-            OnPropertyChanged(nameof(SelectedSubject));
+     
+        }
+
+        private void DatagridNoSelection()
+        {
+            // Még nincs használva
+            if (Subjects.Count > 0)
+            {
+                SelectedItemIndex = -1;
+                SelectedSubject = null;
+            }
         }
 
         private void SetInfoText(string info)
@@ -294,7 +332,5 @@ namespace KretaDesktop.ViewModel.Content
             ProjectLocalization projectLocalization = new ProjectLocalization();
             return projectLocalization.GetStringResource(localizationStringName);
         }
-
-        
     }
 }

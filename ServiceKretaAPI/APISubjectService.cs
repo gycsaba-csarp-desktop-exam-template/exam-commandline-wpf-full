@@ -224,7 +224,15 @@ namespace ServiceKretaAPI.Services
                 try
                 {
                     var response = await httpClient.PutAsync("Subject/api/subject/" + id.ToString(), httpContent);
-                    return response.StatusCode;
+                    if (response.StatusCode == HttpStatusCode.Created)
+                        return HttpStatusCode.OK;
+                    else
+                    {
+
+                        string error = response.Headers + " : " + response.Content + " : " + response.StatusCode;
+                        Console.WriteLine(error);
+                        return HttpStatusCode.InternalServerError;
+                    }
                 }
                 catch (Exception ex)
                 {
