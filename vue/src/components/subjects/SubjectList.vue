@@ -6,10 +6,12 @@
         <div class="card-body">
             <div class="card-title text-left"></div>
             <form class="form-inline" v-on:submit.prevent="onSubmit">
+                <!--
                 <div class="form-group">
                     <label>Azon.:</label>
                     <input  type="text" class="form-control ml-sm-2 mr-sm-4 my-2"  required/>
                 </div>
+                -->
                 <div class="form-group">
                     <label>Tantárgy név:</label>
                     <input  type="text" class="form-control ml-sm-2 mr-sm-4 my-2"  required/>
