@@ -48,11 +48,20 @@
                 </div>
             </div>
         </div>
+        <div>
+            <button @click="count++">You clicked me {{ count }} times.</button>
+            <p>{{subjects}}</p>        
+            <textarea 
+                placeholder="tweet your reply" 
+                v-model="commentText"
+                v-on:input="countCharacters">                
+            </textarea>
+            <p>Number of characher: {{charactersRemaining}}</p>
+        </div>        
     </div> 
 </template>
 
 <script>
-
 import SubjectService from "@/services/SubjectService.js";
 
 export default {
@@ -60,10 +69,13 @@ export default {
 
     data() {
         return {
-            subjects:[]
+            count: 0,
+            subjects:[],
+            commentText: '',
+            charactersRemaining: 280
         }
     },
-    mathods:{ 
+    methods:{ 
         retriveSubjects() {
             SubjectService.getAllSubjects()
                 .then(response => {
@@ -80,12 +92,10 @@ export default {
             console.log("Tantárgyak megjelenítése.");
             this.retriveSubjects();
         },
-
-        mounted() {
-            console.log("Tantárgyak mountolás.");
-           this.retriveSubjects();
-        },
+        
+        countCharacters: function() {
+            this.charactersRemaining = 280 - this.commentText.length
+        }
     }
 }
-
 </script>
