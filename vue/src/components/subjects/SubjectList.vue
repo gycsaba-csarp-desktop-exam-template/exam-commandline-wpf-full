@@ -30,6 +30,11 @@
             <div class="card-body">
                 <div class="card-title text-left">A tantárgy adatait szerkeszheti vagy törölheti.</div>
             </div>
+            <div>
+                <p class="text-left">
+                    <button @click="getSubjects">Get subjects</button> <br />
+                </p>
+            </div>
             <div class="container text-left">
                 <div class="row">
                     <div class="col-sm">Azon.</div>
@@ -39,30 +44,21 @@
                 <div v-for="(subjct,index) in subjects"
                                 :key="index"
                                 class="row">
-                    <div class="col-sm">a</div>
-                    <div class="col-sm">b</div>
+                    <div class="col-sm">{{subjct.id}}</div>
+                    <div class="col-sm">{{subjct.subjectName}}</div>
                     <b-col class="m-sm-1">
                         <b-icon icon="pencil" class="p-3"></b-icon>
                         <b-icon icon="trash" class="p-3"></b-icon>
                     </b-col>                      
                 </div>
             </div>
-        </div>
-        <div>
-            <button @click="count++">You clicked me {{ count }} times.</button>
-            <p>{{subjects}}</p>        
-            <textarea 
-                placeholder="tweet your reply" 
-                v-model="commentText"
-                v-on:input="countCharacters">                
-            </textarea>
-            <p>Number of characher: {{charactersRemaining}}</p>
         </div>        
     </div> 
 </template>
 
 <script>
 import SubjectService from "@/services/SubjectService.js";
+import axios from "axios";
 
 export default {
     name: 'SubjectList',
@@ -80,7 +76,6 @@ export default {
             SubjectService.getAllSubjects()
                 .then(response => {
                     this.subjects = response.data;
-                    console.log(response.data)
                 })
                 .catch(e => {
                     console.log(e);
@@ -88,13 +83,19 @@ export default {
 
         },              
         
-        beforeCreate() {
+        beforeCreate: function() {
             console.log("Tantárgyak megjelenítése.");
             this.retriveSubjects();
+            console.log("Tantárgyak megjelenítve.");
         },
-        
-        countCharacters: function() {
-            this.charactersRemaining = 280 - this.commentText.length
+        async getSubjects() {
+            try
+            {
+                this.retriveSubjects();
+
+            } catch(e) {
+                console.log(e)
+            }
         }
     }
 }

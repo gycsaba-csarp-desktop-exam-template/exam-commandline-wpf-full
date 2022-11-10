@@ -2,7 +2,7 @@ import http from "../http-commons";
 
 class SubjectService {
     getAllSubjects() {
-        return http.get("/Subject/api/subjects");
+        return http.get("/api/subject");
     }
 }
 

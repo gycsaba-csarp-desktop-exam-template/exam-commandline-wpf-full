@@ -3,6 +3,8 @@
 // https://www.bezkoder.com/vue-3-crud
 // https://madewithvuejs.com/vuejs-crud
 // https://github.com/waseembarcha/vuejs-crud
+// https://codersdiaries.com/blog/vue-axios
+// https://spring.io/guides/gs/rest-service-cors/
 import Vue from 'vue'
 import App from './App'
 import router from './router'
